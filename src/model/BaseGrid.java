@@ -24,6 +24,7 @@ public interface BaseGrid {
     /**
      * 
      * @return the player who should take the next move
+     * @throws a IllegalStateException if the match is not started
      */
     public GridOption getCurrentPlayerTurn();
 
@@ -31,6 +32,7 @@ public interface BaseGrid {
      * Gets the score of one of the two players
      * @param player
      * @return his points
+     * @throws a IllegalArgumentException if player does not exist
      */
     public Integer getPlayerPoints(GridOption player);
 
@@ -51,6 +53,7 @@ public interface BaseGrid {
      * @param listIndex is the number of list
      * @param elementIndex is the position of the chosen list where the player wants to set the line
      * @return which player has set the vertical line, if it is empty noone has set that line
+     * @throws a IllegalArgumentException if the parameters insert are not correct
      */
     public GridOption getVerticalElement(Integer listIndex, Integer elementIndex);
 
@@ -58,6 +61,7 @@ public interface BaseGrid {
      * Makes a move setting a vertical line in the grid
      * @param listIndex is the number of the list where the player wants to set his line
      * @param elementIndex is the position of the chosen list where the player wants to set the line
+     * @throws a IllegalArgumentException if the parameters insert are not correct
      */
     public void setVerticalLine(int listIndex, int position);
 
@@ -66,6 +70,7 @@ public interface BaseGrid {
      * @param listIndex is the number of list
      * @param elementIndex is the position of the chosen list where the player wants to set the line
      * @return which player has set the horizontal line, if it is empty noone has set that line
+     * @throws a IllegalArgumentException if the parameters insert are not correct
      */
     public GridOption getHorizontalElement(Integer listIndex, Integer position);
 	
@@ -73,12 +78,14 @@ public interface BaseGrid {
      * Makes a move setting a horizontal line in the grid
      * @param listIndex is the number of the list where the player wants to set his line
      * @param elementIndex is the position of the chosen list where the player wants to set the line
+     * @throws a IllegalArgumentException if the parameters insert are not correct
      */
     public void setHorizontalLine(int listIndex, int position);
 
     /**
      * 
      * @return the winner of the match
+     * @throws a IllegalStateException if the game is not ended
      */
     public GridOption getWinner();
 
