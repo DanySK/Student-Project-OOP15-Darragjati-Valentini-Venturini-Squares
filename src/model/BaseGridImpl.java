@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class BaseGridImpl {
+public class BaseGridImpl implements BaseGrid {
 
     private List<List<GridOption>> horizontal = new ArrayList<>();
     private List<List<GridOption>> vertical = new ArrayList<>();
