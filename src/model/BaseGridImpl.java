@@ -51,7 +51,7 @@ public class BaseGridImpl implements BaseGrid {
 
 	    matchStarted = true;
 	} else {
-	    throw new IllegalStateException();
+	    throw new IllegalStateException(" ds");
 	}
     }
 
