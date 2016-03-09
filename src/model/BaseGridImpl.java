@@ -40,14 +40,19 @@ public class BaseGridImpl implements BaseGrid {
 	return emptyGrid;
     }
 
+    @Override
     public void startMatch() {
 
-	this.scorePlayer1 = INITIAL_SCORE;
-	this.scorePlayer2 = INITIAL_SCORE;
+	if(!isStarted()){
+	    this.scorePlayer1 = INITIAL_SCORE;
+	    this.scorePlayer2 = INITIAL_SCORE;
 
-	randomizeTurn();
+	    randomizeTurn();
 
-	matchStarted = true;
+	    matchStarted = true;
+	} else {
+	    throw new IllegalStateException();
+	}
     }
 
     private void randomizeTurn() {
@@ -66,10 +71,12 @@ public class BaseGridImpl implements BaseGrid {
 
     }
 
+    @Override
     public boolean isStarted() {
 	return this.matchStarted;
     }
 
+    @Override
     public boolean isEnded() {
 	
 	/*if(!isStarted()){
@@ -82,6 +89,7 @@ public class BaseGridImpl implements BaseGrid {
 	return (!isStarted() || (scorePlayer1 + scorePlayer2) < horizontal.get(0).size() * horizontal.get(0).size()) ? false : true;
     }
 
+    @Override
     public GridOption getCurrentPlayerTurn() {
 
 	if (isStarted()) {
@@ -104,6 +112,7 @@ public class BaseGridImpl implements BaseGrid {
 	}
     }
 
+    @Override
     public Integer getPlayerPoints(GridOption player) {
 
 	if (!isStarted()) {
@@ -119,11 +128,13 @@ public class BaseGridImpl implements BaseGrid {
 	
     }
 
+    @Override
     public Integer getTotalMoves() {
 
 	return (horizontal.size() * horizontal.get(0).size()) + (vertical.size() * vertical.get(0).size());
     }
-
+    
+    @Override
     public Integer getRemainingMoves() {
 
 	Integer movesLeft = 0;
@@ -152,6 +163,7 @@ public class BaseGridImpl implements BaseGrid {
 	return (listIndex < 0 || listIndex > vertical.size() || position < 0 || position > vertical.get(0).size()) ? false : true;
     }
 
+    @Override
     public GridOption getVerticalElement(Integer listIndex, Integer elementIndex) {
 	
 	if(!checkCorrectVerticalInput(listIndex, elementIndex)){
@@ -161,6 +173,7 @@ public class BaseGridImpl implements BaseGrid {
 	return vertical.get(listIndex).get(elementIndex);
     }
 
+    @Override
     public void setVerticalLine(int listIndex, int position) {
 
 	if(!checkCorrectVerticalInput(listIndex, position)){
@@ -208,6 +221,7 @@ public class BaseGridImpl implements BaseGrid {
 	return (listIndex < 0 || listIndex > horizontal.size() || position < 0 || position > horizontal.get(0).size()) ? false : true;
     }
 
+    @Override
     public GridOption getHorizontalElement(Integer listIndex, Integer position) {
 	
 	if(!checkCorrectHorizontalInput(listIndex, position)){
@@ -217,6 +231,7 @@ public class BaseGridImpl implements BaseGrid {
 	return horizontal.get(listIndex).get(position);
     }
 
+    @Override
     public void setHorizontalLine(int listIndex, int position) {
 
 	if(!checkCorrectHorizontalInput(listIndex, position)){
@@ -273,6 +288,7 @@ public class BaseGridImpl implements BaseGrid {
 	}
     }
 
+    @Override
     public GridOption getWinner() {
 
 	if (isEnded()) {
