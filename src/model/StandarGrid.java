@@ -1,6 +1,6 @@
 package model;
 
-public class StandarGrid extends BaseGrid {
+public class StandarGrid extends BaseGridImpl {
 
    
     public StandarGrid(Integer size) {

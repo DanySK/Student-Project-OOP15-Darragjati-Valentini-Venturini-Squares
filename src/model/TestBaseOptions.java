@@ -11,7 +11,7 @@ public class TestBaseOptions {
     @Test
     public void test() {
 
-	BaseGrid gridOfSize = new BaseGrid(SIZE);
+	BaseGridImpl gridOfSize = new BaseGridImpl(SIZE);
 
 	assertEquals(gridOfSize.getTotalMoves(), gridOfSize.getRemainingMoves()); // verifies
 										// that
@@ -75,7 +75,7 @@ public class TestBaseOptions {
 	gridOfSize.setVerticalLine(SIZE, 0);
 	gridOfSize.setVerticalLine(SIZE, SIZE - 1);
 
-	BaseGrid gridOfSize2 = new BaseGrid(SIZE);
+	BaseGridImpl gridOfSize2 = new BaseGridImpl(SIZE);
 
 	gridOfSize2.startMatch();
 
@@ -96,22 +96,22 @@ public class TestBaseOptions {
     @Test
     public void testExceptions() {
 
-	BaseGrid testGrid;
+	BaseGridImpl testGrid;
 
 	try {
-	    testGrid = new BaseGrid(SIZE - SIZE);
+	    testGrid = new BaseGridImpl(SIZE - SIZE);
 	} catch (IllegalArgumentException e) {
 	} catch (Exception e) {
 	    fail("Wrong exception thrown");
 	}
 	try {
-	    testGrid = new BaseGrid(SIZE + SIZE);
+	    testGrid = new BaseGridImpl(SIZE + SIZE);
 	} catch (IllegalArgumentException e) {
 	} catch (Exception e) {
 	    fail("Wrong exception thrown");
 	}
 
-	testGrid = new BaseGrid(SIZE);
+	testGrid = new BaseGridImpl(SIZE);
 	try {
 	    testGrid.setHorizontalLine(0, 0);
 	} catch (IllegalStateException e) {

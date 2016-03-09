@@ -8,7 +8,7 @@ public class Turn {
     Integer scorePlayer1;
     Integer scorePlayer2;
     private GridOption turn;
-    public BaseGrid base;
+    public BaseGridImpl base;
     
     
     public void startMatch() {
