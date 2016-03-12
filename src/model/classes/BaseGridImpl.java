@@ -108,7 +108,7 @@ public class BaseGridImpl implements BaseGrid {
 	    throw new IllegalStateException();
 	}
 
-	if (getCurrentPlayerTurn1().equals(GridOption.PLAYER1)) {
+	if (getCurrentPlayerTurn().equals(GridOption.PLAYER1)) {
 	    this.turn = GridOption.PLAYER2;
 	} else {
 	    this.turn = GridOption.PLAYER1;
@@ -184,7 +184,7 @@ public class BaseGridImpl implements BaseGrid {
 	}
 	
 	if (vertical.get(listIndex).get(position).equals(GridOption.EMPTY)) {
-	    vertical.get(listIndex).set(position, getCurrentPlayerTurn1());
+	    vertical.get(listIndex).set(position, getCurrentPlayerTurn());
 
 	    if (verticalPointScored(listIndex, position).equals(0)) {
 		nextTurn();
@@ -242,7 +242,7 @@ public class BaseGridImpl implements BaseGrid {
 	}
 	
 	if (horizontal.get(listIndex).get(position).equals(GridOption.EMPTY)) {
-	    horizontal.get(listIndex).set(position, getCurrentPlayerTurn1());
+	    horizontal.get(listIndex).set(position, getCurrentPlayerTurn());
 
 	    if (horizontalPointScored(listIndex, position).equals(0)) {
 		nextTurn();
@@ -284,7 +284,7 @@ public class BaseGridImpl implements BaseGrid {
 	    throw new IllegalStateException();
 	}
 
-	if (getCurrentPlayerTurn1().equals(GridOption.PLAYER1)) {
+	if (getCurrentPlayerTurn().equals(GridOption.PLAYER1)) {
 	    scorePlayer1 += points;
 	} else {
 	    scorePlayer2 += points;
@@ -293,14 +293,16 @@ public class BaseGridImpl implements BaseGrid {
 
     @Override
     public GridOption getWinner() {
-	// TODO Auto-generated method stub
-	return null;
-    }
-
-    @Override
-    public GridOption getCurrentPlayerTurn1() {
-	// TODO Auto-generated method stub
-	return null;
+	
+	if(isEnded()){
+	    if(getPlayerPoints(GridOption.PLAYER1).equals(getPlayerPoints(GridOption.PLAYER2))){
+		return GridOption.EMPTY;
+	    }
+	
+	    return (getPlayerPoints(GridOption.PLAYER1) > getPlayerPoints(GridOption.PLAYER2)) ? GridOption.PLAYER1 : GridOption.PLAYER2;
+	} else {
+	    throw new IllegalStateException();
+	}
     }
 
 }

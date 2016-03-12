@@ -85,12 +85,10 @@ public interface BaseGrid {
 
     /**
      * 
-     * @return the winner of the match
+     * @return the winner of the match, if the game is even returns GridOption.Empty
      * @throws a IllegalStateException if the game is not ended
      */
     public GridOption getWinner();
-
-    GridOption getCurrentPlayerTurn1();
 
  
 }
