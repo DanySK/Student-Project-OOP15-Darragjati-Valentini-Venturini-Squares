@@ -1,8 +1,11 @@
-package model;
+package model.classes;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import model.interfaces.BaseGrid;
+import model.enumerations.*;
 
 public class BaseGridImpl implements BaseGrid {
 
@@ -105,7 +108,7 @@ public class BaseGridImpl implements BaseGrid {
 	    throw new IllegalStateException();
 	}
 
-	if (getCurrentPlayerTurn().equals(GridOption.PLAYER1)) {
+	if (getCurrentPlayerTurn1().equals(GridOption.PLAYER1)) {
 	    this.turn = GridOption.PLAYER2;
 	} else {
 	    this.turn = GridOption.PLAYER1;
@@ -181,7 +184,7 @@ public class BaseGridImpl implements BaseGrid {
 	}
 	
 	if (vertical.get(listIndex).get(position).equals(GridOption.EMPTY)) {
-	    vertical.get(listIndex).set(position, getCurrentPlayerTurn());
+	    vertical.get(listIndex).set(position, getCurrentPlayerTurn1());
 
 	    if (verticalPointScored(listIndex, position).equals(0)) {
 		nextTurn();
@@ -239,7 +242,7 @@ public class BaseGridImpl implements BaseGrid {
 	}
 	
 	if (horizontal.get(listIndex).get(position).equals(GridOption.EMPTY)) {
-	    horizontal.get(listIndex).set(position, getCurrentPlayerTurn());
+	    horizontal.get(listIndex).set(position, getCurrentPlayerTurn1());
 
 	    if (horizontalPointScored(listIndex, position).equals(0)) {
 		nextTurn();
@@ -281,7 +284,7 @@ public class BaseGridImpl implements BaseGrid {
 	    throw new IllegalStateException();
 	}
 
-	if (getCurrentPlayerTurn().equals(GridOption.PLAYER1)) {
+	if (getCurrentPlayerTurn1().equals(GridOption.PLAYER1)) {
 	    scorePlayer1 += points;
 	} else {
 	    scorePlayer2 += points;
@@ -290,13 +293,14 @@ public class BaseGridImpl implements BaseGrid {
 
     @Override
     public GridOption getWinner() {
+	// TODO Auto-generated method stub
+	return null;
+    }
 
-	if (isEnded()) {
-	    return (scorePlayer1 > scorePlayer2) ? GridOption.PLAYER1 : GridOption.PLAYER2;
-	} else {
-	    // da modificare non è quella giusta
-	    throw new IllegalStateException();
-	}
+    @Override
+    public GridOption getCurrentPlayerTurn1() {
+	// TODO Auto-generated method stub
+	return null;
     }
 
 }

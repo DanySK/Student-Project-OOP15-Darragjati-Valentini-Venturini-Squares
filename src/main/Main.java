@@ -1,7 +1,6 @@
 package main;
 
-
-import model.Turn;
+import model.classes.Turn;
 
 public class Main {
     

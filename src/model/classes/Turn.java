@@ -1,6 +1,8 @@
-package model;
+package model.classes;
 
 import java.util.Random;
+
+import model.enumerations.GridOption;
 
 public class Turn {
 

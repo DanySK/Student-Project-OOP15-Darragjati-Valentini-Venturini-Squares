@@ -1,8 +1,10 @@
-package model;
+package model.classes;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import model.enumerations.GridOption;
 
 public class TestBaseOptions {
 

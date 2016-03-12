@@ -1,4 +1,4 @@
-package model;
+package model.classes;
 
 public class StandarGrid extends BaseGridImpl {
 

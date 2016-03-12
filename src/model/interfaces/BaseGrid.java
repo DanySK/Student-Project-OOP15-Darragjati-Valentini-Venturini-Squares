@@ -1,5 +1,6 @@
-package model;
+package model.interfaces;
 
+import model.enumerations.GridOption;
 
 public interface BaseGrid {
 
@@ -88,6 +89,8 @@ public interface BaseGrid {
      * @throws a IllegalStateException if the game is not ended
      */
     public GridOption getWinner();
+
+    GridOption getCurrentPlayerTurn1();
 
  
 }
