@@ -27,10 +27,6 @@ public class Pair<X,Y> {
 	public void setY(Y y){
 	    this.y = y;
 	}
-
-	public void SecurityException(){
-	    
-	}
 	
 	@Override
 	public int hashCode() {

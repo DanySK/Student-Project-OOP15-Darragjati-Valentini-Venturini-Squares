@@ -2,6 +2,9 @@ package model.classes;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 
 import model.enumerations.GridOption;
@@ -9,9 +12,11 @@ import model.enumerations.GridOption;
 public class TestBaseOptions {
 
     private final static Integer SIZE = 6;
-
+    
     @Test
     public void test() {
+	
+	
 
 	BaseGridImpl gridOfSize = new BaseGridImpl(SIZE);
 
