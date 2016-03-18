@@ -34,19 +34,15 @@ public class RankingImpl implements Ranking {
     }
 
     private void addNewPlayer(String playerName, boolean win, Integer score) {
-/*
-	boolean playerAdded = false;
-	for (Pair<String, Integer> p : oldRanking) {
-	    if (p.getY() < score && !playerAdded) {
-		updatedRanking.add(new Pair<>(playerName, score));
-		playerAdded = true;
-	    }
-	    updatedRanking.add(p);
-	}
 
-	if (!playerAdded) {
-	    updatedRanking.add(new Pair<>(playerName, score));
-	}*/
+	PlayerData<Double, Integer, Integer, Integer> playerScores = new PlayerData<>();
+	if(win){
+	    playerScores.setTotalWins(1);
+	}
+	playerScores.setTotalMatches(1);
+	playerScores.setWinrate((double) (playerScores.getTotalWins()/playerScores.getTotalMatches()));
+	playerScores.setSquareCatched(score);
+	oldRanking.put(playerName, playerScores);
     }
 
     private void update(String playerName, boolean win, Integer score) {
