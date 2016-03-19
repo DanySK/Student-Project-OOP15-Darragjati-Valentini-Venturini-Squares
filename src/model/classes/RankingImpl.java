@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 import model.interfaces.Ranking;
 
@@ -16,10 +15,6 @@ public class RankingImpl implements Ranking {
 
     public RankingImpl( Map<String, PlayerData<Double, Integer, Integer, Integer>> oldRanking) {
 	this.oldRanking = oldRanking;
-    }
-    
-    public void method(){
-	
     }
     
     @Override
