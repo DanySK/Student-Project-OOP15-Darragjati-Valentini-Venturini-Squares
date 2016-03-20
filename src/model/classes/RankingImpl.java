@@ -24,7 +24,7 @@ public class RankingImpl implements Ranking {
     public void addPlayerResults(String playerName, boolean win, Integer score) {
 
 	if (oldRanking.containsKey(playerName)) {
-		update(playerName, win, score);
+		updatePlayerResults(playerName, win, score);
 		return;
 	    }
 	
@@ -43,7 +43,7 @@ public class RankingImpl implements Ranking {
 	oldRanking.put(playerName, playerScores);
     }
 
-    private void update(String playerName, boolean win, Integer score) {
+    private void updatePlayerResults(String playerName, boolean win, Integer score) {
 
 	PlayerData<Double, Integer, Integer, Integer> playerScores = new PlayerData<>();
 	if(win){
