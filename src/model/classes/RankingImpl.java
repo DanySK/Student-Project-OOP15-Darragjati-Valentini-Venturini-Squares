@@ -9,9 +9,8 @@ import model.interfaces.Ranking;
 
 public class RankingImpl implements Ranking {
 
-    Map<String, PlayerData<Double, Integer, Integer, Integer>> oldRanking = new HashMap<>();
-    private List<String> oldRanking2 = new ArrayList<>();
-    private List<Pair<String, Integer>> updatedRanking = new ArrayList<>();
+    private Map<String, PlayerData<Double, Integer, Integer, Integer>> oldRanking = new HashMap<>();
+    private List<List<String>> updatedRanking = new ArrayList<>();
 
     public RankingImpl( Map<String, PlayerData<Double, Integer, Integer, Integer>> oldRanking) {
 	this.oldRanking = oldRanking;
@@ -50,8 +49,28 @@ public class RankingImpl implements Ranking {
 	playerScores.setWinrate((double) (playerScores.getTotalWins()/playerScores.getTotalMatches()));
 	playerScores.setSquareCatched(oldRanking.get(playerName).getSquareCatched()+score);
 	oldRanking.replace(playerName, playerScores);
-	
-
+    }
+    
+    public List<List<String>> orderListByWinrate(){
+        
+        for(String player : oldRanking.keySet()){
+            
+            List<String> newPlayer = new ArrayList<>();
+            newPlayer.add(player);
+            newPlayer.add("" + oldRanking.get(player).getWinRate());
+            newPlayer.add("" + oldRanking.get(player).getTotalWins());
+            newPlayer.add("" + oldRanking.get(player).getTotalMatches());
+            newPlayer.add("" + oldRanking.get(player).getSquareCatched());
+            
+            if(updatedRanking.size()==0){
+                updatedRanking.add(new ArrayList<String>());
+            }
+            
+            oldRanking.get(player).getWinRate();
+        }
+         
+        //mettere copyof
+        return updatedRanking;
     }
 
 }
