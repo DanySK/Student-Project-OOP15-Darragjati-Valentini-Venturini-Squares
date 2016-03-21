@@ -13,10 +13,6 @@ public class RankingImpl implements Ranking {
 
     private Map<String, PlayerData<Double, Integer, Integer, Integer>> oldRanking = new HashMap<>();
     private List<Pair<String, PlayerData<Double, Integer, Integer, Integer>>> updatedRanking;
-    private static final Integer WINRATE_CODE = 1;
-    private static final Integer WINS_CODE = 2;
-    private static final Integer TOTAL_MATCHES_CODE = 3;
-    private static final Integer TOTAL_SQUARES_CATCHED_CODE = 4;
 
     public RankingImpl(Map<String, PlayerData<Double, Integer, Integer, Integer>> oldRanking) {
         this.oldRanking = oldRanking;
