@@ -32,11 +32,11 @@ public class PlayerData<A, B, C, D> {
 	this.totalMatches = totalMatches;
     }
 
-    public D getSquareCatched() {
+    public D getTotalSquaresCatched() {
 	return squareCatched;
     }
 
-    public void setSquareCatched(D squareCatched) {
+    public void setTotalSquaresCatched(D squareCatched) {
 	this.squareCatched = squareCatched;
     }
 }

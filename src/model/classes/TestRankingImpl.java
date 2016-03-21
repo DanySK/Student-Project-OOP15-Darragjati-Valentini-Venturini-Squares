@@ -17,7 +17,7 @@ public class TestRankingImpl {
         PlayerData<Double, Integer, Integer, Integer> playerDataTest = new PlayerData<>();
         playerDataTest.setTotalWins(1);
         playerDataTest.setTotalMatches(2);
-        playerDataTest.setSquareCatched(33);
+        playerDataTest.setTotalSquaresCatched(33);
         playerDataTest.setWinrate((double) (playerDataTest.getTotalWins()/playerDataTest.getTotalMatches()));
         rankingTest.put(PLAYER1, playerDataTest);
     }

@@ -41,7 +41,7 @@ public class RankingImpl implements Ranking {
         }
         playerScores.setTotalMatches(1);
         playerScores.setWinrate((double) (playerScores.getTotalWins() / playerScores.getTotalMatches()));
-        playerScores.setSquareCatched(score);
+        playerScores.setTotalSquaresCatched(score);
         oldRanking.put(playerName, playerScores);
     }
 
@@ -53,7 +53,7 @@ public class RankingImpl implements Ranking {
         }
         playerScores.setTotalMatches(oldRanking.get(playerName).getTotalMatches() + 1);
         playerScores.setWinrate((double) (playerScores.getTotalWins() / playerScores.getTotalMatches()));
-        playerScores.setSquareCatched(oldRanking.get(playerName).getSquareCatched() + score);
+        playerScores.setTotalSquaresCatched(oldRanking.get(playerName).getTotalSquaresCatched() + score);
         oldRanking.replace(playerName, playerScores);
     }
 
@@ -67,23 +67,40 @@ public class RankingImpl implements Ranking {
             } else {
                 switch (option) {
                 case WINRATE:
+                    for (int i = 0; i < updatedRanking.size(); i++) {
+                        if (oldRanking.get(player).getWinRate() > updatedRanking.get(i).getY().getWinRate()) {
+                            updatedRanking.add(i, createNewPlayerList(player));
+                            break;
+                        }
+                    }
                     break;
                 case TOTAL_WINS:
+                    for (int i = 0; i < updatedRanking.size(); i++) {
+                        if (oldRanking.get(player).getTotalWins() > updatedRanking.get(i).getY().getTotalWins()) {
+                            updatedRanking.add(i, createNewPlayerList(player));
+                            break;
+                        }
+                    }
                     break;
                 case TOTAL_MATCHES:
+                    for (int i = 0; i < updatedRanking.size(); i++) {
+                        if (oldRanking.get(player).getTotalMatches() > updatedRanking.get(i).getY().getTotalMatches()) {
+                            updatedRanking.add(i, createNewPlayerList(player));
+                            break;
+                        }
+                    }
                     break;
                 case TOTAL_SQUARES_CATCHED:
+                    for (int i = 0; i < updatedRanking.size(); i++) {
+                        if (oldRanking.get(player).getTotalSquaresCatched() > updatedRanking.get(i).getY().getTotalSquaresCatched()) {
+                            updatedRanking.add(i, createNewPlayerList(player));
+                            break;
+                        }
+                    }
                     break;
                 default:
                     throw new IllegalStateException("There is a bug here.");
                 }
-                for (int i = 0; i < updatedRanking.size(); i++) {
-                    if (oldRanking.get(player).getWinRate() > updatedRanking.get(i).getY().getWinRate()) {
-                        updatedRanking.add(i, createNewPlayerList(player));
-                        break;
-                    }
-                }
-
             }
         }
 
@@ -96,7 +113,7 @@ public class RankingImpl implements Ranking {
         datas.setWinrate(oldRanking.get(player).getWinRate());
         datas.setTotalWins(oldRanking.get(player).getTotalWins());
         datas.setTotalMatches(oldRanking.get(player).getTotalMatches());
-        datas.setSquareCatched(oldRanking.get(player).getSquareCatched());
+        datas.setTotalSquaresCatched(oldRanking.get(player).getTotalSquaresCatched());
 
         return new Pair<>(player, datas);
     }
