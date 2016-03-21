@@ -1,8 +1,6 @@
 package model.classes;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +11,7 @@ import model.interfaces.Ranking;
 public class RankingImpl implements Ranking {
 
     private Map<String, PlayerData<Double, Integer, Integer, Integer>> oldRanking = new HashMap<>();
-    private List<Pair<String, PlayerData<Double, Integer, Integer, Integer>>> updatedRanking = new ArrayList<>();
+    private List<Pair<String, PlayerData<Double, Integer, Integer, Integer>>> updatedRanking;
     private static final Integer WINRATE_CODE = 1;
     private static final Integer WINS_CODE = 2;
     private static final Integer TOTAL_MATCHES_CODE = 3;
@@ -58,8 +56,9 @@ public class RankingImpl implements Ranking {
         oldRanking.replace(playerName, playerScores);
     }
 
-    public List<Pair<String, PlayerData<Double, Integer, Integer, Integer>>> orderListByWinrate() {
+    public List<Pair<String, PlayerData<Double, Integer, Integer, Integer>>> orderListBy(WINRATE) {
 
+        updatedRanking = new ArrayList<>();
         for (String player : oldRanking.keySet()) {
 
             if (updatedRanking.size() == 0) {
@@ -75,7 +74,50 @@ public class RankingImpl implements Ranking {
             }
         }
 
-        return Collections.unmodifiableList(updatedRanking);      
+        return Collections.unmodifiableList(updatedRanking);
+    }
+    
+    public List<Pair<String, PlayerData<Double, Integer, Integer, Integer>>> orderListByWins() {
+        
+        updatedRanking = new ArrayList<>();
+        
+        for (String player : oldRanking.keySet()) {
+            
+            if (updatedRanking.size() == 0) {
+                updatedRanking.add(createNewPlayerList(player));
+            } else {
+                for( int i = 0; i < updatedRanking.size(); i++){
+                    
+                }
+            }
+        }
+        return Collections.unmodifiableList(updatedRanking);
+    }
+    
+    public List<Pair<String, PlayerData<Double, Integer, Integer, Integer>>> orderListByTotalMatches() {
+        
+        updatedRanking = new ArrayList<>();
+        
+        for (String player : oldRanking.keySet()) {
+            
+            if (updatedRanking.size() == 0) {
+                updatedRanking.add(createNewPlayerList(player));
+            }
+        }
+        return Collections.unmodifiableList(updatedRanking);
+    }
+    
+    public List<Pair<String, PlayerData<Double, Integer, Integer, Integer>>> orderListBySquarCatched() {
+        
+        updatedRanking = new ArrayList<>();
+        
+        for (String player : oldRanking.keySet()) {
+            
+            if (updatedRanking.size() == 0) {
+                updatedRanking.add(createNewPlayerList(player));
+            }
+        }
+        return Collections.unmodifiableList(updatedRanking);
     }
 
     private Pair<String, PlayerData<Double, Integer, Integer, Integer>> createNewPlayerList(String player) {
