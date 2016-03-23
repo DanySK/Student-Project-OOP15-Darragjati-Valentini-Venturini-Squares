@@ -15,12 +15,13 @@ public class Player {
         this.wonMatches = 0;
         this.totalMatches = 0;
         this.totalSquaresCatched = 0;
-
     }
 
     private void calculateWinRate() {
 
-        this.winRate = getTotalWins() / getTotalMatches();
+        double totalWins = (double) getTotalWins();
+        double totalMatches = (double) getTotalMatches();
+        this.winRate = totalWins / totalMatches;
     }
 
     public String getPlayerName() {
@@ -72,4 +73,12 @@ public class Player {
     public void setTotalSquaresCatched(Integer totalSquaresCatched) {
         this.totalSquaresCatched = totalSquaresCatched;
     }
+
+    @Override
+    public String toString() {
+        return "Player [playerName=" + playerName + ", winRate=" + winRate + ", wonMatches=" + wonMatches
+                + ", totalMatches=" + totalMatches + ", totalSquaresCatched=" + totalSquaresCatched + "]";
+    }
+    
+    
 }

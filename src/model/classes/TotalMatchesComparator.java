@@ -16,15 +16,15 @@ public class TotalMatchesComparator implements Comparator<Player>{
                     return player1.getPlayerName().compareTo(player2.getPlayerName());
                 } else {
                     
-                    return (player1.getTotalSquaresCatched() > player2.getTotalSquaresCatched()) ? 1 : -1;
+                    return (player1.getTotalSquaresCatched() > player2.getTotalSquaresCatched()) ? -1 : 1;
                 }
             } else {
                 
-                return (player1.getWinRate() > player2.getWinRate()) ? 1 : -1;
+                return (player1.getWinRate() > player2.getWinRate()) ? -1 : 1;
             }
         } else{
             
-            return (player1.getTotalMatches() > player2.getTotalMatches()) ? 1 : -1;
+            return (player1.getTotalMatches() > player2.getTotalMatches()) ? -1 : 1;
         }
     }
 }

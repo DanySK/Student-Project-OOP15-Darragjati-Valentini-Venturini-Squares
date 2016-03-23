@@ -32,6 +32,9 @@ public class RankingImpl implements Ranking {
 
     public List<Player> orderListBy(RankingOption option) {
 
+        if(playerList.isEmpty()){
+            
+        }
         switch (option) {
         case WINRATE:
             playerList.sort(new WinRateComparator());
@@ -40,10 +43,10 @@ public class RankingImpl implements Ranking {
             playerList.sort(new TotalWinsComparator());
             break;
         case TOTAL_MATCHES:
-            playerList.sort(new WinRateComparator());
+            playerList.sort(new TotalMatchesComparator());
             break;
         case TOTAL_SQUARES_CATCHED:
-            playerList.sort(new WinRateComparator());
+            playerList.sort(new TotalSquaresCatchedComparator());
             break;
         default:
             throw new IllegalStateException("There is a bug here.");
