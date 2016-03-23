@@ -11,6 +11,7 @@ import model.interfaces.Ranking;
 
 public class RankingImpl implements Ranking {
 
+    private List<Player> list = new ArrayList<>();
     private Map<String, PlayerData<Double, Integer, Integer, Integer>> oldRanking = new HashMap<>();
     private List<Pair<String, PlayerData<Double, Integer, Integer, Integer>>> updatedRanking;
 

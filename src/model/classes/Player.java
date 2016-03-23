@@ -1,61 +1,75 @@
 package model.classes;
 
 public class Player {
- 
+
     private String playerName;
-    private Integer score;
-    private Integer win;
+    private double winRate;
+    private Integer wonMatches;
     private Integer totalMatches;
     private Integer totalSquaresCatched;
-    private double winRate;
-   
-    
-    public Player(String playerName){
-	
-	this.playerName = playerName;
-	this.score = 0;
-	this.win = 0;
-	this.totalMatches = 0;
-	this.winRate = 0;
+
+    public Player(String playerName) {
+
+        this.playerName = playerName;
+        this.winRate = 0;
+        this.wonMatches = 0;
+        this.totalMatches = 0;
+        this.totalSquaresCatched = 0;
+
     }
-    
-    public String getPlayerName(){
-	return playerName;
+
+    private void calculateWinRate() {
+
+        this.winRate = getTotalWins() / getTotalMatches();
     }
-    
-    public Integer getPlayerScore(){
-	return this.score;
+
+    public String getPlayerName() {
+        return playerName;
     }
-    
-    public Integer getTotalWins(){
-	return this.win;
-    }
-    
-    public Integer getTotalMatches(){
-	return this.totalMatches;
-    }
-    
+
     public double getWinRate() {
-	return this.winRate;
+        calculateWinRate();
+        return this.winRate;
+    }
+
+    public Integer getTotalWins() {
+        return this.wonMatches;
+    }
+
+    public Integer getTotalMatches() {
+        return this.totalMatches;
+    }
+
+    public Integer getTotalSquaresCatched() {
+        return this.totalSquaresCatched;
+    }
+
+    public void addLastMatchResults(boolean victory, Integer totalSquaresCatched) {
+
+        if (victory) {
+            this.wonMatches++;
+        }
+
+        this.totalMatches++;
+
+        calculateWinRate();
+
+        this.totalSquaresCatched += totalSquaresCatched;
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
     }
     
-    public void addLastMatchResults(Integer score, boolean victory, Integer totalSquaresCatched){
-	
-	this.score += score;
-	
-	if(victory){
-	    this.win++;
-	}
-	
-	this.totalMatches++;
-	
-	calculateWinRate();
-	
-	this.totalSquaresCatched += totalSquaresCatched;
+    public void setWonMatches(Integer wonMatches) {
+        this.wonMatches = wonMatches;
     }
     
-    private void calculateWinRate(){
-	
-	this.winRate = getTotalWins() / getTotalMatches();
+    public void setTotalMatches(Integer totalMatches) {
+        this.totalMatches = totalMatches;
+    }
+    
+    public void setTotalSquaresCatched(Integer totalSquaresCatched) {
+        this.totalSquaresCatched = totalSquaresCatched;
     }
 }
