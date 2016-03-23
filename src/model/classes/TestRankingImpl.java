@@ -43,10 +43,10 @@ public class TestRankingImpl {
         
         assertEquals(oldRanking.size(), 3);
         
-        RankingImpl rankingTest = new RankingImpl(oldRanking);
+       /* RankingImpl rankingTest = new RankingImpl(oldRanking);
         
         rankingTest.addPlayerResults(PLAYER1, false, 13);
-        rankingTest.addPlayerResults("Topolino", false, 22);
+        rankingTest.addPlayerResults("Topolino", false, 22);*/
         System.out.println("BENE!");
         
     }

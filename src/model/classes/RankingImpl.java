@@ -37,13 +37,13 @@ public class RankingImpl implements Ranking {
             playerList.sort(new WinRateComparator());
             break;
         case TOTAL_WINS:
-
+            playerList.sort(new TotalWinsComparator());
             break;
         case TOTAL_MATCHES:
-
+            playerList.sort(new WinRateComparator());
             break;
         case TOTAL_SQUARES_CATCHED:
-
+            playerList.sort(new WinRateComparator());
             break;
         default:
             throw new IllegalStateException("There is a bug here.");
