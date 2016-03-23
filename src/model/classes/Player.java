@@ -6,6 +6,7 @@ public class Player {
     private Integer score;
     private Integer win;
     private Integer totalMatches;
+    private Integer totalSquaresCatched;
     private double winRate;
    
     
@@ -34,11 +35,11 @@ public class Player {
 	return this.totalMatches;
     }
     
-    public double getWinRatio() {
+    public double getWinRate() {
 	return this.winRate;
     }
     
-    public void addLastMatchResults(Integer score, boolean victory){
+    public void addLastMatchResults(Integer score, boolean victory, Integer totalSquaresCatched){
 	
 	this.score += score;
 	
@@ -50,6 +51,7 @@ public class Player {
 	
 	calculateWinRate();
 	
+	this.totalSquaresCatched += totalSquaresCatched;
     }
     
     private void calculateWinRate(){
