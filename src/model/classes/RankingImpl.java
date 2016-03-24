@@ -30,6 +30,7 @@ public class RankingImpl implements Ranking {
         playerList.add(newPlayer);
     }
 
+    @Override
     public List<Player> orderListBy(RankingOption option) {
 
         
@@ -53,6 +54,7 @@ public class RankingImpl implements Ranking {
         return Collections.unmodifiableList(playerList);
     }
     
+    @Override
     public List<Player> reverseRanking(RankingOption option){
         
         List<Player> reverseList = new ArrayList<>();
@@ -60,7 +62,7 @@ public class RankingImpl implements Ranking {
         for(int i = orderListBy(option).size()-1; i > 0; i-- ){
             reverseList.add(orderListBy(option).get(i));
         }
-        return reverseList;
+        return Collections.unmodifiableList(reverseList);
     }
     
 }
