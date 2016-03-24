@@ -32,9 +32,7 @@ public class RankingImpl implements Ranking {
 
     public List<Player> orderListBy(RankingOption option) {
 
-        if(playerList.isEmpty()){
-            
-        }
+        
         switch (option) {
         case WINRATE:
             playerList.sort(new WinRateComparator());
@@ -53,6 +51,16 @@ public class RankingImpl implements Ranking {
         }
 
         return Collections.unmodifiableList(playerList);
+    }
+    
+    public List<Player> reverseRanking(RankingOption option){
+        
+        List<Player> reverseList = new ArrayList<>();
+        
+        for(int i = orderListBy(option).size()-1; i > 0; i-- ){
+            reverseList.add(orderListBy(option).get(i));
+        }
+        return reverseList;
     }
     
 }

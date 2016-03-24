@@ -91,6 +91,14 @@ public class TestRankingImpl {
         assertEquals(testWinRateOrderedList2.get(3).getPlayerName(), PLAYER3);
         assertEquals(testWinRateOrderedList2.get(4).getPlayerName(), PLAYER1);
         
+        List<Player> testReverseOrderedList = rankingTest.reverseRanking(RankingOption.WINRATE);
+        
+        System.out.println(testReverseOrderedList.size());
+        assertEquals(testReverseOrderedList.get(0).getPlayerName(), PLAYER1);
+        assertEquals(testReverseOrderedList.get(1).getPlayerName(), PLAYER3);
+        assertEquals(testReverseOrderedList.get(2).getPlayerName(), PLAYER2);
+        assertEquals(testReverseOrderedList.get(3).getPlayerName(), PLAYER4);
+        
         System.out.println("BENE!");
 
     }

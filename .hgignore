@@ -5,3 +5,4 @@ syntax: glob
 */target/*
 *hs_err_pid*
 */bin/*
+*.DS_Store
