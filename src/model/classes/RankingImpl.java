@@ -12,6 +12,21 @@ public class RankingImpl implements Ranking {
 
     public RankingImpl(List<PlayerImpl> playerList) {
         this.playerList = playerList;
+        Integer listIndex = 0;
+        Integer occurrences = 0;
+        
+        for(PlayerImpl player : playerList){
+            occurrences = 0;
+            while(playerList.iterator().hasNext()){
+                if(player.getPlayerName() == playerList.get(listIndex).getPlayerName()){
+                    occurrences++;
+                }
+            }
+            if(occurrences == 1){
+                System.out.println("errore");
+                throw new IllegalArgumentException();
+            }
+        }
     }
 
     @Override
@@ -47,7 +62,7 @@ public class RankingImpl implements Ranking {
             playerList.sort(new TotalSquaresCatchedComparator());
             break;
         default:
-            throw new IllegalStateException("There is a bug here.");
+            throw new IllegalStateException();
         }
 
         return Collections.unmodifiableList(playerList);
