@@ -4,9 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.junit.Test;
-
 import model.enumerations.RankingOption;
 
 public class TestRankingImpl {
@@ -20,10 +18,10 @@ public class TestRankingImpl {
     @Test
     public void test() {
 
-        List<Player> playerList = new ArrayList<>();
-        Player player1 = new Player(PLAYER1);
-        Player player2 = new Player(PLAYER2);
-        Player player3 = new Player(PLAYER3);
+        List<PlayerImpl> playerList = new ArrayList<>();
+        PlayerImpl player1 = new PlayerImpl(PLAYER1);
+        PlayerImpl player2 = new PlayerImpl(PLAYER2);
+        PlayerImpl player3 = new PlayerImpl(PLAYER3);
 
         player1.setWonMatches(1);
         player1.setTotalMatches(10);
@@ -52,21 +50,21 @@ public class TestRankingImpl {
 
         assertEquals(playerList.size(), 4);
 
-        List<Player> testWinRateOrderedList = rankingTest.orderListBy(RankingOption.WINRATE);
+        List<PlayerImpl> testWinRateOrderedList = rankingTest.orderListBy(RankingOption.WINRATE);
         
         assertEquals(testWinRateOrderedList.get(0).getPlayerName(), PLAYER4);
         assertEquals(testWinRateOrderedList.get(1).getPlayerName(), PLAYER2);
         assertEquals(testWinRateOrderedList.get(2).getPlayerName(), PLAYER3);
         assertEquals(testWinRateOrderedList.get(3).getPlayerName(), PLAYER1);
         
-        List<Player> testWonMatchesOrderedList = rankingTest.orderListBy(RankingOption.TOTAL_WINS);
+        List<PlayerImpl> testWonMatchesOrderedList = rankingTest.orderListBy(RankingOption.TOTAL_WINS);
         
         assertEquals(testWonMatchesOrderedList.get(0).getPlayerName(), PLAYER2);
         assertEquals(testWonMatchesOrderedList.get(1).getPlayerName(), PLAYER3);
         assertEquals(testWonMatchesOrderedList.get(2).getPlayerName(), PLAYER4);
         assertEquals(testWonMatchesOrderedList.get(3).getPlayerName(), PLAYER1);
         
-        List<Player> testPlayedMatchesOrderedList = rankingTest.orderListBy(RankingOption.TOTAL_MATCHES);
+        List<PlayerImpl> testPlayedMatchesOrderedList = rankingTest.orderListBy(RankingOption.TOTAL_MATCHES);
         
         assertEquals(testPlayedMatchesOrderedList.get(0).getPlayerName(), PLAYER2);
         assertEquals(testPlayedMatchesOrderedList.get(1).getPlayerName(), PLAYER1);
@@ -74,7 +72,7 @@ public class TestRankingImpl {
         assertEquals(testPlayedMatchesOrderedList.get(3).getPlayerName(), PLAYER4);
         
         
-        List<Player> testTotalSquaresCatchedOrderedList = rankingTest.orderListBy(RankingOption.TOTAL_SQUARES_CATCHED);
+        List<PlayerImpl> testTotalSquaresCatchedOrderedList = rankingTest.orderListBy(RankingOption.TOTAL_SQUARES_CATCHED);
         
         assertEquals(testTotalSquaresCatchedOrderedList.get(0).getPlayerName(), PLAYER2);
         assertEquals(testTotalSquaresCatchedOrderedList.get(1).getPlayerName(), PLAYER3);
@@ -83,7 +81,7 @@ public class TestRankingImpl {
         
         rankingTest.addPlayerResults(PLAYER5, true, 37);
         
-        List<Player> testWinRateOrderedList2 = rankingTest.orderListBy(RankingOption.WINRATE);
+        List<PlayerImpl> testWinRateOrderedList2 = rankingTest.orderListBy(RankingOption.WINRATE);
         
         assertEquals(testWinRateOrderedList2.get(0).getPlayerName(), PLAYER5);
         assertEquals(testWinRateOrderedList2.get(1).getPlayerName(), PLAYER4);
@@ -91,7 +89,7 @@ public class TestRankingImpl {
         assertEquals(testWinRateOrderedList2.get(3).getPlayerName(), PLAYER3);
         assertEquals(testWinRateOrderedList2.get(4).getPlayerName(), PLAYER1);
         
-        List<Player> testReverseOrderedList = rankingTest.reverseRanking(RankingOption.WINRATE);
+        List<PlayerImpl> testReverseOrderedList = rankingTest.reverseRanking(RankingOption.WINRATE);
         
         System.out.println(testReverseOrderedList.size());
         assertEquals(testReverseOrderedList.get(0).getPlayerName(), PLAYER1);

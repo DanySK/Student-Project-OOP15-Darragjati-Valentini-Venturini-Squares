@@ -2,7 +2,7 @@ package model.interfaces;
 
 import java.util.List;
 
-import model.classes.Player;
+import model.classes.PlayerImpl;
 import model.enumerations.RankingOption;
 
 public interface Ranking {
@@ -20,12 +20,12 @@ public interface Ranking {
      * @param option wich way the list should be ordered
      * @return the reordered list
      */
-    public List<Player> orderListBy(RankingOption option) ;
+    public List<PlayerImpl> orderListBy(RankingOption option) ;
        
     /**
      * Reverts the order of the list obtained through the method addPlayerResults
      * @param option wich way the list should be ordered
      * @return the reordered list
      */
-    public List<Player> reverseRanking(RankingOption option);
+    public List<PlayerImpl> reverseRanking(RankingOption option);
 }

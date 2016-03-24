@@ -3,35 +3,34 @@ package model.classes;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import model.enumerations.RankingOption;
 import model.interfaces.Ranking;
 
 public class RankingImpl implements Ranking {
 
-    private List<Player> playerList = new ArrayList<>();
+    private List<PlayerImpl> playerList = new ArrayList<>();
 
-    public RankingImpl(List<Player> playerList) {
+    public RankingImpl(List<PlayerImpl> playerList) {
         this.playerList = playerList;
     }
 
     @Override
     public void addPlayerResults(String playerName, boolean victory, Integer totalSquaresCatched) {
 
-        for (Player p : playerList) {
+        for (PlayerImpl p : playerList) {
             if (p.getPlayerName().equals(playerName)) {
                 p.addLastMatchResults(victory, totalSquaresCatched);
                 return;
             }
         }
 
-        Player newPlayer = new Player(playerName);
+        PlayerImpl newPlayer = new PlayerImpl(playerName);
         newPlayer.addLastMatchResults(victory, totalSquaresCatched);
         playerList.add(newPlayer);
     }
 
     @Override
-    public List<Player> orderListBy(RankingOption option) {
+    public List<PlayerImpl> orderListBy(RankingOption option) {
 
         
         switch (option) {
@@ -55,9 +54,9 @@ public class RankingImpl implements Ranking {
     }
     
     @Override
-    public List<Player> reverseRanking(RankingOption option){
+    public List<PlayerImpl> reverseRanking(RankingOption option){
         
-        List<Player> reverseList = new ArrayList<>();
+        List<PlayerImpl> reverseList = new ArrayList<>();
         
         for(int i = orderListBy(option).size()-1; i > 0; i-- ){
             reverseList.add(orderListBy(option).get(i));

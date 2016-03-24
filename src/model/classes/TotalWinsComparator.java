@@ -2,10 +2,10 @@ package model.classes;
 
 import java.util.Comparator;
 
-public class TotalWinsComparator implements Comparator<Player> {
+public class TotalWinsComparator implements Comparator<PlayerImpl> {
 
     @Override
-    public int compare(Player player1, Player player2) {
+    public int compare(PlayerImpl player1, PlayerImpl player2) {
 
         if (player1.getTotalWins() == player2.getTotalWins()) {
 

@@ -26,27 +26,33 @@ public class PlayerImpl implements Player{
         this.winRate = totalWins / totalMatches;
     }
 
+    @Override
     public String getPlayerName() {
         return playerName;
     }
 
+    @Override
     public double getWinRate() {
         calculateWinRate();
         return this.winRate;
     }
 
+    @Override
     public Integer getTotalWins() {
         return this.wonMatches;
     }
 
+    @Override
     public Integer getTotalMatches() {
         return this.totalMatches;
     }
 
+    @Override
     public Integer getTotalSquaresCatched() {
         return this.totalSquaresCatched;
     }
 
+    @Override
     public void addLastMatchResults(boolean victory, Integer totalSquaresCatched) {
 
         if (victory) {
@@ -60,18 +66,22 @@ public class PlayerImpl implements Player{
         this.totalSquaresCatched += totalSquaresCatched;
     }
 
+    @Override
     public void setPlayerName(String playerName) {
         this.playerName = playerName;
     }
     
+    @Override
     public void setWonMatches(Integer wonMatches) {
         this.wonMatches = wonMatches;
     }
     
+    @Override
     public void setTotalMatches(Integer totalMatches) {
         this.totalMatches = totalMatches;
     }
     
+    @Override
     public void setTotalSquaresCatched(Integer totalSquaresCatched) {
         this.totalSquaresCatched = totalSquaresCatched;
     }
