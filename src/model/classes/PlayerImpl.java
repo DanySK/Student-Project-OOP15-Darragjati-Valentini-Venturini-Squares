@@ -1,6 +1,8 @@
 package model.classes;
 
-public class Player {
+import model.interfaces.Player;
+
+public class PlayerImpl implements Player{
 
     private String playerName;
     private double winRate;
@@ -8,7 +10,7 @@ public class Player {
     private Integer totalMatches;
     private Integer totalSquaresCatched;
 
-    public Player(String playerName) {
+    public PlayerImpl(String playerName) {
 
         this.playerName = playerName;
         this.winRate = 0;
