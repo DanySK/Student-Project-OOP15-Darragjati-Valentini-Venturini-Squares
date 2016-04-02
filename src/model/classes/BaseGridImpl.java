@@ -19,15 +19,19 @@ public class BaseGridImpl implements BaseGrid {
     private static final Integer MINIMUM_SIZE = 4;
     private static final Integer MAXIMUM_SIZE = 10;
 
-    public BaseGridImpl(Integer size) {
+    public BaseGridImpl(Integer rowsNumber, Integer columnNumber) {
 
-        if (size < MINIMUM_SIZE || size > MAXIMUM_SIZE) {
+        if (rowsNumber < MINIMUM_SIZE || rowsNumber > MAXIMUM_SIZE || columnNumber < MINIMUM_SIZE
+                || columnNumber > MAXIMUM_SIZE) {
             throw new IllegalArgumentException();
         }
-        for (int i = 0; i < size + 1; i++) {
+        for (int i = 0; i < rowsNumber + 1; i++) {
 
-            vertical.add(createEmptyGrid(size));
-            horizontal.add(createEmptyGrid(size));
+            vertical.add(createEmptyGrid(rowsNumber));
+        }
+        for (int i = 0; i < columnNumber + 1; i++) {
+
+            vertical.add(createEmptyGrid(columnNumber));
         }
         System.out.println("Orizzontale " + horizontal.toString() + "\nVerticale " + vertical.toString());
 
@@ -142,14 +146,6 @@ public class BaseGridImpl implements BaseGrid {
 
         for (int i = 0; i < horizontal.size(); i++) {
             for (GridOption grid : horizontal.get(i)) {
-                if (grid.equals(GridOption.EMPTY)) {
-                    movesLeft++;
-                }
-            }
-        }
-
-        for (int i = 0; i < vertical.size(); i++) {
-            for (GridOption grid : vertical.get(i)) {
                 if (grid.equals(GridOption.EMPTY)) {
                     movesLeft++;
                 }
