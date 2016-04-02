@@ -53,7 +53,7 @@ public class PlayerImpl implements Player{
     }
 
     @Override
-    public void addLastMatchResults(boolean victory, Integer totalSquaresCatched) {
+    public void addLastMatchResults(final boolean victory, final Integer totalSquaresCatched) {
 
         if (victory) {
             this.wonMatches++;
@@ -67,22 +67,22 @@ public class PlayerImpl implements Player{
     }
 
     @Override
-    public void setPlayerName(String playerName) {
+    public void setPlayerName(final String playerName) {
         this.playerName = playerName;
     }
     
     @Override
-    public void setWonMatches(Integer wonMatches) {
+    public void setWonMatches(final Integer wonMatches) {
         this.wonMatches = wonMatches;
     }
     
     @Override
-    public void setTotalMatches(Integer totalMatches) {
+    public void setTotalMatches(final Integer totalMatches) {
         this.totalMatches = totalMatches;
     }
     
     @Override
-    public void setTotalSquaresCatched(Integer totalSquaresCatched) {
+    public void setTotalSquaresCatched(final Integer totalSquaresCatched) {
         this.totalSquaresCatched = totalSquaresCatched;
     }
 

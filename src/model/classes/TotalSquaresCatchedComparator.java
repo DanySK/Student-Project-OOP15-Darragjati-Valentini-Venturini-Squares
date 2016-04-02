@@ -5,7 +5,7 @@ import java.util.Comparator;
 public class TotalSquaresCatchedComparator implements Comparator<PlayerImpl> {
 
     @Override
-    public int compare(PlayerImpl player1, PlayerImpl player2) {
+    public int compare(final PlayerImpl player1, final PlayerImpl player2) {
 
         if (player1.getTotalSquaresCatched() == player2.getTotalSquaresCatched()) {
 

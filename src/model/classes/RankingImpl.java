@@ -14,15 +14,15 @@ public class RankingImpl implements Ranking {
         this.playerList = playerList;
         Integer listIndex = 0;
         Integer occurrences = 0;
-        
-        for(PlayerImpl player : playerList){
+
+        for (PlayerImpl player : playerList) {
             occurrences = 0;
-            while(playerList.iterator().hasNext()){
-                if(player.getPlayerName() == playerList.get(listIndex).getPlayerName()){
+            while (playerList.iterator().hasNext()) {
+                if (player.getPlayerName().equals(playerList.get(listIndex).getPlayerName())) {
                     occurrences++;
                 }
             }
-            if(occurrences == 1){
+            if (occurrences == 1) {
                 System.out.println("errore");
                 throw new IllegalArgumentException();
             }
@@ -30,7 +30,7 @@ public class RankingImpl implements Ranking {
     }
 
     @Override
-    public void addPlayerResults(String playerName, boolean victory, Integer totalSquaresCatched) {
+    public void addPlayerResults(final String playerName, final boolean victory, final Integer totalSquaresCatched) {
 
         for (PlayerImpl p : playerList) {
             if (p.getPlayerName().equals(playerName)) {
@@ -45,9 +45,8 @@ public class RankingImpl implements Ranking {
     }
 
     @Override
-    public List<PlayerImpl> orderListBy(RankingOption option) {
+    public List<PlayerImpl> orderListBy(final RankingOption option) {
 
-        
         switch (option) {
         case WINRATE:
             playerList.sort(new WinRateComparator());
@@ -67,16 +66,16 @@ public class RankingImpl implements Ranking {
 
         return Collections.unmodifiableList(playerList);
     }
-    
+
     @Override
-    public List<PlayerImpl> reverseRanking(RankingOption option){
-        
+    public List<PlayerImpl> reverseRanking(final RankingOption option) {
+
         List<PlayerImpl> reverseList = new ArrayList<>();
-        
-        for(int i = orderListBy(option).size()-1; i > 0; i-- ){
+
+        for (int i = orderListBy(option).size() - 1; i > 0; i--) {
             reverseList.add(orderListBy(option).get(i));
         }
         return Collections.unmodifiableList(reverseList);
     }
-    
+
 }

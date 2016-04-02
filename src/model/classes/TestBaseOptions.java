@@ -8,7 +8,7 @@ import model.enumerations.GridOption;
 
 public class TestBaseOptions {
 
-    private final static Integer SIZE = 6;
+    private static final Integer SIZE = 6;
     
     @Test
     public void test() {
