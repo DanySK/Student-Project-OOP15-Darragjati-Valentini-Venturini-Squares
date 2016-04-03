@@ -51,16 +51,17 @@ public class BaseGridImpl implements BaseGrid {
             grid.add(createEmptyGrid(columnNumber));
         }
 
-        System.out.print("orizzontali: ");
+        System.out.print("Oriz: ");
         for (int i = 0; i < rowsNumber + 1; i++) {
 
             System.out.print(grid.get(i) + " ");
         }
-        System.out.print("verticali: ");
+        System.out.print("\nVert: ");
         for (int i = 0; i < columnNumber + 1; i++) {
 
-            System.out.println(grid.get(i) + " ");
+            System.out.print(grid.get(i) + " ");
         }
+        System.out.println();
     }
 
     private List<GridOption> createEmptyGrid(final Integer size) {
@@ -152,6 +153,7 @@ public class BaseGridImpl implements BaseGrid {
         }
 
         if (player.equals(GridOption.PLAYER1) || player.equals(GridOption.PLAYER2)) {
+            System.out.println("P1: " + scorePlayer1 + " P2: " + scorePlayer2);
             return (player.equals(GridOption.PLAYER1)) ? scorePlayer1 : scorePlayer2;
         } else {
             throw new IllegalArgumentException();
@@ -252,7 +254,7 @@ public class BaseGridImpl implements BaseGrid {
             if (listIndex != rows + 1) {
                 if (getCopyOfElement(listIndex - 1, position) != GridOption.EMPTY) {
                     if (getCopyOfElement(position, listIndex - (rows + 1 + 1)) != GridOption.EMPTY
-                            && getCopyOfElement(position + 1, listIndex - (rows + 1)) != GridOption.EMPTY) {
+                            && getCopyOfElement(position + 1, listIndex - (rows + 1 + 1)) != GridOption.EMPTY) {
                         points++;
                     }
                 }
@@ -260,7 +262,7 @@ public class BaseGridImpl implements BaseGrid {
 
             if (listIndex != rows + columns) {
                 if (getCopyOfElement(listIndex + 1, position) != GridOption.EMPTY) {
-                    if (getCopyOfElement(position, listIndex - (rows + 1 + 1)) != GridOption.EMPTY
+                    if (getCopyOfElement(position, listIndex - (rows + 1)) != GridOption.EMPTY
                             && getCopyOfElement(position + 1, listIndex - (rows + 1)) != GridOption.EMPTY) {
                         points++;
                     }
