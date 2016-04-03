@@ -14,8 +14,7 @@ import model.enumerations.*;
  */
 public class BaseGridImpl implements BaseGrid {
 
-    private List<List<GridOption>> horizontal = new ArrayList<>();
-    private List<List<GridOption>> vertical = new ArrayList<>();
+    private List<List<GridOption>> grid = new ArrayList<>();
     private GridOption turn = GridOption.EMPTY;
     private boolean matchStarted = false;
     private Integer scorePlayer1;
@@ -25,7 +24,6 @@ public class BaseGridImpl implements BaseGrid {
     private static final Integer INITIAL_SCORE = 0;
     private static final Integer MINIMUM_SIZE = 4;
     private static final Integer MAXIMUM_SIZE = 10;
-    private static final Integer DUNNO_NUM = 5;
 
     /**
      * 
@@ -46,11 +44,22 @@ public class BaseGridImpl implements BaseGrid {
 
         for (int i = 0; i < rowsNumber + 1; i++) {
 
-            vertical.add(createEmptyGrid(rowsNumber));
+            grid.add(createEmptyGrid(rowsNumber));
         }
         for (int i = 0; i < columnNumber + 1; i++) {
 
-            vertical.add(createEmptyGrid(columnNumber));
+            grid.add(createEmptyGrid(columnNumber));
+        }
+
+        System.out.print("orizzontali: ");
+        for (int i = 0; i < rowsNumber + 1; i++) {
+
+            System.out.print(grid.get(i) + " ");
+        }
+        System.out.print("verticali: ");
+        for (int i = 0; i < columnNumber + 1; i++) {
+
+            System.out.println(grid.get(i) + " ");
         }
     }
 
@@ -108,7 +117,7 @@ public class BaseGridImpl implements BaseGrid {
          * horizontal.get(0).size() * horizontal.get(0).size()){ return false; }
          * return true;
          */
-        return (!isStarted() || (scorePlayer1 + scorePlayer2) < horizontal.get(0)
+        return (!isStarted() || (scorePlayer1 + scorePlayer2) < grid.get(0)
                 .size() /* horizontal.get(0).size() */) ? false : true;
     }
 
@@ -153,7 +162,8 @@ public class BaseGridImpl implements BaseGrid {
     @Override
     public Integer getTotalMoves() {
 
-        return (horizontal.size() * horizontal.get(0).size()) + (vertical.size() * vertical.get(0).size());
+        //System.out.println((((rows + 1) * grid.get(0).size()) + ((columns + 1) * grid.get(rows + 1 + 1).size())));
+        return (((rows + 1) * grid.get(0).size()) + ((columns + 1) * grid.get(rows + 1 + 1).size()));
     }
 
     @Override
@@ -161,21 +171,21 @@ public class BaseGridImpl implements BaseGrid {
 
         Integer movesLeft = 0;
 
-        for (List<GridOption> list : horizontal) {
+        for (List<GridOption> list : grid) {
             for (GridOption option : list) {
                 if (option.equals(GridOption.EMPTY)) {
                     movesLeft++;
                 }
             }
         }
-
+        
         return movesLeft;
     }
 
     private boolean checkCorrectInput(final Integer listIndex, final Integer position) {
 
-        return (listIndex < 0 || listIndex > horizontal.size() || position < 0
-                || position > vertical.get(listIndex).size()) ? false : true;
+        return (listIndex < 0 || listIndex > grid.size() || position < 0 || position > grid.get(listIndex).size())
+                ? false : true;
     }
 
     @Override
@@ -185,7 +195,7 @@ public class BaseGridImpl implements BaseGrid {
             throw new IllegalArgumentException();
         }
 
-        GridOption copyOfMove = horizontal.get(listIndex).get(elementIndex);
+        GridOption copyOfMove = grid.get(listIndex).get(elementIndex);
 
         return copyOfMove;
     }
@@ -198,8 +208,8 @@ public class BaseGridImpl implements BaseGrid {
         }
 
         if (getCopyOfElement(listIndex, position).equals(GridOption.EMPTY)) {
-           
-            horizontal.get(listIndex).set(position, getCurrentPlayerTurn());
+
+            grid.get(listIndex).set(position, getCurrentPlayerTurn());
 
             if (!pointScored(listIndex, position)) {
                 nextTurn();
@@ -213,7 +223,7 @@ public class BaseGridImpl implements BaseGrid {
 
         int points = 0;
 
-        if (listIndex >= 0 && listIndex <= rows) {//da sistemare
+        if (listIndex >= 0 && listIndex <= rows) {// da sistemare
 
             if (listIndex != 0) {
                 if (getCopyOfElement(listIndex - 1, position) != GridOption.EMPTY) {
@@ -237,12 +247,12 @@ public class BaseGridImpl implements BaseGrid {
             return points > 0 ? true : false;
         }
 
-        if (listIndex >= rows && listIndex <= rows + columns) {//da sistemare
+        if (listIndex > rows && listIndex <= rows + columns) {// da sistemare
 
-            if (listIndex != rows) {
+            if (listIndex != rows + 1) {
                 if (getCopyOfElement(listIndex - 1, position) != GridOption.EMPTY) {
-                    if (getCopyOfElement(position, listIndex - DUNNO_NUM) != GridOption.EMPTY
-                            && getCopyOfElement(position + 1, listIndex - DUNNO_NUM) != GridOption.EMPTY) {
+                    if (getCopyOfElement(position, listIndex - (rows + 1 + 1)) != GridOption.EMPTY
+                            && getCopyOfElement(position + 1, listIndex - (rows + 1)) != GridOption.EMPTY) {
                         points++;
                     }
                 }
@@ -250,8 +260,8 @@ public class BaseGridImpl implements BaseGrid {
 
             if (listIndex != rows + columns) {
                 if (getCopyOfElement(listIndex + 1, position) != GridOption.EMPTY) {
-                    if (getCopyOfElement(position, listIndex - DUNNO_NUM + 1) != GridOption.EMPTY
-                            && getCopyOfElement(position + 1, listIndex - DUNNO_NUM + 1) != GridOption.EMPTY) {
+                    if (getCopyOfElement(position, listIndex - (rows + 1 + 1)) != GridOption.EMPTY
+                            && getCopyOfElement(position + 1, listIndex - (rows + 1)) != GridOption.EMPTY) {
                         points++;
                     }
                 }
