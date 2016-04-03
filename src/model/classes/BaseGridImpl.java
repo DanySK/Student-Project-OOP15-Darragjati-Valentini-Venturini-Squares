@@ -7,6 +7,11 @@ import java.util.Random;
 import model.interfaces.BaseGrid;
 import model.enumerations.*;
 
+/**
+ * 
+ * 
+ *
+ */
 public class BaseGridImpl implements BaseGrid {
 
     private List<List<GridOption>> horizontal = new ArrayList<>();
@@ -19,7 +24,12 @@ public class BaseGridImpl implements BaseGrid {
     private static final Integer MINIMUM_SIZE = 4;
     private static final Integer MAXIMUM_SIZE = 10;
 
-    public BaseGridImpl(Integer rowsNumber, Integer columnNumber) {
+    /**
+     * 
+     * @param rowsNumber a
+     * @param columnNumber a
+     */
+    public BaseGridImpl(final Integer rowsNumber, final Integer columnNumber) {
 
         if (rowsNumber < MINIMUM_SIZE || rowsNumber > MAXIMUM_SIZE || columnNumber < MINIMUM_SIZE
                 || columnNumber > MAXIMUM_SIZE) {
@@ -33,8 +43,6 @@ public class BaseGridImpl implements BaseGrid {
 
             vertical.add(createEmptyGrid(columnNumber));
         }
-        System.out.println("Orizzontale " + horizontal.toString() + "\nVerticale " + vertical.toString());
-
     }
 
     private List<GridOption> createEmptyGrid(final Integer size) {
@@ -91,7 +99,7 @@ public class BaseGridImpl implements BaseGrid {
          * horizontal.get(0).size() * horizontal.get(0).size()){ return false; }
          * return true;
          */
-        return (!isStarted() || (scorePlayer1 + scorePlayer2) < horizontal.get(0).size() * horizontal.get(0).size())
+        return (!isStarted() || (scorePlayer1 + scorePlayer2) < horizontal.get(0).size() /* horizontal.get(0).size()*/)
                 ? false : true;
     }
 
@@ -144,9 +152,9 @@ public class BaseGridImpl implements BaseGrid {
 
         Integer movesLeft = 0;
 
-        for (int i = 0; i < horizontal.size(); i++) {
-            for (GridOption grid : horizontal.get(i)) {
-                if (grid.equals(GridOption.EMPTY)) {
+        for (List<GridOption> list : horizontal) {
+            for (GridOption option : list) {
+                if (option.equals(GridOption.EMPTY)) {
                     movesLeft++;
                 }
             }
