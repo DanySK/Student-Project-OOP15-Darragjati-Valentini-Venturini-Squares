@@ -32,7 +32,7 @@ public class TestBaseOptions {
 					     // the list is initialized as EMPTY
 	    for (int z = 0; z < SIZE; z++) {
 		assertEquals(gridOfSize.getHorizontalElement(i, z), GridOption.EMPTY);
-		assertEquals(gridOfSize.getVerticalElement(i, z), GridOption.EMPTY);
+		assertEquals(gridOfSize.getCopyOfElement(i, z), GridOption.EMPTY);
 	    }
 	}
 
@@ -41,7 +41,7 @@ public class TestBaseOptions {
 
 	gridOfSize.startMatch();
 	assertTrue(gridOfSize.isStarted());
-	gridOfSize.setVerticalLine(0, 0);
+	gridOfSize.setLine(0, 0);
 
 	assertEquals(gridOfSize.getRemainingMoves(), (Integer) (gridOfSize.getTotalMoves() - 1));
 
@@ -56,7 +56,7 @@ public class TestBaseOptions {
 	for (int i = 0; i < SIZE + 1; i++) { // verifies that every element in
 					     // the list is initialized as EMPTY
 	    for (int z = 0; z < SIZE; z++) {
-		System.out.print(gridOfSize.getVerticalElement(i, z) + "|");
+		System.out.print(gridOfSize.getCopyOfElement(i, z) + "|");
 	    }
 	}
 	System.out.println();
@@ -65,7 +65,7 @@ public class TestBaseOptions {
 	gridOfSize.setHorizontalLine(1, 0);
 
 	GridOption player = gridOfSize.getCurrentPlayerTurn();
-	gridOfSize.setVerticalLine(1, 0);
+	gridOfSize.setLine(1, 0);
 
 	assertEquals(gridOfSize.getRemainingMoves(), (Integer) (gridOfSize.getTotalMoves() - 4));
 	assertNotEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
@@ -76,8 +76,8 @@ public class TestBaseOptions {
 
 	gridOfSize.setHorizontalLine(SIZE, 0);
 	gridOfSize.setHorizontalLine(SIZE, SIZE - 1);
-	gridOfSize.setVerticalLine(SIZE, 0);
-	gridOfSize.setVerticalLine(SIZE, SIZE - 1);
+	gridOfSize.setLine(SIZE, 0);
+	gridOfSize.setLine(SIZE, SIZE - 1);
 
 	BaseGridImpl gridOfSize2 = new BaseGridImpl(SIZE);
 
@@ -86,7 +86,7 @@ public class TestBaseOptions {
 	for (int i = 0; i < SIZE + 1; i++) {
 	    for (int z = 0; z < SIZE; z++) {
 		gridOfSize2.setHorizontalLine(i, z);
-		gridOfSize2.setVerticalLine(i, z);
+		gridOfSize2.setLine(i, z);
 	    }
 	}
 
