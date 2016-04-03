@@ -56,8 +56,6 @@ public class TestBaseOptions {
 
         assertEquals(gridOfSize.getRemainingMoves(), (Integer) (gridOfSize.getTotalMoves() - 1));
 
-        
-
         gridOfSize.setLine(7, 0);
         gridOfSize.setLine(1, 0);
 
@@ -68,16 +66,17 @@ public class TestBaseOptions {
             }
         }
         System.out.print("\nVert ");
-        for (int i = SIZE + 1; i < 2 * (SIZE + 1); i++) { 
+        for (int i = SIZE + 1; i < 2 * (SIZE + 1); i++) {
             for (int z = 0; z < SIZE; z++) {
                 System.out.print(gridOfSize.getCopyOfElement(i, z) + "|");
             }
         }
         System.out.println();
-        
+
         GridOption player = gridOfSize.getCurrentPlayerTurn();
         gridOfSize.setLine(8, 0);
 
+        /*
         System.out.print("Oriz ");
         for (int i = 0; i < SIZE + 1; i++) {
             for (int z = 0; z < SIZE; z++) {
@@ -85,13 +84,13 @@ public class TestBaseOptions {
             }
         }
         System.out.print("\nVert ");
-        for (int i = SIZE + 1; i < 2 * (SIZE + 1); i++) { 
+        for (int i = SIZE + 1; i < 2 * (SIZE + 1); i++) {
             for (int z = 0; z < SIZE; z++) {
                 System.out.print(gridOfSize.getCopyOfElement(i, z) + "|");
             }
         }
-        System.out.println();
-        
+        System.out.println();*/
+
         assertEquals(gridOfSize.getRemainingMoves(), (Integer) (gridOfSize.getTotalMoves() - 4));
         assertNotEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
         assertEquals(player, gridOfSize.getCurrentPlayerTurn()); // verifies if
@@ -102,12 +101,31 @@ public class TestBaseOptions {
         BaseGridImpl gridOfSize2 = new BaseGridImpl(SIZE, SIZE);
 
         gridOfSize2.startMatch();
-
+        
         for (int i = 0; i < SIZE + 1; i++) {
             for (int z = 0; z < SIZE; z++) {
                 gridOfSize2.setLine(i, z);
+            }
+        }
+
+        
+        for (int i = (SIZE + 1) + 1; i < 2 * (SIZE + 1); i++) {
+            for (int z = 0; z < SIZE; z++) {
                 gridOfSize2.setLine(i, z);
             }
+            System.out.print("Oriz ");
+            for (int h = 0; h < SIZE + 1; h++) {
+                for (int z = 0; z < SIZE; z++) {
+                    System.out.print(gridOfSize2.getCopyOfElement(h, z) + "|");
+                }
+            }
+            System.out.print("\nVert ");
+            for (int h = SIZE + 1; h < 2 * (SIZE + 1); h++) {
+                for (int z = 0; z < SIZE; z++) {
+                    System.out.print(gridOfSize2.getCopyOfElement(h, z) + "|");
+                }
+            }
+            System.out.println();
         }
 
         assertTrue(gridOfSize2.getRemainingMoves().equals(0));
@@ -116,23 +134,49 @@ public class TestBaseOptions {
         assertTrue(gridOfSize2.isEnded());
         assertNotEquals(GridOption.EMPTY, gridOfSize2.getWinner());
     }
-    /*
-     * @Test public void testExceptions() {
+
+    /**
      * 
-     * BaseGridImpl testGrid;
-     * 
-     * try { testGrid = new BaseGridImpl(SIZE - SIZE, SIZE); fail(); } catch
-     * (IllegalArgumentException e) { } catch (Exception e) { fail(
-     * "Wrong exception thrown"); } try { testGrid = new BaseGridImpl(SIZE +
-     * SIZE, SIZE); } catch (IllegalArgumentException e) { } catch (Exception e)
-     * { fail("Wrong exception thrown"); }
-     * 
-     * testGrid = new BaseGridImpl(SIZE, SIZE); try {
-     * testGrid.setHorizontalLine(0, 0); } catch (IllegalStateException e) { }
-     * catch (Exception e) { fail("Wrong exception thrown"); } try {
-     * testGrid.setHorizontalLine(-1, -1); } catch (IllegalArgumentException e)
-     * { } catch (Exception e) { fail("Wrong exception thrown"); } try {
-     * testGrid.getWinner(); fail(""); } catch (IllegalStateException e){ }
-     * catch (Exception e){ fail("Wrong exception thrown"); } }
      */
+    @Test
+    public void testExceptions() {
+
+        BaseGridImpl testGrid;
+
+        try {
+            testGrid = new BaseGridImpl(SIZE - 4, SIZE - 4);
+            fail();
+        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
+            fail("Wrong exception thrown");
+        }
+        try {
+            testGrid = new BaseGridImpl(SIZE + SIZE, SIZE + SIZE);
+        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
+            fail("Wrong exception thrown");
+        }
+
+        testGrid = new BaseGridImpl(SIZE, SIZE);
+        try {
+            testGrid.setLine(0, 0);
+        } catch (IllegalStateException e) {
+        } catch (Exception e) {
+            fail("Wrong exception thrown");
+        }
+        try {
+            testGrid.setLine(-1, -1);
+        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
+            fail("Wrong exception thrown");
+        }
+        try {
+            testGrid.getWinner();
+            fail("");
+        } catch (IllegalStateException e) {
+        } catch (Exception e) {
+            fail("Wrong exception thrown");
+        }
+    }
+
 }

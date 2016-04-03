@@ -50,7 +50,7 @@ public class BaseGridImpl implements BaseGrid {
 
             grid.add(createEmptyGrid(columnNumber));
         }
-
+/*
         System.out.print("Oriz: ");
         for (int i = 0; i < rowsNumber + 1; i++) {
 
@@ -61,7 +61,7 @@ public class BaseGridImpl implements BaseGrid {
 
             System.out.print(grid.get(i) + " ");
         }
-        System.out.println();
+        System.out.println();*/
     }
 
     private List<GridOption> createEmptyGrid(final Integer size) {
@@ -153,7 +153,7 @@ public class BaseGridImpl implements BaseGrid {
         }
 
         if (player.equals(GridOption.PLAYER1) || player.equals(GridOption.PLAYER2)) {
-            System.out.println("P1: " + scorePlayer1 + " P2: " + scorePlayer2);
+
             return (player.equals(GridOption.PLAYER1)) ? scorePlayer1 : scorePlayer2;
         } else {
             throw new IllegalArgumentException();
