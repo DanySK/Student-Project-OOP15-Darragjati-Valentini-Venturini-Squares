@@ -24,7 +24,7 @@ public class TestBaseOptions {
      */
     @Test
     public void test() {
-
+/*
         BaseGridImpl gridOfSize = new BaseGridImpl(SIZE, SIZE);
 
         assertEquals(gridOfSize.getTotalMoves(), gridOfSize.getRemainingMoves()); // verifies
@@ -43,9 +43,9 @@ public class TestBaseOptions {
                                              // Gridoption.EMPTY
             for (int z = 0; z < SIZE; z++) {
                 assertEquals(gridOfSize.getCopyOfElement(i, z), GridOption.EMPTY);
-                assertEquals(gridOfSize.getCopyOfElement(i, z), GridOption.EMPTY);
             }
         }
+        // non effettuo il controllo per le verticali AGGIUNGERE
 
         assertFalse(gridOfSize.isStarted());
         assertFalse(gridOfSize.isEnded());
@@ -76,20 +76,7 @@ public class TestBaseOptions {
         GridOption player = gridOfSize.getCurrentPlayerTurn();
         gridOfSize.setLine(8, 0);
 
-        /*
-        System.out.print("Oriz ");
-        for (int i = 0; i < SIZE + 1; i++) {
-            for (int z = 0; z < SIZE; z++) {
-                System.out.print(gridOfSize.getCopyOfElement(i, z) + "|");
-            }
-        }
-        System.out.print("\nVert ");
-        for (int i = SIZE + 1; i < 2 * (SIZE + 1); i++) {
-            for (int z = 0; z < SIZE; z++) {
-                System.out.print(gridOfSize.getCopyOfElement(i, z) + "|");
-            }
-        }
-        System.out.println();*/
+        
 
         assertEquals(gridOfSize.getRemainingMoves(), (Integer) (gridOfSize.getTotalMoves() - 4));
         assertNotEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
@@ -97,33 +84,16 @@ public class TestBaseOptions {
                                                                  // the player
                                                                  // has received
                                                                  // a bonus move
-
+*/
         BaseGridImpl gridOfSize2 = new BaseGridImpl(SIZE, SIZE);
 
         gridOfSize2.startMatch();
-        
-        for (int i = 0; i < SIZE + 1; i++) {
-            for (int z = 0; z < SIZE; z++) {
-                gridOfSize2.setLine(i, z);
-            }
-        }
 
-        
-        for (int i = (SIZE + 1) + 1; i < 2 * (SIZE + 1); i++) {
+        for (int i = 0; i < 2 * (SIZE + 1); i++) {
+            System.out.print("Lista: " + i);
             for (int z = 0; z < SIZE; z++) {
                 gridOfSize2.setLine(i, z);
-            }
-            System.out.print("Oriz ");
-            for (int h = 0; h < SIZE + 1; h++) {
-                for (int z = 0; z < SIZE; z++) {
-                    System.out.print(gridOfSize2.getCopyOfElement(h, z) + "|");
-                }
-            }
-            System.out.print("\nVert ");
-            for (int h = SIZE + 1; h < 2 * (SIZE + 1); h++) {
-                for (int z = 0; z < SIZE; z++) {
-                    System.out.print(gridOfSize2.getCopyOfElement(h, z) + "|");
-                }
+                System.out.print(" Posizione: " + z);
             }
             System.out.println();
         }
@@ -135,10 +105,11 @@ public class TestBaseOptions {
         assertNotEquals(GridOption.EMPTY, gridOfSize2.getWinner());
     }
 
+   
     /**
      * 
      */
-    @Test
+/*    @Test
     public void testExceptions() {
 
         BaseGridImpl testGrid;
@@ -177,6 +148,6 @@ public class TestBaseOptions {
         } catch (Exception e) {
             fail("Wrong exception thrown");
         }
-    }
+    }*/
 
 }

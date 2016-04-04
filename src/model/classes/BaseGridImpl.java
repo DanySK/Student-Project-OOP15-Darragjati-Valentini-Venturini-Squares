@@ -225,7 +225,7 @@ public class BaseGridImpl implements BaseGrid {
 
         int points = 0;
 
-        if (listIndex >= 0 && listIndex <= rows) {// da sistemare
+        if (listIndex >= 0 && listIndex <= rows) {
 
             if (listIndex != 0) {
                 if (getCopyOfElement(listIndex - 1, position) != GridOption.EMPTY) {
@@ -249,7 +249,7 @@ public class BaseGridImpl implements BaseGrid {
             return points > 0 ? true : false;
         }
 
-        if (listIndex > rows && listIndex <= rows + columns) {// da sistemare
+        if (listIndex > rows && listIndex <= rows + columns + 1) {
 
             if (listIndex != rows + 1) {
                 if (getCopyOfElement(listIndex - 1, position) != GridOption.EMPTY) {
@@ -260,7 +260,7 @@ public class BaseGridImpl implements BaseGrid {
                 }
             }
 
-            if (listIndex != rows + columns) {
+            if (listIndex != rows + columns + 1) {
                 if (getCopyOfElement(listIndex + 1, position) != GridOption.EMPTY) {
                     if (getCopyOfElement(position, listIndex - (rows + 1)) != GridOption.EMPTY
                             && getCopyOfElement(position + 1, listIndex - (rows + 1)) != GridOption.EMPTY) {
