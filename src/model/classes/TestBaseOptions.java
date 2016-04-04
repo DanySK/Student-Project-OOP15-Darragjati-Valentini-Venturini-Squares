@@ -103,7 +103,7 @@ public class TestBaseOptions {
     /**
      * 
      */
-    @Test
+    @Test 
     public void testExceptions() {
 
         BaseGridImpl testGrid;
