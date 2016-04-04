@@ -223,8 +223,8 @@ public class BaseGridImpl implements BaseGrid {
 
             if (listIndex != 0) {
                 if (getPreviousParallelList(listIndex, position) != GridOption.EMPTY) {
-                    if (getCopyOfElement(listIndex + rows, listIndex - 1) != GridOption.EMPTY
-                            && getCopyOfElement(listIndex + rows + 1, listIndex - 1) != GridOption.EMPTY) {
+                    if (getCopyOfElement(listIndex + horizontalLists, listIndex - 1) != GridOption.EMPTY
+                            && getCopyOfElement(listIndex + horizontalLists + 1, listIndex - 1) != GridOption.EMPTY) {
                         points++;
                     }
                 }
@@ -232,8 +232,8 @@ public class BaseGridImpl implements BaseGrid {
 
             if (listIndex != rows) {
                 if (getNextParallelList(listIndex, position) != GridOption.EMPTY) {
-                    if (getCopyOfElement(listIndex + rows, listIndex) != GridOption.EMPTY
-                            && getCopyOfElement(listIndex + rows + 1, listIndex) != GridOption.EMPTY) {
+                    if (getCopyOfElement(listIndex + horizontalLists, listIndex) != GridOption.EMPTY
+                            && getCopyOfElement(listIndex + horizontalLists + 1, listIndex) != GridOption.EMPTY) {
                         points++;
                     }
                 }
@@ -247,8 +247,8 @@ public class BaseGridImpl implements BaseGrid {
 
             if (listIndex != rows + 1) {
                 if (getPreviousParallelList(listIndex, position) != GridOption.EMPTY) {
-                    if (getCopyOfElement(position, listIndex - (rows + 1 + 1)) != GridOption.EMPTY
-                            && getCopyOfElement(position + 1, listIndex - (rows + 1 + 1)) != GridOption.EMPTY) {
+                    if (getCopyOfElement(position, listIndex - horizontalLists - 1) != GridOption.EMPTY
+                            && getCopyOfElement(position + 1, listIndex - horizontalLists - 1) != GridOption.EMPTY) {
                         points++;
                     }
                 }
@@ -256,8 +256,8 @@ public class BaseGridImpl implements BaseGrid {
 
             if (listIndex != rows + columns + 1) {
                 if (getNextParallelList(listIndex, position) != GridOption.EMPTY) {
-                    if (getCopyOfElement(position, listIndex - (rows + 1)) != GridOption.EMPTY
-                            && getCopyOfElement(position + 1, listIndex - (rows + 1)) != GridOption.EMPTY) {
+                    if (getCopyOfElement(position, listIndex - horizontalLists) != GridOption.EMPTY
+                            && getCopyOfElement(position + 1, listIndex - horizontalLists) != GridOption.EMPTY) {
                         points++;
                     }
                 }
@@ -292,7 +292,7 @@ public class BaseGridImpl implements BaseGrid {
             throw new IllegalArgumentException();
         }
     }
-    
+
     private GridOption getNextParallelList(final int listIndex, final int position) {
 
         if (listIndex != 0 || listIndex != horizontalLists + 1) {
