@@ -50,18 +50,15 @@ public class BaseGridImpl implements BaseGrid {
 
             grid.add(createEmptyGrid(columnNumber));
         }
-/*
-        System.out.print("Oriz: ");
-        for (int i = 0; i < rowsNumber + 1; i++) {
-
-            System.out.print(grid.get(i) + " ");
-        }
-        System.out.print("\nVert: ");
-        for (int i = 0; i < columnNumber + 1; i++) {
-
-            System.out.print(grid.get(i) + " ");
-        }
-        System.out.println();*/
+        /*
+         * System.out.print("Oriz: "); for (int i = 0; i < rowsNumber + 1; i++)
+         * {
+         * 
+         * System.out.print(grid.get(i) + " "); } System.out.print("\nVert: ");
+         * for (int i = 0; i < columnNumber + 1; i++) {
+         * 
+         * System.out.print(grid.get(i) + " "); } System.out.println();
+         */
     }
 
     private List<GridOption> createEmptyGrid(final Integer size) {
@@ -164,7 +161,8 @@ public class BaseGridImpl implements BaseGrid {
     @Override
     public Integer getTotalMoves() {
 
-        //System.out.println((((rows + 1) * grid.get(0).size()) + ((columns + 1) * grid.get(rows + 1 + 1).size())));
+        // System.out.println((((rows + 1) * grid.get(0).size()) + ((columns +
+        // 1) * grid.get(rows + 1 + 1).size())));
         return (((rows + 1) * grid.get(0).size()) + ((columns + 1) * grid.get(rows + 1 + 1).size()));
     }
 
@@ -180,23 +178,26 @@ public class BaseGridImpl implements BaseGrid {
                 }
             }
         }
-        
+
         return movesLeft;
     }
 
-    private boolean checkCorrectInput(final Integer listIndex, final Integer position) {
+    private void checkCorrectInput(final Integer listIndex, final Integer position) {
 
-        return (listIndex < 0 || listIndex > grid.size() || position < 0 || position > grid.get(listIndex).size())
-                ? false : true;
+        if (listIndex < 0 || listIndex > grid.size()) {
+            throw new IllegalArgumentException();
+        }
+
+        if (position < 0 || position > grid.get(listIndex).size()) {
+            throw new IndexOutOfBoundsException();
+        }
     }
 
     @Override
     public GridOption getCopyOfElement(final Integer listIndex, final Integer elementIndex) {
 
-        if (!checkCorrectInput(listIndex, elementIndex)) {
-            throw new IllegalArgumentException();
-        }
-
+        checkCorrectInput(listIndex, elementIndex);
+         
         GridOption copyOfMove = grid.get(listIndex).get(elementIndex);
 
         return copyOfMove;
@@ -205,9 +206,7 @@ public class BaseGridImpl implements BaseGrid {
     @Override
     public void setLine(final int listIndex, final int position) {
 
-        if (!checkCorrectInput(listIndex, position)) {
-            throw new IllegalArgumentException();
-        }
+        checkCorrectInput(listIndex, position);
 
         if (getCopyOfElement(listIndex, position).equals(GridOption.EMPTY)) {
 
