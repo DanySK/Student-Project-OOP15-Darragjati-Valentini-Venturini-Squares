@@ -2,7 +2,12 @@ package model.classes;
 
 import model.interfaces.Player;
 
-public class PlayerImpl implements Player{
+/**
+ * 
+ * 
+ *
+ */
+public class PlayerImpl implements Player {
 
     private String playerName;
     private double winRate;
@@ -10,7 +15,11 @@ public class PlayerImpl implements Player{
     private Integer totalMatches;
     private Integer totalSquaresCatched;
 
-    public PlayerImpl(String playerName) {
+    /**
+     * 
+     * @param playerName the player's name or nickname
+     */
+    public PlayerImpl(final String playerName) {
 
         this.playerName = playerName;
         this.winRate = 0;
@@ -70,17 +79,17 @@ public class PlayerImpl implements Player{
     public void setPlayerName(final String playerName) {
         this.playerName = playerName;
     }
-    
+
     @Override
     public void setWonMatches(final Integer wonMatches) {
         this.wonMatches = wonMatches;
     }
-    
+
     @Override
     public void setTotalMatches(final Integer totalMatches) {
         this.totalMatches = totalMatches;
     }
-    
+
     @Override
     public void setTotalSquaresCatched(final Integer totalSquaresCatched) {
         this.totalSquaresCatched = totalSquaresCatched;
@@ -91,6 +100,5 @@ public class PlayerImpl implements Player{
         return "Player [playerName=" + playerName + ", winRate=" + winRate + ", wonMatches=" + wonMatches
                 + ", totalMatches=" + totalMatches + ", totalSquaresCatched=" + totalSquaresCatched + "]";
     }
-    
-    
+
 }

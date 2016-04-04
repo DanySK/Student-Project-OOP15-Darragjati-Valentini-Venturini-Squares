@@ -6,11 +6,20 @@ import java.util.List;
 import model.enumerations.RankingOption;
 import model.interfaces.Ranking;
 
+/**
+ * 
+ * 
+ *
+ */
 public class RankingImpl implements Ranking {
 
-    private List<PlayerImpl> playerList = new ArrayList<>();
+    private List<PlayerImpl> playerList;
 
-    public RankingImpl(List<PlayerImpl> playerList) {
+    /**
+     * 
+     * @param playerList the List of people that already palyed the game
+     */
+    public RankingImpl(final List<PlayerImpl> playerList) {
         this.playerList = playerList;
         Integer listIndex = 0;
         Integer occurrences = 0;

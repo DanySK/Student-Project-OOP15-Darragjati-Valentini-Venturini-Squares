@@ -57,7 +57,7 @@ public interface BaseGrid {
     /**
      * 
      * @param listIndex is the number of list
-     * @param elementIndex is the position of the chosen list where the player wants to set the line
+     * @param elementIndex is the position of the chosen list where you want to get the line
      * @return which player has set the vertical line, if it is empty noone has set that line
      * @throws a IllegalArgumentException if the parameters insert are not correct
      */

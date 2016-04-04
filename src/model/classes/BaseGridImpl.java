@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import model.enumerations.GridOption;
 import model.interfaces.BaseGrid;
-import model.enumerations.*;
+
 
 /**
  * 
@@ -105,12 +106,9 @@ public class BaseGridImpl implements BaseGrid {
     @Override
     public boolean isEnded() {
 
-        /*
-         * if(!isStarted()){ return false; } if(scorePlayer1 + scorePlayer2 <
-         * horizontal.get(0).size() * horizontal.get(0).size()){ return false; }
-         * return true;
-         */
-        return (!isStarted() || (scorePlayer1 + scorePlayer2) < grid.get(0).size() * grid.get(horizontalLists + 1).size() ) ? false : true;
+        return (!isStarted()
+                || (scorePlayer1 + scorePlayer2) < grid.get(0).size() * grid.get(horizontalLists + 1).size()) ? false
+                        : true;
     }
 
     @Override
@@ -154,10 +152,8 @@ public class BaseGridImpl implements BaseGrid {
 
     @Override
     public Integer getTotalMoves() {
-
-        // System.out.println((((rows + 1) * grid.get(0).size()) + ((columns +
-        // 1) * grid.get(rows + 1 + 1).size())));
-        return (((rows + 1) * grid.get(0).size()) + ((columns + 1) * grid.get(rows + 1 + 1).size()));
+        
+        return ((horizontalLists * grid.get(0).size()) + (verticalLists * grid.get(horizontalLists + 1).size()));
     }
 
     @Override

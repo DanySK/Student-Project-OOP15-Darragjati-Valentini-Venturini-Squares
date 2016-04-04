@@ -87,12 +87,6 @@ public class TestBaseOptions {
 
         gridOfSize2.startMatch();
 
-        for (int i = 0; i < 2 * (SIZE + 1); i++) {
-            for (int z = 0; z < SIZE; z++) {
-                gridOfSize2.setLine(i, z);
-            }
-        }
-
         assertTrue(gridOfSize2.getRemainingMoves().equals(0));
         System.out.println("Player1 " + gridOfSize2.getPlayerPoints(GridOption.PLAYER1) + " Player2 "
                 + gridOfSize2.getPlayerPoints(GridOption.PLAYER2));

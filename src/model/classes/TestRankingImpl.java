@@ -1,12 +1,19 @@
 package model.classes;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
 import model.enumerations.RankingOption;
 
+/**
+ * 
+ * 
+ *
+ */
 public class TestRankingImpl {
 
     private static final String PLAYER1 = "Pippo";
@@ -15,6 +22,9 @@ public class TestRankingImpl {
     private static final String PLAYER4 = "Topolino";
     private static final String PLAYER5 = "Paperone";
 
+    /**
+     * Base option test.
+     */
     @Test
     public void test() {
 
@@ -98,10 +108,13 @@ public class TestRankingImpl {
         assertEquals(testReverseOrderedList.get(3).getPlayerName(), PLAYER4);
 
     }
-    
+
+    /**
+     * Exceptions Test.
+     */
     @Test
     public void testExceptions() {
-        
+
         List<PlayerImpl> playerList = new ArrayList<>();
         PlayerImpl player1 = new PlayerImpl(PLAYER1);
         PlayerImpl player2 = new PlayerImpl(PLAYER2);
@@ -114,35 +127,36 @@ public class TestRankingImpl {
         player2.setWonMatches(8);
         player2.setTotalMatches(10);
         player2.setTotalSquaresCatched(456);
-        
+
         player3.setWonMatches(4);
         player3.setTotalMatches(5);
         player3.setTotalSquaresCatched(223);
-        
+
         playerList.add(player1);
         playerList.add(player2);
-        
+
         RankingImpl testListException;
-        
-        try{
+
+        try {
             testListException = new RankingImpl(playerList);
-        } catch (Exception e){
-            
-        }
-        /*
-        try{
-            testListException.orderListBy(RankingOption.WINRATE).add(player3);
-        } catch (UnsupportedOperationException e){
+            fail();
         } catch (Exception e) {
-            fail("Wrong exception thrown");
-        }*/
-   
-        
+
+        }
+
+//        try {
+//            testListException.orderListBy(RankingOption.WINRATE).add(player3);
+//            fail();
+//        } catch (UnsupportedOperationException e) {
+//        } catch (Exception e) {
+//            fail("Wrong exception thrown");
+//        }
+
         playerList.add(player1);
-        
-        try{
+
+        try {
             testListException = new RankingImpl(playerList);
-        } catch (Exception e){
+        } catch (Exception e) {
         }
     }
 }
