@@ -110,8 +110,7 @@ public class BaseGridImpl implements BaseGrid {
          * horizontal.get(0).size() * horizontal.get(0).size()){ return false; }
          * return true;
          */
-        return (!isStarted() || (scorePlayer1 + scorePlayer2) < grid.get(0)
-                .size() /* horizontal.get(0).size() */) ? false : true;
+        return (!isStarted() || (scorePlayer1 + scorePlayer2) < grid.get(0).size() * grid.get(horizontalLists + 1).size() ) ? false : true;
     }
 
     @Override
