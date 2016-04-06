@@ -11,8 +11,8 @@ public class WinRateComparator implements Comparator<PlayerImpl> {
 
     @Override
     public int compare(final PlayerImpl player1, final PlayerImpl player2) {
-
-        if (player1.getWinRate() == player2.getWinRate()) {
+        
+        if (Double.compare(player1.getWinRate(), player2.getWinRate()) == 0) {
 
             if (player1.getTotalMatches().equals(player2.getTotalMatches())) {
 
@@ -27,7 +27,7 @@ public class WinRateComparator implements Comparator<PlayerImpl> {
             return (player1.getTotalMatches() > player2.getTotalMatches()) ? -1 : 1;
         }
 
-        return (player1.getWinRate() > player2.getWinRate()) ? -1 : 1;
+        return Double.compare(player1.getWinRate(), player2.getWinRate());
     }
 
 }

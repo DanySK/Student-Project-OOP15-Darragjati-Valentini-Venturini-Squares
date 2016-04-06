@@ -8,7 +8,7 @@ import java.util.Comparator;
  *
  */
 public class TotalSquaresCatchedComparator implements Comparator<PlayerImpl> {
-
+    
     @Override
     public int compare(final PlayerImpl player1, final PlayerImpl player2) {
 
@@ -25,7 +25,7 @@ public class TotalSquaresCatchedComparator implements Comparator<PlayerImpl> {
 
             }
 
-            return (player1.getWinRate() > player2.getWinRate()) ? -1 : 1;
+            return Double.compare(player1.getWinRate(), player2.getWinRate());
 
         }
 

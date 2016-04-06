@@ -2,6 +2,7 @@ package model.classes;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import model.enumerations.RankingOption;
 import model.interfaces.Ranking;
@@ -23,7 +24,7 @@ public class RankingImpl implements Ranking {
         this.playerList = playerList;
         Integer listIndex = 0;
         Integer occurrences = 0;
-
+   
         for (PlayerImpl player : playerList) {
             occurrences = 0;
             while (playerList.iterator().hasNext()) {
@@ -58,16 +59,118 @@ public class RankingImpl implements Ranking {
 
         switch (option) {
         case WINRATE:
-            playerList.sort(new WinRateComparator());
+            playerList.sort(new Comparator<PlayerImpl>() {
+
+                @Override
+                public int compare(PlayerImpl player1, PlayerImpl player2) {
+                    
+                    if (Double.compare(player1.getWinRate(), player2.getWinRate()) == 0) {
+
+                        if (player1.getTotalMatches().equals(player2.getTotalMatches())) {
+
+                            if (player1.getTotalSquaresCatched().equals(player2.getTotalSquaresCatched())) {
+
+                                return player1.getPlayerName().compareTo(player2.getPlayerName());
+                            }
+
+                            return (player1.getTotalSquaresCatched() > player2.getTotalSquaresCatched()) ? -1 : 1;
+                        }
+
+                        return (player1.getTotalMatches() > player2.getTotalMatches()) ? -1 : 1;
+                    }
+
+                    return Double.compare(player1.getWinRate(), player2.getWinRate());
+                }
+            });
             break;
         case TOTAL_WINS:
-            playerList.sort(new TotalWinsComparator());
+            playerList.sort(new Comparator<PlayerImpl>() {
+
+                @Override
+                public int compare(PlayerImpl player1, PlayerImpl player2) {
+                    if (player1.getTotalWins().equals(player2.getTotalWins())) {
+
+                        if (player1.getWinRate() == player2.getWinRate()) {
+
+                                if (player1.getTotalSquaresCatched().equals(player2.getTotalSquaresCatched())) {
+
+                                    return player1.getPlayerName().compareTo(player2.getPlayerName());
+                                }
+
+                                return player1.getTotalSquaresCatched() > player2.getTotalSquaresCatched() ? -1 : 1;
+                            }
+                        
+                        return Double.compare(player1.getWinRate(), player2.getWinRate());
+                    }
+                    
+                    return player1.getTotalWins() > player2.getTotalWins() ? -1 : 1;
+                
+                }
+                
+            });
             break;
         case TOTAL_MATCHES:
-            playerList.sort(new TotalMatchesComparator());
+            playerList.sort(new Comparator<PlayerImpl>() {
+
+                @Override
+                public int compare(PlayerImpl player1, PlayerImpl player2) {
+                    if (player1.getTotalMatches().equals(player2.getTotalMatches())) {
+
+                        if (player1.getWinRate() == player2.getWinRate()) {
+
+                            if (player1.getTotalSquaresCatched().equals(player2.getTotalSquaresCatched())) {
+
+                                return player1.getPlayerName().compareTo(player2.getPlayerName());
+                            }
+
+                            return (player1.getTotalSquaresCatched() > player2.getTotalSquaresCatched()) ? -1 : 1;
+
+                        }
+
+                        return Double.compare(player1.getWinRate(), player2.getWinRate()); // da
+                                                                                          // verificare
+                                                                                          // dovrebbe
+                                                                                          // fare
+                                                                                          // l'azione
+                                                                                          // inversa
+                                                                                          // rispetto
+                                                                                          // a
+                                                                                          // quella
+                                                                                          // richiesta
+                    }
+
+                    return (player1.getTotalMatches() > player2.getTotalMatches()) ? -1 : 1;
+
+                }
+                
+            });
             break;
         case TOTAL_SQUARES_CATCHED:
-            playerList.sort(new TotalSquaresCatchedComparator());
+            playerList.sort(new Comparator<PlayerImpl>() {
+
+                @Override
+                public int compare(PlayerImpl player1, PlayerImpl player2) {
+                    if (player1.getTotalSquaresCatched().equals(player2.getTotalSquaresCatched())) {
+
+                        if (player1.getWinRate() == player2.getWinRate()) {
+
+                            if (player1.getTotalMatches().equals(player2.getTotalMatches())) {
+
+                                return player1.getPlayerName().compareTo(player2.getPlayerName());
+                            }
+
+                            return (player1.getTotalMatches() > player2.getTotalMatches()) ? -1 : 1;
+
+                        }
+
+                        return Double.compare(player1.getWinRate(), player2.getWinRate());
+
+                    }
+
+                    return (player1.getTotalSquaresCatched() > player2.getTotalSquaresCatched()) ? -1 : 1;
+                }
+                
+            });
             break;
         default:
             throw new IllegalStateException();

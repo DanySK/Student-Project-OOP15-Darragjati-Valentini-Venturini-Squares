@@ -24,7 +24,7 @@ public class TotalWinsComparator implements Comparator<PlayerImpl> {
                     return player1.getTotalSquaresCatched() > player2.getTotalSquaresCatched() ? -1 : 1;
                 }
             
-            return player1.getWinRate() > player2.getWinRate() ? -1 : 1;
+            return Double.compare(player1.getWinRate(), player2.getWinRate());
         }
         
         return player1.getTotalWins() > player2.getTotalWins() ? -1 : 1;
