@@ -15,7 +15,8 @@ import model.interfaces.BaseGrid;
  */
 public class BaseGridImpl implements BaseGrid {
 
-    private List<List<GridOption>> grid = new ArrayList<>();
+    private List<List<GridOption>> horizontal = new ArrayList<>();
+    private List<List<GridOption>> vertical = new ArrayList<>();
     private GridOption turn = GridOption.EMPTY;
     private boolean matchStarted = false;
     private Integer scorePlayer1;
@@ -48,12 +49,10 @@ public class BaseGridImpl implements BaseGrid {
         this.verticalLists = columnNumber + 1;
 
         for (int i = 0; i < horizontalLists; i++) {
-
-            grid.add(createEmptyGrid(rowsNumber));
+            horizontal.add(createEmptyGrid(rowsNumber));
         }
         for (int i = 0; i < verticalLists; i++) {
-
-            grid.add(createEmptyGrid(columnNumber));
+            vertical.add(createEmptyGrid(columnNumber));
         }
     }
 
@@ -73,9 +72,7 @@ public class BaseGridImpl implements BaseGrid {
         if (!isStarted()) {
             this.scorePlayer1 = INITIAL_SCORE;
             this.scorePlayer2 = INITIAL_SCORE;
-
             randomizeTurn();
-
             matchStarted = true;
         } else {
             throw new IllegalStateException("Match già iniziato");
@@ -105,15 +102,12 @@ public class BaseGridImpl implements BaseGrid {
 
     @Override
     public boolean isEnded() {
-
-        return (!isStarted()
-                || (scorePlayer1 + scorePlayer2) < grid.get(0).size() * grid.get(horizontalLists + 1).size()) ? false
-                        : true;
+        return (!isStarted() || (scorePlayer1 + scorePlayer2) < horizontal.get(0).size() * horizontal.get(0).size())
+                ? false : true;
     }
 
     @Override
     public GridOption getCurrentPlayerTurn() {
-
         if (isStarted()) {
             return this.turn;
         } else {
@@ -142,7 +136,6 @@ public class BaseGridImpl implements BaseGrid {
         }
 
         if (player.equals(GridOption.PLAYER1) || player.equals(GridOption.PLAYER2)) {
-
             return (player.equals(GridOption.PLAYER1)) ? scorePlayer1 : scorePlayer2;
         } else {
             throw new IllegalArgumentException();
@@ -151,9 +144,8 @@ public class BaseGridImpl implements BaseGrid {
     }
 
     @Override
-    public Integer getTotalMoves() {
-        
-        return ((horizontalLists * grid.get(0).size()) + (verticalLists * grid.get(horizontalLists + 1).size()));
+    public Integer getTotalMoves() {  
+        return (horizontal.size() * horizontal.get(0).size()) + (vertical.size() * vertical.get(0).size());
     }
 
     @Override
@@ -161,7 +153,7 @@ public class BaseGridImpl implements BaseGrid {
 
         Integer movesLeft = 0;
 
-        for (List<GridOption> list : grid) {
+        for (List<GridOption> list : horizontal) {
             for (GridOption option : list) {
                 if (option.equals(GridOption.EMPTY)) {
                     movesLeft++;
@@ -169,16 +161,143 @@ public class BaseGridImpl implements BaseGrid {
             }
         }
 
+        for (List<GridOption> list : vertical) {
+            for (GridOption option : list) {
+                if (option.equals(GridOption.EMPTY)) {
+                    movesLeft++;
+                }
+            }
+        }
         return movesLeft;
     }
 
-    private void checkCorrectInput(final Integer listIndex, final Integer position) {
+    private boolean checkCorrectVerticalInput(final Integer listIndex, final Integer position) {
 
-        if (listIndex < 0 || listIndex > grid.size()) {
+        return (listIndex < 0 || listIndex > vertical.size() || position < 0 || position > vertical.get(0).size())
+                ? false : true;
+    }
+    
+    @Override
+    public GridOption getVerticalElement(final Integer listIndex, final Integer elementIndex) {
+
+        if (!checkCorrectVerticalInput(listIndex, elementIndex)) {
             throw new IllegalArgumentException();
         }
 
-        if (position < 0 || position > grid.get(listIndex).size()) {
+        return vertical.get(listIndex).get(elementIndex);
+    }
+    
+    @Override
+    public void setVerticalLine(final int listIndex, final int position) {
+
+        if (!checkCorrectVerticalInput(listIndex, position)) {
+            throw new IllegalArgumentException();
+        }
+
+        if (vertical.get(listIndex).get(position).equals(GridOption.EMPTY)) {
+            vertical.get(listIndex).set(position, getCurrentPlayerTurn());
+
+            if (verticalPointScored(listIndex, position).equals(0)) {
+                nextTurn();
+            }
+        } else {
+            throw new IllegalStateException();
+        }
+    }
+    
+    private Integer verticalPointScored(final int listIndex, final int position) {
+
+        int points = 0;
+
+        if (listIndex != 0) {
+            if (getVerticalElement(listIndex - 1, position) != GridOption.EMPTY) {
+                if (getHorizontalElement(position, listIndex - 1) != GridOption.EMPTY
+                        && getHorizontalElement(position + 1, listIndex - 1) != GridOption.EMPTY) {
+                    points++;
+                }
+            }
+        }
+
+        if (listIndex != vertical.get(0).size()) {
+            if (getVerticalElement(listIndex + 1, position) != GridOption.EMPTY) {
+                if (getHorizontalElement(position, listIndex) != GridOption.EMPTY
+                        && getHorizontalElement(position + 1, listIndex) != GridOption.EMPTY) {
+                    points++;
+                }
+            }
+        }
+        addPoints(points);
+        return points;
+    }
+
+    private boolean checkCorrectHorizontalInput(final Integer listIndex, final Integer position) {
+
+        return (listIndex < 0 || listIndex > horizontal.size() || position < 0 || position > horizontal.get(0).size())
+                ? false : true;
+    }
+
+    @Override
+    public GridOption getHorizontalElement(final Integer listIndex, final Integer position) {
+
+        if (!checkCorrectHorizontalInput(listIndex, position)) {
+            throw new IllegalArgumentException();
+        }
+
+        return horizontal.get(listIndex).get(position);
+    }
+
+    @Override
+    public void setHorizontalLine(final int listIndex, final int position) {
+
+        if (!checkCorrectHorizontalInput(listIndex, position)) {
+            throw new IllegalArgumentException();
+        }
+
+        if (horizontal.get(listIndex).get(position).equals(GridOption.EMPTY)) {
+            horizontal.get(listIndex).set(position, getCurrentPlayerTurn());
+
+            if (horizontalPointScored(listIndex, position).equals(0)) {
+                nextTurn();
+            }
+        } else {
+            throw new IllegalStateException();
+        }
+    }
+
+    private Integer horizontalPointScored(final int listIndex, final int position) {
+
+        int points = 0;
+
+        if (listIndex != 0) {
+            if (getHorizontalElement(listIndex - 1, position) != GridOption.EMPTY) {
+                if (getVerticalElement(position, listIndex - 1) != GridOption.EMPTY
+                        && getVerticalElement(position + 1, listIndex - 1) != GridOption.EMPTY) {
+                    points++;
+                }
+            }
+        }
+
+        if (listIndex != horizontal.get(0).size()) {
+            if (getHorizontalElement(listIndex + 1, position) != GridOption.EMPTY) {
+                if (getVerticalElement(position, listIndex) != GridOption.EMPTY
+                        && getVerticalElement(position + 1, listIndex) != GridOption.EMPTY) {
+                    points++;
+                }
+            }
+        }
+
+        addPoints(points);
+        return points;
+    }
+
+    /*
+    private void checkCorrectInput(final Integer listIndex, final Integer position) {
+
+        if (listIndex < 0 || listIndex > horizontal.size()) {
+            throw new IllegalArgumentException();
+        }
+
+        if (position < 0 || position > horizontal.get(listIndex).size()) {
             throw new IndexOutOfBoundsException();
         }
     }
@@ -188,7 +307,7 @@ public class BaseGridImpl implements BaseGrid {
 
         checkCorrectInput(listIndex, position);
 
-        GridOption copyOfMove = grid.get(listIndex).get(position);
+        GridOption copyOfMove = horizontal.get(listIndex).get(position);
 
         return copyOfMove;
     }
@@ -200,7 +319,7 @@ public class BaseGridImpl implements BaseGrid {
 
         if (getCopyOfElement(listIndex, position).equals(GridOption.EMPTY)) {
 
-            grid.get(listIndex).set(position, getCurrentPlayerTurn());
+            horizontal.get(listIndex).set(position, getCurrentPlayerTurn());
 
             if (!pointScored(listIndex, position)) {
                 nextTurn();
@@ -263,7 +382,7 @@ public class BaseGridImpl implements BaseGrid {
         }
 
         throw new IllegalArgumentException();
-    }
+    }*/
 
     private void addPoints(final Integer points) {
 

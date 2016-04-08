@@ -14,6 +14,7 @@ import model.enumerations.RankingOption;
  * 
  *
  */
+
 public class TestRankingImpl {
 
     private static final String PLAYER1 = "Pippo";
@@ -35,7 +36,9 @@ public class TestRankingImpl {
 
         player1.setWonMatches(1);
         player1.setTotalMatches(10);
+        //checkstyle:OFF
         player1.setTotalSquaresCatched(33);
+        //checkstyle:ON
         assertTrue(player1.getWinRate() == 0.1);
 
         player2.setWonMatches(8);

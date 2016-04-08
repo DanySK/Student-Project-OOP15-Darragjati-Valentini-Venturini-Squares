@@ -62,7 +62,7 @@ public class RankingImpl implements Ranking {
             playerList.sort(new Comparator<PlayerImpl>() {
 
                 @Override
-                public int compare(PlayerImpl player1, PlayerImpl player2) {
+                public int compare(final PlayerImpl player1, final PlayerImpl player2) {
                     
                     if (Double.compare(player1.getWinRate(), player2.getWinRate()) == 0) {
 
@@ -87,7 +87,7 @@ public class RankingImpl implements Ranking {
             playerList.sort(new Comparator<PlayerImpl>() {
 
                 @Override
-                public int compare(PlayerImpl player1, PlayerImpl player2) {
+                public int compare(final PlayerImpl player1, final PlayerImpl player2) {
                     if (player1.getTotalWins().equals(player2.getTotalWins())) {
 
                         if (player1.getWinRate() == player2.getWinRate()) {
@@ -103,7 +103,7 @@ public class RankingImpl implements Ranking {
                         return Double.compare(player1.getWinRate(), player2.getWinRate());
                     }
                     
-                    return player1.getTotalWins() > player2.getTotalWins() ? -1 : 1;
+                    return //Integer.compare(player1.getTotalWins(), player2.getTotalWins()) ? -1 : 1;
                 
                 }
                 
@@ -113,7 +113,7 @@ public class RankingImpl implements Ranking {
             playerList.sort(new Comparator<PlayerImpl>() {
 
                 @Override
-                public int compare(PlayerImpl player1, PlayerImpl player2) {
+                public int compare(final PlayerImpl player1, final PlayerImpl player2) {
                     if (player1.getTotalMatches().equals(player2.getTotalMatches())) {
 
                         if (player1.getWinRate() == player2.getWinRate()) {
@@ -149,7 +149,7 @@ public class RankingImpl implements Ranking {
             playerList.sort(new Comparator<PlayerImpl>() {
 
                 @Override
-                public int compare(PlayerImpl player1, PlayerImpl player2) {
+                public int compare(final PlayerImpl player1, final PlayerImpl player2) {
                     if (player1.getTotalSquaresCatched().equals(player2.getTotalSquaresCatched())) {
 
                         if (player1.getWinRate() == player2.getWinRate()) {
