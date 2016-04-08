@@ -56,20 +56,33 @@ public interface BaseGrid {
 
     /**
      * 
-     * @param listIndex is the number of list
-     * @param elementIndex is the position of the chosen list where you want to get the line
-     * @return which player has set the vertical line, if it is empty noone has set that line
-     * @throws a IllegalArgumentException if the parameters insert are not correct
+     * @param listIndex
+     * @param position
+     * @return
      */
-    GridOption getCopyOfElement(Integer listIndex, Integer elementIndex);
+    GridOption getCopyOfVerticalElement(Integer listIndex, Integer position);
 
     /**
-     * Makes a move setting a line in the grid.
-     * @param listIndex is the number of the list where the player wants to set his line
-     * @param position is the position of the chosen list where the player wants to set the line
-     * @throws a IllegalArgumentException if the parameters insert are not correct
+     * 
+     * @param listIndex
+     * @param position
      */
-    void setLine(int listIndex, int position);
+    void setVerticalLine(int listIndex, int position);
+
+    /**
+     * 
+     * @param listIndex
+     * @param position
+     * @return
+     */
+    GridOption getCopyOfHorizontalElement(Integer listIndex, Integer position);
+
+    /**
+     * 
+     * @param listIndex
+     * @param position
+     */
+    void setHorizontalLine(int listIndex, int position);
 
     /**
      * 
@@ -77,6 +90,4 @@ public interface BaseGrid {
      * @throws a IllegalStateException if the game is not ended
      */
     GridOption getWinner();
-
- 
 }

@@ -40,11 +40,11 @@ public class TestBaseOptions {
 
         for (int i = 0; i < SIZE + 1; i++) { // verifies that every element in
             // the list is initialized as EMPTY
-for (int z = 0; z < SIZE; z++) {
-assertEquals(gridOfSize.getHorizontalElement(i, z), GridOption.EMPTY);
-assertEquals(gridOfSize.getVerticalElement(i, z), GridOption.EMPTY);
-}
-}
+            for (int z = 0; z < SIZE; z++) {
+                assertEquals(gridOfSize.getCopyOfHorizontalElement(i, z), GridOption.EMPTY);
+                assertEquals(gridOfSize.getCopyOfVerticalElement(i, z), GridOption.EMPTY);
+            }
+        }
 
         assertFalse(gridOfSize.isStarted());
         assertFalse(gridOfSize.isEnded());
@@ -61,7 +61,6 @@ assertEquals(gridOfSize.getVerticalElement(i, z), GridOption.EMPTY);
         GridOption player = gridOfSize.getCurrentPlayerTurn();
         gridOfSize.setVerticalLine(1, 0);
 
-
         assertEquals(gridOfSize.getRemainingMoves(), (Integer) (gridOfSize.getTotalMoves() - 4));
         assertNotEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
         assertEquals(player, gridOfSize.getCurrentPlayerTurn()); // verifies if
@@ -72,7 +71,7 @@ assertEquals(gridOfSize.getVerticalElement(i, z), GridOption.EMPTY);
         BaseGridImpl gridOfSize2 = new BaseGridImpl(SIZE, SIZE);
 
         gridOfSize2.startMatch();
-        
+
         for (int i = 0; i < SIZE + 1; i++) {
             for (int z = 0; z < SIZE; z++) {
                 gridOfSize2.setHorizontalLine(i, z);
@@ -90,7 +89,7 @@ assertEquals(gridOfSize.getVerticalElement(i, z), GridOption.EMPTY);
     /**
      * 
      */
-    @Test 
+    @Test
     public void testExceptions() {
 
         BaseGridImpl testGrid;
