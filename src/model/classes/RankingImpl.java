@@ -18,13 +18,16 @@ public class RankingImpl implements Ranking {
 
     /**
      * 
-     * @param playerList the List of people that already palyed the game
+     * @param playerList
+     *            the List of people that already palyed the game
      */
+    // CHECKSTYLE:OFF:
     public RankingImpl(final List<PlayerImpl> playerList) {
+        // CHECKSTYLE:ON:
         this.playerList = playerList;
         Integer listIndex = 0;
         Integer occurrences = 0;
-   
+
         for (PlayerImpl player : playerList) {
             occurrences = 0;
             while (playerList.iterator().hasNext()) {
@@ -63,22 +66,16 @@ public class RankingImpl implements Ranking {
 
                 @Override
                 public int compare(final PlayerImpl player1, final PlayerImpl player2) {
-                    
-                    if (Double.compare(player1.getWinRate(), player2.getWinRate()) == 0) {
 
+                    if (player1.getWinRate() == player2.getWinRate()) {
                         if (player1.getTotalMatches().equals(player2.getTotalMatches())) {
-
                             if (player1.getTotalSquaresCatched().equals(player2.getTotalSquaresCatched())) {
-
                                 return player1.getPlayerName().compareTo(player2.getPlayerName());
                             }
-
-                            return (player1.getTotalSquaresCatched() > player2.getTotalSquaresCatched()) ? -1 : 1;
+                            return Integer.compare(player1.getTotalSquaresCatched(), player2.getTotalSquaresCatched());
                         }
-
-                        return (player1.getTotalMatches() > player2.getTotalMatches()) ? -1 : 1;
+                        return Integer.compare(player1.getTotalMatches(), player2.getTotalMatches());
                     }
-
                     return Double.compare(player1.getWinRate(), player2.getWinRate());
                 }
             });
@@ -89,24 +86,18 @@ public class RankingImpl implements Ranking {
                 @Override
                 public int compare(final PlayerImpl player1, final PlayerImpl player2) {
                     if (player1.getTotalWins().equals(player2.getTotalWins())) {
-
                         if (player1.getWinRate() == player2.getWinRate()) {
-
-                                if (player1.getTotalSquaresCatched().equals(player2.getTotalSquaresCatched())) {
-
-                                    return player1.getPlayerName().compareTo(player2.getPlayerName());
-                                }
-
-                                return player1.getTotalSquaresCatched() > player2.getTotalSquaresCatched() ? -1 : 1;
+                            if (player1.getTotalSquaresCatched().equals(player2.getTotalSquaresCatched())) {
+                                return player1.getPlayerName().compareTo(player2.getPlayerName());
                             }
-                        
+                            return Integer.compare(player1.getTotalSquaresCatched(), player2.getTotalSquaresCatched());
+                        }
                         return Double.compare(player1.getWinRate(), player2.getWinRate());
                     }
-                    
-                    return //Integer.compare(player1.getTotalWins(), player2.getTotalWins()) ? -1 : 1;
-                
+                    return Integer.compare(player1.getTotalWins(), player2.getTotalWins());
+
                 }
-                
+
             });
             break;
         case TOTAL_MATCHES:
@@ -115,34 +106,18 @@ public class RankingImpl implements Ranking {
                 @Override
                 public int compare(final PlayerImpl player1, final PlayerImpl player2) {
                     if (player1.getTotalMatches().equals(player2.getTotalMatches())) {
-
                         if (player1.getWinRate() == player2.getWinRate()) {
-
                             if (player1.getTotalSquaresCatched().equals(player2.getTotalSquaresCatched())) {
-
                                 return player1.getPlayerName().compareTo(player2.getPlayerName());
                             }
-
-                            return (player1.getTotalSquaresCatched() > player2.getTotalSquaresCatched()) ? -1 : 1;
-
+                            return Integer.compare(player1.getTotalSquaresCatched(), player2.getTotalSquaresCatched());
                         }
-
-                        return Double.compare(player1.getWinRate(), player2.getWinRate()); // da
-                                                                                          // verificare
-                                                                                          // dovrebbe
-                                                                                          // fare
-                                                                                          // l'azione
-                                                                                          // inversa
-                                                                                          // rispetto
-                                                                                          // a
-                                                                                          // quella
-                                                                                          // richiesta
+                        return Double.compare(player1.getWinRate(), player2.getWinRate());
                     }
-
-                    return (player1.getTotalMatches() > player2.getTotalMatches()) ? -1 : 1;
+                    return Integer.compare(player1.getTotalMatches(), player2.getTotalMatches());
 
                 }
-                
+
             });
             break;
         case TOTAL_SQUARES_CATCHED:
@@ -151,31 +126,22 @@ public class RankingImpl implements Ranking {
                 @Override
                 public int compare(final PlayerImpl player1, final PlayerImpl player2) {
                     if (player1.getTotalSquaresCatched().equals(player2.getTotalSquaresCatched())) {
-
                         if (player1.getWinRate() == player2.getWinRate()) {
-
                             if (player1.getTotalMatches().equals(player2.getTotalMatches())) {
-
                                 return player1.getPlayerName().compareTo(player2.getPlayerName());
                             }
-
-                            return (player1.getTotalMatches() > player2.getTotalMatches()) ? -1 : 1;
-
+                            return Integer.compare(player1.getTotalMatches(), player2.getTotalMatches());
                         }
-
                         return Double.compare(player1.getWinRate(), player2.getWinRate());
-
                     }
-
-                    return (player1.getTotalSquaresCatched() > player2.getTotalSquaresCatched()) ? -1 : 1;
+                    return Integer.compare(player1.getTotalSquaresCatched(), player2.getTotalSquaresCatched());
                 }
-                
+
             });
             break;
         default:
             throw new IllegalStateException();
         }
-
         return Collections.unmodifiableList(playerList);
     }
 

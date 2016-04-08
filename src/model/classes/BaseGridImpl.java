@@ -7,7 +7,6 @@ import java.util.Random;
 import model.enumerations.GridOption;
 import model.interfaces.BaseGrid;
 
-
 /**
  * 
  * 
@@ -135,7 +134,7 @@ public class BaseGridImpl implements BaseGrid {
     }
 
     @Override
-    public Integer getTotalMoves() {  
+    public Integer getTotalMoves() {
         return (horizontal.size() * horizontal.get(0).size()) + (vertical.size() * vertical.get(0).size());
     }
 
@@ -161,7 +160,7 @@ public class BaseGridImpl implements BaseGrid {
         }
         return movesLeft;
     }
-    
+
     private void checkCorrectVerticalInput(final Integer listIndex, final Integer position) {
 
         if (listIndex < 0 || listIndex > vertical.size()) {
@@ -172,7 +171,7 @@ public class BaseGridImpl implements BaseGrid {
             throw new IndexOutOfBoundsException();
         }
     }
-    
+
     @Override
     public GridOption getCopyOfVerticalElement(final Integer listIndex, final Integer position) {
 
@@ -180,7 +179,7 @@ public class BaseGridImpl implements BaseGrid {
         GridOption copyOfVerticalElement = vertical.get(listIndex).get(position);
         return copyOfVerticalElement;
     }
-    
+
     @Override
     public void setVerticalLine(final int listIndex, final int position) {
 
@@ -189,14 +188,14 @@ public class BaseGridImpl implements BaseGrid {
         if (vertical.get(listIndex).get(position).equals(GridOption.EMPTY)) {
             vertical.get(listIndex).set(position, getCurrentPlayerTurn());
 
-            if(!verticalPointScored(listIndex, position)){
+            if (!verticalPointScored(listIndex, position)) {
                 nextTurn();
             }
         } else {
             throw new IllegalStateException();
         }
     }
-    
+
     private boolean verticalPointScored(final int listIndex, final int position) {
 
         int points = 0;
@@ -221,7 +220,6 @@ public class BaseGridImpl implements BaseGrid {
         addPoints(points);
         return points > 0 ? true : false;
     }
-    
 
     private void checkCorrectHorizontalInput(final Integer listIndex, final Integer position) {
 
@@ -250,15 +248,15 @@ public class BaseGridImpl implements BaseGrid {
         if (horizontal.get(listIndex).get(position).equals(GridOption.EMPTY)) {
             horizontal.get(listIndex).set(position, getCurrentPlayerTurn());
 
-            if(!horizontalPointScored(listIndex, position)){
+            if (!horizontalPointScored(listIndex, position)) {
                 nextTurn();
             }
-            
+
         } else {
             throw new IllegalStateException();
         }
     }
-    
+
     private boolean horizontalPointScored(final int listIndex, final int position) {
 
         int points = 0;
@@ -284,7 +282,7 @@ public class BaseGridImpl implements BaseGrid {
         addPoints(points);
         return points > 0 ? true : false;
     }
-    
+
     private void addPoints(final Integer points) {
 
         if (!isStarted()) {
@@ -297,27 +295,24 @@ public class BaseGridImpl implements BaseGrid {
             scorePlayer2 += points;
         }
     }
-/*
-    private GridOption getPreviousParallelList(final int listIndex, final int position) {
 
-        if (listIndex != 0 || listIndex != horizontalLists + 1) {
-
-            return getCopyOfElement(listIndex - 1, position);
-        } else {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    private GridOption getNextParallelList(final int listIndex, final int position) {
-
-        if (listIndex != 0 || listIndex != horizontalLists + 1) {
-
-            return getCopyOfElement(listIndex + 1, position);
-        } else {
-            throw new IllegalArgumentException();
-        }
-    }
-*/
+    /*
+     * private GridOption getPreviousParallelList(final int listIndex, final int
+     * position) {
+     * 
+     * if (listIndex != 0 || listIndex != horizontalLists + 1) {
+     * 
+     * return getCopyOfElement(listIndex - 1, position); } else { throw new
+     * IllegalArgumentException(); } }
+     * 
+     * private GridOption getNextParallelList(final int listIndex, final int
+     * position) {
+     * 
+     * if (listIndex != 0 || listIndex != horizontalLists + 1) {
+     * 
+     * return getCopyOfElement(listIndex + 1, position); } else { throw new
+     * IllegalArgumentException(); } }
+     */
     @Override
     public GridOption getWinner() {
 
