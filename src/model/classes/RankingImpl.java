@@ -84,6 +84,7 @@ public class RankingImpl implements Ranking {
 
                 @Override
                 public int compare(final PlayerImpl player1, final PlayerImpl player2) {
+                  
                     if (player1.getTotalWins().equals(player2.getTotalWins())) {
                         if (player1.getWinRate() == player2.getWinRate()) {
                             if (player1.getTotalSquaresCatched().equals(player2.getTotalSquaresCatched())) {
@@ -104,6 +105,7 @@ public class RankingImpl implements Ranking {
 
                 @Override
                 public int compare(final PlayerImpl player1, final PlayerImpl player2) {
+                  
                     if (player1.getTotalMatches().equals(player2.getTotalMatches())) {
                         if (player1.getWinRate() == player2.getWinRate()) {
                             if (player1.getTotalSquaresCatched().equals(player2.getTotalSquaresCatched())) {
@@ -114,9 +116,7 @@ public class RankingImpl implements Ranking {
                         return Double.compare(player1.getWinRate(), player2.getWinRate());
                     }
                     return Integer.compare(player1.getTotalMatches(), player2.getTotalMatches());
-
                 }
-
             });
             break;
         case TOTAL_SQUARES_CATCHED:
@@ -124,6 +124,7 @@ public class RankingImpl implements Ranking {
 
                 @Override
                 public int compare(final PlayerImpl player1, final PlayerImpl player2) {
+                   
                     if (player1.getTotalSquaresCatched().equals(player2.getTotalSquaresCatched())) {
                         if (player1.getWinRate() == player2.getWinRate()) {
                             if (player1.getTotalMatches().equals(player2.getTotalMatches())) {
@@ -147,12 +148,14 @@ public class RankingImpl implements Ranking {
     @Override
     public List<PlayerImpl> reverseRanking(final RankingOption option) {
 
+        List<PlayerImpl> orderedList = orderListBy(option);
         List<PlayerImpl> reverseList = new ArrayList<>();
-
-        for (int i = orderListBy(option).size() - 1; i > 0; i--) {
-            reverseList.add(orderListBy(option).get(i));
+        
+        for(PlayerImpl player : orderedList){
+            reverseList.add(player);
         }
-        return Collections.unmodifiableList(reverseList);
+        Collections.reverse(reverseList);
+        return reverseList;
     }
 
 }
