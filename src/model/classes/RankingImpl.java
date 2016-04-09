@@ -25,17 +25,16 @@ public class RankingImpl implements Ranking {
     public RankingImpl(final List<PlayerImpl> playerList) {
         // CHECKSTYLE:ON:
         this.playerList = playerList;
-        Integer listIndex = 0;
         Integer occurrences = 0;
 
         for (PlayerImpl player : playerList) {
             occurrences = 0;
-            while (playerList.iterator().hasNext()) {
-                if (player.getPlayerName().equals(playerList.get(listIndex).getPlayerName())) {
+            for (PlayerImpl p : playerList) {
+                if (player.getPlayerName().equals(p.getPlayerName())) {
                     occurrences++;
                 }
             }
-            if (occurrences == 1) {
+            if (occurrences > 1) {
                 System.out.println("errore");
                 throw new IllegalArgumentException();
             }

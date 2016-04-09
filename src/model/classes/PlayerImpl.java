@@ -17,10 +17,12 @@ public class PlayerImpl implements Player {
 
     /**
      * 
-     * @param playerName the player's name or nickname
+     * @param playerName
+     *            the player's name or nickname
      */
+    // CHECKSTYLE:OFF:
     public PlayerImpl(final String playerName) {
-
+        // CHECKSTYLE:ON:
         this.playerName = playerName;
         this.winRate = 0;
         this.wonMatches = 0;
@@ -30,29 +32,31 @@ public class PlayerImpl implements Player {
 
     private void calculateWinRate() {
 
-        double totalWins = (double) getTotalWins();
-        double totalMatches = (double) getTotalMatches();
-        this.winRate = totalWins / totalMatches;
+        this.winRate = getTotalWins() / (double) getTotalMatches();
     }
 
     @Override
     public String getPlayerName() {
+
         return playerName;
     }
 
     @Override
     public double getWinRate() {
+
         calculateWinRate();
         return this.winRate;
     }
 
     @Override
     public Integer getTotalWins() {
+
         return this.wonMatches;
     }
 
     @Override
     public Integer getTotalMatches() {
+
         return this.totalMatches;
     }
 
@@ -62,8 +66,9 @@ public class PlayerImpl implements Player {
     }
 
     @Override
+    // CHECKSTYLE:OFF:
     public void addLastMatchResults(final boolean victory, final Integer totalSquaresCatched) {
-
+        // CHECKSTYLE:ON:
         if (victory) {
             this.wonMatches++;
         }
@@ -76,22 +81,30 @@ public class PlayerImpl implements Player {
     }
 
     @Override
+    // CHECKSTYLE:OFF:
     public void setPlayerName(final String playerName) {
+        // CHECKSTYLE:ON:
         this.playerName = playerName;
     }
 
     @Override
+    // CHECKSTYLE:OFF:
     public void setWonMatches(final Integer wonMatches) {
+        // CHECKSTYLE:ON:
         this.wonMatches = wonMatches;
     }
 
     @Override
+    // CHECKSTYLE:OFF:
     public void setTotalMatches(final Integer totalMatches) {
+        // CHECKSTYLE:ON:
         this.totalMatches = totalMatches;
     }
 
     @Override
+    // CHECKSTYLE:OFF:
     public void setTotalSquaresCatched(final Integer totalSquaresCatched) {
+        // CHECKSTYLE:ON:
         this.totalSquaresCatched = totalSquaresCatched;
     }
 
