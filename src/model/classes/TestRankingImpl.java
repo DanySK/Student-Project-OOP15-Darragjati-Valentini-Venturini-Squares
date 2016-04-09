@@ -130,28 +130,23 @@ public class TestRankingImpl {
         playerList.add(player1);
         playerList.add(player2);
 
-        RankingImpl testListException;
+        RankingImpl testListException = new RankingImpl(playerList);
 
         try {
-            testListException = new RankingImpl(playerList);
-            fail();
+            testListException.orderListBy(RankingOption.WINRATE).add(player3);
+            fail("You can't order the list by that option");
+        } catch (UnsupportedOperationException e) {
         } catch (Exception e) {
-
+            fail("Wrong exception thrown");
         }
-
-        // try {
-        // testListException.orderListBy(RankingOption.WINRATE).add(player3);
-        // fail();
-        // } catch (UnsupportedOperationException e) {
-        // } catch (Exception e) {
-        // fail("Wrong exception thrown");
-        // }
-
+        
         playerList.add(player1);
-
         try {
-            testListException = new RankingImpl(playerList);
+           testListException = new RankingImpl(playerList);
+           fail();
+        } catch (IllegalArgumentException e) {
         } catch (Exception e) {
+            fail("Wrong exception thrown");
         }
     }
 }
