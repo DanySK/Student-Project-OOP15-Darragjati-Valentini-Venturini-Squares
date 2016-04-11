@@ -1,11 +1,8 @@
 package model.classes;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import model.enumerations.GridOption;
 import model.enumerations.ListType;
-import model.interfaces.BaseGrid;
 import model.interfaces.Turn;
 
 /**
@@ -23,11 +20,8 @@ public class TurnImpl extends BaseGridImpl implements Turn {
     /**
      * 
      * @param rowsNumber
-     *            a
      * @param columnNumber
-     *            a
      */
-
     TurnImpl(final Integer rowsNumber, final Integer columnNumber) {
         super(rowsNumber, columnNumber);
     }
@@ -61,7 +55,7 @@ public class TurnImpl extends BaseGridImpl implements Turn {
 
     }
 
-    // @Override
+    @Override
     public boolean isStarted() {
         return this.matchStarted;
     }
@@ -79,7 +73,7 @@ public class TurnImpl extends BaseGridImpl implements Turn {
         }
     }
 
-    // @Override
+    @Override
     public Integer getPlayerPoints(final GridOption player) {
 
         if (!isStarted()) {
@@ -97,42 +91,21 @@ public class TurnImpl extends BaseGridImpl implements Turn {
     @Override
     public void setLine(final ListType list, final Integer listIndex, final Integer position) {
 
-        if (!list.equals(ListType.HORIZONTAL) && !list.equals(ListType.HORIZONTAL)) {    
+        if (!list.equals(ListType.HORIZONTAL) || !list.equals(ListType.HORIZONTAL)) {
             throw new IllegalArgumentException("the list selected does not exist");
         }
 
-        if (list.equals(ListType.HORIZONTAL)) {         
+        if (list.equals(ListType.HORIZONTAL)) {
             this.setHorizontalLine(listIndex, position);
-            horizontalPointScored(listIndex, position);
+            if (!horizontalPointScored(listIndex, position)) {
+                nextTurn();
+            }
         } else {
             this.setVerticalLine(listIndex, position);
-            verticalPointScored(listIndex, position);
-        }
-    }
-
-    private boolean verticalPointScored(final int listIndex, final int position) {
-
-        int points = 0;
-
-        if (listIndex != 0) {
-            if (getCopyOfVerticalElement(listIndex - 1, position) != GridOption.EMPTY) {
-                if (getCopyOfHorizontalElement(position, listIndex - 1) != GridOption.EMPTY
-                        && getCopyOfHorizontalElement(position + 1, listIndex - 1) != GridOption.EMPTY) {
-                    points++;
-                }
+            if (!verticalPointScored(listIndex, position)) {
+                nextTurn();
             }
         }
-
-        if (listIndex != vertical.get(0).size()) {
-            if (getCopyOfVerticalElement(listIndex + 1, position) != GridOption.EMPTY) {
-                if (getCopyOfHorizontalElement(position, listIndex) != GridOption.EMPTY
-                        && getCopyOfHorizontalElement(position + 1, listIndex) != GridOption.EMPTY) {
-                    points++;
-                }
-            }
-        }
-        addPoints(points);
-        return points > 0 ? true : false;
     }
 
     private boolean horizontalPointScored(final int listIndex, final int position) {
@@ -148,7 +121,7 @@ public class TurnImpl extends BaseGridImpl implements Turn {
             }
         }
 
-        if (listIndex != horizontal.get(0).size()) {
+        if (listIndex != horizontal.size()) {
             if (getCopyOfHorizontalElement(listIndex + 1, position) != GridOption.EMPTY) {
                 if (getCopyOfVerticalElement(position, listIndex) != GridOption.EMPTY
                         && getCopyOfVerticalElement(position + 1, listIndex) != GridOption.EMPTY) {
@@ -157,6 +130,31 @@ public class TurnImpl extends BaseGridImpl implements Turn {
             }
         }
 
+        addPoints(points);
+        return points > 0 ? true : false;
+    }
+
+    private boolean verticalPointScored(final int listIndex, final int position) {
+
+        int points = 0;
+
+        if (listIndex != 0) {
+            if (getCopyOfVerticalElement(listIndex - 1, position) != GridOption.EMPTY) {
+                if (getCopyOfHorizontalElement(position, listIndex - 1) != GridOption.EMPTY
+                        && getCopyOfHorizontalElement(position + 1, listIndex - 1) != GridOption.EMPTY) {
+                    points++;
+                }
+            }
+        }
+
+        if (listIndex != vertical.size()) {
+            if (getCopyOfVerticalElement(listIndex + 1, position) != GridOption.EMPTY) {
+                if (getCopyOfHorizontalElement(position, listIndex) != GridOption.EMPTY
+                        && getCopyOfHorizontalElement(position + 1, listIndex) != GridOption.EMPTY) {
+                    points++;
+                }
+            }
+        }
         addPoints(points);
         return points > 0 ? true : false;
     }
