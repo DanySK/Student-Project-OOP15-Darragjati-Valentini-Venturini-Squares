@@ -108,18 +108,22 @@ public class TurnImpl extends BaseGridImpl implements Turn {
 
         if (list.equals(ListType.HORIZONTAL)) {
             this.setHorizontalLine(listIndex, position);
-            if (!horizontalPointScored(listIndex, position)) {
+            if (horizontalPointScored(listIndex, position) > 0) {
+                addPoints(horizontalPointScored(listIndex, position));
+            } else {
                 nextTurn();
             }
         } else {
             this.setVerticalLine(listIndex, position);
-            if (!verticalPointScored(listIndex, position)) {
+            if (verticalPointScored(listIndex, position) > 0) {
+                addPoints(verticalPointScored(listIndex, position));
+            } else {
                 nextTurn();
             }
         }
     }
 
-    private boolean horizontalPointScored(final int listIndex, final int position) {
+    private Integer horizontalPointScored(final int listIndex, final int position) {
 
         int points = 0;
 
@@ -140,12 +144,10 @@ public class TurnImpl extends BaseGridImpl implements Turn {
                 }
             }
         }
-
-        addPoints(points);
-        return points > 0 ? true : false;
+        return points;
     }
 
-    private boolean verticalPointScored(final int listIndex, final int position) {
+    private Integer verticalPointScored(final int listIndex, final int position) {
 
         int points = 0;
 
@@ -166,8 +168,7 @@ public class TurnImpl extends BaseGridImpl implements Turn {
                 }
             }
         }
-        addPoints(points);
-        return points > 0 ? true : false;
+        return points;
     }
 
     private void addPoints(final Integer points) {
@@ -197,16 +198,18 @@ public class TurnImpl extends BaseGridImpl implements Turn {
             throw new IllegalStateException();
         }
     }
-    
-    public void undoLastMove(){
+
+    public void undoLastMove() {
         
-        if(getLastListMove().equals(ListType.HORIZONTAL)){
+        if (getLastListMove().equals(ListType.HORIZONTAL)) {
+            addPoints(-horizontalPointScored(getLastListIndex(), getLastListPosition()));
             setHorizontalLine(getLastListIndex(), getLastListPosition(), GridOption.EMPTY);
         } else {
+            addPoints(-verticalPointScored(getLastListIndex(), getLastListPosition()));
             setVerticalLine(getLastListIndex(), getLastListPosition(), GridOption.EMPTY);
         }
     }
-    
+
     /*
      * private GridOption getPreviousParallelList(final int listIndex, final int
      * position) {
