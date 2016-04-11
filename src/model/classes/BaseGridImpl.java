@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import model.enumerations.GridOption;
+import model.enumerations.ListOption;
 import model.interfaces.BaseGrid;
 
 /**
@@ -17,6 +18,7 @@ public class BaseGridImpl implements BaseGrid {
     private List<List<GridOption>> horizontal = new ArrayList<>();
     private List<List<GridOption>> vertical = new ArrayList<>();
     private GridOption turn = GridOption.EMPTY;
+    private ListOption lastMove;
     private static final Integer MINIMUM_SIZE = 4;
     private static final Integer MAXIMUM_SIZE = 10;
 
@@ -115,7 +117,9 @@ public class BaseGridImpl implements BaseGrid {
         checkCorrectVerticalInput(listIndex, position);
 
         if (vertical.get(listIndex).get(position).equals(GridOption.EMPTY)) {
+            
             vertical.get(listIndex).set(position, getCurrentPlayerTurn());
+            
         } else {
             throw new IllegalStateException();
         }

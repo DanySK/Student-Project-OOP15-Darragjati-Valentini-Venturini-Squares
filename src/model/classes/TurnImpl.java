@@ -3,8 +3,9 @@ package model.classes;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
+import model.classes.BaseGridImpl;
 import model.enumerations.GridOption;
+import model.interfaces.BaseGrid;
 
 /**
  * 
@@ -13,11 +14,11 @@ import model.enumerations.GridOption;
  */
 public class TurnImpl {
 
-    private GridOption turn = GridOption.EMPTY;
     private boolean matchStarted = false;
     private Integer scorePlayer1;
     private Integer scorePlayer2;
     private static final Integer INITIAL_SCORE = 0;
+    BaseGridImpl grid;
 
     /**
      * 
@@ -26,6 +27,10 @@ public class TurnImpl {
      * @param columnNumber
      *            a
      */
+    
+    TurnImpl(Integer rowsNumber, Integer columnNumber){
+        grid = new BaseGridImpl(rowsNumber, columnNumber);
+    }
 
  //   @Override
     public void startMatch() {
@@ -46,9 +51,9 @@ public class TurnImpl {
             Random randomTurn = new Random();
 
             if (randomTurn.nextInt(2) == 0) {
-                this.turn = GridOption.PLAYER1;
+                grid.setPlayerTurn(GridOption.PLAYER1);
             } else {
-                this.turn = GridOption.PLAYER2;
+                grid.setPlayerTurn(GridOption.PLAYER2);
             }
         } else {
             throw new IllegalStateException();
@@ -56,24 +61,9 @@ public class TurnImpl {
 
     }
 
-//    @Override
+    //@Override
     public boolean isStarted() {
         return this.matchStarted;
-    }
-
-//    @Override
-    public boolean isEnded() {
-        return (!isStarted() || (scorePlayer1 + scorePlayer2) < horizontal.get(0).size() * horizontal.get(0).size())
-                ? false : true;
-    }
-
-//    @Override
-    public GridOption getCurrentPlayerTurn() {
-        if (isStarted()) {
-            return this.turn;
-        } else {
-            throw new IllegalStateException();
-        }
     }
 
     private void nextTurn() {
@@ -82,10 +72,10 @@ public class TurnImpl {
             throw new IllegalStateException();
         }
 
-        if (getCurrentPlayerTurn().equals(GridOption.PLAYER1)) {
-            this.turn = GridOption.PLAYER2;
+        if (grid.getCurrentPlayerTurn().equals(GridOption.PLAYER1)) {
+            grid.setPlayerTurn(GridOption.PLAYER2);
         } else {
-            this.turn = GridOption.PLAYER1;
+            grid.setPlayerTurn(GridOption.PLAYER1);
         }
     }
 
@@ -102,34 +92,6 @@ public class TurnImpl {
             throw new IllegalArgumentException();
         }
 
-    }
-
-    @Override
-    public Integer getTotalMoves() {
-        return (horizontal.size() * horizontal.get(0).size()) + (vertical.size() * vertical.get(0).size());
-    }
-
-    @Override
-    public Integer getRemainingMoves() {
-
-        Integer movesLeft = 0;
-
-        for (List<GridOption> list : horizontal) {
-            for (GridOption option : list) {
-                if (option.equals(GridOption.EMPTY)) {
-                    movesLeft++;
-                }
-            }
-        }
-
-        for (List<GridOption> list : vertical) {
-            for (GridOption option : list) {
-                if (option.equals(GridOption.EMPTY)) {
-                    movesLeft++;
-                }
-            }
-        }
-        return movesLeft;
     }
 
     private boolean verticalPointScored(final int listIndex, final int position) {
