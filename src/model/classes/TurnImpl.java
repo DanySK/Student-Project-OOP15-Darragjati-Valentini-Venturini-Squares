@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 import model.classes.BaseGridImpl;
 import model.enumerations.GridOption;
+import model.enumerations.ListType;
 import model.interfaces.BaseGrid;
 
 /**
@@ -12,13 +13,12 @@ import model.interfaces.BaseGrid;
  * 
  *
  */
-public class TurnImpl {
+public class TurnImpl extends BaseGridImpl {
 
     private boolean matchStarted = false;
     private Integer scorePlayer1;
     private Integer scorePlayer2;
     private static final Integer INITIAL_SCORE = 0;
-    BaseGridImpl grid;
 
     /**
      * 
@@ -27,12 +27,12 @@ public class TurnImpl {
      * @param columnNumber
      *            a
      */
-    
-    TurnImpl(Integer rowsNumber, Integer columnNumber){
-        grid = new BaseGridImpl(rowsNumber, columnNumber);
+
+    TurnImpl(Integer rowsNumber, Integer columnNumber) {
+        super(rowsNumber, columnNumber);
     }
 
- //   @Override
+    // @Override
     public void startMatch() {
 
         if (!isStarted()) {
@@ -51,9 +51,9 @@ public class TurnImpl {
             Random randomTurn = new Random();
 
             if (randomTurn.nextInt(2) == 0) {
-                grid.setPlayerTurn(GridOption.PLAYER1);
+                this.setPlayerTurn(GridOption.PLAYER1);
             } else {
-                grid.setPlayerTurn(GridOption.PLAYER2);
+                this.setPlayerTurn(GridOption.PLAYER2);
             }
         } else {
             throw new IllegalStateException();
@@ -61,7 +61,7 @@ public class TurnImpl {
 
     }
 
-    //@Override
+    // @Override
     public boolean isStarted() {
         return this.matchStarted;
     }
@@ -72,14 +72,14 @@ public class TurnImpl {
             throw new IllegalStateException();
         }
 
-        if (grid.getCurrentPlayerTurn().equals(GridOption.PLAYER1)) {
-            grid.setPlayerTurn(GridOption.PLAYER2);
+        if (this.getCurrentPlayerTurn().equals(GridOption.PLAYER1)) {
+            this.setPlayerTurn(GridOption.PLAYER2);
         } else {
-            grid.setPlayerTurn(GridOption.PLAYER1);
+            this.setPlayerTurn(GridOption.PLAYER1);
         }
     }
 
-//    @Override
+    // @Override
     public Integer getPlayerPoints(final GridOption player) {
 
         if (!isStarted()) {
@@ -92,6 +92,19 @@ public class TurnImpl {
             throw new IllegalArgumentException();
         }
 
+    }
+
+    public void setMove(final ListType list, final Integer listIndex, final Integer position) {
+
+        if (!list.equals(ListType.HORIZONTAL) && !list.equals(ListType.HORIZONTAL)) {    
+            throw new IllegalArgumentException("the list selected does not exist");
+        }
+
+        if (list.equals(ListType.HORIZONTAL)) {         
+            this.setHorizontalLine(listIndex, position);
+        } else {
+            this.setVerticalLine(listIndex, position);
+        }
     }
 
     private boolean verticalPointScored(final int listIndex, final int position) {

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import model.enumerations.GridOption;
-import model.enumerations.ListOption;
+import model.enumerations.ListType;
 import model.interfaces.BaseGrid;
 
 /**
@@ -15,10 +15,12 @@ import model.interfaces.BaseGrid;
  */
 public class BaseGridImpl implements BaseGrid {
 
-    private List<List<GridOption>> horizontal = new ArrayList<>();
-    private List<List<GridOption>> vertical = new ArrayList<>();
+    protected List<List<GridOption>> horizontal = new ArrayList<>();
+    protected List<List<GridOption>> vertical = new ArrayList<>();
     private GridOption turn = GridOption.EMPTY;
-    private ListOption lastMove;
+    private ListType lastListMove;
+    private Integer lastListIndex;
+    private Integer lastPosition;
     private static final Integer MINIMUM_SIZE = 4;
     private static final Integer MAXIMUM_SIZE = 10;
 
@@ -82,6 +84,17 @@ public class BaseGridImpl implements BaseGrid {
         return movesLeft;
     }
     
+    public ListType getLastListMove(){
+        return this.lastListMove;
+    }
+    
+    public Integer getLastListIndex(){
+        return this.lastListIndex;
+    }
+    
+    public Integer getLastListPosition(){
+        return this.lastPosition;
+    }
     
     public GridOption getCurrentPlayerTurn(){
         
@@ -119,7 +132,9 @@ public class BaseGridImpl implements BaseGrid {
         if (vertical.get(listIndex).get(position).equals(GridOption.EMPTY)) {
             
             vertical.get(listIndex).set(position, getCurrentPlayerTurn());
-            
+            this.lastListMove = ListType.VERTICAL;
+            this.lastListIndex = listIndex;
+            this.lastPosition = position;
         } else {
             throw new IllegalStateException();
         }
@@ -150,7 +165,11 @@ public class BaseGridImpl implements BaseGrid {
         checkCorrectHorizontalInput(listIndex, position);
 
         if (horizontal.get(listIndex).get(position).equals(GridOption.EMPTY)) {
+            
             horizontal.get(listIndex).set(position, getCurrentPlayerTurn());
+            this.lastListMove = ListType.HORIZONTAL;
+            this.lastListIndex = listIndex;
+            this.lastPosition = position;
         } else {
             throw new IllegalStateException();
         }
