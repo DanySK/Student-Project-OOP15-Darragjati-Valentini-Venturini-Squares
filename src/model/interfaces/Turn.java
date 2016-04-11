@@ -1,8 +1,9 @@
 package model.interfaces;
 
 import model.enumerations.GridOption;
+import model.enumerations.ListType;
 
-public interface Turn {
+public interface Turn extends BaseGrid{
 
     /**
      * Starts a new match.
@@ -37,34 +38,15 @@ public interface Turn {
      */
     Integer getPlayerPoints(GridOption player);
 
-    /**
-     * 
-     * @return the number of moves
-     */
-    Integer getTotalMoves();
-
-    /**
-     * 
-     * @return the number of moves left
-     */
-    Integer getRemainingMoves();
-
-    /**
-     * 
-     * @param listIndex is the number of list
-     * @param elementIndex is the position of the chosen list where you want to get the line
-     * @return which player has set the vertical line, if it is empty noone has set that line
-     * @throws a IllegalArgumentException if the parameters insert are not correct
-     */
-    GridOption getCopyOfElement(Integer listIndex, Integer elementIndex);
 
     /**
      * Makes a move setting a line in the grid.
+     * @param 
      * @param listIndex is the number of the list where the player wants to set his line
      * @param position is the position of the chosen list where the player wants to set the line
      * @throws a IllegalArgumentException if the parameters insert are not correct
      */
-    void setLine(int listIndex, int position);
+    void setLine(ListType list, Integer listIndex, Integer position);
 
     /**
      * 

@@ -3,17 +3,17 @@ package model.classes;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import model.classes.BaseGridImpl;
 import model.enumerations.GridOption;
 import model.enumerations.ListType;
 import model.interfaces.BaseGrid;
+import model.interfaces.Turn;
 
 /**
  * 
  * 
  *
  */
-public class TurnImpl extends BaseGridImpl {
+public class TurnImpl extends BaseGridImpl implements Turn {
 
     private boolean matchStarted = false;
     private Integer scorePlayer1;
@@ -28,11 +28,11 @@ public class TurnImpl extends BaseGridImpl {
      *            a
      */
 
-    TurnImpl(Integer rowsNumber, Integer columnNumber) {
+    TurnImpl(final Integer rowsNumber, final Integer columnNumber) {
         super(rowsNumber, columnNumber);
     }
 
-    // @Override
+    @Override
     public void startMatch() {
 
         if (!isStarted()) {
@@ -94,7 +94,8 @@ public class TurnImpl extends BaseGridImpl {
 
     }
 
-    public void setMove(final ListType list, final Integer listIndex, final Integer position) {
+    @Override
+    public void setLine(final ListType list, final Integer listIndex, final Integer position) {
 
         if (!list.equals(ListType.HORIZONTAL) && !list.equals(ListType.HORIZONTAL)) {    
             throw new IllegalArgumentException("the list selected does not exist");
@@ -102,8 +103,10 @@ public class TurnImpl extends BaseGridImpl {
 
         if (list.equals(ListType.HORIZONTAL)) {         
             this.setHorizontalLine(listIndex, position);
+            horizontalPointScored(listIndex, position);
         } else {
             this.setVerticalLine(listIndex, position);
+            verticalPointScored(listIndex, position);
         }
     }
 
@@ -203,4 +206,9 @@ public class TurnImpl extends BaseGridImpl {
         }
     }
 
+    @Override
+    public boolean isEnded() {
+        // TODO Auto-generated method stub
+        return false;
+    }
 }
