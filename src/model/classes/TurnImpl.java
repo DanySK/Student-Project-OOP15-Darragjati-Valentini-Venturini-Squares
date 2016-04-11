@@ -74,6 +74,17 @@ public class TurnImpl extends BaseGridImpl implements Turn {
     }
 
     @Override
+    public boolean isEnded() {
+
+        if (!isStarted()) {
+            throw new IllegalStateException("the match can't be ended if it isn't even started");
+        }
+
+        return getPlayerPoints(GridOption.PLAYER1) + getPlayerPoints(GridOption.PLAYER2) == (horizontal.size() - 1)
+                * (vertical.size() - 1) ? true : false;
+    }
+
+    @Override
     public Integer getPlayerPoints(final GridOption player) {
 
         if (!isStarted()) {
@@ -165,13 +176,37 @@ public class TurnImpl extends BaseGridImpl implements Turn {
             throw new IllegalStateException();
         }
 
-        if (getCurrentPlayerTurn().equals(GridOption.PLAYER1)) {
+        if (this.getCurrentPlayerTurn().equals(GridOption.PLAYER1)) {
             scorePlayer1 += points;
         } else {
             scorePlayer2 += points;
         }
     }
 
+    @Override
+    public GridOption getWinner() {
+
+        if (isEnded()) {
+            if (getPlayerPoints(GridOption.PLAYER1).equals(getPlayerPoints(GridOption.PLAYER2))) {
+                return GridOption.EMPTY;
+            }
+
+            return (getPlayerPoints(GridOption.PLAYER1) > getPlayerPoints(GridOption.PLAYER2)) ? GridOption.PLAYER1
+                    : GridOption.PLAYER2;
+        } else {
+            throw new IllegalStateException();
+        }
+    }
+    
+    public void undoLastMove(){
+        
+        if(getLastListMove().equals(ListType.HORIZONTAL)){
+            setHorizontalLine(getLastListIndex(), getLastListPosition(), GridOption.EMPTY);
+        } else {
+            setVerticalLine(getLastListIndex(), getLastListPosition(), GridOption.EMPTY);
+        }
+    }
+    
     /*
      * private GridOption getPreviousParallelList(final int listIndex, final int
      * position) {
@@ -189,24 +224,4 @@ public class TurnImpl extends BaseGridImpl implements Turn {
      * return getCopyOfElement(listIndex + 1, position); } else { throw new
      * IllegalArgumentException(); } }
      */
-    @Override
-    public GridOption getWinner() {
-
-        if (isEnded()) {
-            if (getPlayerPoints(GridOption.PLAYER1).equals(getPlayerPoints(GridOption.PLAYER2))) {
-                return GridOption.EMPTY;
-            }
-
-            return (getPlayerPoints(GridOption.PLAYER1) > getPlayerPoints(GridOption.PLAYER2)) ? GridOption.PLAYER1
-                    : GridOption.PLAYER2;
-        } else {
-            throw new IllegalStateException();
-        }
-    }
-
-    @Override
-    public boolean isEnded() {
-        // TODO Auto-generated method stub
-        return false;
-    }
 }
