@@ -42,7 +42,7 @@ public interface BaseGrid {
      * @param listIndex
      * @param position
      */
-    void setVerticalLine(int listIndex, int position);
+    void setVerticalLine(int listIndex, int position, GridOption playerTurn);
 
     /**
      * 
@@ -57,5 +57,5 @@ public interface BaseGrid {
      * @param listIndex
      * @param position
      */
-    void setHorizontalLine(int listIndex, int position);
+    void setHorizontalLine(int listIndex, int position, GridOption playerTurn);
 }

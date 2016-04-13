@@ -125,7 +125,7 @@ public class BaseGridImpl implements BaseGrid {
     }
 
     @Override
-    public void setVerticalLine(final int listIndex, final int position) {
+    public void setVerticalLine(final int listIndex, final int position, GridOption playerTurn) {
 
         checkCorrectVerticalInput(listIndex, position);
 
@@ -160,7 +160,7 @@ public class BaseGridImpl implements BaseGrid {
     }
 
     @Override
-    public void setHorizontalLine(final int listIndex, final int position) {
+    public void setHorizontalLine(final int listIndex, final int position, GridOption playerTurn) {
 
         checkCorrectHorizontalInput(listIndex, position);
 
