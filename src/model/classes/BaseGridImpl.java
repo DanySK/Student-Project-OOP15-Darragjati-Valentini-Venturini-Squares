@@ -18,9 +18,7 @@ public class BaseGridImpl implements BaseGrid {
     protected List<List<GridOption>> horizontal = new ArrayList<>();
     protected List<List<GridOption>> vertical = new ArrayList<>();
     private GridOption turn = GridOption.EMPTY;
-    private ListType lastListMove;
-    private Integer lastListIndex;
-    private Integer lastPosition;
+    private LastMoveImpl lastMove;
     private static final Integer MINIMUM_SIZE = 4;
     private static final Integer MAXIMUM_SIZE = 10;
 
@@ -84,18 +82,6 @@ public class BaseGridImpl implements BaseGrid {
         return movesLeft;
     }
     
-    public ListType getLastListMove(){
-        return this.lastListMove;
-    }
-    
-    public Integer getLastListIndex(){
-        return this.lastListIndex;
-    }
-    
-    public Integer getLastListPosition(){
-        return this.lastPosition;
-    }
-    
     public GridOption getCurrentPlayerTurn(){
         
         return this.turn;
@@ -131,10 +117,10 @@ public class BaseGridImpl implements BaseGrid {
 
         if (vertical.get(listIndex).get(position).equals(GridOption.EMPTY)) {
             
-            vertical.get(listIndex).set(position, getCurrentPlayerTurn());
-            this.lastListMove = ListType.VERTICAL;
-            this.lastListIndex = listIndex;
-            this.lastPosition = position;
+            vertical.get(listIndex).set(position, playerTurn);
+            lastMove.setLastListType(ListType.VERTICAL);
+            lastMove.setLastListIndex(listIndex);
+            lastMove.setLastPosition(position);
         } else {
             throw new IllegalStateException();
         }
@@ -166,15 +152,18 @@ public class BaseGridImpl implements BaseGrid {
 
         if (horizontal.get(listIndex).get(position).equals(GridOption.EMPTY)) {
             
-            horizontal.get(listIndex).set(position, getCurrentPlayerTurn());
-            this.lastListMove = ListType.HORIZONTAL;
-            this.lastListIndex = listIndex;
-            this.lastPosition = position;
+            horizontal.get(listIndex).set(position, playerTurn);
+            lastMove.setLastListType(ListType.VERTICAL);
+            lastMove.setLastListIndex(listIndex);
+            lastMove.setLastPosition(position);
         } else {
             throw new IllegalStateException();
         }
     }
 
+    public LastMoveImpl getLastMove(){          //da difendere?
+        return lastMove;
+    }
     
 
     /*

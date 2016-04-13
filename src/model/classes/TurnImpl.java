@@ -107,14 +107,14 @@ public class TurnImpl extends BaseGridImpl implements Turn {
         }
 
         if (list.equals(ListType.HORIZONTAL)) {
-            this.setHorizontalLine(listIndex, position);
+            this.setHorizontalLine(listIndex, position, getCurrentPlayerTurn());
             if (horizontalPointScored(listIndex, position) > 0) {
                 addPoints(horizontalPointScored(listIndex, position));
             } else {
                 nextTurn();
             }
         } else {
-            this.setVerticalLine(listIndex, position);
+            this.setVerticalLine(listIndex, position, getCurrentPlayerTurn());
             if (verticalPointScored(listIndex, position) > 0) {
                 addPoints(verticalPointScored(listIndex, position));
             } else {
@@ -200,13 +200,14 @@ public class TurnImpl extends BaseGridImpl implements Turn {
     }
 
     public void undoLastMove() {
-        
-        if (getLastListMove().equals(ListType.HORIZONTAL)) {
-            addPoints(-horizontalPointScored(getLastListIndex(), getLastListPosition()));
-            setHorizontalLine(getLastListIndex(), getLastListPosition(), GridOption.EMPTY);
+
+        if (this.getLastMove().getLastListType().equals(ListType.HORIZONTAL)) {
+            addPoints(-horizontalPointScored(this.getLastMove().getLastListIndex(), this.getLastMove().getLastPosition()));
+            setHorizontalLine(this.getLastMove().getLastListIndex(), this.getLastMove().getLastPosition(),
+                    GridOption.EMPTY);
         } else {
-            addPoints(-verticalPointScored(getLastListIndex(), getLastListPosition()));
-            setVerticalLine(getLastListIndex(), getLastListPosition(), GridOption.EMPTY);
+            addPoints(-verticalPointScored(this.getLastMove().getLastListIndex(), this.getLastMove().getLastPosition()));
+            setVerticalLine(this.getLastMove().getLastListIndex(), this.getLastMove().getLastPosition(), GridOption.EMPTY);
         }
     }
 
