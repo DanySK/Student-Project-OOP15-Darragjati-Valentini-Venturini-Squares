@@ -9,6 +9,9 @@ import static org.junit.Assert.assertNotEquals;
 import org.junit.Test;
 
 import model.enumerations.GridOption;
+import model.enumerations.ListType;
+import model.interfaces.BaseGrid;
+import model.interfaces.Turn;
 
 /**
  * 
@@ -25,61 +28,61 @@ public class TestBaseOptions {
     @Test
     public void test() {
 
-        BaseGridImpl gridOfSize = new BaseGridImpl(SIZE, SIZE);
+        Turn gridOfSize = new TurnImpl(SIZE, SIZE);
 
-        assertEquals(gridOfSize.getTotalMoves(), gridOfSize.getRemainingMoves()); // verifies
-                                                                                  // that
-                                                                                  // total
-                                                                                  // moves
-                                                                                  // are
-                                                                                  // the
-                                                                                  // same
-                                                                                  // as
-                                                                                  // remaining
-                                                                                  // moves
+        assertEquals(gridOfSize.getGrid().getTotalMoves(), gridOfSize.getGrid().getRemainingMoves()); // verifies
+        // that
+        // total
+        // moves
+        // are
+        // the
+        // same
+        // as
+        // remaining
+        // moves
 
         for (int i = 0; i < SIZE + 1; i++) { // verifies that every element in
             // the list is initialized as EMPTY
             for (int z = 0; z < SIZE; z++) {
-                assertEquals(gridOfSize.getCopyOfHorizontalElement(i, z), GridOption.EMPTY);
-                assertEquals(gridOfSize.getCopyOfVerticalElement(i, z), GridOption.EMPTY);
+                assertEquals(gridOfSize.getGrid().getCopyOfHorizontalElement(i, z), GridOption.EMPTY);
+                assertEquals(gridOfSize.getGrid().getCopyOfVerticalElement(i, z), GridOption.EMPTY);
             }
         }
 
         assertFalse(gridOfSize.isStarted());
-        assertFalse(gridOfSize.isEnded());
 
         gridOfSize.startMatch();
         assertTrue(gridOfSize.isStarted());
-        gridOfSize.setVerticalLine(0, 0);
+        gridOfSize.setLine(ListType.VERTICAL, 0, 0);
 
-        assertEquals(gridOfSize.getRemainingMoves(), (Integer) (gridOfSize.getTotalMoves() - 1));
+        assertEquals(gridOfSize.getGrid().getRemainingMoves(), (Integer) (gridOfSize.getGrid().getTotalMoves() - 1));
 
-        gridOfSize.setHorizontalLine(0, 0);
-        gridOfSize.setHorizontalLine(1, 0);
+        gridOfSize.setLine(ListType.HORIZONTAL, 0, 0);
+        gridOfSize.setLine(ListType.HORIZONTAL, 1, 0);
 
-        GridOption player = gridOfSize.getCurrentPlayerTurn();
-        gridOfSize.setVerticalLine(1, 0);
+        GridOption player = gridOfSize.getGrid().getCurrentPlayerTurn();
+        gridOfSize.setLine(ListType.VERTICAL, 1, 0);
 
-        assertEquals(gridOfSize.getRemainingMoves(), (Integer) (gridOfSize.getTotalMoves() - 4));
+        assertEquals(gridOfSize.getGrid().getRemainingMoves(), (Integer) (gridOfSize.getGrid().getTotalMoves() - 4));
         assertNotEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
-        assertEquals(player, gridOfSize.getCurrentPlayerTurn()); // verifies if
-                                                                 // the player
-                                                                 // has received
-                                                                 // a bonus move
+        assertEquals(player, gridOfSize.getGrid().getCurrentPlayerTurn()); // verifies
+                                                                           // if
+        // the player
+        // has received
+        // a bonus move
 
-        BaseGridImpl gridOfSize2 = new BaseGridImpl(SIZE, SIZE);
+        Turn gridOfSize2 = new TurnImpl(SIZE, SIZE);
 
         gridOfSize2.startMatch();
 
         for (int i = 0; i < SIZE + 1; i++) {
             for (int z = 0; z < SIZE; z++) {
-                gridOfSize2.setHorizontalLine(i, z);
-                gridOfSize2.setVerticalLine(i, z);
+                gridOfSize2.setLine(ListType.HORIZONTAL, i, z);
+                gridOfSize2.setLine(ListType.VERTICAL, i, z);
             }
         }
 
-        assertTrue(gridOfSize2.getRemainingMoves().equals(0));
+        assertTrue(gridOfSize2.getGrid().getRemainingMoves().equals(0));
         System.out.println("Player1 " + gridOfSize2.getPlayerPoints(GridOption.PLAYER1) + " Player2 "
                 + gridOfSize2.getPlayerPoints(GridOption.PLAYER2));
         assertTrue(gridOfSize2.isEnded());
@@ -92,26 +95,33 @@ public class TestBaseOptions {
     @Test
     public void testExceptions() {
 
-        BaseGridImpl testGrid;
+        Turn testGrid;
 
         try {
-            testGrid = new BaseGridImpl(SIZE - 4, SIZE - 4);
+            testGrid = new TurnImpl(SIZE - 4, SIZE - 4);
             fail("Can't create a grid too small");
         } catch (IllegalArgumentException e) {
         } catch (Exception e) {
             fail("Wrong exception thrown");
         }
         try {
-            testGrid = new BaseGridImpl(SIZE + SIZE, SIZE + SIZE);
+            testGrid = new TurnImpl(SIZE + SIZE, SIZE + SIZE);
             fail("Can't create a grid too big");
         } catch (IllegalArgumentException e) {
         } catch (Exception e) {
             fail("Wrong exception thrown");
         }
 
-        testGrid = new BaseGridImpl(SIZE, SIZE);
+        testGrid = new TurnImpl(SIZE, SIZE);
+        try{
+            testGrid.isEnded();
+            fail("the match can't be ended if it isn't started");
+        } catch (IllegalStateException e){
+        } catch (Exception e) {
+            fail("Wrong exception thrown");
+        }
         try {
-            testGrid.setHorizontalLine(0, 0);
+            testGrid.setLine(ListType.HORIZONTAL, 0, 0);
             fail("Can't insert a move when the match isn't started");
         } catch (IllegalStateException e) {
         } catch (Exception e) {
@@ -119,7 +129,7 @@ public class TestBaseOptions {
         }
         testGrid.startMatch();
         try {
-            testGrid.setHorizontalLine(-1, -1);
+            testGrid.setLine(ListType.HORIZONTAL, -1, -1);
             fail("Can't insert those parameters");
         } catch (IllegalArgumentException e) { // forse potrebbe essere anche un
                                                // index out of bound
@@ -127,7 +137,7 @@ public class TestBaseOptions {
             fail("Wrong exception thrown");
         }
         try {
-            testGrid.setHorizontalLine(0, 7);
+            testGrid.setLine(ListType.HORIZONTAL, 0, 7);
             fail("The grid isn't big enough");
         } catch (IndexOutOfBoundsException e) { // forse potrebbe essere anche
                                                 // un

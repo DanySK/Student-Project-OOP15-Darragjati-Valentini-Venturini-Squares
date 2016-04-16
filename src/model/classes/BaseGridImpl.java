@@ -2,7 +2,6 @@ package model.classes;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import model.enumerations.GridOption;
 import model.enumerations.ListType;
@@ -62,7 +61,7 @@ public class BaseGridImpl implements BaseGrid {
 
     @Override
     public Integer getRemainingMoves() {
-        
+
         Integer movesLeft = 0;
 
         for (List<GridOption> list : horizontal) {
@@ -89,7 +88,9 @@ public class BaseGridImpl implements BaseGrid {
     }
 
     @Override
+    //CHECKSTYLE:OFF:
     public void setPlayerTurn(final GridOption turn) {
+      //CHECKSTYLE:ON:
         this.turn = turn;
     }
 
@@ -113,7 +114,7 @@ public class BaseGridImpl implements BaseGrid {
     }
 
     @Override
-    public void setVerticalLine(final int listIndex, final int position, GridOption playerTurn) {
+    public void setVerticalLine(final int listIndex, final int position, final GridOption playerTurn) {
 
         checkCorrectVerticalInput(listIndex, position);
 
@@ -148,7 +149,7 @@ public class BaseGridImpl implements BaseGrid {
     }
 
     @Override
-    public void setHorizontalLine(final int listIndex, final int position, GridOption playerTurn) {
+    public void setHorizontalLine(final int listIndex, final int position, final GridOption playerTurn) {
 
         checkCorrectHorizontalInput(listIndex, position);
 
@@ -169,12 +170,12 @@ public class BaseGridImpl implements BaseGrid {
     }
 
     @Override
-    public Integer getHorizontalListSize(){
+    public Integer getHorizontalListSize() {
         return horizontal.size();
     }
-    
+
     @Override
-    public Integer getVerticallListSize(){
+    public Integer getVerticallListSize() {
         return vertical.size();
     }
     /*

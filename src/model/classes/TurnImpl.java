@@ -215,6 +215,11 @@ public class TurnImpl implements Turn {
         }
     }
 
+    @Override
+    public BaseGrid getGrid() {
+        return this.grid;
+    }
+
     /*
      * private GridOption getPreviousParallelList(final int listIndex, final int
      * position) {

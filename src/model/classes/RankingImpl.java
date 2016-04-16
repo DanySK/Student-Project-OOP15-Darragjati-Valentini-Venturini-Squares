@@ -1,6 +1,5 @@
 package model.classes;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -57,7 +56,7 @@ public class RankingImpl implements Ranking {
     }
 
     @Override
-    public List<PlayerImpl> orderListBy(final RankingOption option, boolean reverseRanking) {
+    public List<PlayerImpl> orderListBy(final RankingOption option, final boolean reverseRanking) {
 
         switch (option) {
         case WINRATE:
@@ -84,7 +83,7 @@ public class RankingImpl implements Ranking {
 
                 @Override
                 public int compare(final PlayerImpl player1, final PlayerImpl player2) {
-                  
+
                     if (player1.getTotalWins().equals(player2.getTotalWins())) {
                         if (player1.getWinRate() == player2.getWinRate()) {
                             if (player1.getTotalSquaresCatched().equals(player2.getTotalSquaresCatched())) {
@@ -105,7 +104,7 @@ public class RankingImpl implements Ranking {
 
                 @Override
                 public int compare(final PlayerImpl player1, final PlayerImpl player2) {
-                  
+
                     if (player1.getTotalMatches().equals(player2.getTotalMatches())) {
                         if (player1.getWinRate() == player2.getWinRate()) {
                             if (player1.getTotalSquaresCatched().equals(player2.getTotalSquaresCatched())) {
@@ -124,7 +123,7 @@ public class RankingImpl implements Ranking {
 
                 @Override
                 public int compare(final PlayerImpl player1, final PlayerImpl player2) {
-                   
+
                     if (player1.getTotalSquaresCatched().equals(player2.getTotalSquaresCatched())) {
                         if (player1.getWinRate() == player2.getWinRate()) {
                             if (player1.getTotalMatches().equals(player2.getTotalMatches())) {
@@ -142,7 +141,7 @@ public class RankingImpl implements Ranking {
         default:
             throw new IllegalStateException();
         }
-        if(reverseRanking){
+        if (reverseRanking) {
             Collections.reverse(playerList);
         }
         return Collections.unmodifiableList(playerList);

@@ -48,4 +48,6 @@ public interface Turn {
      * @throws a IllegalStateException if the game is not ended
      */
     GridOption getWinner();
+
+    BaseGrid getGrid();
 }
