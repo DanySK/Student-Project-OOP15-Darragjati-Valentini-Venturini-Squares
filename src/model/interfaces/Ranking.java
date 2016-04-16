@@ -26,19 +26,9 @@ public interface Ranking {
      * winrate, per total wins, per total games played and per total squares
      * catched.
      * 
-     * @param option
-     *            wich way the list should be ordered
+     * @param option wich way the list should be ordered
+     * @param reverseRanking true if the list should be ordered in the opposite way
      * @return the reordered list
      */
-    List<PlayerImpl> orderListBy(RankingOption option);
-
-    /**
-     * Reverts the order of the list obtained through the method
-     * addPlayerResults.
-     * 
-     * @param option
-     *            wich way the list should be ordered
-     * @return the reordered list
-     */
-    List<PlayerImpl> reverseRanking(RankingOption option);
+    List<PlayerImpl> orderListBy(RankingOption option, boolean reverseRanking);
 }

@@ -57,7 +57,7 @@ public class RankingImpl implements Ranking {
     }
 
     @Override
-    public List<PlayerImpl> orderListBy(final RankingOption option) {
+    public List<PlayerImpl> orderListBy(final RankingOption option, boolean reverseRanking) {
 
         switch (option) {
         case WINRATE:
@@ -142,20 +142,9 @@ public class RankingImpl implements Ranking {
         default:
             throw new IllegalStateException();
         }
+        if(reverseRanking){
+            Collections.reverse(playerList);
+        }
         return Collections.unmodifiableList(playerList);
     }
-
-    @Override
-    public List<PlayerImpl> reverseRanking(final RankingOption option) {
-
-        List<PlayerImpl> orderedList = orderListBy(option);
-        List<PlayerImpl> reverseList = new ArrayList<>();
-        
-        for(PlayerImpl player : orderedList){
-            reverseList.add(player);
-        }
-        Collections.reverse(reverseList);
-        return reverseList;
-    }
-
 }

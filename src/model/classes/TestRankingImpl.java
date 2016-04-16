@@ -63,25 +63,25 @@ public class TestRankingImpl {
 
         assertEquals(playerList.size(), 4);
         // ordering list by WINRATE
-        List<PlayerImpl> orderingTest = rankingTest.orderListBy(RankingOption.WINRATE);
+        List<PlayerImpl> orderingTest = rankingTest.orderListBy(RankingOption.WINRATE, false);
         assertEquals(orderingTest.get(0).getPlayerName(), PLAYER1);
         assertEquals(orderingTest.get(1).getPlayerName(), PLAYER3);
         assertEquals(orderingTest.get(2).getPlayerName(), PLAYER2);
         assertEquals(orderingTest.get(3).getPlayerName(), PLAYER4);
         // ordering list by TOTAL WINS
-        orderingTest = rankingTest.orderListBy(RankingOption.TOTAL_WINS);
+        orderingTest = rankingTest.orderListBy(RankingOption.TOTAL_WINS, false);
         assertEquals(orderingTest.get(0).getPlayerName(), PLAYER1);
         assertEquals(orderingTest.get(1).getPlayerName(), PLAYER4);
         assertEquals(orderingTest.get(2).getPlayerName(), PLAYER3);
         assertEquals(orderingTest.get(3).getPlayerName(), PLAYER2);
         // ordering list by TOTAL MATCHES done
-        orderingTest = rankingTest.orderListBy(RankingOption.TOTAL_MATCHES);
+        orderingTest = rankingTest.orderListBy(RankingOption.TOTAL_MATCHES, false);
         assertEquals(orderingTest.get(0).getPlayerName(), PLAYER4);
         assertEquals(orderingTest.get(1).getPlayerName(), PLAYER3);
         assertEquals(orderingTest.get(2).getPlayerName(), PLAYER1);
         assertEquals(orderingTest.get(3).getPlayerName(), PLAYER2);
         // ordering list by TOTSL SQUARES CATCHED
-        orderingTest = rankingTest.orderListBy(RankingOption.TOTAL_SQUARES_CATCHED);
+        orderingTest = rankingTest.orderListBy(RankingOption.TOTAL_SQUARES_CATCHED, false);
         assertEquals(orderingTest.get(0).getPlayerName(), PLAYER4);
         assertEquals(orderingTest.get(1).getPlayerName(), PLAYER1);
         assertEquals(orderingTest.get(2).getPlayerName(), PLAYER3);
@@ -89,14 +89,14 @@ public class TestRankingImpl {
 
         rankingTest.addPlayerResults(PLAYER5, true, 37);
         // ordering list by WINRATE
-        List<PlayerImpl> testWinRateOrderedList = rankingTest.orderListBy(RankingOption.WINRATE);
+        List<PlayerImpl> testWinRateOrderedList = rankingTest.orderListBy(RankingOption.WINRATE, false);
         assertEquals(testWinRateOrderedList.get(0).getPlayerName(), PLAYER1);
         assertEquals(testWinRateOrderedList.get(1).getPlayerName(), PLAYER3);
         assertEquals(testWinRateOrderedList.get(2).getPlayerName(), PLAYER2);
         assertEquals(testWinRateOrderedList.get(3).getPlayerName(), PLAYER5);
         assertEquals(testWinRateOrderedList.get(4).getPlayerName(), PLAYER4);
         // reversing the list ordered by WINRATE
-        List<PlayerImpl> testReverseOrderedList = rankingTest.reverseRanking(RankingOption.WINRATE);
+        List<PlayerImpl> testReverseOrderedList = rankingTest.orderListBy(RankingOption.WINRATE, true);
         assertEquals(testReverseOrderedList.get(0).getPlayerName(), PLAYER4);
         assertEquals(testReverseOrderedList.get(1).getPlayerName(), PLAYER5);
         assertEquals(testReverseOrderedList.get(2).getPlayerName(), PLAYER2);
@@ -133,8 +133,8 @@ public class TestRankingImpl {
         RankingImpl testListException = new RankingImpl(playerList);
 
         try {
-            testListException.orderListBy(RankingOption.WINRATE).add(player3);
-            fail("You can't order the list by that option");
+            testListException.orderListBy(RankingOption.WINRATE, false).add(player3);
+            fail("You can't add a player to the list, it should be unmodifiable");
         } catch (UnsupportedOperationException e) {
         } catch (Exception e) {
             fail("Wrong exception thrown");
