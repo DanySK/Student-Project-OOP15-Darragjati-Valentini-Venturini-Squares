@@ -1,10 +1,11 @@
 package model.interfaces;
 
+import model.classes.LastMoveImpl;
 import model.enumerations.GridOption;
 
 /**
  * 
- * 
+ * CHE SCRIVERE?
  *
  */
 public interface BaseGrid {
@@ -58,4 +59,12 @@ public interface BaseGrid {
      * @param position
      */
     void setHorizontalLine(int listIndex, int position, GridOption playerTurn);
+
+    LastMove getLastMove();
+
+    void setPlayerTurn(GridOption turn);
+
+    Integer getHorizontalListSize();
+
+    Integer getVerticallListSize();
 }

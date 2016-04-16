@@ -7,6 +7,7 @@ import java.util.Random;
 import model.enumerations.GridOption;
 import model.enumerations.ListType;
 import model.interfaces.BaseGrid;
+import model.interfaces.LastMove;
 
 /**
  * 
@@ -15,10 +16,10 @@ import model.interfaces.BaseGrid;
  */
 public class BaseGridImpl implements BaseGrid {
 
-    protected List<List<GridOption>> horizontal = new ArrayList<>();
-    protected List<List<GridOption>> vertical = new ArrayList<>();
+    private List<List<GridOption>> horizontal = new ArrayList<>();
+    private List<List<GridOption>> vertical = new ArrayList<>();
     private GridOption turn = GridOption.EMPTY;
-    private LastMoveImpl lastMove = new LastMoveImpl();
+    private LastMove lastMove = new LastMoveImpl();
     private static final Integer MINIMUM_SIZE = 4;
     private static final Integer MAXIMUM_SIZE = 10;
 
@@ -61,7 +62,7 @@ public class BaseGridImpl implements BaseGrid {
 
     @Override
     public Integer getRemainingMoves() {
-
+        
         Integer movesLeft = 0;
 
         for (List<GridOption> list : horizontal) {
@@ -81,13 +82,14 @@ public class BaseGridImpl implements BaseGrid {
         }
         return movesLeft;
     }
-    
-    public GridOption getCurrentPlayerTurn(){
-        
+
+    @Override
+    public GridOption getCurrentPlayerTurn() {
         return this.turn;
     }
-    
-    public void setPlayerTurn(final GridOption turn){
+
+    @Override
+    public void setPlayerTurn(final GridOption turn) {
         this.turn = turn;
     }
 
@@ -116,7 +118,7 @@ public class BaseGridImpl implements BaseGrid {
         checkCorrectVerticalInput(listIndex, position);
 
         if (vertical.get(listIndex).get(position).equals(GridOption.EMPTY)) {
-            
+
             vertical.get(listIndex).set(position, playerTurn);
             lastMove.setLastListType(ListType.VERTICAL);
             lastMove.setLastListIndex(listIndex);
@@ -151,7 +153,7 @@ public class BaseGridImpl implements BaseGrid {
         checkCorrectHorizontalInput(listIndex, position);
 
         if (horizontal.get(listIndex).get(position).equals(GridOption.EMPTY)) {
-            
+
             horizontal.get(listIndex).set(position, playerTurn);
             lastMove.setLastListType(ListType.VERTICAL);
             lastMove.setLastListIndex(listIndex);
@@ -161,11 +163,20 @@ public class BaseGridImpl implements BaseGrid {
         }
     }
 
-    public LastMoveImpl getLastMove(){          //da difendere?
+    @Override
+    public LastMove getLastMove() { // da difendere?
         return lastMove;
     }
-    
 
+    @Override
+    public Integer getHorizontalListSize(){
+        return horizontal.size();
+    }
+    
+    @Override
+    public Integer getVerticallListSize(){
+        return vertical.size();
+    }
     /*
      * private GridOption getPreviousParallelList(final int listIndex, final int
      * position) {

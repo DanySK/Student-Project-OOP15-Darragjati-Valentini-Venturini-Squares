@@ -3,7 +3,7 @@ package model.interfaces;
 import model.enumerations.GridOption;
 import model.enumerations.ListType;
 
-public interface Turn extends BaseGrid{
+public interface Turn {
 
     /**
      * Starts a new match.
@@ -23,12 +23,6 @@ public interface Turn extends BaseGrid{
      */
     boolean isEnded();
 
-    /**
-     * 
-     * @return the player who should take the next move
-     * @throws a IllegalStateException if the match is not started
-     */
-    GridOption getCurrentPlayerTurn();
 
     /**
      * Gets the score of one of the two players.

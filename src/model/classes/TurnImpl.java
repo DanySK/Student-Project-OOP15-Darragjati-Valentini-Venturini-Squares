@@ -3,6 +3,7 @@ package model.classes;
 import java.util.Random;
 import model.enumerations.GridOption;
 import model.enumerations.ListType;
+import model.interfaces.BaseGrid;
 import model.interfaces.Turn;
 
 /**
@@ -10,20 +11,19 @@ import model.interfaces.Turn;
  * 
  *
  */
-public class TurnImpl extends BaseGridImpl implements Turn {
+public class TurnImpl implements Turn {
 
     private boolean matchStarted = false;
     private Integer scorePlayer1;
     private Integer scorePlayer2;
     private static final Integer INITIAL_SCORE = 0;
+    private BaseGrid grid;
 
     /**
      * 
-     * @param rowsNumber
-     * @param columnNumber
      */
     TurnImpl(final Integer rowsNumber, final Integer columnNumber) {
-        super(rowsNumber, columnNumber);
+        grid = new BaseGridImpl(rowsNumber, columnNumber);
     }
 
     @Override
@@ -45,9 +45,9 @@ public class TurnImpl extends BaseGridImpl implements Turn {
             Random randomTurn = new Random();
 
             if (randomTurn.nextInt(2) == 0) {
-                this.setPlayerTurn(GridOption.PLAYER1);
+                grid.setPlayerTurn(GridOption.PLAYER1);
             } else {
-                this.setPlayerTurn(GridOption.PLAYER2);
+                grid.setPlayerTurn(GridOption.PLAYER2);
             }
         } else {
             throw new IllegalStateException();
@@ -66,10 +66,10 @@ public class TurnImpl extends BaseGridImpl implements Turn {
             throw new IllegalStateException();
         }
 
-        if (this.getCurrentPlayerTurn().equals(GridOption.PLAYER1)) {
-            this.setPlayerTurn(GridOption.PLAYER2);
+        if (grid.getCurrentPlayerTurn().equals(GridOption.PLAYER1)) {
+            grid.setPlayerTurn(GridOption.PLAYER2);
         } else {
-            this.setPlayerTurn(GridOption.PLAYER1);
+            grid.setPlayerTurn(GridOption.PLAYER1);
         }
     }
 
@@ -80,8 +80,9 @@ public class TurnImpl extends BaseGridImpl implements Turn {
             throw new IllegalStateException("the match can't be ended if it isn't even started");
         }
 
-        return getPlayerPoints(GridOption.PLAYER1) + getPlayerPoints(GridOption.PLAYER2) == (horizontal.size() - 1)
-                * (vertical.size() - 1) ? true : false;
+        return getPlayerPoints(GridOption.PLAYER1)
+                + getPlayerPoints(GridOption.PLAYER2) == (grid.getHorizontalListSize() - 1)
+                        * (grid.getVerticallListSize() - 1) ? true : false;
     }
 
     @Override
@@ -107,14 +108,14 @@ public class TurnImpl extends BaseGridImpl implements Turn {
         }
 
         if (list.equals(ListType.HORIZONTAL)) {
-            this.setHorizontalLine(listIndex, position, getCurrentPlayerTurn());
+            grid.setHorizontalLine(listIndex, position, grid.getCurrentPlayerTurn());
             if (horizontalPointScored(listIndex, position) > 0) {
                 addPoints(horizontalPointScored(listIndex, position));
             } else {
                 nextTurn();
             }
         } else {
-            this.setVerticalLine(listIndex, position, getCurrentPlayerTurn());
+            grid.setVerticalLine(listIndex, position, grid.getCurrentPlayerTurn());
             if (verticalPointScored(listIndex, position) > 0) {
                 addPoints(verticalPointScored(listIndex, position));
             } else {
@@ -128,18 +129,18 @@ public class TurnImpl extends BaseGridImpl implements Turn {
         int points = 0;
 
         if (listIndex != 0) {
-            if (getCopyOfHorizontalElement(listIndex - 1, position) != GridOption.EMPTY) {
-                if (getCopyOfVerticalElement(position, listIndex - 1) != GridOption.EMPTY
-                        && getCopyOfVerticalElement(position + 1, listIndex - 1) != GridOption.EMPTY) {
+            if (grid.getCopyOfHorizontalElement(listIndex - 1, position) != GridOption.EMPTY) {
+                if (grid.getCopyOfVerticalElement(position, listIndex - 1) != GridOption.EMPTY
+                        && grid.getCopyOfVerticalElement(position + 1, listIndex - 1) != GridOption.EMPTY) {
                     points++;
                 }
             }
         }
 
-        if (listIndex != horizontal.size()) {
-            if (getCopyOfHorizontalElement(listIndex + 1, position) != GridOption.EMPTY) {
-                if (getCopyOfVerticalElement(position, listIndex) != GridOption.EMPTY
-                        && getCopyOfVerticalElement(position + 1, listIndex) != GridOption.EMPTY) {
+        if (listIndex != grid.getHorizontalListSize()) {
+            if (grid.getCopyOfHorizontalElement(listIndex + 1, position) != GridOption.EMPTY) {
+                if (grid.getCopyOfVerticalElement(position, listIndex) != GridOption.EMPTY
+                        && grid.getCopyOfVerticalElement(position + 1, listIndex) != GridOption.EMPTY) {
                     points++;
                 }
             }
@@ -152,18 +153,18 @@ public class TurnImpl extends BaseGridImpl implements Turn {
         int points = 0;
 
         if (listIndex != 0) {
-            if (getCopyOfVerticalElement(listIndex - 1, position) != GridOption.EMPTY) {
-                if (getCopyOfHorizontalElement(position, listIndex - 1) != GridOption.EMPTY
-                        && getCopyOfHorizontalElement(position + 1, listIndex - 1) != GridOption.EMPTY) {
+            if (grid.getCopyOfVerticalElement(listIndex - 1, position) != GridOption.EMPTY) {
+                if (grid.getCopyOfHorizontalElement(position, listIndex - 1) != GridOption.EMPTY
+                        && grid.getCopyOfHorizontalElement(position + 1, listIndex - 1) != GridOption.EMPTY) {
                     points++;
                 }
             }
         }
 
-        if (listIndex != vertical.size()) {
-            if (getCopyOfVerticalElement(listIndex + 1, position) != GridOption.EMPTY) {
-                if (getCopyOfHorizontalElement(position, listIndex) != GridOption.EMPTY
-                        && getCopyOfHorizontalElement(position + 1, listIndex) != GridOption.EMPTY) {
+        if (listIndex != grid.getVerticallListSize()) {
+            if (grid.getCopyOfVerticalElement(listIndex + 1, position) != GridOption.EMPTY) {
+                if (grid.getCopyOfHorizontalElement(position, listIndex) != GridOption.EMPTY
+                        && grid.getCopyOfHorizontalElement(position + 1, listIndex) != GridOption.EMPTY) {
                     points++;
                 }
             }
@@ -177,7 +178,7 @@ public class TurnImpl extends BaseGridImpl implements Turn {
             throw new IllegalStateException();
         }
 
-        if (this.getCurrentPlayerTurn().equals(GridOption.PLAYER1)) {
+        if (grid.getCurrentPlayerTurn().equals(GridOption.PLAYER1)) {
             scorePlayer1 += points;
         } else {
             scorePlayer2 += points;
@@ -201,13 +202,16 @@ public class TurnImpl extends BaseGridImpl implements Turn {
 
     public void undoLastMove() {
 
-        if (this.getLastMove().getLastListType().equals(ListType.HORIZONTAL)) {
-            addPoints(-horizontalPointScored(this.getLastMove().getLastListIndex(), this.getLastMove().getLastPosition()));
-            setHorizontalLine(this.getLastMove().getLastListIndex(), this.getLastMove().getLastPosition(),
+        if (grid.getLastMove().getLastListType().equals(ListType.HORIZONTAL)) {
+            addPoints(-horizontalPointScored(grid.getLastMove().getLastListIndex(),
+                    grid.getLastMove().getLastPosition()));
+            grid.setHorizontalLine(grid.getLastMove().getLastListIndex(), grid.getLastMove().getLastPosition(),
                     GridOption.EMPTY);
         } else {
-            addPoints(-verticalPointScored(this.getLastMove().getLastListIndex(), this.getLastMove().getLastPosition()));
-            setVerticalLine(this.getLastMove().getLastListIndex(), this.getLastMove().getLastPosition(), GridOption.EMPTY);
+            addPoints(
+                    -verticalPointScored(grid.getLastMove().getLastListIndex(), grid.getLastMove().getLastPosition()));
+            grid.setVerticalLine(grid.getLastMove().getLastListIndex(), grid.getLastMove().getLastPosition(),
+                    GridOption.EMPTY);
         }
     }
 
