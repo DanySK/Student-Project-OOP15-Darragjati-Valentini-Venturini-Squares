@@ -102,8 +102,7 @@ public class TurnImpl implements Turn {
 
     @Override
     public void setLine(final ListType list, final Integer listIndex, final Integer position) {
-
-        if (!list.equals(ListType.HORIZONTAL) || !list.equals(ListType.HORIZONTAL)) {
+        if (!list.equals(ListType.HORIZONTAL) && !list.equals(ListType.VERTICAL)) {
             throw new IllegalArgumentException("the list selected does not exist");
         }
 
@@ -122,13 +121,14 @@ public class TurnImpl implements Turn {
                 nextTurn();
             }
         }
+
     }
 
     private Integer horizontalPointScored(final int listIndex, final int position) {
 
         int points = 0;
 
-        if (listIndex != 0) {
+        if (listIndex > 0) {
             if (grid.getCopyOfHorizontalElement(listIndex - 1, position) != GridOption.EMPTY) {
                 if (grid.getCopyOfVerticalElement(position, listIndex - 1) != GridOption.EMPTY
                         && grid.getCopyOfVerticalElement(position + 1, listIndex - 1) != GridOption.EMPTY) {
@@ -137,7 +137,7 @@ public class TurnImpl implements Turn {
             }
         }
 
-        if (listIndex != grid.getHorizontalListSize()) {
+        if (listIndex < grid.getHorizontalListSize() - 1) {
             if (grid.getCopyOfHorizontalElement(listIndex + 1, position) != GridOption.EMPTY) {
                 if (grid.getCopyOfVerticalElement(position, listIndex) != GridOption.EMPTY
                         && grid.getCopyOfVerticalElement(position + 1, listIndex) != GridOption.EMPTY) {
@@ -152,7 +152,7 @@ public class TurnImpl implements Turn {
 
         int points = 0;
 
-        if (listIndex != 0) {
+        if (listIndex > 0) {
             if (grid.getCopyOfVerticalElement(listIndex - 1, position) != GridOption.EMPTY) {
                 if (grid.getCopyOfHorizontalElement(position, listIndex - 1) != GridOption.EMPTY
                         && grid.getCopyOfHorizontalElement(position + 1, listIndex - 1) != GridOption.EMPTY) {
@@ -161,7 +161,7 @@ public class TurnImpl implements Turn {
             }
         }
 
-        if (listIndex != grid.getVerticallListSize()) {
+        if (listIndex < grid.getVerticallListSize() - 1) {
             if (grid.getCopyOfVerticalElement(listIndex + 1, position) != GridOption.EMPTY) {
                 if (grid.getCopyOfHorizontalElement(position, listIndex) != GridOption.EMPTY
                         && grid.getCopyOfHorizontalElement(position + 1, listIndex) != GridOption.EMPTY) {

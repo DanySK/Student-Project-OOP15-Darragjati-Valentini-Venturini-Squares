@@ -76,8 +76,11 @@ public class TestBaseOptions {
         gridOfSize2.startMatch();
 
         for (int i = 0; i < SIZE + 1; i++) {
+            System.out.println("I " + i);
             for (int z = 0; z < SIZE; z++) {
+                System.out.println("Z ho " + z);
                 gridOfSize2.setLine(ListType.HORIZONTAL, i, z);
+                System.out.println("Z ve " + z);
                 gridOfSize2.setLine(ListType.VERTICAL, i, z);
             }
         }
@@ -113,10 +116,10 @@ public class TestBaseOptions {
         }
 
         testGrid = new TurnImpl(SIZE, SIZE);
-        try{
+        try {
             testGrid.isEnded();
             fail("the match can't be ended if it isn't started");
-        } catch (IllegalStateException e){
+        } catch (IllegalStateException e) {
         } catch (Exception e) {
             fail("Wrong exception thrown");
         }

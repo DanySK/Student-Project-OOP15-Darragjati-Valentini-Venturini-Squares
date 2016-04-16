@@ -93,6 +93,42 @@ public class BaseGridImpl implements BaseGrid {
       //CHECKSTYLE:ON:
         this.turn = turn;
     }
+    
+    private void checkCorrectHorizontalInput(final Integer listIndex, final Integer position) {
+
+        System.out.println(horizontal.size());
+        if (listIndex < 0 || listIndex > horizontal.size()) {
+            throw new IllegalArgumentException();
+        }
+
+        if (position < 0 || position > horizontal.get(listIndex).size()) {
+            throw new IndexOutOfBoundsException();
+        }
+    }
+
+    @Override
+    public GridOption getCopyOfHorizontalElement(final Integer listIndex, final Integer position) {
+
+        checkCorrectHorizontalInput(listIndex, position);
+        GridOption copyOfHorizontalElement = horizontal.get(listIndex).get(position);
+        return copyOfHorizontalElement;
+    }
+
+    @Override
+    public void setHorizontalLine(final int listIndex, final int position, final GridOption playerTurn) {
+
+        checkCorrectHorizontalInput(listIndex, position);
+
+        if (horizontal.get(listIndex).get(position).equals(GridOption.EMPTY)) {
+
+            horizontal.get(listIndex).set(position, playerTurn);
+            lastMove.setLastListType(ListType.VERTICAL);
+            lastMove.setLastListIndex(listIndex);
+            lastMove.setLastPosition(position);
+        } else {
+            throw new IllegalStateException();
+        }
+    }
 
     private void checkCorrectVerticalInput(final Integer listIndex, final Integer position) {
 
@@ -121,41 +157,6 @@ public class BaseGridImpl implements BaseGrid {
         if (vertical.get(listIndex).get(position).equals(GridOption.EMPTY)) {
 
             vertical.get(listIndex).set(position, playerTurn);
-            lastMove.setLastListType(ListType.VERTICAL);
-            lastMove.setLastListIndex(listIndex);
-            lastMove.setLastPosition(position);
-        } else {
-            throw new IllegalStateException();
-        }
-    }
-
-    private void checkCorrectHorizontalInput(final Integer listIndex, final Integer position) {
-
-        if (listIndex < 0 || listIndex > horizontal.size()) {
-            throw new IllegalArgumentException();
-        }
-
-        if (position < 0 || position > horizontal.get(listIndex).size()) {
-            throw new IndexOutOfBoundsException();
-        }
-    }
-
-    @Override
-    public GridOption getCopyOfHorizontalElement(final Integer listIndex, final Integer position) {
-
-        checkCorrectHorizontalInput(listIndex, position);
-        GridOption copyOfHorizontalElement = horizontal.get(listIndex).get(position);
-        return copyOfHorizontalElement;
-    }
-
-    @Override
-    public void setHorizontalLine(final int listIndex, final int position, final GridOption playerTurn) {
-
-        checkCorrectHorizontalInput(listIndex, position);
-
-        if (horizontal.get(listIndex).get(position).equals(GridOption.EMPTY)) {
-
-            horizontal.get(listIndex).set(position, playerTurn);
             lastMove.setLastListType(ListType.VERTICAL);
             lastMove.setLastListIndex(listIndex);
             lastMove.setLastPosition(position);
