@@ -127,8 +127,13 @@ public class TurnImpl implements Turn {
         default:
             throw new IllegalArgumentException("the list selected does not exist");
         }
-        lastMoveList.add(grid.getLastMove());
-
+        lastMoveList.add(grid.getCopyOfLastMove());
+        int i = 0;
+        for(LastMove last : lastMoveList){
+            System.out.println("Elemento " + i + " " + last.getLastListType());
+            i++;
+        }
+        System.out.println();
         /*
          * if (list.equals(ListType.HORIZONTAL)) {
          * grid.setHorizontalLine(listIndex, position,
@@ -226,27 +231,28 @@ public class TurnImpl implements Turn {
             throw new IllegalStateException("you can't undo if you didn't made a move");
         }
 
-        if (grid.getLastMove().getLastListType().equals(ListType.HORIZONTAL)) {
-            addPoints(-horizontalPointScored(grid.getLastMove().getLastListIndex(),
-                    grid.getLastMove().getLastPosition()));
-            grid.setHorizontalLine(grid.getLastMove().getLastListIndex(), grid.getLastMove().getLastPosition(),
+        if (grid.getCopyOfLastMove().getLastListType().equals(ListType.HORIZONTAL)) {
+            addPoints(-horizontalPointScored(grid.getCopyOfLastMove().getLastListIndex(),
+                    grid.getCopyOfLastMove().getLastPosition()));
+            grid.setHorizontalLine(grid.getCopyOfLastMove().getLastListIndex(), grid.getCopyOfLastMove().getLastPosition(),
                     GridOption.EMPTY);
         } else {
             addPoints(
-                    -verticalPointScored(grid.getLastMove().getLastListIndex(), grid.getLastMove().getLastPosition()));
-            grid.setVerticalLine(grid.getLastMove().getLastListIndex(), grid.getLastMove().getLastPosition(),
+                    -verticalPointScored(grid.getCopyOfLastMove().getLastListIndex(), grid.getCopyOfLastMove().getLastPosition()));
+            grid.setVerticalLine(grid.getCopyOfLastMove().getLastListIndex(), grid.getCopyOfLastMove().getLastPosition(),
                     GridOption.EMPTY);
         }
 
-        lastMoveList.remove(grid.getLastMove());
-        grid.getLastMove().setLastListType(lastMoveList.get(lastMoveList.size() - 1).getLastListType());
-        grid.getLastMove().setLastListIndex(lastMoveList.get(lastMoveList.size() - 1).getLastListIndex());
-        grid.getLastMove().setLastPosition(lastMoveList.get(lastMoveList.size() - 1).getLastPosition());
+        lastMoveList.remove(grid.getCopyOfLastMove());
+        grid.getCopyOfLastMove().setLastListType(lastMoveList.get(lastMoveList.size() - 1).getLastListType());
+        grid.getCopyOfLastMove().setLastListIndex(lastMoveList.get(lastMoveList.size() - 1).getLastListIndex());
+        grid.getCopyOfLastMove().setLastPosition(lastMoveList.get(lastMoveList.size() - 1).getLastPosition());
     }
 
     @Override
-    public BaseGrid getGrid() {
-        return this.grid;
+    public BaseGrid getCopyOfGrid() {
+        BaseGrid copyOfThisGrid = this.grid;
+        return copyOfThisGrid;
     }
 
     /*

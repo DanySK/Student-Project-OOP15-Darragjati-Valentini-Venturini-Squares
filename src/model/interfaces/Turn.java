@@ -50,7 +50,7 @@ public interface Turn {
      */
     GridOption getWinner();
 
-    BaseGrid getGrid();
+    BaseGrid getCopyOfGrid();
 
     /**
      * Undo the last player move

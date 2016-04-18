@@ -60,7 +60,7 @@ public interface BaseGrid {
      */
     void setHorizontalLine(int listIndex, int position, GridOption playerTurn);
 
-    LastMove getLastMove();
+    LastMove getCopyOfLastMove();
 
     void setPlayerTurn(GridOption turn);
 

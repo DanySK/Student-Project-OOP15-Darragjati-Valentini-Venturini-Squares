@@ -88,15 +88,14 @@ public class BaseGridImpl implements BaseGrid {
     }
 
     @Override
-    //CHECKSTYLE:OFF:
+    // CHECKSTYLE:OFF:
     public void setPlayerTurn(final GridOption turn) {
-      //CHECKSTYLE:ON:
+        // CHECKSTYLE:ON:
         this.turn = turn;
     }
-    
+
     private void checkCorrectHorizontalInput(final Integer listIndex, final Integer position) {
 
-        System.out.println(horizontal.size());
         if (listIndex < 0 || listIndex > horizontal.size()) {
             throw new IllegalArgumentException();
         }
@@ -119,14 +118,23 @@ public class BaseGridImpl implements BaseGrid {
 
         checkCorrectHorizontalInput(listIndex, position);
 
-        if (horizontal.get(listIndex).get(position).equals(GridOption.EMPTY)) {
-
-            horizontal.get(listIndex).set(position, playerTurn);
-            lastMove.setLastListType(ListType.VERTICAL);
-            lastMove.setLastListIndex(listIndex);
-            lastMove.setLastPosition(position);
+        if (playerTurn.equals(GridOption.EMPTY)) {
+            if (!horizontal.get(listIndex).get(position).equals(GridOption.EMPTY)) {
+                horizontal.get(listIndex).set(position, playerTurn);
+            } else {
+                throw new IllegalStateException(); // da mettere il perchè //
+                                                   // lancia quest'eccezione?
+            }
         } else {
-            throw new IllegalStateException();
+            if (horizontal.get(listIndex).get(position).equals(GridOption.EMPTY)) {
+
+                horizontal.get(listIndex).set(position, playerTurn);
+                lastMove.setLastListType(ListType.HORIZONTAL);
+                lastMove.setLastListIndex(listIndex);
+                lastMove.setLastPosition(position);
+            } else {
+                throw new IllegalStateException();
+            }
         }
     }
 
@@ -154,20 +162,32 @@ public class BaseGridImpl implements BaseGrid {
 
         checkCorrectVerticalInput(listIndex, position);
 
-        if (vertical.get(listIndex).get(position).equals(GridOption.EMPTY)) {
-
-            vertical.get(listIndex).set(position, playerTurn);
-            lastMove.setLastListType(ListType.VERTICAL);
-            lastMove.setLastListIndex(listIndex);
-            lastMove.setLastPosition(position);
+        if (playerTurn.equals(GridOption.EMPTY)) {
+            if (!vertical.get(listIndex).get(position).equals(GridOption.EMPTY)) {
+                vertical.get(listIndex).set(position, playerTurn);
+            } else {
+                throw new IllegalStateException(); // da mettere il perchè //
+                                                   // lancia quest'eccezione?
+            }
         } else {
-            throw new IllegalStateException();
+            if (vertical.get(listIndex).get(position).equals(GridOption.EMPTY)) {
+                vertical.get(listIndex).set(position, playerTurn);
+                lastMove.setLastListType(ListType.VERTICAL);
+                lastMove.setLastListIndex(listIndex);
+                lastMove.setLastPosition(position);
+            } else {
+                throw new IllegalStateException();
+            }
         }
     }
 
     @Override
-    public LastMove getLastMove() { // da difendere?
-        return lastMove;
+    public LastMove getCopyOfLastMove() {
+        LastMove copyOfLastMove = new LastMoveImpl();
+        copyOfLastMove.setLastListType(this.lastMove.getLastListType());
+        copyOfLastMove.setLastListIndex(this.lastMove.getLastListIndex());
+        copyOfLastMove.setLastPosition(this.lastMove.getLastPosition());
+        return copyOfLastMove;
     }
 
     @Override

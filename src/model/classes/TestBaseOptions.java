@@ -30,7 +30,7 @@ public class TestBaseOptions {
 
         Turn gridOfSize = new TurnImpl(SIZE, SIZE);
 
-        assertEquals(gridOfSize.getGrid().getTotalMoves(), gridOfSize.getGrid().getRemainingMoves()); // verifies
+        assertEquals(gridOfSize.getCopyOfGrid().getTotalMoves(), gridOfSize.getCopyOfGrid().getRemainingMoves()); // verifies
         // that
         // total
         // moves
@@ -44,8 +44,8 @@ public class TestBaseOptions {
         for (int i = 0; i < SIZE + 1; i++) { // verifies that every element in
             // the list is initialized as EMPTY
             for (int z = 0; z < SIZE; z++) {
-                assertEquals(gridOfSize.getGrid().getCopyOfHorizontalElement(i, z), GridOption.EMPTY);
-                assertEquals(gridOfSize.getGrid().getCopyOfVerticalElement(i, z), GridOption.EMPTY);
+                assertEquals(gridOfSize.getCopyOfGrid().getCopyOfHorizontalElement(i, z), GridOption.EMPTY);
+                assertEquals(gridOfSize.getCopyOfGrid().getCopyOfVerticalElement(i, z), GridOption.EMPTY);
             }
         }
 
@@ -55,22 +55,24 @@ public class TestBaseOptions {
         assertTrue(gridOfSize.isStarted());
         gridOfSize.setLine(ListType.VERTICAL, 0, 0);
 
-        assertEquals(gridOfSize.getGrid().getRemainingMoves(), (Integer) (gridOfSize.getGrid().getTotalMoves() - 1));
+        assertEquals(gridOfSize.getCopyOfGrid().getRemainingMoves(), (Integer) (gridOfSize.getCopyOfGrid().getTotalMoves() - 1));
 
         gridOfSize.setLine(ListType.HORIZONTAL, 0, 0);
         gridOfSize.setLine(ListType.HORIZONTAL, 1, 0);
 
-        GridOption player = gridOfSize.getGrid().getCurrentPlayerTurn();
+        GridOption player = gridOfSize.getCopyOfGrid().getCurrentPlayerTurn();
         gridOfSize.setLine(ListType.VERTICAL, 1, 0);
 
-        assertEquals(gridOfSize.getGrid().getRemainingMoves(), (Integer) (gridOfSize.getGrid().getTotalMoves() - 4));
+        assertEquals(gridOfSize.getCopyOfGrid().getRemainingMoves(), (Integer) (gridOfSize.getCopyOfGrid().getTotalMoves() - 4));
         assertNotEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
-        assertEquals(player, gridOfSize.getGrid().getCurrentPlayerTurn()); // verifies
-                                                                           // if
-        // the player
-        // has received
-        // a bonus move
-
+        assertEquals(player, gridOfSize.getCopyOfGrid().getCurrentPlayerTurn()); // verifies if the player has received a bonus move
+        
+        gridOfSize.undoLastMove();
+        assertEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER1));
+        assertEquals(player, gridOfSize.getCopyOfGrid().getCurrentPlayerTurn());    
+        gridOfSize.undoLastMove();
+        assertNotEquals(player, gridOfSize.getCopyOfGrid().getCurrentPlayerTurn());
+        
         Turn gridOfSize2 = new TurnImpl(SIZE, SIZE);
 
         gridOfSize2.startMatch();
@@ -85,7 +87,7 @@ public class TestBaseOptions {
             }
         }
 
-        assertTrue(gridOfSize2.getGrid().getRemainingMoves().equals(0));
+        assertTrue(gridOfSize2.getCopyOfGrid().getRemainingMoves().equals(0));
         System.out.println("Player1 " + gridOfSize2.getPlayerPoints(GridOption.PLAYER1) + " Player2 "
                 + gridOfSize2.getPlayerPoints(GridOption.PLAYER2));
         assertTrue(gridOfSize2.isEnded());
