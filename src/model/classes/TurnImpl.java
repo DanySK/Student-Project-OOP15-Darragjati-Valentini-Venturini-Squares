@@ -101,11 +101,6 @@ public class TurnImpl implements Turn {
 
     @Override
     public void setLine(final ListType list, final Integer listIndex, final Integer position) {
-        /*
-         * if (!list.equals(ListType.HORIZONTAL) &&
-         * !list.equals(ListType.VERTICAL)) { throw new
-         * IllegalArgumentException("the list selected does not exist"); }
-         */
 
         switch (list) {
         case HORIZONTAL:
@@ -128,24 +123,6 @@ public class TurnImpl implements Turn {
             throw new IllegalArgumentException("the list selected does not exist");
         }
         lastMoveList.add(grid.getCopyOfLastMove());
-        int i = 0;
-        for(LastMove last : lastMoveList){
-            System.out.println("Elemento " + i + " " + last.getLastListType());
-            i++;
-        }
-        System.out.println();
-        /*
-         * if (list.equals(ListType.HORIZONTAL)) {
-         * grid.setHorizontalLine(listIndex, position,
-         * grid.getCurrentPlayerTurn()); if (horizontalPointScored(listIndex,
-         * position) > 0) { addPoints(horizontalPointScored(listIndex,
-         * position)); } else { nextTurn(); } } else {
-         * grid.setVerticalLine(listIndex, position,
-         * grid.getCurrentPlayerTurn()); if (verticalPointScored(listIndex,
-         * position) > 0) { addPoints(verticalPointScored(listIndex, position));
-         * } else { nextTurn(); } }
-         */
-
     }
 
     private Integer horizontalPointScored(final int listIndex, final int position) {
@@ -234,19 +211,28 @@ public class TurnImpl implements Turn {
         if (grid.getCopyOfLastMove().getLastListType().equals(ListType.HORIZONTAL)) {
             addPoints(-horizontalPointScored(grid.getCopyOfLastMove().getLastListIndex(),
                     grid.getCopyOfLastMove().getLastPosition()));
-            grid.setHorizontalLine(grid.getCopyOfLastMove().getLastListIndex(), grid.getCopyOfLastMove().getLastPosition(),
-                    GridOption.EMPTY);
+            grid.setHorizontalLine(grid.getCopyOfLastMove().getLastListIndex(),
+                    grid.getCopyOfLastMove().getLastPosition(), GridOption.EMPTY);
+            if (!(horizontalPointScored(grid.getCopyOfLastMove().getLastListIndex(),
+                    grid.getCopyOfLastMove().getLastPosition()) > 0)) {
+                nextTurn();
+            }
         } else {
-            addPoints(
-                    -verticalPointScored(grid.getCopyOfLastMove().getLastListIndex(), grid.getCopyOfLastMove().getLastPosition()));
-            grid.setVerticalLine(grid.getCopyOfLastMove().getLastListIndex(), grid.getCopyOfLastMove().getLastPosition(),
-                    GridOption.EMPTY);
+            addPoints(-verticalPointScored(grid.getCopyOfLastMove().getLastListIndex(),
+                    grid.getCopyOfLastMove().getLastPosition()));
+            grid.setVerticalLine(grid.getCopyOfLastMove().getLastListIndex(),
+                    grid.getCopyOfLastMove().getLastPosition(), GridOption.EMPTY);
+            if (!(verticalPointScored(grid.getCopyOfLastMove().getLastListIndex(),
+                    grid.getCopyOfLastMove().getLastPosition()) > 0)) {
+                nextTurn();
+            }
         }
 
-        lastMoveList.remove(grid.getCopyOfLastMove());
-        grid.getCopyOfLastMove().setLastListType(lastMoveList.get(lastMoveList.size() - 1).getLastListType());
-        grid.getCopyOfLastMove().setLastListIndex(lastMoveList.get(lastMoveList.size() - 1).getLastListIndex());
-        grid.getCopyOfLastMove().setLastPosition(lastMoveList.get(lastMoveList.size() - 1).getLastPosition());
+        lastMoveList.remove(lastMoveList.size() - 1);
+        // DA RIVEDERE, ESPONGO LA LAST MOVE E POTREBBE COMPROMETTERE L'APPLICAZOINE
+        grid.getLastMove().setLastListType(lastMoveList.get(lastMoveList.size() - 1).getLastListType());
+        grid.getLastMove().setLastListIndex(lastMoveList.get(lastMoveList.size() - 1).getLastListIndex());
+        grid.getLastMove().setLastPosition(lastMoveList.get(lastMoveList.size() - 1).getLastPosition());
     }
 
     @Override

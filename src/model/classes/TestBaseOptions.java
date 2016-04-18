@@ -53,26 +53,43 @@ public class TestBaseOptions {
 
         gridOfSize.startMatch();
         assertTrue(gridOfSize.isStarted());
+        System.out.println("Mossa 1 " + gridOfSize.getCopyOfGrid().getCurrentPlayerTurn());
         gridOfSize.setLine(ListType.VERTICAL, 0, 0);
 
-        assertEquals(gridOfSize.getCopyOfGrid().getRemainingMoves(), (Integer) (gridOfSize.getCopyOfGrid().getTotalMoves() - 1));
+        assertEquals(gridOfSize.getCopyOfGrid().getRemainingMoves(),
+                (Integer) (gridOfSize.getCopyOfGrid().getTotalMoves() - 1));
 
+        System.out.println("Mossa 2 " + gridOfSize.getCopyOfGrid().getCurrentPlayerTurn());
         gridOfSize.setLine(ListType.HORIZONTAL, 0, 0);
+        System.out.println("Mossa 3 " + gridOfSize.getCopyOfGrid().getCurrentPlayerTurn());
         gridOfSize.setLine(ListType.HORIZONTAL, 1, 0);
 
         GridOption player = gridOfSize.getCopyOfGrid().getCurrentPlayerTurn();
+        System.out.println("Mossa 4 " + gridOfSize.getCopyOfGrid().getCurrentPlayerTurn());
         gridOfSize.setLine(ListType.VERTICAL, 1, 0);
 
-        assertEquals(gridOfSize.getCopyOfGrid().getRemainingMoves(), (Integer) (gridOfSize.getCopyOfGrid().getTotalMoves() - 4));
+        assertEquals(gridOfSize.getCopyOfGrid().getRemainingMoves(),
+                (Integer) (gridOfSize.getCopyOfGrid().getTotalMoves() - 4));
         assertNotEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
-        assertEquals(player, gridOfSize.getCopyOfGrid().getCurrentPlayerTurn()); // verifies if the player has received a bonus move
-        
+        assertEquals(player, gridOfSize.getCopyOfGrid().getCurrentPlayerTurn()); // verifies
+                                                                                 // if
+                                                                                 // the
+                                                                                 // player
+                                                                                 // has
+                                                                                 // received
+                                                                                 // a
+                                                                                 // bonus
+                                                                                 // move
+
+        System.out.println("Prima di undo " + gridOfSize.getCopyOfGrid().getCurrentPlayerTurn());
         gridOfSize.undoLastMove();
+        System.out.println("Dopo di undo " + gridOfSize.getCopyOfGrid().getCurrentPlayerTurn());
         assertEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER1));
-        assertEquals(player, gridOfSize.getCopyOfGrid().getCurrentPlayerTurn());    
+        assertEquals(player, gridOfSize.getCopyOfGrid().getCurrentPlayerTurn());
         gridOfSize.undoLastMove();
+        System.out.println("Dopo di undo 2 " + gridOfSize.getCopyOfGrid().getCurrentPlayerTurn());
         assertNotEquals(player, gridOfSize.getCopyOfGrid().getCurrentPlayerTurn());
-        
+
         Turn gridOfSize2 = new TurnImpl(SIZE, SIZE);
 
         gridOfSize2.startMatch();

@@ -67,4 +67,6 @@ public interface BaseGrid {
     Integer getHorizontalListSize();
 
     Integer getVerticallListSize();
+
+    LastMove getLastMove();
 }

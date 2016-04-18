@@ -18,7 +18,9 @@ public class BaseGridImpl implements BaseGrid {
     private List<List<GridOption>> horizontal = new ArrayList<>();
     private List<List<GridOption>> vertical = new ArrayList<>();
     private GridOption turn = GridOption.EMPTY;
-    private LastMove lastMove = new LastMoveImpl();
+    //CHECKSTYLE:OFF:
+    LastMove lastMove = new LastMoveImpl();
+  //CHECKSTYLE:ON:
     private static final Integer MINIMUM_SIZE = 4;
     private static final Integer MAXIMUM_SIZE = 10;
 
@@ -181,6 +183,11 @@ public class BaseGridImpl implements BaseGrid {
         }
     }
 
+    @Override
+    public LastMove getLastMove() {
+        return this.lastMove;
+    }
+    
     @Override
     public LastMove getCopyOfLastMove() {
         LastMove copyOfLastMove = new LastMoveImpl();
