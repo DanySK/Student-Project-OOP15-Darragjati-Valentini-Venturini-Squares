@@ -1,16 +1,14 @@
 package model.classes;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import model.enumerations.GridOption;
 import model.enumerations.ListType;
 import model.interfaces.BaseGrid;
+import model.interfaces.LastMove;
 import model.interfaces.Turn;
 
-/**
- * 
- * 
- *
- */
 public class TurnImpl implements Turn {
 
     private boolean matchStarted = false;
@@ -18,6 +16,7 @@ public class TurnImpl implements Turn {
     private Integer scorePlayer2;
     private static final Integer INITIAL_SCORE = 0;
     private BaseGrid grid;
+    private List<LastMove> lastMoveList = new ArrayList<>();
 
     /**
      * 
@@ -102,25 +101,45 @@ public class TurnImpl implements Turn {
 
     @Override
     public void setLine(final ListType list, final Integer listIndex, final Integer position) {
-        if (!list.equals(ListType.HORIZONTAL) && !list.equals(ListType.VERTICAL)) {
-            throw new IllegalArgumentException("the list selected does not exist");
-        }
+        /*
+         * if (!list.equals(ListType.HORIZONTAL) &&
+         * !list.equals(ListType.VERTICAL)) { throw new
+         * IllegalArgumentException("the list selected does not exist"); }
+         */
 
-        if (list.equals(ListType.HORIZONTAL)) {
+        switch (list) {
+        case HORIZONTAL:
             grid.setHorizontalLine(listIndex, position, grid.getCurrentPlayerTurn());
             if (horizontalPointScored(listIndex, position) > 0) {
                 addPoints(horizontalPointScored(listIndex, position));
             } else {
                 nextTurn();
             }
-        } else {
+            break;
+        case VERTICAL:
             grid.setVerticalLine(listIndex, position, grid.getCurrentPlayerTurn());
             if (verticalPointScored(listIndex, position) > 0) {
                 addPoints(verticalPointScored(listIndex, position));
             } else {
                 nextTurn();
             }
+            break;
+        default:
+            throw new IllegalArgumentException("the list selected does not exist");
         }
+        lastMoveList.add(grid.getLastMove());
+
+        /*
+         * if (list.equals(ListType.HORIZONTAL)) {
+         * grid.setHorizontalLine(listIndex, position,
+         * grid.getCurrentPlayerTurn()); if (horizontalPointScored(listIndex,
+         * position) > 0) { addPoints(horizontalPointScored(listIndex,
+         * position)); } else { nextTurn(); } } else {
+         * grid.setVerticalLine(listIndex, position,
+         * grid.getCurrentPlayerTurn()); if (verticalPointScored(listIndex,
+         * position) > 0) { addPoints(verticalPointScored(listIndex, position));
+         * } else { nextTurn(); } }
+         */
 
     }
 
@@ -200,7 +219,12 @@ public class TurnImpl implements Turn {
         }
     }
 
+    @Override
     public void undoLastMove() {
+
+        if (lastMoveList.isEmpty()) {
+            throw new IllegalStateException("you can't undo if you didn't made a move");
+        }
 
         if (grid.getLastMove().getLastListType().equals(ListType.HORIZONTAL)) {
             addPoints(-horizontalPointScored(grid.getLastMove().getLastListIndex(),
@@ -213,6 +237,11 @@ public class TurnImpl implements Turn {
             grid.setVerticalLine(grid.getLastMove().getLastListIndex(), grid.getLastMove().getLastPosition(),
                     GridOption.EMPTY);
         }
+
+        lastMoveList.remove(grid.getLastMove());
+        grid.getLastMove().setLastListType(lastMoveList.get(lastMoveList.size() - 1).getLastListType());
+        grid.getLastMove().setLastListIndex(lastMoveList.get(lastMoveList.size() - 1).getLastListIndex());
+        grid.getLastMove().setLastPosition(lastMoveList.get(lastMoveList.size() - 1).getLastPosition());
     }
 
     @Override

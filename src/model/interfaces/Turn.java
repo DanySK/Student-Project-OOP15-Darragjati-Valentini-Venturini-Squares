@@ -3,6 +3,7 @@ package model.interfaces;
 import model.enumerations.GridOption;
 import model.enumerations.ListType;
 
+
 public interface Turn {
 
     /**
@@ -50,4 +51,10 @@ public interface Turn {
     GridOption getWinner();
 
     BaseGrid getGrid();
+
+    /**
+     * Undo the last player move
+     * @throws a IllegalStateException if no moves are done
+     */
+    void undoLastMove();
 }
