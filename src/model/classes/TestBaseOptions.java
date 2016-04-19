@@ -55,9 +55,9 @@ public class TestBaseOptions {
         gridOfSize.setLine(ListType.VERTICAL, 0, 0);
         assertEquals(gridOfSize.getCopyOfGrid().getRemainingMoves(),
                 (Integer) (gridOfSize.getCopyOfGrid().getTotalMoves() - 1));
-        assertEquals(gridOfSize.getCopyOfGrid().getLastMove().getLastListType(), ListType.VERTICAL);
-        assertEquals(gridOfSize.getCopyOfGrid().getLastMove().getLastListIndex(), (Integer) 0);
-        assertEquals(gridOfSize.getCopyOfGrid().getLastMove().getLastPosition(), (Integer) 0);
+        assertEquals(gridOfSize.getCopyOfLastMove().getLastListType(), ListType.VERTICAL);
+        assertEquals(gridOfSize.getCopyOfLastMove().getLastListIndex(), (Integer) 0);
+        assertEquals(gridOfSize.getCopyOfLastMove().getLastPosition(), (Integer) 0);
 
         gridOfSize.setLine(ListType.HORIZONTAL, 0, 0);
         gridOfSize.setLine(ListType.HORIZONTAL, 1, 0);
@@ -81,9 +81,9 @@ public class TestBaseOptions {
         gridOfSize.undoLastMove();
         assertEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER1));
         assertEquals(player, gridOfSize.getCopyOfGrid().getCurrentPlayerTurn());
-        assertEquals(gridOfSize.getCopyOfGrid().getLastMove().getLastListType(), ListType.HORIZONTAL);
-        assertEquals(gridOfSize.getCopyOfGrid().getLastMove().getLastListIndex(), (Integer) 1);
-        assertEquals(gridOfSize.getCopyOfGrid().getLastMove().getLastPosition(), (Integer) 0);
+        assertEquals(gridOfSize.getCopyOfLastMove().getLastListType(), ListType.HORIZONTAL);
+        assertEquals(gridOfSize.getCopyOfLastMove().getLastListIndex(), (Integer) 1);
+        assertEquals(gridOfSize.getCopyOfLastMove().getLastPosition(), (Integer) 0);
         gridOfSize.undoLastMove();
         assertNotEquals(player, gridOfSize.getCopyOfGrid().getCurrentPlayerTurn());
 

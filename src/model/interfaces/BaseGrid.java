@@ -62,13 +62,9 @@ public interface BaseGrid {
      */
     void setVerticalLine(final int listIndex, int position, GridOption playerTurn);
 
-    LastMove getCopyOfLastMove();
-
     void setPlayerTurn(GridOption turn);
 
     Integer getHorizontalListSize();
 
     Integer getVerticallListSize();
-
-    LastMove getLastMove();
 }

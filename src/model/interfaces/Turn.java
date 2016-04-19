@@ -57,4 +57,6 @@ public interface Turn {
      * @throws a IllegalStateException if no moves are done
      */
     void undoLastMove();
+
+    LastMove getCopyOfLastMove();
 }

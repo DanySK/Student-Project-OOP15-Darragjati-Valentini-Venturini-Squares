@@ -14,9 +14,6 @@ public class BaseGridImpl implements BaseGrid {
     private List<List<GridOption>> horizontal = new ArrayList<>();
     private List<List<GridOption>> vertical = new ArrayList<>();
     private GridOption turn = GridOption.EMPTY;
-    //CHECKSTYLE:OFF:
-    LastMove lastMove = new LastMoveImpl();
-  //CHECKSTYLE:ON:
     private static final Integer MINIMUM_SIZE = 4;
     private static final Integer MAXIMUM_SIZE = 10;
 
@@ -118,11 +115,7 @@ public class BaseGridImpl implements BaseGrid {
             }
         } else {
             if (horizontal.get(listIndex).get(position).equals(GridOption.EMPTY)) {
-
                 horizontal.get(listIndex).set(position, playerTurn);
-                lastMove.setLastListType(ListType.HORIZONTAL);
-                lastMove.setLastListIndex(listIndex);
-                lastMove.setLastPosition(position);
             } else {
                 throw new IllegalStateException();
             }
@@ -163,27 +156,10 @@ public class BaseGridImpl implements BaseGrid {
         } else {
             if (vertical.get(listIndex).get(position).equals(GridOption.EMPTY)) {
                 vertical.get(listIndex).set(position, playerTurn);
-                lastMove.setLastListType(ListType.VERTICAL);
-                lastMove.setLastListIndex(listIndex);
-                lastMove.setLastPosition(position);
             } else {
                 throw new IllegalStateException();
             }
         }
-    }
-
-    @Override
-    public LastMove getLastMove() {
-        return this.lastMove;
-    }
-    
-    @Override
-    public LastMove getCopyOfLastMove() {
-        LastMove copyOfLastMove = new LastMoveImpl();
-        copyOfLastMove.setLastListType(this.lastMove.getLastListType());
-        copyOfLastMove.setLastListIndex(this.lastMove.getLastListIndex());
-        copyOfLastMove.setLastPosition(this.lastMove.getLastPosition());
-        return copyOfLastMove;
     }
 
     @Override
