@@ -11,11 +11,12 @@ import model.interfaces.Turn;
 
 public class TurnImpl implements Turn {
 
+    private BaseGrid grid;
     private boolean matchStarted = false;
     private Integer scorePlayer1;
     private Integer scorePlayer2;
     private static final Integer INITIAL_SCORE = 0;
-    private BaseGrid grid;
+    
     private List<LastMove> lastMoveList = new ArrayList<>();
 
     /**

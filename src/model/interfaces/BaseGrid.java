@@ -32,33 +32,32 @@ public interface BaseGrid {
     Integer getRemainingMoves();
 
     /**
-     * 
-     * @param listIndex
-     * @param position
-     * @return
+     * @param listIndex is the number of the horizontal list where the player wants to get the line
+     * @param position is the position of the chosen list where the player wants to get the line
+     * @return which one of the two players has set the move
      */
     GridOption getCopyOfHorizontalElement(Integer listIndex, Integer position);
 
     /**
-     * 
-     * @param listIndex
-     * @param position
+     *
+     * @param listIndex is the number of the horizontal list where the player wants to set his line
+     * @param position is the position of the chosen list where the player wants to set the line
+     * @param playerTurn which one of the two players is making the move
      */
     void setHorizontalLine(int listIndex, int position, GridOption playerTurn);
 
     /**
-     * 
-     * @param listIndex
-     * @param position
-     * @return
+     * @param listIndex is the number of the vertical list where the player wants to get the line
+     * @param position is the position of the chosen list where the player wants to get the line
+     * @return which one of the two players has set the move
      */
     GridOption getCopyOfVerticalElement(Integer listIndex, Integer position);
 
     /**
      * 
-     * @param listIndex 
-     * @param position 
-     * @param playerTurn 
+     * @param listIndex is the number of the vertical list where the player wants to set his line
+     * @param position is the position of the chosen list where the player wants to set the line
+     * @param playerTurn which one of the two players is making the move
      */
     void setVerticalLine(final int listIndex, int position, GridOption playerTurn);
 

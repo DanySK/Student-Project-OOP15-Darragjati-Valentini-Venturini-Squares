@@ -36,7 +36,7 @@ public interface Turn {
 
     /**
      * Makes a move setting a line in the grid.
-     * @param 
+     * @param list
      * @param listIndex is the number of the list where the player wants to set his line
      * @param position is the position of the chosen list where the player wants to set the line
      * @throws a IllegalArgumentException if the parameters insert are not correct
