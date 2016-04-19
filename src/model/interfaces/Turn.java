@@ -59,4 +59,6 @@ public interface Turn {
     void undoLastMove();
 
     LastMove getCopyOfLastMove();
+
+    GridOption getCurrentPlayerTurn();
 }

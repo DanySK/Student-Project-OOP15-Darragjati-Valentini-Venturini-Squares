@@ -16,7 +16,7 @@ public class TurnImpl implements Turn {
     private Integer scorePlayer1;
     private Integer scorePlayer2;
     private static final Integer INITIAL_SCORE = 0;
-    
+    private GridOption turn = GridOption.EMPTY;
     private List<LastMove> lastMoveList = new ArrayList<>();
 
     /**
@@ -45,9 +45,9 @@ public class TurnImpl implements Turn {
             Random randomTurn = new Random();
 
             if (randomTurn.nextInt(2) == 0) {
-                grid.setPlayerTurn(GridOption.PLAYER1);
+                this.turn = GridOption.PLAYER1;
             } else {
-                grid.setPlayerTurn(GridOption.PLAYER2);
+                this.turn = GridOption.PLAYER2;
             }
         } else {
             throw new IllegalStateException();
@@ -66,10 +66,10 @@ public class TurnImpl implements Turn {
             throw new IllegalStateException();
         }
 
-        if (grid.getCurrentPlayerTurn().equals(GridOption.PLAYER1)) {
-            grid.setPlayerTurn(GridOption.PLAYER2);
+        if (this.turn.equals(GridOption.PLAYER1)) {
+            this.turn = GridOption.PLAYER2;
         } else {
-            grid.setPlayerTurn(GridOption.PLAYER1);
+            this.turn = GridOption.PLAYER1;
         }
     }
 
@@ -83,6 +83,11 @@ public class TurnImpl implements Turn {
         return getPlayerPoints(GridOption.PLAYER1)
                 + getPlayerPoints(GridOption.PLAYER2) == (grid.getHorizontalListSize() - 1)
                         * (grid.getVerticallListSize() - 1) ? true : false;
+    }
+
+    @Override
+    public GridOption getCurrentPlayerTurn() {//espongo turn, lo devo proteggere?
+        return this.turn;
     }
 
     @Override
@@ -105,7 +110,7 @@ public class TurnImpl implements Turn {
 
         switch (list) {
         case HORIZONTAL:
-            grid.setHorizontalLine(listIndex, position, grid.getCurrentPlayerTurn());
+            grid.setHorizontalLine(listIndex, position, this.turn);
             if (horizontalPointScored(listIndex, position) > 0) {
                 addPoints(horizontalPointScored(listIndex, position));
             } else {
@@ -113,7 +118,7 @@ public class TurnImpl implements Turn {
             }
             break;
         case VERTICAL:
-            grid.setVerticalLine(listIndex, position, grid.getCurrentPlayerTurn());
+            grid.setVerticalLine(listIndex, position, this.turn);
             if (verticalPointScored(listIndex, position) > 0) {
                 addPoints(verticalPointScored(listIndex, position));
             } else {
@@ -185,7 +190,7 @@ public class TurnImpl implements Turn {
             throw new IllegalStateException();
         }
 
-        if (grid.getCurrentPlayerTurn().equals(GridOption.PLAYER1)) {
+        if (this.turn.equals(GridOption.PLAYER1)) {
             scorePlayer1 += points;
         } else {
             scorePlayer2 += points;
@@ -222,8 +227,8 @@ public class TurnImpl implements Turn {
         if (getCopyOfLastMove().getLastListType().equals(ListType.HORIZONTAL)) {
             addPoints(-horizontalPointScored(getCopyOfLastMove().getLastListIndex(),
                     getCopyOfLastMove().getLastPosition()));
-            grid.setHorizontalLine(getCopyOfLastMove().getLastListIndex(),
-                    getCopyOfLastMove().getLastPosition(), GridOption.EMPTY);
+            grid.setHorizontalLine(getCopyOfLastMove().getLastListIndex(), getCopyOfLastMove().getLastPosition(),
+                    GridOption.EMPTY);
             if (!(horizontalPointScored(getCopyOfLastMove().getLastListIndex(),
                     getCopyOfLastMove().getLastPosition()) > 0)) {
                 nextTurn();
@@ -231,8 +236,8 @@ public class TurnImpl implements Turn {
         } else {
             addPoints(-verticalPointScored(getCopyOfLastMove().getLastListIndex(),
                     getCopyOfLastMove().getLastPosition()));
-            grid.setVerticalLine(getCopyOfLastMove().getLastListIndex(),
-                    getCopyOfLastMove().getLastPosition(), GridOption.EMPTY);
+            grid.setVerticalLine(getCopyOfLastMove().getLastListIndex(), getCopyOfLastMove().getLastPosition(),
+                    GridOption.EMPTY);
             if (!(verticalPointScored(getCopyOfLastMove().getLastListIndex(),
                     getCopyOfLastMove().getLastPosition()) > 0)) {
                 nextTurn();
@@ -242,9 +247,14 @@ public class TurnImpl implements Turn {
         lastMoveList.remove(lastMoveList.size() - 1);
         // DA RIVEDERE, ESPONGO LA LAST MOVE E POTREBBE COMPROMETTERE
         // L'APPLICAZOINE
-        /*grid.getLastMove().setLastListType(lastMoveList.get(lastMoveList.size() - 1).getLastListType());
-        grid.getLastMove().setLastListIndex(lastMoveList.get(lastMoveList.size() - 1).getLastListIndex());
-        grid.getLastMove().setLastPosition(lastMoveList.get(lastMoveList.size() - 1).getLastPosition());*/
+        /*
+         * grid.getLastMove().setLastListType(lastMoveList.get(lastMoveList.size
+         * () - 1).getLastListType());
+         * grid.getLastMove().setLastListIndex(lastMoveList.get(lastMoveList.
+         * size() - 1).getLastListIndex());
+         * grid.getLastMove().setLastPosition(lastMoveList.get(lastMoveList.size
+         * () - 1).getLastPosition());
+         */
     }
 
     @Override

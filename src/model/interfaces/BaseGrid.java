@@ -13,14 +13,6 @@ public interface BaseGrid {
 
     /**
      * 
-     * @return the player who should take the next move
-     * @throws a
-     *             IllegalStateException if the match is not started
-     */
-    GridOption getCurrentPlayerTurn();
-
-    /**
-     * 
      * @return the number of moves
      */
     Integer getTotalMoves();
@@ -60,8 +52,6 @@ public interface BaseGrid {
      * @param playerTurn which one of the two players is making the move
      */
     void setVerticalLine(final int listIndex, int position, GridOption playerTurn);
-
-    void setPlayerTurn(GridOption turn);
 
     Integer getHorizontalListSize();
 

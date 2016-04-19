@@ -62,13 +62,13 @@ public class TestBaseOptions {
         gridOfSize.setLine(ListType.HORIZONTAL, 0, 0);
         gridOfSize.setLine(ListType.HORIZONTAL, 1, 0);
 
-        GridOption player = gridOfSize.getCopyOfGrid().getCurrentPlayerTurn();
+        GridOption player = gridOfSize.getCurrentPlayerTurn();
         gridOfSize.setLine(ListType.VERTICAL, 1, 0);
 
         assertEquals(gridOfSize.getCopyOfGrid().getRemainingMoves(),
                 (Integer) (gridOfSize.getCopyOfGrid().getTotalMoves() - 4));
         assertNotEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
-        assertEquals(player, gridOfSize.getCopyOfGrid().getCurrentPlayerTurn()); // verifies
+        assertEquals(player, gridOfSize.getCurrentPlayerTurn()); // verifies
                                                                                  // if
                                                                                  // the
                                                                                  // player
@@ -80,12 +80,12 @@ public class TestBaseOptions {
 
         gridOfSize.undoLastMove();
         assertEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER1));
-        assertEquals(player, gridOfSize.getCopyOfGrid().getCurrentPlayerTurn());
+        assertEquals(player, gridOfSize.getCurrentPlayerTurn());
         assertEquals(gridOfSize.getCopyOfLastMove().getLastListType(), ListType.HORIZONTAL);
         assertEquals(gridOfSize.getCopyOfLastMove().getLastListIndex(), (Integer) 1);
         assertEquals(gridOfSize.getCopyOfLastMove().getLastPosition(), (Integer) 0);
         gridOfSize.undoLastMove();
-        assertNotEquals(player, gridOfSize.getCopyOfGrid().getCurrentPlayerTurn());
+        assertNotEquals(player, gridOfSize.getCurrentPlayerTurn());
 
         Turn gridOfSize2 = new TurnImpl(SIZE, SIZE);
 

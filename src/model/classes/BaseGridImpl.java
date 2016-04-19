@@ -13,7 +13,6 @@ public class BaseGridImpl implements BaseGrid {
 
     private List<List<GridOption>> horizontal = new ArrayList<>();
     private List<List<GridOption>> vertical = new ArrayList<>();
-    private GridOption turn = GridOption.EMPTY;
     private static final Integer MINIMUM_SIZE = 4;
     private static final Integer MAXIMUM_SIZE = 10;
 
@@ -68,18 +67,6 @@ public class BaseGridImpl implements BaseGrid {
             }
         }
         return movesLeft;
-    }
-
-    @Override
-    public GridOption getCurrentPlayerTurn() {
-        return this.turn;
-    }
-
-    @Override
-    // CHECKSTYLE:OFF:
-    public void setPlayerTurn(final GridOption turn) {
-        // CHECKSTYLE:ON:
-        this.turn = turn;
     }
 
     private void checkCorrectHorizontalInput(final Integer listIndex, final Integer position) {
