@@ -10,7 +10,6 @@ import org.junit.Test;
 
 import model.enumerations.GridOption;
 import model.enumerations.ListType;
-import model.interfaces.BaseGrid;
 import model.interfaces.Turn;
 
 /**
@@ -53,19 +52,17 @@ public class TestBaseOptions {
 
         gridOfSize.startMatch();
         assertTrue(gridOfSize.isStarted());
-        System.out.println("Mossa 1 " + gridOfSize.getCopyOfGrid().getCurrentPlayerTurn());
         gridOfSize.setLine(ListType.VERTICAL, 0, 0);
-
         assertEquals(gridOfSize.getCopyOfGrid().getRemainingMoves(),
                 (Integer) (gridOfSize.getCopyOfGrid().getTotalMoves() - 1));
+        assertEquals(gridOfSize.getCopyOfGrid().getLastMove().getLastListType(), ListType.VERTICAL);
+        assertEquals(gridOfSize.getCopyOfGrid().getLastMove().getLastListIndex(), (Integer) 0);
+        assertEquals(gridOfSize.getCopyOfGrid().getLastMove().getLastPosition(), (Integer) 0);
 
-        System.out.println("Mossa 2 " + gridOfSize.getCopyOfGrid().getCurrentPlayerTurn());
         gridOfSize.setLine(ListType.HORIZONTAL, 0, 0);
-        System.out.println("Mossa 3 " + gridOfSize.getCopyOfGrid().getCurrentPlayerTurn());
         gridOfSize.setLine(ListType.HORIZONTAL, 1, 0);
 
         GridOption player = gridOfSize.getCopyOfGrid().getCurrentPlayerTurn();
-        System.out.println("Mossa 4 " + gridOfSize.getCopyOfGrid().getCurrentPlayerTurn());
         gridOfSize.setLine(ListType.VERTICAL, 1, 0);
 
         assertEquals(gridOfSize.getCopyOfGrid().getRemainingMoves(),
@@ -81,32 +78,28 @@ public class TestBaseOptions {
                                                                                  // bonus
                                                                                  // move
 
-        System.out.println("Prima di undo " + gridOfSize.getCopyOfGrid().getCurrentPlayerTurn());
         gridOfSize.undoLastMove();
-        System.out.println("Dopo di undo " + gridOfSize.getCopyOfGrid().getCurrentPlayerTurn());
         assertEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER1));
         assertEquals(player, gridOfSize.getCopyOfGrid().getCurrentPlayerTurn());
+        assertEquals(gridOfSize.getCopyOfGrid().getLastMove().getLastListType(), ListType.HORIZONTAL);
+        assertEquals(gridOfSize.getCopyOfGrid().getLastMove().getLastListIndex(), (Integer) 1);
+        assertEquals(gridOfSize.getCopyOfGrid().getLastMove().getLastPosition(), (Integer) 0);
         gridOfSize.undoLastMove();
-        System.out.println("Dopo di undo 2 " + gridOfSize.getCopyOfGrid().getCurrentPlayerTurn());
         assertNotEquals(player, gridOfSize.getCopyOfGrid().getCurrentPlayerTurn());
 
         Turn gridOfSize2 = new TurnImpl(SIZE, SIZE);
 
         gridOfSize2.startMatch();
 
-        for (int i = 0; i < SIZE + 1; i++) {
-            System.out.println("I " + i);
+        for (int i = 0; i < SIZE + 1; i++) {                    //fills the grid with all the possible moves
             for (int z = 0; z < SIZE; z++) {
-                System.out.println("Z ho " + z);
                 gridOfSize2.setLine(ListType.HORIZONTAL, i, z);
-                System.out.println("Z ve " + z);
                 gridOfSize2.setLine(ListType.VERTICAL, i, z);
             }
         }
 
         assertTrue(gridOfSize2.getCopyOfGrid().getRemainingMoves().equals(0));
-        System.out.println("Player1 " + gridOfSize2.getPlayerPoints(GridOption.PLAYER1) + " Player2 "
-                + gridOfSize2.getPlayerPoints(GridOption.PLAYER2));
+        assertNotEquals(gridOfSize2.getPlayerPoints(GridOption.PLAYER1), gridOfSize2.getPlayerPoints(GridOption.PLAYER2));
         assertTrue(gridOfSize2.isEnded());
         assertNotEquals(GridOption.EMPTY, gridOfSize2.getWinner());
     }
@@ -120,7 +113,9 @@ public class TestBaseOptions {
         Turn testGrid;
 
         try {
+            // CHECKSTYLE:OFF:
             testGrid = new TurnImpl(SIZE - 4, SIZE - 4);
+            // CHECKSTYLE:ON:
             fail("Can't create a grid too small");
         } catch (IllegalArgumentException e) {
         } catch (Exception e) {
@@ -159,11 +154,20 @@ public class TestBaseOptions {
             fail("Wrong exception thrown");
         }
         try {
+            // CHECKSTYLE:OFF:
             testGrid.setLine(ListType.HORIZONTAL, 0, 7);
+            // CHECKSTYLE:ON:
             fail("The grid isn't big enough");
         } catch (IndexOutOfBoundsException e) { // forse potrebbe essere anche
                                                 // un
                                                 // illegal argument
+        } catch (Exception e) {
+            fail("Wrong exception thrown");
+        }
+        try {
+            testGrid.undoLastMove();
+            fail("You can't undo a move if a player didn't do at least one"); // riformulare
+        } catch (IllegalStateException e) {
         } catch (Exception e) {
             fail("Wrong exception thrown");
         }
