@@ -8,11 +8,7 @@ import model.enumerations.ListType;
 import model.interfaces.BaseGrid;
 import model.interfaces.LastMove;
 
-/**
- * 
- * 
- *
- */
+
 public class BaseGridImpl implements BaseGrid {
 
     private List<List<GridOption>> horizontal = new ArrayList<>();
@@ -24,13 +20,6 @@ public class BaseGridImpl implements BaseGrid {
     private static final Integer MINIMUM_SIZE = 4;
     private static final Integer MAXIMUM_SIZE = 10;
 
-    /**
-     * 
-     * @param rowsNumber
-     *            a
-     * @param columnNumber
-     *            a
-     */
     public BaseGridImpl(final Integer rowsNumber, final Integer columnNumber) {
 
         if (rowsNumber < MINIMUM_SIZE || rowsNumber > MAXIMUM_SIZE || columnNumber < MINIMUM_SIZE
