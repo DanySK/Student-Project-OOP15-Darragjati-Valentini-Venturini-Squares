@@ -30,39 +30,62 @@ public class PlayerImpl implements Player {
         this.totalSquaresCatched = 0;
     }
 
-    private void calculateWinRate() {
-
-        this.winRate = getTotalWins() / (double) getTotalMatches();
-    }
-
     @Override
     public String getPlayerName() {
-
         return playerName;
     }
+    
+    @Override
+    // CHECKSTYLE:OFF:
+    public void setPlayerName(final String playerName) {
+        // CHECKSTYLE:ON:
+        this.playerName = playerName;
+    }
 
+    private void calculateWinRate() {
+        this.winRate = getTotalWins() / (double) getTotalMatches();
+    }
+    
     @Override
     public double getWinRate() {
-
         calculateWinRate();
         return this.winRate;
     }
 
     @Override
     public Integer getTotalWins() {
-
         return this.wonMatches;
+    }
+    
+    @Override
+    // CHECKSTYLE:OFF:
+    public void setWonMatches(final Integer wonMatches) {
+        // CHECKSTYLE:ON:
+        this.wonMatches = wonMatches;
     }
 
     @Override
     public Integer getTotalMatches() {
-
         return this.totalMatches;
     }
 
     @Override
+    // CHECKSTYLE:OFF:
+    public void setTotalMatches(final Integer totalMatches) {
+        // CHECKSTYLE:ON:
+        this.totalMatches = totalMatches;
+    }
+    
+    @Override
     public Integer getTotalSquaresCatched() {
         return this.totalSquaresCatched;
+    }
+    
+    @Override
+    // CHECKSTYLE:OFF:
+    public void setTotalSquaresCatched(final Integer totalSquaresCatched) {
+        // CHECKSTYLE:ON:
+        this.totalSquaresCatched = totalSquaresCatched;
     }
 
     @Override
@@ -72,40 +95,9 @@ public class PlayerImpl implements Player {
         if (victory) {
             this.wonMatches++;
         }
-
         this.totalMatches++;
-
         calculateWinRate();
-
         this.totalSquaresCatched += totalSquaresCatched;
-    }
-
-    @Override
-    // CHECKSTYLE:OFF:
-    public void setPlayerName(final String playerName) {
-        // CHECKSTYLE:ON:
-        this.playerName = playerName;
-    }
-
-    @Override
-    // CHECKSTYLE:OFF:
-    public void setWonMatches(final Integer wonMatches) {
-        // CHECKSTYLE:ON:
-        this.wonMatches = wonMatches;
-    }
-
-    @Override
-    // CHECKSTYLE:OFF:
-    public void setTotalMatches(final Integer totalMatches) {
-        // CHECKSTYLE:ON:
-        this.totalMatches = totalMatches;
-    }
-
-    @Override
-    // CHECKSTYLE:OFF:
-    public void setTotalSquaresCatched(final Integer totalSquaresCatched) {
-        // CHECKSTYLE:ON:
-        this.totalSquaresCatched = totalSquaresCatched;
     }
 
     @Override
