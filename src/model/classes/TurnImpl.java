@@ -86,7 +86,8 @@ public class TurnImpl implements Turn {
     }
 
     @Override
-    public GridOption getCurrentPlayerTurn() {//espongo turn, lo devo proteggere?
+    public GridOption getCurrentPlayerTurn() {// espongo turn, lo devo
+                                              // proteggere?
         return this.turn;
     }
 
@@ -136,6 +137,40 @@ public class TurnImpl implements Turn {
         lastMoveList.add(lastMove);
     }
 
+    private GridOption getPreviousParallelList(final ListType list, final int listIndex, final int position) {
+        if (listIndex > 0) {
+            switch (list) {
+            case HORIZONTAL:
+                return grid.getCopyOfHorizontalElement(listIndex - 1, position);
+            case VERTICAL:
+                return grid.getCopyOfVerticalElement(listIndex - 1, position);
+            default:
+                throw new IllegalStateException("the list does not exist");
+            }
+        } else {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private GridOption getNextParallelList(final ListType list, final int listIndex, final int position) {
+        switch (list) {
+        case HORIZONTAL:
+            if (listIndex < grid.getHorizontalListSize()) {
+                return grid.getCopyOfHorizontalElement(listIndex + 1, position);
+            } else {
+                throw new IllegalArgumentException();
+            }
+        case VERTICAL:
+            if (listIndex < grid.getVerticallListSize()) {
+                return grid.getCopyOfVerticalElement(listIndex + 1, position);
+            } else {
+                throw new IllegalArgumentException();
+            }
+        default:
+            throw new IllegalStateException("the list does not exist");
+        }
+    }
+
     private Integer horizontalPointScored(final int listIndex, final int position) {
 
         int points = 0;
@@ -165,7 +200,7 @@ public class TurnImpl implements Turn {
         int points = 0;
 
         if (listIndex > 0) {
-            if (grid.getCopyOfVerticalElement(listIndex - 1, position) != GridOption.EMPTY) {
+            if (getPreviousParallelList(ListType.VERTICAL, listIndex, position) != GridOption.EMPTY) {
                 if (grid.getCopyOfHorizontalElement(position, listIndex - 1) != GridOption.EMPTY
                         && grid.getCopyOfHorizontalElement(position + 1, listIndex - 1) != GridOption.EMPTY) {
                     points++;
@@ -174,7 +209,7 @@ public class TurnImpl implements Turn {
         }
 
         if (listIndex < grid.getVerticallListSize() - 1) {
-            if (grid.getCopyOfVerticalElement(listIndex + 1, position) != GridOption.EMPTY) {
+            if (getNextParallelList(ListType.VERTICAL, listIndex, position) != GridOption.EMPTY) {
                 if (grid.getCopyOfHorizontalElement(position, listIndex) != GridOption.EMPTY
                         && grid.getCopyOfHorizontalElement(position + 1, listIndex) != GridOption.EMPTY) {
                     points++;
@@ -245,16 +280,6 @@ public class TurnImpl implements Turn {
         }
 
         lastMoveList.remove(lastMoveList.size() - 1);
-        // DA RIVEDERE, ESPONGO LA LAST MOVE E POTREBBE COMPROMETTERE
-        // L'APPLICAZOINE
-        /*
-         * grid.getLastMove().setLastListType(lastMoveList.get(lastMoveList.size
-         * () - 1).getLastListType());
-         * grid.getLastMove().setLastListIndex(lastMoveList.get(lastMoveList.
-         * size() - 1).getLastListIndex());
-         * grid.getLastMove().setLastPosition(lastMoveList.get(lastMoveList.size
-         * () - 1).getLastPosition());
-         */
     }
 
     @Override
@@ -262,22 +287,4 @@ public class TurnImpl implements Turn {
         BaseGrid copyOfThisGrid = this.grid;
         return copyOfThisGrid;
     }
-
-    /*
-     * private GridOption getPreviousParallelList(final int listIndex, final int
-     * position) {
-     * 
-     * if (listIndex != 0 || listIndex != horizontalLists + 1) {
-     * 
-     * return getCopyOfElement(listIndex - 1, position); } else { throw new
-     * IllegalArgumentException(); } }
-     * 
-     * private GridOption getNextParallelList(final int listIndex, final int
-     * position) {
-     * 
-     * if (listIndex != 0 || listIndex != horizontalLists + 1) {
-     * 
-     * return getCopyOfElement(listIndex + 1, position); } else { throw new
-     * IllegalArgumentException(); } }
-     */
 }

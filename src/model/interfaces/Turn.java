@@ -53,7 +53,7 @@ public interface Turn {
     BaseGrid getCopyOfGrid();
 
     /**
-     * Undo the last player move
+     * Undo the last player move.
      * @throws a IllegalStateException if no moves are done
      */
     void undoLastMove();

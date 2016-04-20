@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.enumerations.GridOption;
-import model.enumerations.ListType;
 import model.interfaces.BaseGrid;
-import model.interfaces.LastMove;
+
 
 
 public class BaseGridImpl implements BaseGrid {
@@ -158,21 +157,4 @@ public class BaseGridImpl implements BaseGrid {
     public Integer getVerticallListSize() {
         return vertical.size();
     }
-    /*
-     * private GridOption getPreviousParallelList(final int listIndex, final int
-     * position) {
-     * 
-     * if (listIndex != 0 || listIndex != horizontalLists + 1) {
-     * 
-     * return getCopyOfElement(listIndex - 1, position); } else { throw new
-     * IllegalArgumentException(); } }
-     * 
-     * private GridOption getNextParallelList(final int listIndex, final int
-     * position) {
-     * 
-     * if (listIndex != 0 || listIndex != horizontalLists + 1) {
-     * 
-     * return getCopyOfElement(listIndex + 1, position); } else { throw new
-     * IllegalArgumentException(); } }
-     */
 }
