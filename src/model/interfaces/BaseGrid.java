@@ -6,8 +6,7 @@ import model.enumerations.GridOption;
  * This interface is used to create a new playable field with size rowsNumber x
  * columnNumber. It offers the methods to insert a new move in the field, to get
  * which player has inserted a move, to set the current player turn,to get all
- * the possible moves and the remaining ones
- *
+ * the possible moves and the remaining ones.
  */
 public interface BaseGrid {
 
@@ -53,7 +52,15 @@ public interface BaseGrid {
      */
     void setVerticalLine(final int listIndex, int position, GridOption playerTurn);
 
+    /**
+     * Gets the number of horizontal lists that makes the grid.
+     * @return the number of horizontal lists that makes the grid.
+     */
     Integer getHorizontalListSize();
 
+    /**
+     * Gets the number of vertical lists that makes the grid.
+     * @return the number of horizontal lists that makes the grid.
+     */
     Integer getVerticallListSize();
 }

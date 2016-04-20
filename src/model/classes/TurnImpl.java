@@ -19,9 +19,6 @@ public class TurnImpl implements Turn {
     private GridOption turn = GridOption.EMPTY;
     private List<LastMove> lastMoveList = new ArrayList<>();
 
-    /**
-     * 
-     */
     TurnImpl(final Integer rowsNumber, final Integer columnNumber) {
         grid = new BaseGridImpl(rowsNumber, columnNumber);
     }
@@ -104,6 +101,21 @@ public class TurnImpl implements Turn {
             throw new IllegalArgumentException();
         }
 
+    }
+
+    @Override
+    public GridOption getWinner() {
+
+        if (isEnded()) {
+            if (getPlayerPoints(GridOption.PLAYER1).equals(getPlayerPoints(GridOption.PLAYER2))) {
+                return GridOption.EMPTY;
+            }
+
+            return (getPlayerPoints(GridOption.PLAYER1) > getPlayerPoints(GridOption.PLAYER2)) ? GridOption.PLAYER1
+                    : GridOption.PLAYER2;
+        } else {
+            throw new IllegalStateException();
+        }
     }
 
     @Override
@@ -233,26 +245,6 @@ public class TurnImpl implements Turn {
     }
 
     @Override
-    public GridOption getWinner() {
-
-        if (isEnded()) {
-            if (getPlayerPoints(GridOption.PLAYER1).equals(getPlayerPoints(GridOption.PLAYER2))) {
-                return GridOption.EMPTY;
-            }
-
-            return (getPlayerPoints(GridOption.PLAYER1) > getPlayerPoints(GridOption.PLAYER2)) ? GridOption.PLAYER1
-                    : GridOption.PLAYER2;
-        } else {
-            throw new IllegalStateException();
-        }
-    }
-
-    @Override
-    public LastMove getCopyOfLastMove() {
-        return lastMoveList.get(lastMoveList.size() - 1);
-    }
-
-    @Override
     public void undoLastMove() {
 
         if (lastMoveList.isEmpty()) {
@@ -283,6 +275,11 @@ public class TurnImpl implements Turn {
     }
 
     @Override
+    public LastMove getCopyOfLastMove() {
+        return lastMoveList.get(lastMoveList.size() - 1);
+    }
+
+    @Override // DA RIGUARDARE
     public BaseGrid getCopyOfGrid() {
         BaseGrid copyOfThisGrid = this.grid;
         return copyOfThisGrid;
