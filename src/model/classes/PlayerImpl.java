@@ -2,11 +2,7 @@ package model.classes;
 
 import model.interfaces.Player;
 
-/**
- * 
- * 
- *
- */
+
 public class PlayerImpl implements Player {
 
     private String playerName;
@@ -15,11 +11,6 @@ public class PlayerImpl implements Player {
     private Integer totalMatches;
     private Integer totalSquaresCatched;
 
-    /**
-     * 
-     * @param playerName
-     *            the player's name or nickname
-     */
     // CHECKSTYLE:OFF:
     public PlayerImpl(final String playerName) {
         // CHECKSTYLE:ON:

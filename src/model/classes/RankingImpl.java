@@ -6,20 +6,11 @@ import java.util.List;
 import model.enumerations.RankingOption;
 import model.interfaces.Ranking;
 
-/**
- * 
- * 
- *
- */
+
 public class RankingImpl implements Ranking {
 
     private List<PlayerImpl> playerList;
 
-    /**
-     * 
-     * @param playerList
-     *            the List of people that already palyed the game
-     */
     // CHECKSTYLE:OFF:
     public RankingImpl(final List<PlayerImpl> playerList) {
         // CHECKSTYLE:ON:
