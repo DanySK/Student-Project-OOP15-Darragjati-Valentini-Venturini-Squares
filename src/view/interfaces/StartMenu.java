@@ -15,7 +15,7 @@ public interface StartMenu {
     /**
      * this method starts a new match.
      */
-    void startGame();
+    void startNewGame();
 
     /**
      * this method shows the rules of the game.
