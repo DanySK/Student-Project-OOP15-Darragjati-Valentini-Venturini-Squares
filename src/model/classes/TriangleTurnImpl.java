@@ -92,6 +92,15 @@ public class TriangleTurnImpl extends TurnImpl {
 
         int points = 0;
 
+        if (!triangleGrid.getCopyOfHorizontalElement(listIndex, position).equals(GridOption.EMPTY)
+                && triangleGrid.getCopyOfVerticalElement(position + 1, listIndex).equals(GridOption.EMPTY)) {
+            points++;
+        }
+
+        if (!triangleGrid.getCopyOfHorizontalElement(listIndex + 1, position).equals(GridOption.EMPTY)
+                && triangleGrid.getCopyOfVerticalElement(position, listIndex).equals(GridOption.EMPTY)) {
+            points++;
+        }
         return points;
     }
 
