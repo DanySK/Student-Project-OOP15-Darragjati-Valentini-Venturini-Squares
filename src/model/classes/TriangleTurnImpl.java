@@ -32,8 +32,8 @@ public class TriangleTurnImpl extends TurnImpl {
 
         if (list.equals(ListType.DIAGONAL)) {
             triangleGrid.setVerticalLine(listIndex, position, this.turn);
-            if (verticalPointScored(listIndex, position) > 0) {
-                addPoints(verticalPointScored(listIndex, position));
+            if (diagonalPointScored(listIndex, position) > 0) {
+                addPoints(diagonalPointScored(listIndex, position));
             } else {
                 nextTurn();
             }
@@ -70,10 +70,29 @@ public class TriangleTurnImpl extends TurnImpl {
 
     private Integer verticalPointScored(final int listIndex, final int position) {
 
+        int points = 0;
+
+        if (listIndex > 0) {
+            if (!triangleGrid.getCopyOfHorizontalElement(position, listIndex - 1).equals(GridOption.EMPTY)
+                    && !triangleGrid.getCopyOfDiagonalElement(position, listIndex - 1).equals(GridOption.EMPTY)) {
+                points++;
+            }
+        }
+
+        if (listIndex < triangleGrid.getVerticallListSize() - 1) {
+            if (triangleGrid.getCopyOfHorizontalElement(position + 1, listIndex) != GridOption.EMPTY
+                    && !triangleGrid.getCopyOfDiagonalElement(position, listIndex).equals(GridOption.EMPTY)) {
+                points++;
+            }
+        }
+        return points;
     }
 
     private Integer diagonalPointScored(final int listIndex, final int position) {
 
+        int points = 0;
+
+        return points;
     }
 
     @Override
