@@ -54,17 +54,15 @@ public class TriangleTurnImpl extends TurnImpl {
 
         if (listIndex > 0) {
             if (!triangleGrid.getCopyOfVerticalElement(position, listIndex - 1).equals(GridOption.EMPTY)
-                    && !triangleGrid.getCopyOfDiagonalElement(listIndex, position).equals(GridOption.EMPTY)) {
+                    && !triangleGrid.getCopyOfDiagonalElement(listIndex - 1, position).equals(GridOption.EMPTY)) {
                 points++;
             }
         }
 
-        if (listIndex < triangleGrid.getHorizontalListSize() - 1) {
-            if (triangleGrid.getCopyOfHorizontalElement(listIndex + 1, position) != GridOption.EMPTY) {
-                if (triangleGrid.getCopyOfVerticalElement(position, listIndex) != GridOption.EMPTY
-                        && triangleGrid.getCopyOfVerticalElement(position + 1, listIndex) != GridOption.EMPTY) {
-                    points++;
-                }
+        if (listIndex < triangleGrid.getDiagonalListSize() - 1) {
+            if (!triangleGrid.getCopyOfVerticalElement(position + 1, listIndex).equals(GridOption.EMPTY)
+                    && !triangleGrid.getCopyOfDiagonalElement(listIndex, position).equals(GridOption.EMPTY)) {
+                points++;
             }
         }
         return points;
