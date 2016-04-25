@@ -14,10 +14,30 @@ public class TriangleGridImpl extends BaseGridImpl implements TriangleGrid {
         super(rowsNumber, columnNumber);
 
         for (int i = 0; i < rowsNumber; i++) {
-            createEmptyGrid(columnNumber);
+            diagonal.add(createEmptyGrid(columnNumber));
         }
     }
 
+    @Override
+    public Integer getTotalMoves() {
+        return super.getTotalMoves() + (diagonal.size() * diagonal.get(0).size());
+    }
+    
+    @Override
+    public Integer getRemainingMoves() {
+        
+        Integer movesLeft = 0;
+
+        for (List<GridOption> list : diagonal) {
+            for (GridOption option : list) {
+                if (option.equals(GridOption.EMPTY)) {
+                    movesLeft++;
+                }
+            }
+        }
+        return super.getRemainingMoves() + movesLeft;
+    }
+    
     private void checkCorrectDiagonalInput(final Integer listIndex, final Integer position) {
 
         if (listIndex < 0 || listIndex > diagonal.size()) {
@@ -28,10 +48,10 @@ public class TriangleGridImpl extends BaseGridImpl implements TriangleGrid {
             throw new IndexOutOfBoundsException();
         }
     }
-    
+
     @Override
     public GridOption getCopyOfDiagonalElement(final int listIndex, final int position) {
-        
+
         checkCorrectDiagonalInput(listIndex, position);
         GridOption copyOfDiagonalElement = diagonal.get(listIndex).get(position);
         return copyOfDiagonalElement;
@@ -39,9 +59,9 @@ public class TriangleGridImpl extends BaseGridImpl implements TriangleGrid {
 
     @Override
     public void setDiagonalLine(final int listIndex, final int position, final GridOption playerTurn) {
-        
+
         checkCorrectDiagonalInput(listIndex, position);
-        
+
         if (playerTurn.equals(GridOption.EMPTY)) {
             if (!diagonal.get(listIndex).get(position).equals(GridOption.EMPTY)) {
                 diagonal.get(listIndex).set(position, playerTurn);
