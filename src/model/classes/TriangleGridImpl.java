@@ -12,16 +12,20 @@ public class TriangleGridImpl extends BaseGridImpl implements TriangleGrid {
 
     public TriangleGridImpl(Integer rowsNumber, Integer columnNumber) {
         super(rowsNumber, columnNumber);
+
+        for (int i = 0; i < rowsNumber; i++) {
+            diagonal.add(createEmptyGrid(columnNumber));
+        }
     }
 
     @Override
     public Integer getTotalMoves() {
         return super.getTotalMoves() + (diagonal.size() * diagonal.get(0).size());
     }
-    
+
     @Override
     public Integer getRemainingMoves() {
-        
+
         Integer movesLeft = 0;
 
         for (List<GridOption> list : diagonal) {
@@ -33,7 +37,7 @@ public class TriangleGridImpl extends BaseGridImpl implements TriangleGrid {
         }
         return super.getRemainingMoves() + movesLeft;
     }
-    
+
     private void checkCorrectDiagonalInput(final Integer listIndex, final Integer position) {
 
         if (listIndex < 0 || listIndex > diagonal.size()) {

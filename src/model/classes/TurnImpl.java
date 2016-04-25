@@ -183,7 +183,7 @@ public class TurnImpl implements Turn {
         }
     }
 
-    private Integer horizontalPointScored(final int listIndex, final int position) {
+    protected Integer horizontalPointScored(final int listIndex, final int position) {
 
         int points = 0;
 
@@ -207,7 +207,7 @@ public class TurnImpl implements Turn {
         return points;
     }
 
-    private Integer verticalPointScored(final int listIndex, final int position) {
+    protected Integer verticalPointScored(final int listIndex, final int position) {
 
         int points = 0;
 

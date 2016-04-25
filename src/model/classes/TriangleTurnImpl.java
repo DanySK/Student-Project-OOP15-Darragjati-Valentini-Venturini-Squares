@@ -48,7 +48,7 @@ public class TriangleTurnImpl extends TurnImpl {
         }
     }
 
-    private Integer horizontalPointScored(final int listIndex, final int position) {
+    protected Integer horizontalPointScored(final int listIndex, final int position) {
 
         int points = 0;
 
@@ -68,7 +68,7 @@ public class TriangleTurnImpl extends TurnImpl {
         return points;
     }
 
-    private Integer verticalPointScored(final int listIndex, final int position) {
+    protected Integer verticalPointScored(final int listIndex, final int position) {
 
         int points = 0;
 
