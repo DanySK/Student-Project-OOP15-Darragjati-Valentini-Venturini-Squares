@@ -16,8 +16,8 @@ public class TurnImpl implements Turn {
     private Integer scorePlayer1;
     private Integer scorePlayer2;
     private static final Integer INITIAL_SCORE = 0;
-    private GridOption turn = GridOption.EMPTY;
-    private List<LastMove> lastMoveList = new ArrayList<>();
+    protected GridOption turn = GridOption.EMPTY;
+    protected List<LastMove> lastMoveList = new ArrayList<>();
 
     public TurnImpl(final Integer rowsNumber, final Integer columnNumber) {
         grid = new BaseGridImpl(rowsNumber, columnNumber);
@@ -57,7 +57,7 @@ public class TurnImpl implements Turn {
         return this.matchStarted;
     }
 
-    private void nextTurn() {
+    protected void nextTurn() {
 
         if (!isStarted()) {
             throw new IllegalStateException();
@@ -231,7 +231,7 @@ public class TurnImpl implements Turn {
         return points;
     }
 
-    private void addPoints(final Integer points) {
+    protected void addPoints(final Integer points) {
 
         if (!isStarted()) {
             throw new IllegalStateException();
