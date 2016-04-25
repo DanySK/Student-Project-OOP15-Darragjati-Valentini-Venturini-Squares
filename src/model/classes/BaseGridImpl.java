@@ -30,7 +30,7 @@ public class BaseGridImpl implements BaseGrid {
         }
     }
 
-    private List<GridOption> createEmptyGrid(final Integer size) {
+    protected List<GridOption> createEmptyGrid(final Integer size) {
 
         List<GridOption> emptyGrid = new ArrayList<>();
 
