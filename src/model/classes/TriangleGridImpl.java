@@ -12,10 +12,6 @@ public class TriangleGridImpl extends BaseGridImpl implements TriangleGrid {
 
     public TriangleGridImpl(Integer rowsNumber, Integer columnNumber) {
         super(rowsNumber, columnNumber);
-
-        for (int i = 0; i < rowsNumber; i++) {
-            diagonal.add(createEmptyGrid(columnNumber));
-        }
     }
 
     @Override

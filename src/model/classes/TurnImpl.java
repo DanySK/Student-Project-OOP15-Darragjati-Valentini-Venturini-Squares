@@ -11,7 +11,7 @@ import model.interfaces.Turn;
 
 public class TurnImpl implements Turn {
 
-    protected BaseGrid grid;
+    private BaseGrid squareGrid;
     private boolean matchStarted = false;
     private Integer scorePlayer1;
     private Integer scorePlayer2;
@@ -20,7 +20,7 @@ public class TurnImpl implements Turn {
     protected List<LastMove> lastMoveList = new ArrayList<>();
 
     public TurnImpl(final Integer rowsNumber, final Integer columnNumber) {
-        grid = new BaseGridImpl(rowsNumber, columnNumber);
+        squareGrid = new BaseGridImpl(rowsNumber, columnNumber);
     }
 
     @Override
@@ -78,8 +78,8 @@ public class TurnImpl implements Turn {
         }
 
         return getPlayerPoints(GridOption.PLAYER1)
-                + getPlayerPoints(GridOption.PLAYER2) == (grid.getHorizontalListSize() - 1)
-                        * (grid.getVerticallListSize() - 1) ? true : false;
+                + getPlayerPoints(GridOption.PLAYER2) == (squareGrid.getHorizontalListSize() - 1)
+                        * (squareGrid.getVerticallListSize() - 1) ? true : false;
     }
 
     @Override
@@ -123,7 +123,7 @@ public class TurnImpl implements Turn {
 
         switch (list) {
         case HORIZONTAL:
-            grid.setHorizontalLine(listIndex, position, this.turn);
+            squareGrid.setHorizontalLine(listIndex, position, this.turn);
             if (horizontalPointScored(listIndex, position) > 0) {
                 addPoints(horizontalPointScored(listIndex, position));
             } else {
@@ -131,7 +131,7 @@ public class TurnImpl implements Turn {
             }
             break;
         case VERTICAL:
-            grid.setVerticalLine(listIndex, position, this.turn);
+            squareGrid.setVerticalLine(listIndex, position, this.turn);
             if (verticalPointScored(listIndex, position) > 0) {
                 addPoints(verticalPointScored(listIndex, position));
             } else {
@@ -153,9 +153,9 @@ public class TurnImpl implements Turn {
         if (listIndex > 0) {
             switch (list) {
             case HORIZONTAL:
-                return grid.getCopyOfHorizontalElement(listIndex - 1, position);
+                return squareGrid.getCopyOfHorizontalElement(listIndex - 1, position);
             case VERTICAL:
-                return grid.getCopyOfVerticalElement(listIndex - 1, position);
+                return squareGrid.getCopyOfVerticalElement(listIndex - 1, position);
             default:
                 throw new IllegalStateException("the list does not exist");
             }
@@ -167,14 +167,14 @@ public class TurnImpl implements Turn {
     private GridOption getNextParallelList(final ListType list, final int listIndex, final int position) {
         switch (list) {
         case HORIZONTAL:
-            if (listIndex < grid.getHorizontalListSize()) {
-                return grid.getCopyOfHorizontalElement(listIndex + 1, position);
+            if (listIndex < squareGrid.getHorizontalListSize()) {
+                return squareGrid.getCopyOfHorizontalElement(listIndex + 1, position);
             } else {
                 throw new IllegalArgumentException();
             }
         case VERTICAL:
-            if (listIndex < grid.getVerticallListSize()) {
-                return grid.getCopyOfVerticalElement(listIndex + 1, position);
+            if (listIndex < squareGrid.getVerticallListSize()) {
+                return squareGrid.getCopyOfVerticalElement(listIndex + 1, position);
             } else {
                 throw new IllegalArgumentException();
             }
@@ -188,18 +188,18 @@ public class TurnImpl implements Turn {
         int points = 0;
 
         if (listIndex > 0) {
-            if (grid.getCopyOfHorizontalElement(listIndex - 1, position) != GridOption.EMPTY) {
-                if (grid.getCopyOfVerticalElement(position, listIndex - 1) != GridOption.EMPTY
-                        && grid.getCopyOfVerticalElement(position + 1, listIndex - 1) != GridOption.EMPTY) {
+            if (squareGrid.getCopyOfHorizontalElement(listIndex - 1, position) != GridOption.EMPTY) {
+                if (squareGrid.getCopyOfVerticalElement(position, listIndex - 1) != GridOption.EMPTY
+                        && squareGrid.getCopyOfVerticalElement(position + 1, listIndex - 1) != GridOption.EMPTY) {
                     points++;
                 }
             }
         }
 
-        if (listIndex < grid.getHorizontalListSize() - 1) {
-            if (grid.getCopyOfHorizontalElement(listIndex + 1, position) != GridOption.EMPTY) {
-                if (grid.getCopyOfVerticalElement(position, listIndex) != GridOption.EMPTY
-                        && grid.getCopyOfVerticalElement(position + 1, listIndex) != GridOption.EMPTY) {
+        if (listIndex < squareGrid.getHorizontalListSize() - 1) {
+            if (squareGrid.getCopyOfHorizontalElement(listIndex + 1, position) != GridOption.EMPTY) {
+                if (squareGrid.getCopyOfVerticalElement(position, listIndex) != GridOption.EMPTY
+                        && squareGrid.getCopyOfVerticalElement(position + 1, listIndex) != GridOption.EMPTY) {
                     points++;
                 }
             }
@@ -213,17 +213,17 @@ public class TurnImpl implements Turn {
 
         if (listIndex > 0) {
             if (getPreviousParallelList(ListType.VERTICAL, listIndex, position) != GridOption.EMPTY) {
-                if (grid.getCopyOfHorizontalElement(position, listIndex - 1) != GridOption.EMPTY
-                        && grid.getCopyOfHorizontalElement(position + 1, listIndex - 1) != GridOption.EMPTY) {
+                if (squareGrid.getCopyOfHorizontalElement(position, listIndex - 1) != GridOption.EMPTY
+                        && squareGrid.getCopyOfHorizontalElement(position + 1, listIndex - 1) != GridOption.EMPTY) {
                     points++;
                 }
             }
         }
 
-        if (listIndex < grid.getVerticallListSize() - 1) {
+        if (listIndex < squareGrid.getVerticallListSize() - 1) {
             if (getNextParallelList(ListType.VERTICAL, listIndex, position) != GridOption.EMPTY) {
-                if (grid.getCopyOfHorizontalElement(position, listIndex) != GridOption.EMPTY
-                        && grid.getCopyOfHorizontalElement(position + 1, listIndex) != GridOption.EMPTY) {
+                if (squareGrid.getCopyOfHorizontalElement(position, listIndex) != GridOption.EMPTY
+                        && squareGrid.getCopyOfHorizontalElement(position + 1, listIndex) != GridOption.EMPTY) {
                     points++;
                 }
             }
@@ -254,7 +254,7 @@ public class TurnImpl implements Turn {
         if (getCopyOfLastMove().getLastListType().equals(ListType.HORIZONTAL)) {
             addPoints(-horizontalPointScored(getCopyOfLastMove().getLastListIndex(),
                     getCopyOfLastMove().getLastPosition()));
-            grid.setHorizontalLine(getCopyOfLastMove().getLastListIndex(), getCopyOfLastMove().getLastPosition(),
+            squareGrid.setHorizontalLine(getCopyOfLastMove().getLastListIndex(), getCopyOfLastMove().getLastPosition(),
                     GridOption.EMPTY);
             if (!(horizontalPointScored(getCopyOfLastMove().getLastListIndex(),
                     getCopyOfLastMove().getLastPosition()) > 0)) {
@@ -263,7 +263,7 @@ public class TurnImpl implements Turn {
         } else {
             addPoints(-verticalPointScored(getCopyOfLastMove().getLastListIndex(),
                     getCopyOfLastMove().getLastPosition()));
-            grid.setVerticalLine(getCopyOfLastMove().getLastListIndex(), getCopyOfLastMove().getLastPosition(),
+            squareGrid.setVerticalLine(getCopyOfLastMove().getLastListIndex(), getCopyOfLastMove().getLastPosition(),
                     GridOption.EMPTY);
             if (!(verticalPointScored(getCopyOfLastMove().getLastListIndex(),
                     getCopyOfLastMove().getLastPosition()) > 0)) {
@@ -281,7 +281,7 @@ public class TurnImpl implements Turn {
 
     @Override // DA RIGUARDARE
     public BaseGrid getCopyOfGrid() {
-        BaseGrid copyOfThisGrid = this.grid;
+        BaseGrid copyOfThisGrid = this.squareGrid;
         return copyOfThisGrid;
     }
 }

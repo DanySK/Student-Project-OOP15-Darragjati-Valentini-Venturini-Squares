@@ -2,12 +2,16 @@ package model.classes;
 
 import model.enumerations.GridOption;
 import model.enumerations.ListType;
+import model.interfaces.BaseGrid;
 import model.interfaces.LastMove;
 
 public class TriangleTurnImpl extends TurnImpl {
 
+    private TriangleGridImpl grid;
+    
     public TriangleTurnImpl(Integer rowsNumber, Integer columnNumber) {
         super(rowsNumber, columnNumber);
+        grid = new TriangleGridImpl(rowsNumber, columnNumber);
     }
 
     @Override
@@ -44,7 +48,28 @@ public class TriangleTurnImpl extends TurnImpl {
     }
 
     private Integer horizontalPointScored(final int listIndex, final int position) {
+        
+        int points = 0;
 
+        if (listIndex > 0) {
+            if(grid.ge)
+            if (grid.getCopyOfHorizontalElement(listIndex - 1, position) != GridOption.EMPTY) {
+                if (grid.getCopyOfVerticalElement(position, listIndex - 1) != GridOption.EMPTY
+                        && grid.getCopyOfVerticalElement(position + 1, listIndex - 1) != GridOption.EMPTY) {
+                    points++;
+                }
+            }
+        }
+
+        if (listIndex < grid.getHorizontalListSize() - 1) {
+            if (grid.getCopyOfHorizontalElement(listIndex + 1, position) != GridOption.EMPTY) {
+                if (grid.getCopyOfVerticalElement(position, listIndex) != GridOption.EMPTY
+                        && grid.getCopyOfVerticalElement(position + 1, listIndex) != GridOption.EMPTY) {
+                    points++;
+                }
+            }
+        }
+        return points;
     }
 
     private Integer verticalPointScored(final int listIndex, final int position) {
