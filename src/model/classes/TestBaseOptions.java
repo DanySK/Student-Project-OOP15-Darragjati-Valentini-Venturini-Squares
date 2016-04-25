@@ -69,14 +69,14 @@ public class TestBaseOptions {
                 (Integer) (gridOfSize.getCopyOfGrid().getTotalMoves() - 4));
         assertNotEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
         assertEquals(player, gridOfSize.getCurrentPlayerTurn()); // verifies
-                                                                                 // if
-                                                                                 // the
-                                                                                 // player
-                                                                                 // has
-                                                                                 // received
-                                                                                 // a
-                                                                                 // bonus
-                                                                                 // move
+                                                                 // if
+                                                                 // the
+                                                                 // player
+                                                                 // has
+                                                                 // received
+                                                                 // a
+                                                                 // bonus
+                                                                 // move
 
         gridOfSize.undoLastMove();
         assertEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER1));
@@ -91,7 +91,8 @@ public class TestBaseOptions {
 
         gridOfSize2.startMatch();
 
-        for (int i = 0; i < SIZE + 1; i++) {                    //fills the grid with all the possible moves
+        for (int i = 0; i < SIZE + 1; i++) { // fills the grid with all the
+                                             // possible moves
             for (int z = 0; z < SIZE; z++) {
                 gridOfSize2.setLine(ListType.HORIZONTAL, i, z);
                 gridOfSize2.setLine(ListType.VERTICAL, i, z);
@@ -99,7 +100,8 @@ public class TestBaseOptions {
         }
 
         assertTrue(gridOfSize2.getCopyOfGrid().getRemainingMoves().equals(0));
-        assertNotEquals(gridOfSize2.getPlayerPoints(GridOption.PLAYER1), gridOfSize2.getPlayerPoints(GridOption.PLAYER2));
+        assertNotEquals(gridOfSize2.getPlayerPoints(GridOption.PLAYER1),
+                gridOfSize2.getPlayerPoints(GridOption.PLAYER2));
         assertTrue(gridOfSize2.isEnded());
         assertNotEquals(GridOption.EMPTY, gridOfSize2.getWinner());
     }
@@ -168,6 +170,13 @@ public class TestBaseOptions {
             testGrid.undoLastMove();
             fail("You can't undo a move if a player didn't do at least one"); // riformulare
         } catch (IllegalStateException e) {
+        } catch (Exception e) {
+            fail("Wrong exception thrown");
+        }
+        try {
+            testGrid.setLine(ListType.DIAGONAL, 0, 0);
+            fail("You can't set a diagonal line, the base grid doesn't include this option");
+        } catch (IllegalArgumentException e) {
         } catch (Exception e) {
             fail("Wrong exception thrown");
         }
