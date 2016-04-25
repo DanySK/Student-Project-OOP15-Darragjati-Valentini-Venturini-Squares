@@ -11,7 +11,7 @@ import model.interfaces.Turn;
 
 public class TurnImpl implements Turn {
 
-    private BaseGrid grid;
+    protected BaseGrid grid;
     private boolean matchStarted = false;
     private Integer scorePlayer1;
     private Integer scorePlayer2;
@@ -19,7 +19,7 @@ public class TurnImpl implements Turn {
     private GridOption turn = GridOption.EMPTY;
     private List<LastMove> lastMoveList = new ArrayList<>();
 
-    TurnImpl(final Integer rowsNumber, final Integer columnNumber) {
+    public TurnImpl(final Integer rowsNumber, final Integer columnNumber) {
         grid = new BaseGridImpl(rowsNumber, columnNumber);
     }
 
