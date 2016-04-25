@@ -74,4 +74,8 @@ public class TriangleGridImpl extends BaseGridImpl implements TriangleGrid {
         }
     }
 
+    @Override
+    public Integer getDiagonalListSize() {
+        return diagonal.size();
+    }
 }

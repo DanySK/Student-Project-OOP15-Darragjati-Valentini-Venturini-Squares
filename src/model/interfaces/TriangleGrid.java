@@ -21,4 +21,6 @@ public interface TriangleGrid extends BaseGrid {
      * @param playerTurn which one of the two players is making the move
      */
     void setDiagonalLine(final int listIndex, int position, GridOption playerTurn);
+    
+    Integer getDiagonalListSize();
 }

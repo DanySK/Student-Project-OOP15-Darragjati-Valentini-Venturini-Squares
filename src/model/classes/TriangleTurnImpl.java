@@ -7,11 +7,12 @@ import model.interfaces.LastMove;
 
 public class TriangleTurnImpl extends TurnImpl {
 
-    private TriangleGridImpl grid;
-    
+    private TriangleGridImpl triangleGrid;
+
     public TriangleTurnImpl(Integer rowsNumber, Integer columnNumber) {
-        super(rowsNumber, columnNumber);
-        grid = new TriangleGridImpl(rowsNumber, columnNumber);
+        super(rowsNumber, columnNumber); // creo una griglia di quadrati che non
+                                         // devo usare!
+        triangleGrid = new TriangleGridImpl(rowsNumber, columnNumber);
     }
 
     @Override
@@ -21,16 +22,16 @@ public class TriangleTurnImpl extends TurnImpl {
             throw new IllegalStateException("the match can't be ended if it isn't even started");
         }
 
-        return getPlayerPoints(GridOption.PLAYER1) + getPlayerPoints(
-                GridOption.PLAYER2) == ((grid.getHorizontalListSize() - 1) * (grid.getVerticallListSize() - 1)) * 2
-                        ? true : false;
+        return getPlayerPoints(GridOption.PLAYER1)
+                + getPlayerPoints(GridOption.PLAYER2) == ((triangleGrid.getHorizontalListSize() - 1)
+                        * (triangleGrid.getVerticallListSize() - 1)) * 2 ? true : false;
     }
 
     @Override
     public void setLine(final ListType list, final Integer listIndex, final Integer position) {
 
         if (list.equals(ListType.DIAGONAL)) {
-            grid.setVerticalLine(listIndex, position, this.turn);
+            triangleGrid.setVerticalLine(listIndex, position, this.turn);
             if (verticalPointScored(listIndex, position) > 0) {
                 addPoints(verticalPointScored(listIndex, position));
             } else {
@@ -48,23 +49,20 @@ public class TriangleTurnImpl extends TurnImpl {
     }
 
     private Integer horizontalPointScored(final int listIndex, final int position) {
-        
+
         int points = 0;
 
         if (listIndex > 0) {
-            if(grid.ge)
-            if (grid.getCopyOfHorizontalElement(listIndex - 1, position) != GridOption.EMPTY) {
-                if (grid.getCopyOfVerticalElement(position, listIndex - 1) != GridOption.EMPTY
-                        && grid.getCopyOfVerticalElement(position + 1, listIndex - 1) != GridOption.EMPTY) {
-                    points++;
-                }
+            if (!triangleGrid.getCopyOfVerticalElement(position, listIndex - 1).equals(GridOption.EMPTY)
+                    && !triangleGrid.getCopyOfDiagonalElement(listIndex, position).equals(GridOption.EMPTY)) {
+                points++;
             }
         }
 
-        if (listIndex < grid.getHorizontalListSize() - 1) {
-            if (grid.getCopyOfHorizontalElement(listIndex + 1, position) != GridOption.EMPTY) {
-                if (grid.getCopyOfVerticalElement(position, listIndex) != GridOption.EMPTY
-                        && grid.getCopyOfVerticalElement(position + 1, listIndex) != GridOption.EMPTY) {
+        if (listIndex < triangleGrid.getHorizontalListSize() - 1) {
+            if (triangleGrid.getCopyOfHorizontalElement(listIndex + 1, position) != GridOption.EMPTY) {
+                if (triangleGrid.getCopyOfVerticalElement(position, listIndex) != GridOption.EMPTY
+                        && triangleGrid.getCopyOfVerticalElement(position + 1, listIndex) != GridOption.EMPTY) {
                     points++;
                 }
             }
