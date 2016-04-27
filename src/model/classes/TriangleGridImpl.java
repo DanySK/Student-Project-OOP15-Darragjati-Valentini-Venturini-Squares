@@ -11,11 +11,11 @@ public class TriangleGridImpl extends BaseGridImpl implements BaseGrid, Triangle
 
     private List<List<GridOption>> diagonal = new ArrayList<>();
 
-    public TriangleGridImpl(Integer rowsNumber, Integer columnNumber) {
-        super(rowsNumber, columnNumber);
+    public TriangleGridImpl(Integer rowsNumber, Integer columnsNumber) {
+        super(rowsNumber, columnsNumber);
 
         for (int i = 0; i < rowsNumber; i++) {
-            diagonal.add(createEmptyGrid(columnNumber));
+            diagonal.add(createEmptyGrid(columnsNumber));
         }
     }
 

@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import model.enumerations.GridOption;
 import model.enumerations.ListType;
+import model.interfaces.Turn;
 
 public class TestTriangleGrid {
 
@@ -21,19 +22,12 @@ public class TestTriangleGrid {
     @Test
     public void test() {
 
-        TriangleTurnImpl gridOfSize = new TriangleTurnImpl(SIZE, SIZE);
+        Turn gridOfSize = new TriangleTurnImpl(SIZE, SIZE);
 
-        assertEquals(gridOfSize.getCopyOfGrid().getTotalMoves(), gridOfSize.getCopyOfGrid().getRemainingMoves()); // verifies
-        // that
-        // total
-        // moves
-        // are
-        // the
-        // same
-        // as
-        // remaining
-        // moves
-
+        assertFalse(gridOfSize.isStarted());
+        gridOfSize.startMatch();
+        
+        assertEquals(gridOfSize.getCopyOfGrid().getTotalMoves(), gridOfSize.getCopyOfGrid().getRemainingMoves());
         for (int i = 0; i < SIZE + 1; i++) { // verifies that every element in
             // the list is initialized as EMPTY
             for (int z = 0; z < SIZE; z++) {
@@ -41,10 +35,7 @@ public class TestTriangleGrid {
                 assertEquals(gridOfSize.getCopyOfGrid().getCopyOfVerticalElement(i, z), GridOption.EMPTY);
             }
         }
-
-        assertFalse(gridOfSize.isStarted());
-
-        gridOfSize.startMatch();
+     
         assertTrue(gridOfSize.isStarted());
         gridOfSize.setLine(ListType.VERTICAL, 0, 0);
         assertEquals(gridOfSize.getCopyOfGrid().getRemainingMoves(),

@@ -10,30 +10,16 @@ public class TriangleTurnImpl extends TurnImpl {
 
     private TriangleGrid squareGrid;
 
-    public TriangleTurnImpl(Integer rowsNumber, Integer columnNumber) {
-        super(rowsNumber, columnNumber);
+    public TriangleTurnImpl(Integer rowsNumber, Integer columnsNumber) {
+        super(rowsNumber, columnsNumber);
+        squareGrid = new TriangleGridImpl(rowsNumber, columnsNumber);
     }
 
-    @Override
-    public void startMatch() {
-        if (!isStarted()) {
-            this.scorePlayer1 = INITIAL_SCORE;
-            this.scorePlayer2 = INITIAL_SCORE;
-            randomizeTurn();
-            matchStarted = true;
-            squareGrid = new TriangleGridImpl(rowsNumber, columnsNumber);
-        } else {
-            throw new IllegalStateException("Match already started");
-        }
-    }
-    
     @Override
     public boolean isEnded() {
-
         if (!isStarted()) {
             throw new IllegalStateException("the match can't be ended if it isn't even started");
         }
-
         return getPlayerPoints(GridOption.PLAYER1)
                 + getPlayerPoints(GridOption.PLAYER2) == ((squareGrid.getHorizontalListSize() - 1)
                         * (squareGrid.getVerticallListSize() - 1)) * 2 ? true : false;
@@ -57,6 +43,13 @@ public class TriangleTurnImpl extends TurnImpl {
             lastMoveList.add(lastMove);
         } else {
             super.setLine(list, listIndex, position);
+        }
+        for (int i = 0; i < 7; i++) {
+            for (int z = 0; z < 6; z++) {
+                System.out.println("Orizzontale(" + i + ", " + z + "): " + squareGrid.getCopyOfHorizontalElement(i, z));
+                System.out.println("Verticale(" + i + ", " + z + "): "  + squareGrid.getCopyOfVerticalElement(i, z));
+                System.out.println("Diagonale(" + i + ", " + z + "): " + squareGrid.getCopyOfDiagonalElement(i, z));
+            }
         }
     }
 
@@ -119,5 +112,11 @@ public class TriangleTurnImpl extends TurnImpl {
     @Override
     public void undoLastMove() {
 
+    }
+
+    @Override
+    public BaseGrid getCopyOfGrid() {
+        TriangleGrid copyOfTriangleGrid = this.squareGrid;
+        return copyOfTriangleGrid;
     }
 }

@@ -15,18 +15,18 @@ public class BaseGridImpl implements BaseGrid {
     private static final Integer MINIMUM_SIZE = 4;
     private static final Integer MAXIMUM_SIZE = 10;
 
-    public BaseGridImpl(final Integer rowsNumber, final Integer columnNumber) {
+    public BaseGridImpl(final Integer rowsNumber, final Integer columnsNumber) {
 
-        if (rowsNumber < MINIMUM_SIZE || rowsNumber > MAXIMUM_SIZE || columnNumber < MINIMUM_SIZE
-                || columnNumber > MAXIMUM_SIZE) {
+        if (rowsNumber < MINIMUM_SIZE || rowsNumber > MAXIMUM_SIZE || columnsNumber < MINIMUM_SIZE
+                || columnsNumber > MAXIMUM_SIZE) {
             throw new IllegalArgumentException();
         }
 
         for (int i = 0; i < rowsNumber + 1; i++) {
             horizontal.add(createEmptyGrid(rowsNumber));
         }
-        for (int i = 0; i < columnNumber + 1; i++) {
-            vertical.add(createEmptyGrid(columnNumber));
+        for (int i = 0; i < columnsNumber + 1; i++) {
+            vertical.add(createEmptyGrid(columnsNumber));
         }
     }
 

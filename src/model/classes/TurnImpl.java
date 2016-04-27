@@ -24,6 +24,7 @@ public class TurnImpl implements Turn {
     public TurnImpl(final Integer rowsNumber, final Integer columnsNumber) {
         this.rowsNumber = rowsNumber;
         this.columnsNumber = columnsNumber;
+        this.squareGrid = new BaseGridImpl(rowsNumber, columnsNumber);
     }
 
     @Override
@@ -33,7 +34,7 @@ public class TurnImpl implements Turn {
             this.scorePlayer2 = INITIAL_SCORE;
             randomizeTurn();
             matchStarted = true;
-            squareGrid = new BaseGridImpl(rowsNumber, columnsNumber);
+           //new BaseGridImpl(rowsNumber, columnsNumber);
         } else {
             throw new IllegalStateException("Match already started");
         }
@@ -75,11 +76,9 @@ public class TurnImpl implements Turn {
 
     @Override
     public boolean isEnded() {
-
         if (!isStarted()) {
             throw new IllegalStateException("the match can't be ended if it isn't even started");
         }
-
         return getPlayerPoints(GridOption.PLAYER1)
                 + getPlayerPoints(GridOption.PLAYER2) == (squareGrid.getHorizontalListSize() - 1)
                         * (squareGrid.getVerticallListSize() - 1) ? true : false;
