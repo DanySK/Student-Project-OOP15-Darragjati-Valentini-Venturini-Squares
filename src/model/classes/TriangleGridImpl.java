@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.enumerations.GridOption;
+import model.interfaces.BaseGrid;
 import model.interfaces.TriangleGrid;
 
-public class TriangleGridImpl extends BaseGridImpl implements TriangleGrid {
+public class TriangleGridImpl extends BaseGridImpl implements BaseGrid, TriangleGrid {
 
     private List<List<GridOption>> diagonal = new ArrayList<>();
 

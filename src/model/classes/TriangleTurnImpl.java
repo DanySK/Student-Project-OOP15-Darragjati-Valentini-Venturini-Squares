@@ -4,17 +4,29 @@ import model.enumerations.GridOption;
 import model.enumerations.ListType;
 import model.interfaces.BaseGrid;
 import model.interfaces.LastMove;
+import model.interfaces.TriangleGrid;
 
 public class TriangleTurnImpl extends TurnImpl {
 
-    private TriangleGridImpl triangleGrid;
+    private TriangleGrid squareGrid;
 
     public TriangleTurnImpl(Integer rowsNumber, Integer columnNumber) {
-        super(rowsNumber, columnNumber); // creo una griglia di quadrati che non
-                                         // devo usare!
-        triangleGrid = new TriangleGridImpl(rowsNumber, columnNumber);
+        super(rowsNumber, columnNumber);
     }
 
+    @Override
+    public void startMatch() {
+        if (!isStarted()) {
+            this.scorePlayer1 = INITIAL_SCORE;
+            this.scorePlayer2 = INITIAL_SCORE;
+            randomizeTurn();
+            matchStarted = true;
+            squareGrid = new TriangleGridImpl(rowsNumber, columnsNumber);
+        } else {
+            throw new IllegalStateException("Match already started");
+        }
+    }
+    
     @Override
     public boolean isEnded() {
 
@@ -23,15 +35,15 @@ public class TriangleTurnImpl extends TurnImpl {
         }
 
         return getPlayerPoints(GridOption.PLAYER1)
-                + getPlayerPoints(GridOption.PLAYER2) == ((triangleGrid.getHorizontalListSize() - 1)
-                        * (triangleGrid.getVerticallListSize() - 1)) * 2 ? true : false;
+                + getPlayerPoints(GridOption.PLAYER2) == ((squareGrid.getHorizontalListSize() - 1)
+                        * (squareGrid.getVerticallListSize() - 1)) * 2 ? true : false;
     }
 
     @Override
     public void setLine(final ListType list, final Integer listIndex, final Integer position) {
 
         if (list.equals(ListType.DIAGONAL)) {
-            triangleGrid.setVerticalLine(listIndex, position, this.turn);
+            squareGrid.setVerticalLine(listIndex, position, this.turn);
             if (diagonalPointScored(listIndex, position) > 0) {
                 addPoints(diagonalPointScored(listIndex, position));
             } else {
@@ -53,15 +65,15 @@ public class TriangleTurnImpl extends TurnImpl {
         int points = 0;
 
         if (listIndex > 0) {
-            if (!triangleGrid.getCopyOfVerticalElement(position, listIndex - 1).equals(GridOption.EMPTY)
-                    && !triangleGrid.getCopyOfDiagonalElement(listIndex - 1, position).equals(GridOption.EMPTY)) {
+            if (!squareGrid.getCopyOfVerticalElement(position, listIndex - 1).equals(GridOption.EMPTY)
+                    && !squareGrid.getCopyOfDiagonalElement(listIndex - 1, position).equals(GridOption.EMPTY)) {
                 points++;
             }
         }
 
-        if (listIndex < triangleGrid.getDiagonalListSize() - 1) {
-            if (!triangleGrid.getCopyOfVerticalElement(position + 1, listIndex).equals(GridOption.EMPTY)
-                    && !triangleGrid.getCopyOfDiagonalElement(listIndex, position).equals(GridOption.EMPTY)) {
+        if (listIndex < squareGrid.getDiagonalListSize() - 1) {
+            if (!squareGrid.getCopyOfVerticalElement(position + 1, listIndex).equals(GridOption.EMPTY)
+                    && !squareGrid.getCopyOfDiagonalElement(listIndex, position).equals(GridOption.EMPTY)) {
                 points++;
             }
         }
@@ -73,15 +85,15 @@ public class TriangleTurnImpl extends TurnImpl {
         int points = 0;
 
         if (listIndex > 0) {
-            if (!triangleGrid.getCopyOfHorizontalElement(position, listIndex - 1).equals(GridOption.EMPTY)
-                    && !triangleGrid.getCopyOfDiagonalElement(position, listIndex - 1).equals(GridOption.EMPTY)) {
+            if (!squareGrid.getCopyOfHorizontalElement(position, listIndex - 1).equals(GridOption.EMPTY)
+                    && !squareGrid.getCopyOfDiagonalElement(position, listIndex - 1).equals(GridOption.EMPTY)) {
                 points++;
             }
         }
 
-        if (listIndex < triangleGrid.getVerticallListSize() - 1) {
-            if (triangleGrid.getCopyOfHorizontalElement(position + 1, listIndex) != GridOption.EMPTY
-                    && !triangleGrid.getCopyOfDiagonalElement(position, listIndex).equals(GridOption.EMPTY)) {
+        if (listIndex < squareGrid.getVerticallListSize() - 1) {
+            if (squareGrid.getCopyOfHorizontalElement(position + 1, listIndex) != GridOption.EMPTY
+                    && !squareGrid.getCopyOfDiagonalElement(position, listIndex).equals(GridOption.EMPTY)) {
                 points++;
             }
         }
@@ -92,13 +104,13 @@ public class TriangleTurnImpl extends TurnImpl {
 
         int points = 0;
 
-        if (!triangleGrid.getCopyOfHorizontalElement(listIndex, position).equals(GridOption.EMPTY)
-                && triangleGrid.getCopyOfVerticalElement(position + 1, listIndex).equals(GridOption.EMPTY)) {
+        if (!squareGrid.getCopyOfHorizontalElement(listIndex, position).equals(GridOption.EMPTY)
+                && squareGrid.getCopyOfVerticalElement(position + 1, listIndex).equals(GridOption.EMPTY)) {
             points++;
         }
 
-        if (!triangleGrid.getCopyOfHorizontalElement(listIndex + 1, position).equals(GridOption.EMPTY)
-                && triangleGrid.getCopyOfVerticalElement(position, listIndex).equals(GridOption.EMPTY)) {
+        if (!squareGrid.getCopyOfHorizontalElement(listIndex + 1, position).equals(GridOption.EMPTY)
+                && squareGrid.getCopyOfVerticalElement(position, listIndex).equals(GridOption.EMPTY)) {
             points++;
         }
         return points;

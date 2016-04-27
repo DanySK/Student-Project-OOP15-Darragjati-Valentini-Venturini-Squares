@@ -11,32 +11,35 @@ import model.interfaces.Turn;
 
 public class TurnImpl implements Turn {
 
-    private BaseGrid squareGrid;
-    private boolean matchStarted = false;
-    private Integer scorePlayer1;
-    private Integer scorePlayer2;
-    private static final Integer INITIAL_SCORE = 0;
+    protected BaseGrid squareGrid;
+    protected boolean matchStarted = false;
+    protected Integer scorePlayer1;
+    protected Integer scorePlayer2;
+    protected Integer rowsNumber;
+    protected Integer columnsNumber;
+    protected static final Integer INITIAL_SCORE = 0;
     protected GridOption turn = GridOption.EMPTY;
     protected List<LastMove> lastMoveList = new ArrayList<>();
 
-    public TurnImpl(final Integer rowsNumber, final Integer columnNumber) {
-        squareGrid = new BaseGridImpl(rowsNumber, columnNumber);
+    public TurnImpl(final Integer rowsNumber, final Integer columnsNumber) {
+        this.rowsNumber = rowsNumber;
+        this.columnsNumber = columnsNumber;
     }
 
     @Override
     public void startMatch() {
-
         if (!isStarted()) {
             this.scorePlayer1 = INITIAL_SCORE;
             this.scorePlayer2 = INITIAL_SCORE;
             randomizeTurn();
             matchStarted = true;
+            squareGrid = new BaseGridImpl(rowsNumber, columnsNumber);
         } else {
             throw new IllegalStateException("Match already started");
         }
     }
 
-    private void randomizeTurn() {
+    protected void randomizeTurn() {
 
         if (!isStarted()) {
             Random randomTurn = new Random();
