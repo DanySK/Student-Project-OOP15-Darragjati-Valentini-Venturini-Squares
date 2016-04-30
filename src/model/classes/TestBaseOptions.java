@@ -10,24 +10,19 @@ import org.junit.Test;
 
 import model.enumerations.GridOption;
 import model.enumerations.ListType;
+import model.interfaces.BaseGrid;
 import model.interfaces.Turn;
 
-/**
- * 
- * 
- *
- */
+
 public class TestBaseOptions {
 
     private static final Integer SIZE = 6;
 
-    /**
-     * 
-     */
     @Test
     public void test() {
 
-        Turn gridOfSize = new TurnImpl(SIZE, SIZE);
+        BaseGrid squareGrid = new BaseGridImpl(SIZE, SIZE);
+        Turn gridOfSize = new TurnImpl(squareGrid);
 
         assertEquals(gridOfSize.getCopyOfGrid().getTotalMoves(), gridOfSize.getCopyOfGrid().getRemainingMoves()); // verifies
         // that
@@ -87,7 +82,7 @@ public class TestBaseOptions {
         gridOfSize.undoLastMove();
         assertNotEquals(player, gridOfSize.getCurrentPlayerTurn());
 
-        Turn gridOfSize2 = new TurnImpl(SIZE, SIZE);
+        Turn gridOfSize2 = new TurnImpl(squareGrid);
 
         gridOfSize2.startMatch();
 
