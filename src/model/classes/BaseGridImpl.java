@@ -107,10 +107,9 @@ public class BaseGridImpl implements BaseGrid {
                 throw new IllegalStateException();
             }
         }
-        horizontalPointScored(listIndex, position);
     }
     
-    protected Integer horizontalPointScored(final int listIndex, final int position) {
+    public Integer horizontalPointScored(final int listIndex, final int position) {
 
         int points = 0;
 
@@ -172,17 +171,16 @@ public class BaseGridImpl implements BaseGrid {
                 throw new IllegalStateException();
             }
         }
-        verticalPointScored(listIndex, position);
     }
     
-    protected Integer verticalPointScored(final int listIndex, final int position) {
+    public Integer verticalPointScored(final int listIndex, final int position) {
 
         int points = 0;
 
         if (listIndex > 0) {
             if (!getPreviousParallelList(ListType.VERTICAL, listIndex, position).equals(GridOption.EMPTY)) {
-                if (!grid.getCopyOfHorizontalElement(position, listIndex - 1).equals(GridOption.EMPTY)
-                        && !grid.getCopyOfHorizontalElement(position + 1, listIndex - 1).equals(GridOption.EMPTY)) {
+                if (!getCopyOfHorizontalElement(position, listIndex - 1).equals(GridOption.EMPTY)
+                        && !getCopyOfHorizontalElement(position + 1, listIndex - 1).equals(GridOption.EMPTY)) {
                     points++;
                 }
             }
@@ -190,8 +188,8 @@ public class BaseGridImpl implements BaseGrid {
 
         if (listIndex < vertical.size() - 1) {
             if (!getNextParallelList(ListType.VERTICAL, listIndex, position).equals(GridOption.EMPTY)) {
-                if (!grid.getCopyOfHorizontalElement(position, listIndex).equals(GridOption.EMPTY)
-                        && !grid.getCopyOfHorizontalElement(position + 1, listIndex).equals(GridOption.EMPTY)) {
+                if (!getCopyOfHorizontalElement(position, listIndex).equals(GridOption.EMPTY)
+                        && !getCopyOfHorizontalElement(position + 1, listIndex).equals(GridOption.EMPTY)) {
                     points++;
                 }
             }
@@ -204,9 +202,9 @@ public class BaseGridImpl implements BaseGrid {
         if (listIndex > 0) {
             switch (list) {
             case HORIZONTAL:
-                return grid.getCopyOfHorizontalElement(listIndex - 1, position);
+                return getCopyOfHorizontalElement(listIndex - 1, position);
             case VERTICAL:
-                return grid.getCopyOfVerticalElement(listIndex - 1, position);
+                return getCopyOfVerticalElement(listIndex - 1, position);
             default:
                 throw new IllegalStateException("the list does not exist");
             }
@@ -218,14 +216,14 @@ public class BaseGridImpl implements BaseGrid {
     private GridOption getNextParallelList(final ListType list, final int listIndex, final int position) {
         switch (list) {
         case HORIZONTAL:
-            if (listIndex < grid.getHorizontalListSize()) {
-                return grid.getCopyOfHorizontalElement(listIndex + 1, position);
+            if (listIndex < getHorizontalListSize()) {
+                return getCopyOfHorizontalElement(listIndex + 1, position);
             } else {
                 throw new IllegalArgumentException();
             }
         case VERTICAL:
-            if (listIndex < grid.getVerticallListSize()) {
-                return grid.getCopyOfVerticalElement(listIndex + 1, position);
+            if (listIndex < getVerticallListSize()) {
+                return getCopyOfVerticalElement(listIndex + 1, position);
             } else {
                 throw new IllegalArgumentException();
             }

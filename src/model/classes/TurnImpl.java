@@ -32,7 +32,7 @@ public class TurnImpl implements Turn {
             this.scorePlayer2 = INITIAL_SCORE;
             randomizeTurn();
             matchStarted = true;
-           //new BaseGridImpl(rowsNumber, columnsNumber);
+            // new BaseGridImpl(rowsNumber, columnsNumber);
         } else {
             throw new IllegalStateException("Match already started");
         }
@@ -121,19 +121,23 @@ public class TurnImpl implements Turn {
     @Override
     public void setLine(final ListType list, final Integer listIndex, final Integer position) {
 
+        Integer points = 0;
+
         switch (list) {
         case HORIZONTAL:
             grid.setHorizontalLine(listIndex, position, this.turn);
-            if (horizontalPointScored(listIndex, position) > 0) {
-                addPoints(horizontalPointScored(listIndex, position));
+            points = grid.horizontalPointScored(listIndex, position);
+            if (points > 0) {
+                addPoints(points);
             } else {
                 nextTurn();
             }
             break;
         case VERTICAL:
             grid.setVerticalLine(listIndex, position, this.turn);
-            if (verticalPointScored(listIndex, position) > 0) {
-                addPoints(verticalPointScored(listIndex, position));
+            points = grid.verticalPointScored(listIndex, position);
+            if (points > 0) {
+                addPoints(points);
             } else {
                 nextTurn();
             }
@@ -170,20 +174,20 @@ public class TurnImpl implements Turn {
         }
 
         if (getCopyOfLastMove().getLastListType().equals(ListType.HORIZONTAL)) {
-            addPoints(-horizontalPointScored(getCopyOfLastMove().getLastListIndex(),
+            addPoints(-grid.horizontalPointScored(getCopyOfLastMove().getLastListIndex(),
                     getCopyOfLastMove().getLastPosition()));
             grid.setHorizontalLine(getCopyOfLastMove().getLastListIndex(), getCopyOfLastMove().getLastPosition(),
                     GridOption.EMPTY);
-            if (!(horizontalPointScored(getCopyOfLastMove().getLastListIndex(),
+            if (!(grid.horizontalPointScored(getCopyOfLastMove().getLastListIndex(),
                     getCopyOfLastMove().getLastPosition()) > 0)) {
                 nextTurn();
             }
         } else {
-            addPoints(-verticalPointScored(getCopyOfLastMove().getLastListIndex(),
+            addPoints(-grid.verticalPointScored(getCopyOfLastMove().getLastListIndex(),
                     getCopyOfLastMove().getLastPosition()));
             grid.setVerticalLine(getCopyOfLastMove().getLastListIndex(), getCopyOfLastMove().getLastPosition(),
                     GridOption.EMPTY);
-            if (!(verticalPointScored(getCopyOfLastMove().getLastListIndex(),
+            if (!(grid.verticalPointScored(getCopyOfLastMove().getLastListIndex(),
                     getCopyOfLastMove().getLastPosition()) > 0)) {
                 nextTurn();
             }
