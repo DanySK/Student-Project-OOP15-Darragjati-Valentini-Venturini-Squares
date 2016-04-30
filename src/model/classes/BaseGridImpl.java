@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.enumerations.GridOption;
+import model.enumerations.ListType;
 import model.interfaces.BaseGrid;
 
 
@@ -106,6 +107,31 @@ public class BaseGridImpl implements BaseGrid {
                 throw new IllegalStateException();
             }
         }
+        horizontalPointScored(listIndex, position);
+    }
+    
+    protected Integer horizontalPointScored(final int listIndex, final int position) {
+
+        int points = 0;
+
+        if (listIndex > 0) {
+            if (!getCopyOfHorizontalElement(listIndex - 1, position).equals(GridOption.EMPTY)) {
+                if (!getCopyOfVerticalElement(position, listIndex - 1).equals(GridOption.EMPTY)
+                        && !getCopyOfVerticalElement(position + 1, listIndex - 1).equals(GridOption.EMPTY)) {
+                    points++;
+                }
+            }
+        }
+
+        if (listIndex < horizontal.size() - 1) {
+            if (!getCopyOfHorizontalElement(listIndex + 1, position).equals(GridOption.EMPTY)) {
+                if (!getCopyOfVerticalElement(position, listIndex).equals(GridOption.EMPTY)
+                        && !getCopyOfVerticalElement(position + 1, listIndex).equals(GridOption.EMPTY)) {
+                    points++;
+                }
+            }
+        }
+        return points;
     }
 
     private void checkCorrectVerticalInput(final Integer listIndex, final Integer position) {
@@ -145,6 +171,66 @@ public class BaseGridImpl implements BaseGrid {
             } else {
                 throw new IllegalStateException();
             }
+        }
+        verticalPointScored(listIndex, position);
+    }
+    
+    protected Integer verticalPointScored(final int listIndex, final int position) {
+
+        int points = 0;
+
+        if (listIndex > 0) {
+            if (!getPreviousParallelList(ListType.VERTICAL, listIndex, position).equals(GridOption.EMPTY)) {
+                if (!grid.getCopyOfHorizontalElement(position, listIndex - 1).equals(GridOption.EMPTY)
+                        && !grid.getCopyOfHorizontalElement(position + 1, listIndex - 1).equals(GridOption.EMPTY)) {
+                    points++;
+                }
+            }
+        }
+
+        if (listIndex < vertical.size() - 1) {
+            if (!getNextParallelList(ListType.VERTICAL, listIndex, position).equals(GridOption.EMPTY)) {
+                if (!grid.getCopyOfHorizontalElement(position, listIndex).equals(GridOption.EMPTY)
+                        && !grid.getCopyOfHorizontalElement(position + 1, listIndex).equals(GridOption.EMPTY)) {
+                    points++;
+                }
+            }
+        }
+        return points;
+    }
+    
+  //da tenere?
+    private GridOption getPreviousParallelList(final ListType list, final int listIndex, final int position) {
+        if (listIndex > 0) {
+            switch (list) {
+            case HORIZONTAL:
+                return grid.getCopyOfHorizontalElement(listIndex - 1, position);
+            case VERTICAL:
+                return grid.getCopyOfVerticalElement(listIndex - 1, position);
+            default:
+                throw new IllegalStateException("the list does not exist");
+            }
+        } else {
+            throw new IllegalArgumentException();
+        }
+    }
+    //da tenere?
+    private GridOption getNextParallelList(final ListType list, final int listIndex, final int position) {
+        switch (list) {
+        case HORIZONTAL:
+            if (listIndex < grid.getHorizontalListSize()) {
+                return grid.getCopyOfHorizontalElement(listIndex + 1, position);
+            } else {
+                throw new IllegalArgumentException();
+            }
+        case VERTICAL:
+            if (listIndex < grid.getVerticallListSize()) {
+                return grid.getCopyOfVerticalElement(listIndex + 1, position);
+            } else {
+                throw new IllegalArgumentException();
+            }
+        default:
+            throw new IllegalStateException("the list does not exist");
         }
     }
 
