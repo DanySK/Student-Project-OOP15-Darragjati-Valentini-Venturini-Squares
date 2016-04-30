@@ -11,8 +11,8 @@ import model.interfaces.BaseGrid;
 
 public class BaseGridImpl implements BaseGrid {
 
-    private List<List<GridOption>> horizontal = new ArrayList<>();
-    private List<List<GridOption>> vertical = new ArrayList<>();
+    protected List<List<GridOption>> horizontal = new ArrayList<>();
+    protected List<List<GridOption>> vertical = new ArrayList<>();
     private static final Integer MINIMUM_SIZE = 4;
     private static final Integer MAXIMUM_SIZE = 10;
 

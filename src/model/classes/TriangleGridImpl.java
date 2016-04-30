@@ -38,13 +38,51 @@ public class TriangleGridImpl extends BaseGridImpl implements BaseGrid, Triangle
         }
         return super.getRemainingMoves() + movesLeft;
     }
+    
+    @Override
+    public Integer horizontalPointScored(final int listIndex, final int position) {
 
+        int points = 0;
+
+        if (listIndex > 0) {
+            if (!super.getCopyOfVerticalElement(position, listIndex - 1).equals(GridOption.EMPTY)
+                    && !getCopyOfDiagonalElement(listIndex - 1, position).equals(GridOption.EMPTY)) {
+                points++;
+            }
+        }
+        if (listIndex < super.horizontal.size() - 1) {
+            if (!super.getCopyOfVerticalElement(position + 1, listIndex).equals(GridOption.EMPTY)
+                    && !getCopyOfDiagonalElement(listIndex, position).equals(GridOption.EMPTY)) {
+                points++;
+            }
+        }
+        return points;
+    }
+    
+    @Override
+    public Integer verticalPointScored(final int listIndex, final int position) {
+
+        int points = 0;
+
+        if (listIndex > 0) {
+            if (!super.getCopyOfHorizontalElement(position, listIndex - 1).equals(GridOption.EMPTY)
+                    && !getCopyOfDiagonalElement(position, listIndex - 1).equals(GridOption.EMPTY)) {
+                points++;
+            }
+        }
+        if (listIndex < super.vertical.size() - 1) {
+            if (!super.getCopyOfHorizontalElement(position + 1, listIndex).equals(GridOption.EMPTY)
+                    && !getCopyOfDiagonalElement(position, listIndex).equals(GridOption.EMPTY)) {
+                points++;
+            }
+        }
+        return points;
+    }
+    
     private void checkCorrectDiagonalInput(final Integer listIndex, final Integer position) {
-
         if (listIndex < 0 || listIndex > diagonal.size()) {
             throw new IllegalArgumentException();
         }
-
         if (position < 0 || position > diagonal.get(listIndex).size()) {
             throw new IndexOutOfBoundsException();
         }
@@ -52,7 +90,6 @@ public class TriangleGridImpl extends BaseGridImpl implements BaseGrid, Triangle
 
     @Override
     public GridOption getCopyOfDiagonalElement(final int listIndex, final int position) {
-
         checkCorrectDiagonalInput(listIndex, position);
         GridOption copyOfDiagonalElement = diagonal.get(listIndex).get(position);
         return copyOfDiagonalElement;
@@ -77,6 +114,22 @@ public class TriangleGridImpl extends BaseGridImpl implements BaseGrid, Triangle
                 throw new IllegalStateException();
             }
         }
+    }
+
+    public Integer diagonalPointScored(final int listIndex, final int position) {
+
+        int points = 0;
+
+        if (!super.getCopyOfHorizontalElement(listIndex, position).equals(GridOption.EMPTY)
+                && super.getCopyOfVerticalElement(position + 1, listIndex).equals(GridOption.EMPTY)) {
+            points++;
+        }
+
+        if (!super.getCopyOfHorizontalElement(listIndex + 1, position).equals(GridOption.EMPTY)
+                && super.getCopyOfVerticalElement(position, listIndex).equals(GridOption.EMPTY)) {
+            points++;
+        }
+        return points;
     }
 
     @Override
