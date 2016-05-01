@@ -13,7 +13,6 @@ import model.enumerations.ListType;
 import model.interfaces.BaseGrid;
 import model.interfaces.Turn;
 
-
 public class TestBaseOptions {
 
     private static final Integer STANDARD_SIZE = 6;
@@ -37,21 +36,21 @@ public class TestBaseOptions {
         // remaining
         // moves
 
-     // verifies that every element in the list is initialized as EMPTY
-        for (int i = 0; i < HORIZONTAL_SIZE + 1; i++) { 
+        // verifies that every element in the list is initialized as EMPTY
+        for (int i = 0; i < HORIZONTAL_SIZE + 1; i++) {
             for (int z = 0; z < HORIZONTAL_SIZE; z++) {
                 assertEquals(gridOfSize.getCopyOfGrid().getCopyOfHorizontalElement(i, z), GridOption.EMPTY);
             }
         }
-        for (int i = 0; i < VERTICAL_SIZE + 1; i++) { // verifies that every element in
+        for (int i = 0; i < VERTICAL_SIZE + 1; i++) { // verifies that every
+                                                      // element in
             // the list is initialized as EMPTY
             for (int z = 0; z < VERTICAL_SIZE; z++) {
                 assertEquals(gridOfSize.getCopyOfGrid().getCopyOfVerticalElement(i, z), GridOption.EMPTY);
             }
         }
-        
-        assertFalse(gridOfSize.isStarted());
 
+        assertFalse(gridOfSize.isStarted());
         gridOfSize.startMatch();
         assertTrue(gridOfSize.isStarted());
         gridOfSize.setLine(ListType.VERTICAL, 0, 0);
@@ -94,8 +93,9 @@ public class TestBaseOptions {
 
         gridOfSize2.startMatch();
 
-        for (int i = 0; i < STANDARD_SIZE + 1; i++) { // fills the grid with all the
-                                             // possible moves
+        for (int i = 0; i < STANDARD_SIZE + 1; i++) { // fills the grid with all
+                                                      // the
+            // possible moves
             for (int z = 0; z < STANDARD_SIZE; z++) {
                 gridOfSize2.setLine(ListType.HORIZONTAL, i, z);
                 gridOfSize2.setLine(ListType.VERTICAL, i, z);
@@ -117,7 +117,7 @@ public class TestBaseOptions {
 
         BaseGrid exceptionGrid;
         Turn exceptionGame;
-        
+
         try {
             // CHECKSTYLE:OFF:
             exceptionGrid = new BaseGridImpl(STANDARD_SIZE - 4, STANDARD_SIZE - 4);

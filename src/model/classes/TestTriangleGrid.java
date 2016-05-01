@@ -10,11 +10,15 @@ import org.junit.Test;
 
 import model.enumerations.GridOption;
 import model.enumerations.ListType;
+import model.interfaces.BaseGrid;
+import model.interfaces.TriangleGrid;
 import model.interfaces.Turn;
 
 public class TestTriangleGrid {
 
-    private static final Integer SIZE = 6;
+    private static final Integer STANDARD_SIZE = 6;
+    private static final Integer HORIZONTAL_SIZE = 5;
+    private static final Integer VERTICAL_SIZE = 4;
 
     /**
      * 
@@ -22,20 +26,25 @@ public class TestTriangleGrid {
     @Test
     public void test() {
 
-        Turn gridOfSize = new TriangleTurnImpl(SIZE, SIZE);
+        TriangleGrid squareGrid = new TriangleGridImpl(HORIZONTAL_SIZE, VERTICAL_SIZE);
+        Turn gridOfSize = new TurnImpl(squareGrid);
 
-        assertFalse(gridOfSize.isStarted());
-        gridOfSize.startMatch();
-        
         assertEquals(gridOfSize.getCopyOfGrid().getTotalMoves(), gridOfSize.getCopyOfGrid().getRemainingMoves());
-        for (int i = 0; i < SIZE + 1; i++) { // verifies that every element in
-            // the list is initialized as EMPTY
-            for (int z = 0; z < SIZE; z++) {
+        // verifies that every element in the list is initialized as EMPTY
+        for (int i = 0; i < HORIZONTAL_SIZE + 1; i++) {
+            for (int z = 0; z < HORIZONTAL_SIZE; z++) {
                 assertEquals(gridOfSize.getCopyOfGrid().getCopyOfHorizontalElement(i, z), GridOption.EMPTY);
+                //assertEquals(gridOfSize.getCopyOfGrid().getCopyOfDiagonalElement(i, z), GridOption.EMPTY);
+            }
+        }
+        for (int i = 0; i < VERTICAL_SIZE + 1; i++) {
+            for (int z = 0; z < VERTICAL_SIZE; z++) {
                 assertEquals(gridOfSize.getCopyOfGrid().getCopyOfVerticalElement(i, z), GridOption.EMPTY);
             }
         }
-     
+
+        assertFalse(gridOfSize.isStarted());
+        gridOfSize.startMatch();
         assertTrue(gridOfSize.isStarted());
         gridOfSize.setLine(ListType.VERTICAL, 0, 0);
         assertEquals(gridOfSize.getCopyOfGrid().getRemainingMoves(),
@@ -52,17 +61,15 @@ public class TestTriangleGrid {
 
         assertEquals(gridOfSize.getCopyOfGrid().getRemainingMoves(),
                 (Integer) (gridOfSize.getCopyOfGrid().getTotalMoves() - 4));
+        //the player points should be the same with this game mode
+        assertEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
+        assertNotEquals(player, gridOfSize.getCurrentPlayerTurn());
+        
+        player = gridOfSize.getCurrentPlayerTurn();
+        gridOfSize.setLine(ListType.DIAGONAL, 0, 0);
         assertNotEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
-        assertEquals(player, gridOfSize.getCurrentPlayerTurn()); // verifies
-                                                                 // if
-                                                                 // the
-                                                                 // player
-                                                                 // has
-                                                                 // received
-                                                                 // a
-                                                                 // bonus
-                                                                 // move
-
+        assertEquals(player, gridOfSize.getCurrentPlayerTurn());
+        
         gridOfSize.undoLastMove();
         assertEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER1));
         assertEquals(player, gridOfSize.getCurrentPlayerTurn());
@@ -72,13 +79,14 @@ public class TestTriangleGrid {
         gridOfSize.undoLastMove();
         assertNotEquals(player, gridOfSize.getCurrentPlayerTurn());
 
-        TriangleTurnImpl gridOfSize2 = new TriangleTurnImpl(SIZE, SIZE);
+        BaseGrid squareGrid2 = new TriangleGridImpl(STANDARD_SIZE, STANDARD_SIZE);
+        Turn gridOfSize2 = new TurnImpl(squareGrid2);
 
         gridOfSize2.startMatch();
 
-        for (int i = 0; i < SIZE + 1; i++) { // fills the grid with all the
-                                             // possible moves
-            for (int z = 0; z < SIZE; z++) {
+        // fills the grid with all thepossible moves
+        for (int i = 0; i < STANDARD_SIZE + 1; i++) { 
+            for (int z = 0; z < STANDARD_SIZE; z++) {
                 gridOfSize2.setLine(ListType.HORIZONTAL, i, z);
                 gridOfSize2.setLine(ListType.VERTICAL, i, z);
             }
@@ -97,80 +105,5 @@ public class TestTriangleGrid {
     @Test
     public void testExceptions() {
 
-        TriangleTurnImpl testGrid;
-
-        try {
-            // CHECKSTYLE:OFF:
-            testGrid = new TriangleTurnImpl(SIZE - 4, SIZE - 4);
-            // CHECKSTYLE:ON:
-            fail("Can't create a grid too small");
-        } catch (IllegalArgumentException e) {
-        } catch (Exception e) {
-            fail("Wrong exception thrown");
-        }
-        try {
-            testGrid = new TriangleTurnImpl(SIZE + SIZE, SIZE + SIZE);
-            fail("Can't create a grid too big");
-        } catch (IllegalArgumentException e) {
-        } catch (Exception e) {
-            fail("Wrong exception thrown");
-        }
-
-        testGrid = new TriangleTurnImpl(SIZE, SIZE);
-        try {
-            testGrid.isEnded();
-            fail("the match can't be ended if it isn't started");
-        } catch (IllegalStateException e) {
-        } catch (Exception e) {
-            fail("Wrong exception thrown");
-        }
-        try {
-            testGrid.setLine(ListType.HORIZONTAL, 0, 0);
-            fail("Can't insert a move when the match isn't started");
-        } catch (IllegalStateException e) {
-        } catch (Exception e) {
-            fail("Wrong exception thrown");
-        }
-        testGrid.startMatch();
-        try {
-            testGrid.setLine(ListType.HORIZONTAL, -1, -1);
-            fail("Can't insert those parameters");
-        } catch (IllegalArgumentException e) { // forse potrebbe essere anche un
-                                               // index out of bound
-        } catch (Exception e) {
-            fail("Wrong exception thrown");
-        }
-        try {
-            // CHECKSTYLE:OFF:
-            testGrid.setLine(ListType.HORIZONTAL, 0, 7);
-            // CHECKSTYLE:ON:
-            fail("The grid isn't big enough");
-        } catch (IndexOutOfBoundsException e) { // forse potrebbe essere anche
-                                                // un
-                                                // illegal argument
-        } catch (Exception e) {
-            fail("Wrong exception thrown");
-        }
-        try {
-            testGrid.undoLastMove();
-            fail("You can't undo a move if a player didn't do at least one"); // riformulare
-        } catch (IllegalStateException e) {
-        } catch (Exception e) {
-            fail("Wrong exception thrown");
-        }
-        try {
-            testGrid.setLine(ListType.DIAGONAL, 0, 0);
-            fail("You can't set a diagonal line, the base grid doesn't include this option");
-        } catch (IllegalArgumentException e) {
-        } catch (Exception e) {
-            fail("Wrong exception thrown");
-        }
-        try {
-            testGrid.getWinner();
-            fail("");
-        } catch (IllegalStateException e) {
-        } catch (Exception e) {
-            fail("Wrong exception thrown");
-        }
     }
 }
