@@ -14,8 +14,8 @@ public class TriangleGridImpl extends BaseGridImpl implements TriangleGrid {
     public TriangleGridImpl(Integer rowsNumber, Integer columnsNumber) {
         super(rowsNumber, columnsNumber);
 
-        for (int i = 0; i < rowsNumber; i++) {
-            diagonal.add(createEmptyGrid(columnsNumber));
+        for (int i = 0; i < rowsNumber + 1; i++) {
+            diagonal.add(super.createEmptyGrid(columnsNumber));
         }
     }
 
@@ -92,6 +92,7 @@ public class TriangleGridImpl extends BaseGridImpl implements TriangleGrid {
     public GridOption getCopyOfDiagonalElement(final int listIndex, final int position) {
         checkCorrectDiagonalInput(listIndex, position);
         GridOption copyOfDiagonalElement = diagonal.get(listIndex).get(position);
+        System.out.println("listindex: " + listIndex+ " position: " + position + " " + copyOfDiagonalElement);
         return copyOfDiagonalElement;
     }
 
