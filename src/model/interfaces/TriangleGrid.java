@@ -22,5 +22,7 @@ public interface TriangleGrid extends BaseGrid {
      */
     void setDiagonalLine(final int listIndex, int position, GridOption playerTurn);
     
-    Integer getDiagonalListSize();
+    Integer diagonalPointScored(int listIndex, int position);
+   
+    Integer getDiagonalListSize(); 
 }

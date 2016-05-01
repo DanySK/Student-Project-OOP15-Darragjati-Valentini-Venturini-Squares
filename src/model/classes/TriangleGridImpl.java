@@ -116,6 +116,7 @@ public class TriangleGridImpl extends BaseGridImpl implements TriangleGrid {
         }
     }
 
+    @Override
     public Integer diagonalPointScored(final int listIndex, final int position) {
 
         int points = 0;

@@ -7,6 +7,7 @@ import model.enumerations.GridOption;
 import model.enumerations.ListType;
 import model.interfaces.BaseGrid;
 import model.interfaces.LastMove;
+import model.interfaces.TriangleGrid;
 import model.interfaces.Turn;
 
 public class TurnImpl implements Turn {
@@ -15,8 +16,6 @@ public class TurnImpl implements Turn {
     private boolean matchStarted = false;
     private Integer scorePlayer1;
     private Integer scorePlayer2;
-    private Integer rowsNumber;
-    private Integer columnsNumber;
     private static final Integer INITIAL_SCORE = 0;
     private GridOption turn = GridOption.EMPTY;
     private List<LastMove> lastMoveList = new ArrayList<>();
@@ -136,6 +135,15 @@ public class TurnImpl implements Turn {
         case VERTICAL:
             grid.setVerticalLine(listIndex, position, this.turn);
             points = grid.verticalPointScored(listIndex, position);
+            if (points > 0) {
+                addPoints(points);
+            } else {
+                nextTurn();
+            }
+            break;
+        case DIAGONAL:
+            ((TriangleGrid) grid).setDiagonalLine(listIndex, position, this.turn);
+            points = ((TriangleGrid) grid).diagonalPointScored(listIndex, position);
             if (points > 0) {
                 addPoints(points);
             } else {
