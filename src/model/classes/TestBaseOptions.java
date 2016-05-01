@@ -16,12 +16,14 @@ import model.interfaces.Turn;
 
 public class TestBaseOptions {
 
-    private static final Integer SIZE = 6;
+    private static final Integer STANDARD_SIZE = 6;
+    private static final Integer HORIZONTAL_SIZE = 5;
+    private static final Integer VERTICAL_SIZE = 4;
 
     @Test
     public void test() {
 
-        BaseGrid squareGrid = new BaseGridImpl(SIZE, SIZE);
+        BaseGrid squareGrid = new BaseGridImpl(HORIZONTAL_SIZE, VERTICAL_SIZE);
         Turn gridOfSize = new TurnImpl(squareGrid);
 
         assertEquals(gridOfSize.getCopyOfGrid().getTotalMoves(), gridOfSize.getCopyOfGrid().getRemainingMoves()); // verifies
@@ -35,14 +37,19 @@ public class TestBaseOptions {
         // remaining
         // moves
 
-        for (int i = 0; i < SIZE + 1; i++) { // verifies that every element in
-            // the list is initialized as EMPTY
-            for (int z = 0; z < SIZE; z++) {
+     // verifies that every element in the list is initialized as EMPTY
+        for (int i = 0; i < HORIZONTAL_SIZE + 1; i++) { 
+            for (int z = 0; z < HORIZONTAL_SIZE; z++) {
                 assertEquals(gridOfSize.getCopyOfGrid().getCopyOfHorizontalElement(i, z), GridOption.EMPTY);
+            }
+        }
+        for (int i = 0; i < VERTICAL_SIZE + 1; i++) { // verifies that every element in
+            // the list is initialized as EMPTY
+            for (int z = 0; z < VERTICAL_SIZE; z++) {
                 assertEquals(gridOfSize.getCopyOfGrid().getCopyOfVerticalElement(i, z), GridOption.EMPTY);
             }
         }
-
+        
         assertFalse(gridOfSize.isStarted());
 
         gridOfSize.startMatch();
@@ -82,14 +89,14 @@ public class TestBaseOptions {
         gridOfSize.undoLastMove();
         assertNotEquals(player, gridOfSize.getCurrentPlayerTurn());
 
-        BaseGrid squareGrid2 = new BaseGridImpl(SIZE, SIZE);
+        BaseGrid squareGrid2 = new BaseGridImpl(STANDARD_SIZE, STANDARD_SIZE);
         Turn gridOfSize2 = new TurnImpl(squareGrid2);
 
         gridOfSize2.startMatch();
 
-        for (int i = 0; i < SIZE + 1; i++) { // fills the grid with all the
+        for (int i = 0; i < STANDARD_SIZE + 1; i++) { // fills the grid with all the
                                              // possible moves
-            for (int z = 0; z < SIZE; z++) {
+            for (int z = 0; z < STANDARD_SIZE; z++) {
                 gridOfSize2.setLine(ListType.HORIZONTAL, i, z);
                 gridOfSize2.setLine(ListType.VERTICAL, i, z);
             }
@@ -113,7 +120,7 @@ public class TestBaseOptions {
         
         try {
             // CHECKSTYLE:OFF:
-            exceptionGrid = new BaseGridImpl(SIZE - 4, SIZE - 4);
+            exceptionGrid = new BaseGridImpl(STANDARD_SIZE - 4, STANDARD_SIZE - 4);
             // CHECKSTYLE:ON:
             fail("Can't create a grid too small");
         } catch (IllegalArgumentException e) {
@@ -121,14 +128,14 @@ public class TestBaseOptions {
             fail("Wrong exception thrown");
         }
         try {
-            exceptionGrid = new BaseGridImpl(SIZE + SIZE, SIZE + SIZE);
+            exceptionGrid = new BaseGridImpl(STANDARD_SIZE + STANDARD_SIZE, STANDARD_SIZE + STANDARD_SIZE);
             fail("Can't create a grid too big");
         } catch (IllegalArgumentException e) {
         } catch (Exception e) {
             fail("Wrong exception thrown");
         }
 
-        exceptionGrid = new BaseGridImpl(SIZE, SIZE);
+        exceptionGrid = new BaseGridImpl(STANDARD_SIZE, STANDARD_SIZE);
         exceptionGame = new TurnImpl(exceptionGrid);
         try {
             exceptionGame.isEnded();
