@@ -85,7 +85,4 @@ public interface Turn {
      * @return the copy of the last move.
      */
     LastMove getCopyOfLastMove();
-
-    BaseGrid getCopyOfGrid();
-
 }

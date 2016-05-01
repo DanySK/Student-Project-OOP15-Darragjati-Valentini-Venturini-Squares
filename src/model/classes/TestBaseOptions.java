@@ -25,7 +25,7 @@ public class TestBaseOptions {
         BaseGrid squareGrid = new BaseGridImpl(HORIZONTAL_SIZE, VERTICAL_SIZE);
         Turn gridOfSize = new TurnImpl(squareGrid);
 
-        assertEquals(gridOfSize.getCopyOfGrid().getTotalMoves(), gridOfSize.getCopyOfGrid().getRemainingMoves()); // verifies
+        assertEquals(squareGrid.getTotalMoves(), squareGrid.getRemainingMoves()); // verifies
         // that
         // total
         // moves
@@ -39,14 +39,14 @@ public class TestBaseOptions {
         // verifies that every element in the list is initialized as EMPTY
         for (int i = 0; i < HORIZONTAL_SIZE + 1; i++) {
             for (int z = 0; z < HORIZONTAL_SIZE; z++) {
-                assertEquals(gridOfSize.getCopyOfGrid().getCopyOfHorizontalElement(i, z), GridOption.EMPTY);
+                assertEquals(squareGrid.getCopyOfHorizontalElement(i, z), GridOption.EMPTY);
             }
         }
         for (int i = 0; i < VERTICAL_SIZE + 1; i++) { // verifies that every
                                                       // element in
             // the list is initialized as EMPTY
             for (int z = 0; z < VERTICAL_SIZE; z++) {
-                assertEquals(gridOfSize.getCopyOfGrid().getCopyOfVerticalElement(i, z), GridOption.EMPTY);
+                assertEquals(squareGrid.getCopyOfVerticalElement(i, z), GridOption.EMPTY);
             }
         }
 
@@ -54,7 +54,7 @@ public class TestBaseOptions {
         gridOfSize.startMatch();
         assertTrue(gridOfSize.isStarted());
         gridOfSize.setLine(ListType.VERTICAL, 0, 0);
-        assertEquals(gridOfSize.getCopyOfGrid().getRemainingMoves(),
+        assertEquals(squareGrid.getRemainingMoves(),
                 (Integer) (squareGrid.getTotalMoves() - 1));
         assertEquals(gridOfSize.getCopyOfLastMove().getLastListType(), ListType.VERTICAL);
         assertEquals(gridOfSize.getCopyOfLastMove().getLastListIndex(), (Integer) 0);
@@ -180,7 +180,7 @@ public class TestBaseOptions {
         try {
             exceptionGame.setLine(ListType.DIAGONAL, 0, 0);
             fail("You can't set a diagonal line, the base grid doesn't include this option");
-        } catch (IllegalArgumentException e) {
+        } catch (UnsupportedOperationException e) {
         } catch (Exception e) {
             fail("Wrong exception thrown");
         }

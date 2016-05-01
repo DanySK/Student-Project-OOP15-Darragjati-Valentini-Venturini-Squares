@@ -142,6 +142,9 @@ public class TurnImpl implements Turn {
             }
             break;
         case DIAGONAL:
+            if (grid.getClass().equals(BaseGridImpl.class)) {
+                throw new UnsupportedOperationException();
+            }
             ((TriangleGrid) grid).setDiagonalLine(listIndex, position, this.turn);
             points = ((TriangleGrid) grid).diagonalPointScored(listIndex, position);
             if (points > 0) {
@@ -181,7 +184,7 @@ public class TurnImpl implements Turn {
             throw new IllegalStateException("you can't undo if you didn't made a move");
         }
 
-        switch(getCopyOfLastMove().getLastListType()){
+        switch (getCopyOfLastMove().getLastListType()) {
         case HORIZONTAL:
             addPoints(-grid.horizontalPointScored(getCopyOfLastMove().getLastListIndex(),
                     getCopyOfLastMove().getLastPosition()));
@@ -205,8 +208,8 @@ public class TurnImpl implements Turn {
         case DIAGONAL:
             addPoints(-((TriangleGrid) grid).diagonalPointScored(getCopyOfLastMove().getLastListIndex(),
                     getCopyOfLastMove().getLastPosition()));
-            ((TriangleGrid) grid).setDiagonalLine(getCopyOfLastMove().getLastListIndex(), getCopyOfLastMove().getLastPosition(),
-                    GridOption.EMPTY);
+            ((TriangleGrid) grid).setDiagonalLine(getCopyOfLastMove().getLastListIndex(),
+                    getCopyOfLastMove().getLastPosition(), GridOption.EMPTY);
             if (!(((TriangleGrid) grid).diagonalPointScored(getCopyOfLastMove().getLastListIndex(),
                     getCopyOfLastMove().getLastPosition()) > 0)) {
                 nextTurn();
