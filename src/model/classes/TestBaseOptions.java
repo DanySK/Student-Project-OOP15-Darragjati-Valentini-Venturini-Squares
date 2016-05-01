@@ -55,7 +55,7 @@ public class TestBaseOptions {
         assertTrue(gridOfSize.isStarted());
         gridOfSize.setLine(ListType.VERTICAL, 0, 0);
         assertEquals(gridOfSize.getCopyOfGrid().getRemainingMoves(),
-                (Integer) (gridOfSize.getCopyOfGrid().getTotalMoves() - 1));
+                (Integer) (squareGrid.getTotalMoves() - 1));
         assertEquals(gridOfSize.getCopyOfLastMove().getLastListType(), ListType.VERTICAL);
         assertEquals(gridOfSize.getCopyOfLastMove().getLastListIndex(), (Integer) 0);
         assertEquals(gridOfSize.getCopyOfLastMove().getLastPosition(), (Integer) 0);
@@ -66,8 +66,8 @@ public class TestBaseOptions {
         GridOption player = gridOfSize.getCurrentPlayerTurn();
         gridOfSize.setLine(ListType.VERTICAL, 1, 0);
 
-        assertEquals(gridOfSize.getCopyOfGrid().getRemainingMoves(),
-                (Integer) (gridOfSize.getCopyOfGrid().getTotalMoves() - 4));
+        assertEquals(squareGrid.getRemainingMoves(),
+                (Integer) (squareGrid.getTotalMoves() - 4));
         assertNotEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
         assertEquals(player, gridOfSize.getCurrentPlayerTurn()); // verifies
                                                                  // if
@@ -93,16 +93,15 @@ public class TestBaseOptions {
 
         gridOfSize2.startMatch();
 
-        for (int i = 0; i < STANDARD_SIZE + 1; i++) { // fills the grid with all
-                                                      // the
-            // possible moves
+        //fills the grid with all the possible moves
+        for (int i = 0; i < STANDARD_SIZE + 1; i++) {
             for (int z = 0; z < STANDARD_SIZE; z++) {
                 gridOfSize2.setLine(ListType.HORIZONTAL, i, z);
                 gridOfSize2.setLine(ListType.VERTICAL, i, z);
             }
         }
 
-        assertTrue(gridOfSize2.getCopyOfGrid().getRemainingMoves().equals(0));
+        assertTrue(squareGrid2.getRemainingMoves().equals(0));
         assertNotEquals(gridOfSize2.getPlayerPoints(GridOption.PLAYER1),
                 gridOfSize2.getPlayerPoints(GridOption.PLAYER2));
         assertTrue(gridOfSize2.isEnded());

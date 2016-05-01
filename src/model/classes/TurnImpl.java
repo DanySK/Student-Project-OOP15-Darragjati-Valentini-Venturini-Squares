@@ -220,10 +220,4 @@ public class TurnImpl implements Turn {
     public LastMove getCopyOfLastMove() {
         return lastMoveList.get(lastMoveList.size() - 1);
     }
-
-    @Override // DA RIGUARDARE
-    public BaseGrid getCopyOfGrid() {
-        BaseGrid copyOfThisGrid = this.grid;
-        return copyOfThisGrid;
-    }
 }
