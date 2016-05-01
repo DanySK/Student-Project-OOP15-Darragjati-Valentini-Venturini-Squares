@@ -82,7 +82,8 @@ public class TestBaseOptions {
         gridOfSize.undoLastMove();
         assertNotEquals(player, gridOfSize.getCurrentPlayerTurn());
 
-        Turn gridOfSize2 = new TurnImpl(squareGrid);
+        BaseGrid squareGrid2 = new BaseGridImpl(SIZE, SIZE);
+        Turn gridOfSize2 = new TurnImpl(squareGrid2);
 
         gridOfSize2.startMatch();
 
@@ -107,11 +108,12 @@ public class TestBaseOptions {
     @Test
     public void testExceptions() {
 
-        Turn testGrid;
-
+        BaseGrid exceptionGrid;
+        Turn exceptionGame;
+        
         try {
             // CHECKSTYLE:OFF:
-            testGrid = new TurnImpl(SIZE - 4, SIZE - 4);
+            exceptionGrid = new BaseGridImpl(SIZE - 4, SIZE - 4);
             // CHECKSTYLE:ON:
             fail("Can't create a grid too small");
         } catch (IllegalArgumentException e) {
@@ -119,31 +121,32 @@ public class TestBaseOptions {
             fail("Wrong exception thrown");
         }
         try {
-            testGrid = new TurnImpl(SIZE + SIZE, SIZE + SIZE);
+            exceptionGrid = new BaseGridImpl(SIZE + SIZE, SIZE + SIZE);
             fail("Can't create a grid too big");
         } catch (IllegalArgumentException e) {
         } catch (Exception e) {
             fail("Wrong exception thrown");
         }
 
-        testGrid = new TurnImpl(SIZE, SIZE);
+        exceptionGrid = new BaseGridImpl(SIZE, SIZE);
+        exceptionGame = new TurnImpl(exceptionGrid);
         try {
-            testGrid.isEnded();
+            exceptionGame.isEnded();
             fail("the match can't be ended if it isn't started");
         } catch (IllegalStateException e) {
         } catch (Exception e) {
             fail("Wrong exception thrown");
         }
         try {
-            testGrid.setLine(ListType.HORIZONTAL, 0, 0);
+            exceptionGame.setLine(ListType.HORIZONTAL, 0, 0);
             fail("Can't insert a move when the match isn't started");
         } catch (IllegalStateException e) {
         } catch (Exception e) {
             fail("Wrong exception thrown");
         }
-        testGrid.startMatch();
+        exceptionGame.startMatch();
         try {
-            testGrid.setLine(ListType.HORIZONTAL, -1, -1);
+            exceptionGame.setLine(ListType.HORIZONTAL, -1, -1);
             fail("Can't insert those parameters");
         } catch (IllegalArgumentException e) { // forse potrebbe essere anche un
                                                // index out of bound
@@ -152,7 +155,7 @@ public class TestBaseOptions {
         }
         try {
             // CHECKSTYLE:OFF:
-            testGrid.setLine(ListType.HORIZONTAL, 0, 7);
+            exceptionGame.setLine(ListType.HORIZONTAL, 0, 7);
             // CHECKSTYLE:ON:
             fail("The grid isn't big enough");
         } catch (IndexOutOfBoundsException e) { // forse potrebbe essere anche
@@ -162,21 +165,21 @@ public class TestBaseOptions {
             fail("Wrong exception thrown");
         }
         try {
-            testGrid.undoLastMove();
+            exceptionGame.undoLastMove();
             fail("You can't undo a move if a player didn't do at least one"); // riformulare
         } catch (IllegalStateException e) {
         } catch (Exception e) {
             fail("Wrong exception thrown");
         }
         try {
-            testGrid.setLine(ListType.DIAGONAL, 0, 0);
+            exceptionGame.setLine(ListType.DIAGONAL, 0, 0);
             fail("You can't set a diagonal line, the base grid doesn't include this option");
         } catch (IllegalArgumentException e) {
         } catch (Exception e) {
             fail("Wrong exception thrown");
         }
         try {
-            testGrid.getWinner();
+            exceptionGame.getWinner();
             fail("");
         } catch (IllegalStateException e) {
         } catch (Exception e) {
