@@ -67,13 +67,14 @@ public class TestTriangleGrid {
         
         player = gridOfSize.getCurrentPlayerTurn();
         gridOfSize.setLine(ListType.DIAGONAL, 0, 0);
+        System.out.println(squareGrid.getCopyOfDiagonalElement(0, 0));
         assertNotEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
         assertEquals(player, gridOfSize.getCurrentPlayerTurn());
         
         gridOfSize.undoLastMove();
-        assertEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER1));
+        assertEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
         assertEquals(player, gridOfSize.getCurrentPlayerTurn());
-        assertEquals(gridOfSize.getCopyOfLastMove().getLastListType(), ListType.HORIZONTAL);
+        assertEquals(gridOfSize.getCopyOfLastMove().getLastListType(), ListType.DIAGONAL);
         assertEquals(gridOfSize.getCopyOfLastMove().getLastListIndex(), (Integer) 1);
         assertEquals(gridOfSize.getCopyOfLastMove().getLastPosition(), (Integer) 0);
         gridOfSize.undoLastMove();

@@ -122,12 +122,12 @@ public class TriangleGridImpl extends BaseGridImpl implements TriangleGrid {
         int points = 0;
 
         if (!super.getCopyOfHorizontalElement(listIndex, position).equals(GridOption.EMPTY)
-                && super.getCopyOfVerticalElement(position + 1, listIndex).equals(GridOption.EMPTY)) {
+                && !super.getCopyOfVerticalElement(position + 1, listIndex).equals(GridOption.EMPTY)) {
             points++;
         }
 
         if (!super.getCopyOfHorizontalElement(listIndex + 1, position).equals(GridOption.EMPTY)
-                && super.getCopyOfVerticalElement(position, listIndex).equals(GridOption.EMPTY)) {
+                && !super.getCopyOfVerticalElement(position, listIndex).equals(GridOption.EMPTY)) {
             points++;
         }
         return points;

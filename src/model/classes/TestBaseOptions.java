@@ -80,7 +80,7 @@ public class TestBaseOptions {
                                                                  // move
 
         gridOfSize.undoLastMove();
-        assertEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER1));
+        assertEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
         assertEquals(player, gridOfSize.getCurrentPlayerTurn());
         assertEquals(gridOfSize.getCopyOfLastMove().getLastListType(), ListType.HORIZONTAL);
         assertEquals(gridOfSize.getCopyOfLastMove().getLastListIndex(), (Integer) 1);
