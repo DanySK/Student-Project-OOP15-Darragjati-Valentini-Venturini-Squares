@@ -50,7 +50,7 @@ public class TriangleGridImpl extends BaseGridImpl implements TriangleGrid {
                 points++;
             }
         }
-        if (listIndex < super.horizontal.size() - 1) {
+        if (listIndex < super.getHorizontalListSize() - 1) {
             if (!super.getCopyOfVerticalElement(position + 1, listIndex).equals(GridOption.EMPTY)
                     && !getCopyOfDiagonalElement(listIndex, position).equals(GridOption.EMPTY)) {
                 points++;
@@ -70,7 +70,7 @@ public class TriangleGridImpl extends BaseGridImpl implements TriangleGrid {
                 points++;
             }
         }
-        if (listIndex < super.vertical.size() - 1) {
+        if (listIndex < super.getVerticallListSize() - 1) {
             if (!super.getCopyOfHorizontalElement(position + 1, listIndex).equals(GridOption.EMPTY)
                     && !getCopyOfDiagonalElement(position, listIndex).equals(GridOption.EMPTY)) {
                 points++;

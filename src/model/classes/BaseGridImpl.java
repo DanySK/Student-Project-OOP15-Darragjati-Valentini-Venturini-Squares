@@ -7,12 +7,14 @@ import model.enumerations.GridOption;
 import model.enumerations.ListType;
 import model.interfaces.BaseGrid;
 
-
-
+/**
+ * This class implements the methods of the interface BaseGrid. It is used to
+ * create the game's playable field.
+ */
 public class BaseGridImpl implements BaseGrid {
 
-    protected List<List<GridOption>> horizontal = new ArrayList<>();
-    protected List<List<GridOption>> vertical = new ArrayList<>();
+    private List<List<GridOption>> horizontal = new ArrayList<>();
+    private List<List<GridOption>> vertical = new ArrayList<>();
     private static final Integer MINIMUM_SIZE = 4;
     private static final Integer MAXIMUM_SIZE = 10;
 
@@ -108,7 +110,7 @@ public class BaseGridImpl implements BaseGrid {
             }
         }
     }
-    
+
     public Integer horizontalPointScored(final int listIndex, final int position) {
 
         int points = 0;
@@ -172,7 +174,7 @@ public class BaseGridImpl implements BaseGrid {
             }
         }
     }
-    
+
     public Integer verticalPointScored(final int listIndex, final int position) {
 
         int points = 0;
@@ -196,8 +198,8 @@ public class BaseGridImpl implements BaseGrid {
         }
         return points;
     }
-    
-  //da tenere?
+
+    // da tenere?
     private GridOption getPreviousParallelList(final ListType list, final int listIndex, final int position) {
         if (listIndex > 0) {
             switch (list) {
@@ -212,7 +214,8 @@ public class BaseGridImpl implements BaseGrid {
             throw new IllegalArgumentException();
         }
     }
-    //da tenere?
+
+    // da tenere?
     private GridOption getNextParallelList(final ListType list, final int listIndex, final int position) {
         switch (list) {
         case HORIZONTAL:

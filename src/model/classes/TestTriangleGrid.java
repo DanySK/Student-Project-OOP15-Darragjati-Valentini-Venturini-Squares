@@ -72,7 +72,6 @@ public class TestTriangleGrid {
         
         player = gridOfSize.getCurrentPlayerTurn();
         gridOfSize.setLine(ListType.DIAGONAL, 0, 0);
-        System.out.println(triangleGrid.getCopyOfDiagonalElement(0, 0));
         assertNotEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
         assertEquals(player, gridOfSize.getCurrentPlayerTurn());
         assertEquals(gridOfSize.getCopyOfLastMove().getLastListType(), ListType.DIAGONAL);
