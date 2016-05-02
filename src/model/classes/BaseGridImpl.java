@@ -18,6 +18,11 @@ public class BaseGridImpl implements BaseGrid {
     private static final Integer MINIMUM_SIZE = 4;
     private static final Integer MAXIMUM_SIZE = 10;
 
+    /**
+     * This constructor creates a new playable grid.
+     * @param rowsNumber the number of rows of the grid
+     * @param columnsNumber the number of columns of the grid
+     */
     public BaseGridImpl(final Integer rowsNumber, final Integer columnsNumber) {
 
         if (rowsNumber < MINIMUM_SIZE || rowsNumber > MAXIMUM_SIZE || columnsNumber < MINIMUM_SIZE
@@ -26,17 +31,20 @@ public class BaseGridImpl implements BaseGrid {
         }
 
         for (int i = 0; i < rowsNumber + 1; i++) {
-            horizontal.add(createEmptyGrid(rowsNumber));
+            horizontal.add(createEmptyList(rowsNumber));
         }
         for (int i = 0; i < columnsNumber + 1; i++) {
-            vertical.add(createEmptyGrid(columnsNumber));
+            vertical.add(createEmptyList(columnsNumber));
         }
     }
 
-    protected List<GridOption> createEmptyGrid(final Integer size) {
-
+    /**
+     * This method creates a list of empty moves.
+     * @param size the list's size
+     * @return the created list
+     */
+    protected List<GridOption> createEmptyList(final Integer size) {
         List<GridOption> emptyGrid = new ArrayList<>();
-
         for (int i = 0; i < size; i++) {
             emptyGrid.add(GridOption.EMPTY);
         }

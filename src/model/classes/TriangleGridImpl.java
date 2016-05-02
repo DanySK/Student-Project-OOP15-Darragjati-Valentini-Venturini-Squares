@@ -15,7 +15,7 @@ public class TriangleGridImpl extends BaseGridImpl implements TriangleGrid {
         super(rowsNumber, columnsNumber);
 
         for (int i = 0; i < rowsNumber; i++) {
-            diagonal.add(super.createEmptyGrid(columnsNumber));
+            diagonal.add(super.createEmptyList(columnsNumber));
         }
     }
 
