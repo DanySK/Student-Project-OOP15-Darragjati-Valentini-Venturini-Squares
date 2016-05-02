@@ -4,14 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.enumerations.GridOption;
-import model.interfaces.BaseGrid;
 import model.interfaces.TriangleGrid;
 
+/**
+ * This class modifies the base rules of the game adding a new way to set a move
+ * to score a point.
+ */
 public class TriangleGridImpl extends BaseGridImpl implements TriangleGrid {
 
     private List<List<GridOption>> diagonal = new ArrayList<>();
 
-    public TriangleGridImpl(Integer rowsNumber, Integer columnsNumber) {
+    /**
+     * This constructor creates a new playable grid.
+     * 
+     * @param rowsNumber
+     *            the number of rows of the grid
+     * @param columnsNumber
+     *            the number of columns of the grid
+     */
+    public TriangleGridImpl(final Integer rowsNumber, final Integer columnsNumber) {
         super(rowsNumber, columnsNumber);
 
         for (int i = 0; i < rowsNumber; i++) {
@@ -38,7 +49,7 @@ public class TriangleGridImpl extends BaseGridImpl implements TriangleGrid {
         }
         return super.getRemainingMoves() + movesLeft;
     }
-    
+
     @Override
     public Integer horizontalPointScored(final int listIndex, final int position) {
 
@@ -58,7 +69,7 @@ public class TriangleGridImpl extends BaseGridImpl implements TriangleGrid {
         }
         return points;
     }
-    
+
     @Override
     public Integer verticalPointScored(final int listIndex, final int position) {
 
@@ -78,7 +89,7 @@ public class TriangleGridImpl extends BaseGridImpl implements TriangleGrid {
         }
         return points;
     }
-    
+
     private void checkCorrectDiagonalInput(final Integer listIndex, final Integer position) {
         if (listIndex < 0 || listIndex > diagonal.size()) {
             throw new IllegalArgumentException();

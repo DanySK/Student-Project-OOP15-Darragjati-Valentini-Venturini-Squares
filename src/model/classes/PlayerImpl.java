@@ -2,7 +2,10 @@ package model.classes;
 
 import model.interfaces.Player;
 
-
+/**
+ * THis class implements the interface Player. It is used to manage the player's
+ * informations.
+ */
 public class PlayerImpl implements Player {
 
     private String playerName;
@@ -25,7 +28,7 @@ public class PlayerImpl implements Player {
     public String getPlayerName() {
         return playerName;
     }
-    
+
     @Override
     // CHECKSTYLE:OFF:
     public void setPlayerName(final String playerName) {
@@ -36,7 +39,7 @@ public class PlayerImpl implements Player {
     private void calculateWinRate() {
         this.winRate = getTotalWins() / (double) getTotalMatches();
     }
-    
+
     @Override
     public double getWinRate() {
         calculateWinRate();
@@ -47,7 +50,7 @@ public class PlayerImpl implements Player {
     public Integer getTotalWins() {
         return this.wonMatches;
     }
-    
+
     @Override
     // CHECKSTYLE:OFF:
     public void setWonMatches(final Integer wonMatches) {
@@ -66,12 +69,12 @@ public class PlayerImpl implements Player {
         // CHECKSTYLE:ON:
         this.totalMatches = totalMatches;
     }
-    
+
     @Override
     public Integer getTotalSquaresCatched() {
         return this.totalSquaresCatched;
     }
-    
+
     @Override
     // CHECKSTYLE:OFF:
     public void setTotalSquaresCatched(final Integer totalSquaresCatched) {

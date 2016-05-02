@@ -13,12 +13,18 @@ import model.enumerations.ListType;
 import model.interfaces.BaseGrid;
 import model.interfaces.Turn;
 
+/**
+ * This class simulates the possible moves of a game.
+ */
 public class TestBaseOptions {
 
     private static final Integer STANDARD_SIZE = 6;
     private static final Integer HORIZONTAL_SIZE = 5;
     private static final Integer VERTICAL_SIZE = 4;
 
+    /**
+     * Tests the methods of BaseGridImpl and TurnImpl.
+     */
     @Test
     public void test() {
 
@@ -109,7 +115,7 @@ public class TestBaseOptions {
     }
 
     /**
-     * 
+     * Test if the methods of BaseGridImpl and TurnImpl throws the correct exceptions.
      */
     @Test
     public void testExceptions() {

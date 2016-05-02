@@ -10,6 +10,10 @@ import model.interfaces.LastMove;
 import model.interfaces.TriangleGrid;
 import model.interfaces.Turn;
 
+/**
+ * This class is used to start a new match and all the things related to it,
+ * like assigning points to a player or knowing when the game is ended.
+ */
 public class TurnImpl implements Turn {
 
     private BaseGrid grid;
@@ -20,7 +24,15 @@ public class TurnImpl implements Turn {
     private GridOption turn = GridOption.EMPTY;
     private List<LastMove> lastMoveList = new ArrayList<>();
 
-    public TurnImpl(BaseGrid grid) {
+    /**
+     * This constructor takes an object that implements BaseGrid.
+     * 
+     * @param grid
+     *            the playable game field.
+     */
+    // CHECKSTYLE:OFF:
+    public TurnImpl(final BaseGrid grid) {
+        // CHECKSTYLE:ON:
         this.grid = grid;
     }
 
@@ -37,8 +49,7 @@ public class TurnImpl implements Turn {
         }
     }
 
-    protected void randomizeTurn() {
-
+    private void randomizeTurn() {
         if (!isStarted()) {
             Random randomTurn = new Random();
 
@@ -50,7 +61,6 @@ public class TurnImpl implements Turn {
         } else {
             throw new IllegalStateException();
         }
-
     }
 
     @Override
@@ -58,8 +68,7 @@ public class TurnImpl implements Turn {
         return this.matchStarted;
     }
 
-    protected void nextTurn() {
-
+    private void nextTurn() {
         if (!isStarted()) {
             throw new IllegalStateException();
         }
@@ -85,19 +94,17 @@ public class TurnImpl implements Turn {
                         * (grid.getVerticallListSize() - 1) + diagonalMOves ? true : false;
     }
 
+    // espongo turn, lo devo proteggere?
     @Override
-    public GridOption getCurrentPlayerTurn() {// espongo turn, lo devo
-                                              // proteggere?
+    public GridOption getCurrentPlayerTurn() {
         return this.turn;
     }
 
     @Override
     public Integer getPlayerPoints(final GridOption player) {
-
         if (!isStarted()) {
             return INITIAL_SCORE;
         }
-
         if (player.equals(GridOption.PLAYER1) || player.equals(GridOption.PLAYER2)) {
             return (player.equals(GridOption.PLAYER1)) ? scorePlayer1 : scorePlayer2;
         } else {
@@ -108,12 +115,10 @@ public class TurnImpl implements Turn {
 
     @Override
     public GridOption getWinner() {
-
         if (isEnded()) {
             if (getPlayerPoints(GridOption.PLAYER1).equals(getPlayerPoints(GridOption.PLAYER2))) {
                 return GridOption.EMPTY;
             }
-
             return (getPlayerPoints(GridOption.PLAYER1) > getPlayerPoints(GridOption.PLAYER2)) ? GridOption.PLAYER1
                     : GridOption.PLAYER2;
         } else {
@@ -169,11 +174,9 @@ public class TurnImpl implements Turn {
     }
 
     private void addPoints(final Integer points) {
-
         if (!isStarted()) {
             throw new IllegalStateException();
         }
-
         if (this.turn.equals(GridOption.PLAYER1)) {
             scorePlayer1 += points;
         } else {
@@ -219,6 +222,8 @@ public class TurnImpl implements Turn {
                 nextTurn();
             }
             break;
+        default:
+            throw new IllegalArgumentException();
         }
         lastMoveList.remove(lastMoveList.size() - 1);
     }

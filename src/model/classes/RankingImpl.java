@@ -6,7 +6,10 @@ import java.util.List;
 import model.enumerations.RankingOption;
 import model.interfaces.Ranking;
 
-
+/**
+ * This class implements the interface Ranking. It is used to manage the ranking
+ * system and to set the player's last match results.
+ */
 public class RankingImpl implements Ranking {
 
     private List<PlayerImpl> playerList;
@@ -33,14 +36,12 @@ public class RankingImpl implements Ranking {
 
     @Override
     public void addPlayerResults(final String playerName, final boolean victory, final Integer totalSquaresCatched) {
-
-        for (PlayerImpl p : playerList) {
-            if (p.getPlayerName().equals(playerName)) {
-                p.addLastMatchResults(victory, totalSquaresCatched);
+        for (PlayerImpl player : playerList) {
+            if (player.getPlayerName().equals(playerName)) {
+                player.addLastMatchResults(victory, totalSquaresCatched);
                 return;
             }
         }
-
         PlayerImpl newPlayer = new PlayerImpl(playerName);
         newPlayer.addLastMatchResults(victory, totalSquaresCatched);
         playerList.add(newPlayer);

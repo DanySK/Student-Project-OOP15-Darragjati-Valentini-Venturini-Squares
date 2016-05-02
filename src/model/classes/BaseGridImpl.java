@@ -20,8 +20,11 @@ public class BaseGridImpl implements BaseGrid {
 
     /**
      * This constructor creates a new playable grid.
-     * @param rowsNumber the number of rows of the grid
-     * @param columnsNumber the number of columns of the grid
+     * 
+     * @param rowsNumber
+     *            the number of rows of the grid
+     * @param columnsNumber
+     *            the number of columns of the grid
      */
     public BaseGridImpl(final Integer rowsNumber, final Integer columnsNumber) {
 
@@ -40,7 +43,9 @@ public class BaseGridImpl implements BaseGrid {
 
     /**
      * This method creates a list of empty moves.
-     * @param size the list's size
+     * 
+     * @param size
+     *            the list's size
      * @return the created list
      */
     protected List<GridOption> createEmptyList(final Integer size) {

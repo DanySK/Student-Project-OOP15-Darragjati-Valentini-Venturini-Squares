@@ -10,11 +10,10 @@ import org.junit.Test;
 import model.enumerations.RankingOption;
 
 /**
- * 
+ * Test the options offered by the class RankingImpl
  * 
  *
  */
-
 public class TestRankingImpl {
 
     private static final String PLAYER1 = "Pippo";

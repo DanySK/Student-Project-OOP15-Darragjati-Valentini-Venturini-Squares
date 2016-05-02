@@ -3,12 +3,20 @@ package model.classes;
 import model.enumerations.ListType;
 import model.interfaces.LastMove;
 
-public class LastMoveImpl implements LastMove{
+/**
+ * 
+ * @author Turi
+ *
+ */
+public class LastMoveImpl implements LastMove {
 
     private ListType lastListType;
     private Integer lastListIndex;
     private Integer lastPosition;
 
+    /**
+     * This constructor sets the fields of the object.
+     */
     public LastMoveImpl() {
         this.lastListIndex = -1;
         this.lastPosition = -1;
@@ -20,7 +28,9 @@ public class LastMoveImpl implements LastMove{
     }
 
     @Override
+    // CHECKSTYLE:OFF:
     public void setLastListType(final ListType lastListType) {
+        // CHECKSTYLE:ON:
         this.lastListType = lastListType;
     }
 
@@ -30,7 +40,9 @@ public class LastMoveImpl implements LastMove{
     }
 
     @Override
+    // CHECKSTYLE:OFF:
     public void setLastListIndex(final Integer lastListIndex) {
+        // CHECKSTYLE:ON:
         this.lastListIndex = lastListIndex;
     }
 
@@ -40,7 +52,9 @@ public class LastMoveImpl implements LastMove{
     }
 
     @Override
+    // CHECKSTYLE:OFF:
     public void setLastPosition(final Integer lastPosition) {
+        // CHECKSTYLE:ON:
         this.lastPosition = lastPosition;
     }
 
