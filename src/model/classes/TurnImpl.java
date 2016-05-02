@@ -76,9 +76,13 @@ public class TurnImpl implements Turn {
         if (!isStarted()) {
             throw new IllegalStateException("the match can't be ended if it isn't even started");
         }
+        Integer diagonalMOves = 0;
+        if (this.grid.getClass().equals(TriangleGridImpl.class)) {
+            diagonalMOves = (this.grid.getHorizontalListSize() - 1) * (this.grid.getVerticallListSize() - 1);
+        }
         return getPlayerPoints(GridOption.PLAYER1)
                 + getPlayerPoints(GridOption.PLAYER2) == (grid.getHorizontalListSize() - 1)
-                        * (grid.getVerticallListSize() - 1) ? true : false;
+                        * (grid.getVerticallListSize() - 1) + diagonalMOves ? true : false;
     }
 
     @Override
