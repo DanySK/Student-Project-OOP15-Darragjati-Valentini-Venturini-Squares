@@ -26,30 +26,34 @@ public class TestTriangleGrid {
     @Test
     public void test() {
 
-        TriangleGrid squareGrid = new TriangleGridImpl(HORIZONTAL_SIZE, VERTICAL_SIZE);
-        Turn gridOfSize = new TurnImpl(squareGrid);
+        TriangleGrid triangleGrid = new TriangleGridImpl(HORIZONTAL_SIZE, VERTICAL_SIZE);
+        Turn gridOfSize = new TurnImpl(triangleGrid);
 
-        assertEquals(squareGrid.getTotalMoves(), squareGrid.getRemainingMoves());        
+        assertEquals(triangleGrid.getTotalMoves(), triangleGrid.getRemainingMoves());        
         
         // verifies that every element in the list is initialized as EMPTY
         for (int i = 0; i < HORIZONTAL_SIZE + 1; i++) {
             for (int z = 0; z < HORIZONTAL_SIZE; z++) {
-                assertEquals(squareGrid.getCopyOfHorizontalElement(i, z), GridOption.EMPTY);
-                assertEquals(squareGrid.getCopyOfDiagonalElement(i, z), GridOption.EMPTY);
+                assertEquals(triangleGrid.getCopyOfHorizontalElement(i, z), GridOption.EMPTY);
             }
         }
         for (int i = 0; i < VERTICAL_SIZE + 1; i++) {
             for (int z = 0; z < VERTICAL_SIZE; z++) {
-                assertEquals(squareGrid.getCopyOfVerticalElement(i, z), GridOption.EMPTY);
+                assertEquals(triangleGrid.getCopyOfVerticalElement(i, z), GridOption.EMPTY);
             }
         }
+        for (int i = 0; i < HORIZONTAL_SIZE; i++) {
+            for (int z = 0; z < VERTICAL_SIZE; z++) {
+                assertEquals(triangleGrid.getCopyOfDiagonalElement(i, z), GridOption.EMPTY);
+            }
+        }    
 
         assertFalse(gridOfSize.isStarted());
         gridOfSize.startMatch();
         assertTrue(gridOfSize.isStarted());
         gridOfSize.setLine(ListType.VERTICAL, 0, 0);
-        assertEquals(squareGrid.getRemainingMoves(),
-                (Integer) (squareGrid.getTotalMoves() - 1));
+        assertEquals(triangleGrid.getRemainingMoves(),
+                (Integer) (triangleGrid.getTotalMoves() - 1));
         assertEquals(gridOfSize.getCopyOfLastMove().getLastListType(), ListType.VERTICAL);
         assertEquals(gridOfSize.getCopyOfLastMove().getLastListIndex(), (Integer) 0);
         assertEquals(gridOfSize.getCopyOfLastMove().getLastPosition(), (Integer) 0);
@@ -60,22 +64,25 @@ public class TestTriangleGrid {
         GridOption player = gridOfSize.getCurrentPlayerTurn();
         gridOfSize.setLine(ListType.VERTICAL, 1, 0);
 
-        assertEquals(squareGrid.getRemainingMoves(),
-                (Integer) (squareGrid.getTotalMoves() - 4));
+        assertEquals(triangleGrid.getRemainingMoves(),
+                (Integer) (triangleGrid.getTotalMoves() - 4));
         //the player points should be the same with this game mode
         assertEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
         assertNotEquals(player, gridOfSize.getCurrentPlayerTurn());
         
         player = gridOfSize.getCurrentPlayerTurn();
         gridOfSize.setLine(ListType.DIAGONAL, 0, 0);
-        System.out.println(squareGrid.getCopyOfDiagonalElement(0, 0));
+        System.out.println(triangleGrid.getCopyOfDiagonalElement(0, 0));
         assertNotEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
         assertEquals(player, gridOfSize.getCurrentPlayerTurn());
+        assertEquals(gridOfSize.getCopyOfLastMove().getLastListType(), ListType.DIAGONAL);
+        assertEquals(gridOfSize.getCopyOfLastMove().getLastListIndex(), (Integer) 0);
+        assertEquals(gridOfSize.getCopyOfLastMove().getLastPosition(), (Integer) 0);
         
         gridOfSize.undoLastMove();
         assertEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
         assertEquals(player, gridOfSize.getCurrentPlayerTurn());
-        assertEquals(gridOfSize.getCopyOfLastMove().getLastListType(), ListType.DIAGONAL);
+        assertEquals(gridOfSize.getCopyOfLastMove().getLastListType(), ListType.VERTICAL);
         assertEquals(gridOfSize.getCopyOfLastMove().getLastListIndex(), (Integer) 1);
         assertEquals(gridOfSize.getCopyOfLastMove().getLastPosition(), (Integer) 0);
         gridOfSize.undoLastMove();
@@ -85,12 +92,16 @@ public class TestTriangleGrid {
         Turn gridOfSize2 = new TurnImpl(squareGrid2);
 
         gridOfSize2.startMatch();
-
         // fills the grid with all thepossible moves
         for (int i = 0; i < STANDARD_SIZE + 1; i++) { 
             for (int z = 0; z < STANDARD_SIZE; z++) {
                 gridOfSize2.setLine(ListType.HORIZONTAL, i, z);
                 gridOfSize2.setLine(ListType.VERTICAL, i, z);
+            }
+        }
+        for (int i = 0; i < STANDARD_SIZE; i++) { 
+            for (int z = 0; z < STANDARD_SIZE; z++) {
+                gridOfSize2.setLine(ListType.DIAGONAL, i, z);
             }
         }
 
