@@ -2,7 +2,10 @@ package model.classes;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 import model.enumerations.RankingOption;
 import model.interfaces.Ranking;
 
@@ -12,37 +15,27 @@ import model.interfaces.Ranking;
  */
 public class RankingImpl implements Ranking {
 
-    private List<PlayerImpl> playerList;
+    private final List<PlayerImpl> playerList;
 
     // CHECKSTYLE:OFF:
     public RankingImpl(final List<PlayerImpl> playerList) {
         // CHECKSTYLE:ON:
-        this.playerList = playerList;
-        Integer occurrences = 0;
-
-        for (PlayerImpl player : playerList) {
-            occurrences = 0;
-            for (PlayerImpl p : playerList) {
-                if (player.getPlayerName().equals(p.getPlayerName())) {
-                    occurrences++;
-                }
-            }
-            if (occurrences > 1) {
-                System.out.println("errore");
-                throw new IllegalArgumentException();
-            }
+        final Set<PlayerImpl> playerSet = new HashSet<>(playerList);
+        if (playerList.size() > playerSet.size()) {
+            throw new IllegalArgumentException();
         }
+        this.playerList = playerList;
     }
 
     @Override
     public void addPlayerResults(final String playerName, final boolean victory, final Integer totalSquaresCatched) {
-        for (PlayerImpl player : playerList) {
+        for (final PlayerImpl player : playerList) {
             if (player.getPlayerName().equals(playerName)) {
                 player.addLastMatchResults(victory, totalSquaresCatched);
                 return;
             }
         }
-        PlayerImpl newPlayer = new PlayerImpl(playerName);
+        final PlayerImpl newPlayer = new PlayerImpl(playerName);
         newPlayer.addLastMatchResults(victory, totalSquaresCatched);
         playerList.add(newPlayer);
     }
