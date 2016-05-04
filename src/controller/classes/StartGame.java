@@ -1,26 +1,39 @@
 package controller.classes;
 
+import controller.enumerations.TypeGame;
 import model.classes.BaseGridImpl;
 import model.classes.PlayerImpl;
+import model.classes.TriangleGridImpl;
 import model.classes.TurnImpl;
+import model.interfaces.BaseGrid;
 
 public class StartGame {
 
-    private final int numColonne;
-    private int numRighe;
-    private String namePlayer1;
-    private String namePlayer2;
+    private final int columnsNumber;
+    private final int rowsNumber;
+    private final String namePlayer1;
+    private final String namePlayer2;
+    private final TypeGame mode;
 
-    public StartGame(int numColonne, int numRighe, String namePlayer1, String namePlayer2) {
+    public StartGame(int columsNumber, int rowsNumber, String namePlayer1, String namePlayer2, TypeGame mode) {
         controlNamePlayers(namePlayer1, namePlayer2);
-        this.numColonne = numColonne;
-        this.numRighe = numRighe;
+        this.columnsNumber = columsNumber;
+        this.rowsNumber = rowsNumber;
         this.namePlayer1 = namePlayer1;
         this.namePlayer2 = namePlayer2;
+        this.mode = mode;
     }
 
-    public void createGrid(int numColonne, int numRighe) {
-        BaseGridImpl newGrid = new BaseGridImpl(numRighe, numColonne);
+    public void createGrid() {
+        BaseGrid newGrid;
+        switch (this.mode) {
+        case SQUARE:
+            newGrid = new BaseGridImpl(this.rowsNumber, this.columnsNumber);
+            break;
+        case TRIANGLE:
+            newGrid = new TriangleGridImpl(this.rowsNumber, this.columnsNumber);
+
+        }
 
     }
 
@@ -32,11 +45,11 @@ public class StartGame {
     }
 
     public int getNumColonne() {
-        return this.numColonne;
+        return this.columnsNumber;
     }
 
     public int getNumRighe() {
-        return this.numRighe;
+        return this.rowsNumber;
     }
 
     public String getNamePlayer1() {
