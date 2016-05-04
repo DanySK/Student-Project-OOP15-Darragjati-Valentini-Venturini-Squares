@@ -7,4 +7,6 @@ public interface PlayedTime {
     void gameEnded();
     
     Integer getElapsedTime();
+    
+    void setElapsedTime();
 }
