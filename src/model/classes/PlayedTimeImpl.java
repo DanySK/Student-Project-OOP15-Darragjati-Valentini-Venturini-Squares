@@ -12,7 +12,14 @@ public class PlayedTimeImpl implements PlayedTime {
     private Double totalPlayTime = 0.0;
     private long startGameTime = 0;
 
-    public PlayedTimeImpl() {
+    /**
+     * @param totalPlayTime
+     *            the total play time before the starting of the new match.
+     */
+    // CHECKSTYLE:OFF:
+    public PlayedTimeImpl(final Double totalPlayTime) {
+        // CHECKSTYLE:ON:
+        this.totalPlayTime = totalPlayTime;
     }
 
     @Override
@@ -39,12 +46,5 @@ public class PlayedTimeImpl implements PlayedTime {
     @Override
     public Double getTotalElapsedTime() {
         return this.totalPlayTime;
-    }
-
-    @Override
-    // CHECKSTYLE:OFF:
-    public void setElapsedTime(final Double totalPlayTime) {
-        // CHECKSTYLE:ON:
-        this.totalPlayTime = totalPlayTime;
     }
 }

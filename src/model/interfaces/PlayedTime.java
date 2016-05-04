@@ -26,10 +26,4 @@ public interface PlayedTime {
      * @return the total play time after the last match.
      */
     Double getTotalElapsedTime();
-
-    /**
-     * @param totalPlayTime
-     *            the total play time before the starting of the new match.
-     */
-    void setElapsedTime(Double totalPlayTime);
 }
