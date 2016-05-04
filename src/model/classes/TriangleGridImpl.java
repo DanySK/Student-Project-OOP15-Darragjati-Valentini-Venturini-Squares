@@ -12,7 +12,7 @@ import model.interfaces.TriangleGrid;
  */
 public class TriangleGridImpl extends BaseGridImpl implements TriangleGrid {
 
-    private List<List<GridOption>> diagonal = new ArrayList<>();
+    private final List<List<GridOption>> diagonal = new ArrayList<>();
 
     /**
      * This constructor creates a new playable grid.
@@ -40,8 +40,8 @@ public class TriangleGridImpl extends BaseGridImpl implements TriangleGrid {
 
         Integer movesLeft = 0;
 
-        for (List<GridOption> list : diagonal) {
-            for (GridOption option : list) {
+        for (final List<GridOption> list : diagonal) {
+            for (final GridOption option : list) {
                 if (option.equals(GridOption.EMPTY)) {
                     movesLeft++;
                 }
@@ -52,9 +52,7 @@ public class TriangleGridImpl extends BaseGridImpl implements TriangleGrid {
 
     @Override
     public Integer horizontalPointScored(final int listIndex, final int position) {
-
         int points = 0;
-
         if (listIndex > 0) {
             if (!super.getCopyOfVerticalElement(position, listIndex - 1).equals(GridOption.EMPTY)
                     && !getCopyOfDiagonalElement(listIndex - 1, position).equals(GridOption.EMPTY)) {
@@ -72,9 +70,7 @@ public class TriangleGridImpl extends BaseGridImpl implements TriangleGrid {
 
     @Override
     public Integer verticalPointScored(final int listIndex, final int position) {
-
         int points = 0;
-
         if (listIndex > 0) {
             if (!super.getCopyOfHorizontalElement(position, listIndex - 1).equals(GridOption.EMPTY)
                     && !getCopyOfDiagonalElement(position, listIndex - 1).equals(GridOption.EMPTY)) {
@@ -108,9 +104,7 @@ public class TriangleGridImpl extends BaseGridImpl implements TriangleGrid {
 
     @Override
     public void setDiagonalLine(final int listIndex, final int position, final GridOption playerTurn) {
-
         checkCorrectDiagonalInput(listIndex, position);
-
         if (playerTurn.equals(GridOption.EMPTY)) {
             if (!diagonal.get(listIndex).get(position).equals(GridOption.EMPTY)) {
                 diagonal.get(listIndex).set(position, playerTurn);
@@ -129,9 +123,7 @@ public class TriangleGridImpl extends BaseGridImpl implements TriangleGrid {
 
     @Override
     public Integer diagonalPointScored(final int listIndex, final int position) {
-
         int points = 0;
-
         if (!super.getCopyOfHorizontalElement(listIndex, position).equals(GridOption.EMPTY)
                 && !super.getCopyOfVerticalElement(position + 1, listIndex).equals(GridOption.EMPTY)) {
             points++;

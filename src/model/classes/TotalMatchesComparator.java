@@ -22,7 +22,7 @@ public class TotalMatchesComparator implements Comparator<PlayerImpl> {
                     return player1.getPlayerName().compareTo(player2.getPlayerName());
                 }
 
-                return (player1.getTotalSquaresCatched() > player2.getTotalSquaresCatched()) ? -1 : 1;
+                return player1.getTotalSquaresCatched() > player2.getTotalSquaresCatched() ? -1 : 1;
 
             }
 
@@ -38,7 +38,7 @@ public class TotalMatchesComparator implements Comparator<PlayerImpl> {
                                                                               // richiesta
         }
 
-        return (player1.getTotalMatches() > player2.getTotalMatches()) ? -1 : 1;
+        return player1.getTotalMatches() > player2.getTotalMatches() ? -1 : 1;
 
     }
 }

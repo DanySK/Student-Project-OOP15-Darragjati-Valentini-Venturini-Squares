@@ -28,8 +28,8 @@ public class TestBaseOptions {
     @Test
     public void test() {
 
-        BaseGrid squareGrid = new BaseGridImpl(HORIZONTAL_SIZE, VERTICAL_SIZE);
-        Turn gridOfSize = new TurnImpl(squareGrid);
+        final BaseGrid squareGrid = new BaseGridImpl(HORIZONTAL_SIZE, VERTICAL_SIZE);
+        final Turn gridOfSize = new TurnImpl(squareGrid);
 
         assertEquals(squareGrid.getTotalMoves(), squareGrid.getRemainingMoves()); // verifies
         // that
@@ -69,7 +69,7 @@ public class TestBaseOptions {
         gridOfSize.setLine(ListType.HORIZONTAL, 0, 0);
         gridOfSize.setLine(ListType.HORIZONTAL, 1, 0);
 
-        GridOption player = gridOfSize.getCurrentPlayerTurn();
+        final GridOption player = gridOfSize.getCurrentPlayerTurn();
         gridOfSize.setLine(ListType.VERTICAL, 1, 0);
 
         assertEquals(squareGrid.getRemainingMoves(),
@@ -94,8 +94,8 @@ public class TestBaseOptions {
         gridOfSize.undoLastMove();
         assertNotEquals(player, gridOfSize.getCurrentPlayerTurn());
 
-        BaseGrid squareGrid2 = new BaseGridImpl(STANDARD_SIZE, STANDARD_SIZE);
-        Turn gridOfSize2 = new TurnImpl(squareGrid2);
+        final BaseGrid squareGrid2 = new BaseGridImpl(STANDARD_SIZE, STANDARD_SIZE);
+        final Turn gridOfSize2 = new TurnImpl(squareGrid2);
 
         gridOfSize2.startMatch();
 
