@@ -1,6 +1,5 @@
 package controller.classes;
 
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import controller.enumerations.TypeGame;
 import model.classes.PlayerImpl;
 import model.classes.RankingImpl;
 import model.enumerations.RankingOption;
@@ -25,10 +25,10 @@ public class Menu {
     // this.directory = directory;
     // }
 
-    public void startGame(final int numColonne, final int numRighe, final String namePlayer1,
-            final String namePlayer2) {
-        StartGame game = new StartGame(numColonne, numRighe, namePlayer1, namePlayer2);
-
+    public void startGame(final int numColonne, final int numRighe, final String namePlayer1, final String namePlayer2,
+            TypeGame mode) {
+        StartGame newGame = new StartGame(numColonne, numRighe, namePlayer1, namePlayer2, mode);
+        newGame.createGrid();
     }
 
     public String showRules() throws IOException {
@@ -53,7 +53,7 @@ public class Menu {
     public String showRanking(RankingOption rankingOrder, boolean reverse) {
         List<PlayerImpl> currentRanking = new ArrayList<>();
         RankingImpl ranking = new RankingImpl(currentRanking);
-        
+
         return;
     }
 
