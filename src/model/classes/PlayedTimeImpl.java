@@ -3,6 +3,10 @@ package model.classes;
 import model.interfaces.PlayedTime;
 import model.interfaces.Turn;
 
+/**
+ * This class implements the methods of the interface PlayedTime. It offers the
+ * methods to calculate the time of a match.
+ */
 public class PlayedTimeImpl implements PlayedTime {
 
     private Double totalPlayTime = 0.0;
@@ -33,14 +37,14 @@ public class PlayedTimeImpl implements PlayedTime {
     }
 
     @Override
-    public Double getElapsedTime() {
+    public Double getTotalElapsedTime() {
         return this.totalPlayTime;
     }
 
     @Override
-    //CHECKSTYLE:OFF:
+    // CHECKSTYLE:OFF:
     public void setElapsedTime(final Double totalPlayTime) {
-        //CHECKSTYLE:ON:
+        // CHECKSTYLE:ON:
         this.totalPlayTime = totalPlayTime;
     }
 }
