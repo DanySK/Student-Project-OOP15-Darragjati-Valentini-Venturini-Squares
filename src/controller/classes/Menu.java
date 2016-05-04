@@ -5,6 +5,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,11 +36,10 @@ public class Menu {
 
     public String showRules() throws IOException {
 
-        String fileName = System.getProperty("user.home") + System.getProperty("file.separator") + "SquareRules.txt";
-        File file = new File(fileName); // fileName è di tipo String ed è il
-                                        // percorso del file
+        InputStream readFile = Menu.class.getResourceAsStream("Rules.txt");
+        
 
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(readFile))) {
             String s;
             while ((s = br.readLine()) != null) {
                  this.linesRead.concat(s);
@@ -46,6 +48,7 @@ public class Menu {
         } catch (IOException ex) {
             throw new IOException();
         }
+        readFile.close();
         System.out.println(this.linesRead);
         return this.linesRead;
     }
