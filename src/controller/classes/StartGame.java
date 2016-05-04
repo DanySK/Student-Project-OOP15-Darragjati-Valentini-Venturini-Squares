@@ -32,9 +32,8 @@ public class StartGame {
             break;
         case TRIANGLE:
             newGrid = new TriangleGridImpl(this.rowsNumber, this.columnsNumber);
-
         }
-
+        
     }
 
     private void controlNamePlayers(String namePlayer1, String namePlayer2) {

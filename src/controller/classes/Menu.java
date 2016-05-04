@@ -33,7 +33,7 @@ public class Menu {
 
     public String showRules() throws IOException {
 
-        String fileName = System.getProperty("user.home") + System.getProperty("file.separator") System.getProperty("")+ "SquareRules.txt";
+        String fileName = System.getProperty("user.home") + System.getProperty("file.separator") + "SquareRules.txt";
         File file = new File(fileName); // fileName è di tipo String ed è il
                                         // percorso del file
 
@@ -54,7 +54,7 @@ public class Menu {
         List<PlayerImpl> currentRanking = new ArrayList<>();
         RankingImpl ranking = new RankingImpl(currentRanking);
 
-        return;
+        return null;
     }
 
     public void setting() {
