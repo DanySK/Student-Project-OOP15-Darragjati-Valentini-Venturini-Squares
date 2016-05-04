@@ -1,10 +1,17 @@
 package controller.classes;
 
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import model.classes.PlayerImpl;
+import model.classes.RankingImpl;
+import model.enumerations.RankingOption;
 
 public class Menu {
 
@@ -43,7 +50,10 @@ public class Menu {
         return this.linesRead;
     }
 
-    public String showRanking() {
+    public String showRanking(RankingOption rankingOrder, boolean reverse) {
+        List<PlayerImpl> currentRanking = new ArrayList<>();
+        RankingImpl ranking = new RankingImpl(currentRanking);
+        
         return;
     }
 
