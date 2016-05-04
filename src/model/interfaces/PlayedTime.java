@@ -2,11 +2,11 @@ package model.interfaces;
 
 public interface PlayedTime {
 
-    void gameStarted();
+    void gameStarted(Turn currentGame);
     
-    void gameEnded();
+    void gameEnded(Turn currentGame);
     
-    Integer getElapsedTime();
+    Double getElapsedTime();
     
-    void setElapsedTime();
+    void setElapsedTime(Double totalPlayTime);
 }
