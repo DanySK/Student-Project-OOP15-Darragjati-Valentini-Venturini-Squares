@@ -24,14 +24,14 @@ public class TestRankingImpl {
     private static final String PLAYER4 = "Topolino";
     private static final String PLAYER5 = "Paperone";
 
-    private List<Player> createPlayers(){
-      //CHECKSTYLE:OFF:
+    private List<Player> createPlayers() {
+        // CHECKSTYLE:OFF:
         final PlayerImpl player1 = new PlayerImpl();
         player1.setPlayerName(PLAYER1);
         player1.setWonMatches(1);
         player1.setTotalMatches(10);
         player1.setTotalSquaresCatched(51);
-        assertTrue(player1.getWinRate()==10.0);
+        assertTrue(player1.getWinRate() == 10.0);
 
         final PlayerImpl player2 = new PlayerImpl();
         player2.setPlayerName(PLAYER2);
@@ -45,19 +45,20 @@ public class TestRankingImpl {
         player3.setWonMatches(4);
         player3.setTotalMatches(5);
         player3.setTotalSquaresCatched(223);
-        assertTrue(player3.getWinRate()==player2.getWinRate());
-        //CHECKSTYLE:ON:
+        assertTrue(player3.getWinRate() == player2.getWinRate());
+        // CHECKSTYLE:ON:
         final List<Player> playerList = new ArrayList<>();
         playerList.add(player1);
         playerList.add(player2);
         playerList.add(player3);
         return playerList;
     }
+
     /**
      * Base option test.
      */
     @Test
-    public void test() {    
+    public void test() {
         final List<Player> playerList = createPlayers();
         assertEquals(playerList.size(), 3);
 
@@ -124,15 +125,25 @@ public class TestRankingImpl {
         } catch (UnsupportedOperationException e) {
         } catch (Exception e) {
             fail("Wrong exception thrown");
-        }     
-        testPlayer.setPlayerName(PLAYER1);
-        testPlayer.setWonMatches(5);
-        testPlayer.setTotalMatches(6);
-        testPlayer.setTotalSquaresCatched(467);
-        playerList.add(testPlayer);
+        }
         try {
-           testListException = new RankingImpl(playerList);
-           fail("The list can't contain two players with the same name");
+            testPlayer.setPlayerName(PLAYER1);
+            testPlayer.setWonMatches(5);
+            testPlayer.setTotalMatches(6);
+            testPlayer.setTotalSquaresCatched(467);
+            playerList.add(testPlayer);
+            testListException = new RankingImpl(playerList);
+            fail("The list can't contain two players with the same name");
+        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
+            fail("Wrong exception thrown");
+        }
+        try {
+            testPlayer.setPlayerName(PLAYER4);
+            testPlayer.setWonMatches(5);
+            testPlayer.setTotalMatches(4);
+            testPlayer.getTotalWins();
+            fail("The won matches cant be more than the total matches");
         } catch (IllegalArgumentException e) {
         } catch (Exception e) {
             fail("Wrong exception thrown");

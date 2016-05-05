@@ -46,8 +46,15 @@ public class PlayerImpl implements Player {
         return this.winRate;
     }
 
+    private void checkCorrectInputs() {
+        if (this.wonMatches > this.totalMatches) {
+            throw new IllegalArgumentException();
+        }
+    }
+
     @Override
     public Integer getTotalWins() {
+        checkCorrectInputs();
         return this.wonMatches;
     }
 
@@ -60,6 +67,7 @@ public class PlayerImpl implements Player {
 
     @Override
     public Integer getTotalMatches() {
+        checkCorrectInputs();
         return this.totalMatches;
     }
 
