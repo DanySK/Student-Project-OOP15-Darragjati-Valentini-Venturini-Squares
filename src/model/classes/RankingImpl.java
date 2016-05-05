@@ -1,5 +1,6 @@
 package model.classes;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -7,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import model.enumerations.RankingOption;
+import model.interfaces.Player;
 import model.interfaces.Ranking;
 
 /**
@@ -20,8 +22,13 @@ public class RankingImpl implements Ranking {
     // CHECKSTYLE:OFF:
     public RankingImpl(final List<PlayerImpl> playerList) {
         // CHECKSTYLE:ON:
-        final Set<PlayerImpl> playerSet = new HashSet<>(playerList);
-        if (playerList.size() > playerSet.size()) {
+        final List<String> playerNameList = new ArrayList<>();
+        final Set<String> playerNameSet = new HashSet<>();
+        for (final Player player : playerList) {
+            playerNameList.add(player.getPlayerName());
+            playerNameSet.add(player.getPlayerName());
+        }
+        if (playerNameList.size() > playerNameSet.size()) {
             throw new IllegalArgumentException();
         }
         this.playerList = playerList;
