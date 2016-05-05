@@ -42,7 +42,7 @@ public class Menu {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(readFile))) {
             String s;
             while ((s = br.readLine()) != null) {
-                 this.linesRead.concat(s);
+                 this.linesRead = this.linesRead.concat(s);
                  //System.out.println(s);
             }
         } catch (IOException ex) {
