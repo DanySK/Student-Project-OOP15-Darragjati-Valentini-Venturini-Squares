@@ -17,10 +17,10 @@ import model.interfaces.Ranking;
  */
 public class RankingImpl implements Ranking {
 
-    private final List<PlayerImpl> playerList;
+    private final List<Player> playerList;
 
     // CHECKSTYLE:OFF:
-    public RankingImpl(final List<PlayerImpl> playerList) {
+    public RankingImpl(final List<Player> playerList) {
         // CHECKSTYLE:ON:
         final List<String> playerNameList = new ArrayList<>();
         final Set<String> playerNameSet = new HashSet<>();
@@ -36,7 +36,7 @@ public class RankingImpl implements Ranking {
 
     @Override
     public void addPlayerResults(final String playerName, final boolean victory, final Integer totalSquaresCatched) {
-        for (final PlayerImpl player : playerList) {
+        for (final Player player : playerList) {
             if (player.getPlayerName().equals(playerName)) {
                 addLastMatchResults(player, victory, totalSquaresCatched);
                 return;
@@ -57,14 +57,14 @@ public class RankingImpl implements Ranking {
     }
 
     @Override
-    public List<PlayerImpl> orderListBy(final RankingOption option, final boolean reverseRanking) {
+    public List<Player> orderListBy(final RankingOption option, final boolean reverseRanking) {
 
         switch (option) {
         case WINRATE:
-            playerList.sort(new Comparator<PlayerImpl>() {
+            playerList.sort(new Comparator<Player>() {
 
                 @Override
-                public int compare(final PlayerImpl player1, final PlayerImpl player2) {
+                public int compare(final Player player1, final Player player2) {
 
                     if (player1.getWinRate() == player2.getWinRate()) {
                         if (player1.getTotalMatches().equals(player2.getTotalMatches())) {
@@ -80,10 +80,10 @@ public class RankingImpl implements Ranking {
             });
             break;
         case TOTAL_WINS:
-            playerList.sort(new Comparator<PlayerImpl>() {
+            playerList.sort(new Comparator<Player>() {
 
                 @Override
-                public int compare(final PlayerImpl player1, final PlayerImpl player2) {
+                public int compare(final Player player1, final Player player2) {
 
                     if (player1.getTotalWins().equals(player2.getTotalWins())) {
                         if (player1.getWinRate() == player2.getWinRate()) {
@@ -101,10 +101,10 @@ public class RankingImpl implements Ranking {
             });
             break;
         case TOTAL_MATCHES:
-            playerList.sort(new Comparator<PlayerImpl>() {
+            playerList.sort(new Comparator<Player>() {
 
                 @Override
-                public int compare(final PlayerImpl player1, final PlayerImpl player2) {
+                public int compare(final Player player1, final Player player2) {
 
                     if (player1.getTotalMatches().equals(player2.getTotalMatches())) {
                         if (player1.getWinRate() == player2.getWinRate()) {
@@ -120,10 +120,10 @@ public class RankingImpl implements Ranking {
             });
             break;
         case TOTAL_SQUARES_CATCHED:
-            playerList.sort(new Comparator<PlayerImpl>() {
+            playerList.sort(new Comparator<Player>() {
 
                 @Override
-                public int compare(final PlayerImpl player1, final PlayerImpl player2) {
+                public int compare(final Player player1, final Player player2) {
 
                     if (player1.getTotalSquaresCatched().equals(player2.getTotalSquaresCatched())) {
                         if (player1.getWinRate() == player2.getWinRate()) {

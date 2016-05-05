@@ -9,7 +9,7 @@ import model.interfaces.Player;
 public class PlayerImpl implements Player {
 
     private String playerName;
-    private double winRate;
+    private Double winRate;
     private Integer wonMatches;
     private Integer totalMatches;
     private Integer totalSquaresCatched;
@@ -17,7 +17,7 @@ public class PlayerImpl implements Player {
     // CHECKSTYLE:OFF:
     public PlayerImpl() {
         // CHECKSTYLE:ON:
-        this.winRate = 0;
+        this.winRate = 0.0;
         this.wonMatches = 0;
         this.totalMatches = 0;
         this.totalSquaresCatched = 0;
@@ -36,12 +36,13 @@ public class PlayerImpl implements Player {
     }
 
     private void calculateWinRate() {
-        this.winRate = getTotalWins() / (double) getTotalMatches();
+        this.winRate = getTotalWins() * 100 / (double) getTotalMatches();
     }
 
     @Override
     public double getWinRate() {
         calculateWinRate();
+        System.out.println(this.winRate);
         return this.winRate;
     }
 

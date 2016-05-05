@@ -35,5 +35,5 @@ public interface Ranking {
      *            true if the list should be ordered in the opposite way
      * @return the reordered list
      */
-    List<PlayerImpl> orderListBy(RankingOption option, boolean reverseRanking);
+    List<Player> orderListBy(RankingOption option, boolean reverseRanking);
 }
