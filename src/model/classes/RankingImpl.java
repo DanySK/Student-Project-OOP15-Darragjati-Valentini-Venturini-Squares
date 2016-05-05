@@ -38,13 +38,21 @@ public class RankingImpl implements Ranking {
     public void addPlayerResults(final String playerName, final boolean victory, final Integer totalSquaresCatched) {
         for (final PlayerImpl player : playerList) {
             if (player.getPlayerName().equals(playerName)) {
-                player.addLastMatchResults(victory, totalSquaresCatched);
+                addLastMatchResults(player, victory, totalSquaresCatched);
                 return;
             }
         }
         final PlayerImpl newPlayer = new PlayerImpl(playerName);
-        newPlayer.addLastMatchResults(victory, totalSquaresCatched);
+        addLastMatchResults(newPlayer, victory, totalSquaresCatched);
         playerList.add(newPlayer);
+    }
+
+    private void addLastMatchResults(final Player player, final boolean victory, final Integer totalSquaresCatched) {
+        if (victory) {
+            player.setWonMatches(player.getTotalMatches() + 1);
+        }
+        player.setTotalMatches(player.getTotalMatches() + 1);
+        player.setTotalSquaresCatched(player.getTotalMatches() + totalSquaresCatched);
     }
 
     @Override
