@@ -17,12 +17,12 @@ public class TotalMatchesComparator implements Comparator<PlayerImpl> {
 
             if (player1.getWinRate() == player2.getWinRate()) {
 
-                if (player1.getTotalSquaresCatched().equals(player2.getTotalSquaresCatched())) {
+                if (player1.getTotalPointsScored().equals(player2.getTotalPointsScored())) {
 
                     return player1.getPlayerName().compareTo(player2.getPlayerName());
                 }
 
-                return player1.getTotalSquaresCatched() > player2.getTotalSquaresCatched() ? -1 : 1;
+                return player1.getTotalPointsScored() > player2.getTotalPointsScored() ? -1 : 1;
 
             }
 

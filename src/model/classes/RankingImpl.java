@@ -35,25 +35,25 @@ public class RankingImpl implements Ranking {
     }
 
     @Override
-    public void addPlayerResults(final String playerName, final boolean victory, final Integer totalSquaresCatched) {
+    public void addPlayerResults(final String playerName, final boolean victory, final Integer totalPointScored) {
         for (final Player player : playerList) {
             if (player.getPlayerName().equals(playerName)) {
-                addLastMatchResults(player, victory, totalSquaresCatched);
+                addLastMatchResults(player, victory, totalPointScored);
                 return;
             }
         }
         final PlayerImpl newPlayer = new PlayerImpl();
         newPlayer.setPlayerName(playerName);
-        addLastMatchResults(newPlayer, victory, totalSquaresCatched);
+        addLastMatchResults(newPlayer, victory, totalPointScored);
         playerList.add(newPlayer);
     }
 
-    private void addLastMatchResults(final Player player, final boolean victory, final Integer totalSquaresCatched) {
+    private void addLastMatchResults(final Player player, final boolean victory, final Integer totalPointScored) {
         if (victory) {
-            player.setWonMatches(player.getTotalMatches() + 1);
+            player.setWonMatches(player.getTotalWins() + 1);
         }
         player.setTotalMatches(player.getTotalMatches() + 1);
-        player.setTotalSquaresCatched(player.getTotalMatches() + totalSquaresCatched);
+        player.setTotalPointScored(player.getTotalPointsScored() + totalPointScored);
     }
 
     @Override
@@ -68,10 +68,10 @@ public class RankingImpl implements Ranking {
 
                     if (player1.getWinRate() == player2.getWinRate()) {
                         if (player1.getTotalMatches().equals(player2.getTotalMatches())) {
-                            if (player1.getTotalSquaresCatched().equals(player2.getTotalSquaresCatched())) {
+                            if (player1.getTotalPointsScored().equals(player2.getTotalPointsScored())) {
                                 return player1.getPlayerName().compareTo(player2.getPlayerName());
                             }
-                            return Integer.compare(player1.getTotalSquaresCatched(), player2.getTotalSquaresCatched());
+                            return Integer.compare(player1.getTotalPointsScored(), player2.getTotalPointsScored());
                         }
                         return Integer.compare(player1.getTotalMatches(), player2.getTotalMatches());
                     }
@@ -87,10 +87,10 @@ public class RankingImpl implements Ranking {
 
                     if (player1.getTotalWins().equals(player2.getTotalWins())) {
                         if (player1.getWinRate() == player2.getWinRate()) {
-                            if (player1.getTotalSquaresCatched().equals(player2.getTotalSquaresCatched())) {
+                            if (player1.getTotalPointsScored().equals(player2.getTotalPointsScored())) {
                                 return player1.getPlayerName().compareTo(player2.getPlayerName());
                             }
-                            return Integer.compare(player1.getTotalSquaresCatched(), player2.getTotalSquaresCatched());
+                            return Integer.compare(player1.getTotalPointsScored(), player2.getTotalPointsScored());
                         }
                         return Double.compare(player1.getWinRate(), player2.getWinRate());
                     }
@@ -108,10 +108,10 @@ public class RankingImpl implements Ranking {
 
                     if (player1.getTotalMatches().equals(player2.getTotalMatches())) {
                         if (player1.getWinRate() == player2.getWinRate()) {
-                            if (player1.getTotalSquaresCatched().equals(player2.getTotalSquaresCatched())) {
+                            if (player1.getTotalPointsScored().equals(player2.getTotalPointsScored())) {
                                 return player1.getPlayerName().compareTo(player2.getPlayerName());
                             }
-                            return Integer.compare(player1.getTotalSquaresCatched(), player2.getTotalSquaresCatched());
+                            return Integer.compare(player1.getTotalPointsScored(), player2.getTotalPointsScored());
                         }
                         return Double.compare(player1.getWinRate(), player2.getWinRate());
                     }
@@ -125,7 +125,7 @@ public class RankingImpl implements Ranking {
                 @Override
                 public int compare(final Player player1, final Player player2) {
 
-                    if (player1.getTotalSquaresCatched().equals(player2.getTotalSquaresCatched())) {
+                    if (player1.getTotalPointsScored().equals(player2.getTotalPointsScored())) {
                         if (player1.getWinRate() == player2.getWinRate()) {
                             if (player1.getTotalMatches().equals(player2.getTotalMatches())) {
                                 return player1.getPlayerName().compareTo(player2.getPlayerName());
@@ -134,7 +134,7 @@ public class RankingImpl implements Ranking {
                         }
                         return Double.compare(player1.getWinRate(), player2.getWinRate());
                     }
-                    return Integer.compare(player1.getTotalSquaresCatched(), player2.getTotalSquaresCatched());
+                    return Integer.compare(player1.getTotalPointsScored(), player2.getTotalPointsScored());
                 }
 
             });

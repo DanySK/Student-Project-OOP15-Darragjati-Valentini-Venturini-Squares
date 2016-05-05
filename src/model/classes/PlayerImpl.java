@@ -12,7 +12,7 @@ public class PlayerImpl implements Player {
     private Double winRate;
     private Integer wonMatches;
     private Integer totalMatches;
-    private Integer totalSquaresCatched;
+    private Integer totalPointScored;
 
     // CHECKSTYLE:OFF:
     public PlayerImpl() {
@@ -20,7 +20,7 @@ public class PlayerImpl implements Player {
         this.winRate = 0.0;
         this.wonMatches = 0;
         this.totalMatches = 0;
-        this.totalSquaresCatched = 0;
+        this.totalPointScored = 0;
     }
 
     @Override
@@ -79,21 +79,21 @@ public class PlayerImpl implements Player {
     }
 
     @Override
-    public Integer getTotalSquaresCatched() {
-        return this.totalSquaresCatched;
+    public Integer getTotalPointsScored() {
+        return this.totalPointScored;
     }
 
     @Override
     // CHECKSTYLE:OFF:
-    public void setTotalSquaresCatched(final Integer totalSquaresCatched) {
+    public void setTotalPointScored(final Integer totalPointScored) {
         // CHECKSTYLE:ON:
-        this.totalSquaresCatched = totalSquaresCatched;
+        this.totalPointScored = totalPointScored;
     }
 
     @Override
     public String toString() {
         return "Player [playerName=" + playerName + ", winRate=" + winRate + ", wonMatches=" + wonMatches
-                + ", totalMatches=" + totalMatches + ", totalSquaresCatched=" + totalSquaresCatched + "]";
+                + ", totalMatches=" + totalMatches + ", totalPointScored=" + totalPointScored + "]";
     }
 
 }

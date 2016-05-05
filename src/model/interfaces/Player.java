@@ -8,9 +8,7 @@ package model.interfaces;
 public interface Player {
 
     /**
-     * Get the player's name.
-     * 
-     * @return the player's name
+     * @return the player's name.
      */
     String getPlayerName();
 
@@ -23,16 +21,12 @@ public interface Player {
     void setPlayerName(String playerName);
 
     /**
-     * Get the player's winrate.
-     * 
-     * @return the player's winrate
+     * @return the player's winrate.
      */
     double getWinRate();
 
     /**
-     * Get the player's total wins.
-     * 
-     * @return the player's total wins
+     * @return the player's total wins.
      */
     Integer getTotalWins();
 
@@ -45,9 +39,7 @@ public interface Player {
     void setWonMatches(Integer wonMatches);
 
     /**
-     * Get the player's total matches.
-     * 
-     * @return the player's total matches
+     * @return the player's total matches.
      */
     Integer getTotalMatches();
 
@@ -60,11 +52,9 @@ public interface Player {
     void setTotalMatches(Integer totalMatches);
 
     /**
-     * Get the player's total squares catched.
-     * 
-     * @return the player's total squaers catched
+     * @return the player's total points scored
      */
-    Integer getTotalSquaresCatched();
+    Integer getTotalPointsScored();
 
     /**
      * Set the player's total squares catched.
@@ -72,5 +62,5 @@ public interface Player {
      * @param totalSquaresCatched
      *            the player's total squares catched
      */
-    void setTotalSquaresCatched(Integer totalSquaresCatched);
+    void setTotalPointScored(Integer totalSquaresCatched);
 }
