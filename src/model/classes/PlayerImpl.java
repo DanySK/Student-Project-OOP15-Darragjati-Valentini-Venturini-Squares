@@ -15,9 +15,8 @@ public class PlayerImpl implements Player {
     private Integer totalSquaresCatched;
 
     // CHECKSTYLE:OFF:
-    public PlayerImpl(final String playerName) {
+    public PlayerImpl() {
         // CHECKSTYLE:ON:
-        this.playerName = playerName;
         this.winRate = 0;
         this.wonMatches = 0;
         this.totalMatches = 0;
@@ -80,18 +79,6 @@ public class PlayerImpl implements Player {
     public void setTotalSquaresCatched(final Integer totalSquaresCatched) {
         // CHECKSTYLE:ON:
         this.totalSquaresCatched = totalSquaresCatched;
-    }
-
-    @Override
-    // CHECKSTYLE:OFF:
-    public void addLastMatchResults(final boolean victory, final Integer totalSquaresCatched) {
-        // CHECKSTYLE:ON:
-        if (victory) {
-            this.wonMatches++;
-        }
-        this.totalMatches++;
-        calculateWinRate();
-        this.totalSquaresCatched += totalSquaresCatched;
     }
 
     @Override

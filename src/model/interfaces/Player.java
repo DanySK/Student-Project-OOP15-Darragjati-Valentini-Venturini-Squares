@@ -73,14 +73,4 @@ public interface Player {
      *            the player's total squares catched
      */
     void setTotalSquaresCatched(Integer totalSquaresCatched);
-
-    /**
-     * Adds the last match results to the player datas.
-     * 
-     * @param victory
-     *            true if the player has won the last match
-     * @param totalSquaresCatched
-     *            the number of squares catched by the player in the last match
-     */
-    void addLastMatchResults(boolean victory, Integer totalSquaresCatched);
 }

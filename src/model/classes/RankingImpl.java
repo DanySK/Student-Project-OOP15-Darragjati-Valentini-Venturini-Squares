@@ -42,7 +42,8 @@ public class RankingImpl implements Ranking {
                 return;
             }
         }
-        final PlayerImpl newPlayer = new PlayerImpl(playerName);
+        final PlayerImpl newPlayer = new PlayerImpl();
+        newPlayer.setPlayerName(playerName);
         addLastMatchResults(newPlayer, victory, totalSquaresCatched);
         playerList.add(newPlayer);
     }

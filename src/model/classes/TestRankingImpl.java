@@ -11,7 +11,7 @@ import org.junit.Test;
 import model.enumerations.RankingOption;
 
 /**
- * Test the options offered by the class RankingImpl
+ * Test the options offered by the class RankingImpl.
  * 
  *
  */
