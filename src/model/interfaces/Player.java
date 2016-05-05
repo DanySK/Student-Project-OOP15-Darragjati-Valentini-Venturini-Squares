@@ -62,5 +62,5 @@ public interface Player {
      * @param totalSquaresCatched
      *            the player's total squares catched
      */
-    void setTotalPointScored(Integer totalSquaresCatched);
+    void setTotalPointsScored(Integer totalSquaresCatched);
 }

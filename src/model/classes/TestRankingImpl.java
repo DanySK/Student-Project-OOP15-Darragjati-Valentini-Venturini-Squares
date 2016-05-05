@@ -30,21 +30,21 @@ public class TestRankingImpl {
         player1.setPlayerName(PLAYER1);
         player1.setWonMatches(1);
         player1.setTotalMatches(10);
-        player1.setTotalPointScored(51);
+        player1.setTotalPointsScored(51);
         assertTrue(player1.getWinRate() == 10.0);
 
         final PlayerImpl player2 = new PlayerImpl();
         player2.setPlayerName(PLAYER2);
         player2.setWonMatches(8);
         player2.setTotalMatches(10);
-        player2.setTotalPointScored(456);
+        player2.setTotalPointsScored(456);
         assertTrue(player2.getWinRate() > player1.getWinRate());
 
         final PlayerImpl player3 = new PlayerImpl();
         player3.setPlayerName(PLAYER3);
         player3.setWonMatches(4);
         player3.setTotalMatches(5);
-        player3.setTotalPointScored(223);
+        player3.setTotalPointsScored(223);
         assertTrue(player3.getWinRate() == player2.getWinRate());
         // CHECKSTYLE:ON:
         final List<Player> playerList = new ArrayList<>();
@@ -119,7 +119,7 @@ public class TestRankingImpl {
             testPlayer.setPlayerName(PLAYER4);
             testPlayer.setWonMatches(5);
             testPlayer.setTotalMatches(6);
-            testPlayer.setTotalPointScored(467);
+            testPlayer.setTotalPointsScored(467);
             testListException.orderListBy(RankingOption.WINRATE, false).add(testPlayer);
             fail("You can't add a player to the list, it should be unmodifiable");
         } catch (UnsupportedOperationException e) {
@@ -130,7 +130,7 @@ public class TestRankingImpl {
             testPlayer.setPlayerName(PLAYER1);
             testPlayer.setWonMatches(5);
             testPlayer.setTotalMatches(6);
-            testPlayer.setTotalPointScored(467);
+            testPlayer.setTotalPointsScored(467);
             playerList.add(testPlayer);
             testListException = new RankingImpl(playerList);
             fail("The list can't contain two players with the same name");

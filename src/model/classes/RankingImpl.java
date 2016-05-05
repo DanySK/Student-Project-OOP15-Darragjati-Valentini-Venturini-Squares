@@ -35,25 +35,25 @@ public class RankingImpl implements Ranking {
     }
 
     @Override
-    public void addPlayerResults(final String playerName, final boolean victory, final Integer totalPointScored) {
+    public void addPlayerResults(final String playerName, final boolean victory, final Integer totalPointsScored) {
         for (final Player player : playerList) {
             if (player.getPlayerName().equals(playerName)) {
-                addLastMatchResults(player, victory, totalPointScored);
+                addLastMatchResults(player, victory, totalPointsScored);
                 return;
             }
         }
         final PlayerImpl newPlayer = new PlayerImpl();
         newPlayer.setPlayerName(playerName);
-        addLastMatchResults(newPlayer, victory, totalPointScored);
+        addLastMatchResults(newPlayer, victory, totalPointsScored);
         playerList.add(newPlayer);
     }
 
-    private void addLastMatchResults(final Player player, final boolean victory, final Integer totalPointScored) {
+    private void addLastMatchResults(final Player player, final boolean victory, final Integer totalPointsScored) {
         if (victory) {
             player.setWonMatches(player.getTotalWins() + 1);
         }
         player.setTotalMatches(player.getTotalMatches() + 1);
-        player.setTotalPointScored(player.getTotalPointsScored() + totalPointScored);
+        player.setTotalPointsScored(player.getTotalPointsScored() + totalPointsScored);
     }
 
     @Override
