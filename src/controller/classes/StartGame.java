@@ -56,7 +56,7 @@ public class StartGame {
 
     }
 
-    private void firstPlayer(BaseGrid newGrid) {
+    protected void firstPlayer(BaseGrid newGrid) {
         Turn newTurn = new TurnImpl(newGrid);
         newTurn.startMatch();
         this.firstMove = newTurn.getCurrentPlayerTurn();
