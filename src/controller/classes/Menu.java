@@ -20,6 +20,7 @@ import model.interfaces.Player;
 public class Menu {
 
     private String linesRead;
+    private String firstPlayer;
 
     // public String getLineRead() {
     // return this.lineRead;
@@ -29,10 +30,11 @@ public class Menu {
     // this.directory = directory;
     // }
 
-    public void startGame(final int numColonne, final int numRighe, final String namePlayer1, final String namePlayer2,
+    public String startGame(final int numColonne, final int numRighe, final String namePlayer1, final String namePlayer2,
             TypeGame mode) {
         StartGame newGame = new StartGame(numColonne, numRighe, namePlayer1, namePlayer2, mode);
-        newGame.createGrid();
+        this.firstPlayer = newGame.createGrid();
+        return this.firstPlayer;
     }
 
     public String showRules() throws IOException {
@@ -62,6 +64,7 @@ public class Menu {
     }
 
     public void setting() {
+        
 
     }
 
