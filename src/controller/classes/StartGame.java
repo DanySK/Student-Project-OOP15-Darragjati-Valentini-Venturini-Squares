@@ -29,21 +29,22 @@ public class StartGame {
         this.firstMove = null;
         this.firstPlayer = null;
     }
-    
-    
 
     public String createGrid() {
         BaseGrid newGrid;
         switch (this.mode) {
         case SQUARE:
             newGrid = new BaseGridImpl(this.rowsNumber, this.columnsNumber);
-            firstPlayer(newGrid);
+            
             break;
         case TRIANGLE:
             newGrid = new TriangleGridImpl(this.rowsNumber, this.columnsNumber);
-            firstPlayer(newGrid);
             
+        default:
+            throw new IllegalStateException();
+
         }
+        firstPlayer(newGrid);
         return this.firstPlayer;
 
     }
@@ -55,19 +56,21 @@ public class StartGame {
 
     }
 
-    private String firstPlayer(BaseGrid newGrid) {
+    private void firstPlayer(BaseGrid newGrid) {
         Turn newTurn = new TurnImpl(newGrid);
         newTurn.startMatch();
         this.firstMove = newTurn.getCurrentPlayerTurn();
         switch (this.firstMove) {
         case PLAYER1:
             this.firstPlayer = this.namePlayer1;
+            break;
         case PLAYER2:
             this.firstPlayer = this.namePlayer2;
-        case EMPTY:
+            break;
+        default:
             throw new IllegalStateException();
         }
-        return this.firstPlayer;
+        
     }
 
     public int getNumColonne() {
@@ -85,8 +88,8 @@ public class StartGame {
     public String getNamePlayer2() {
         return this.namePlayer2;
     }
-    
-    public String getFirstPlayer(){
+
+    public String getFirstPlayer() {
         return this.firstPlayer;
     }
 }
