@@ -15,6 +15,7 @@ import controller.enumerations.TypeGame;
 import model.classes.PlayerImpl;
 import model.classes.RankingImpl;
 import model.enumerations.RankingOption;
+import model.interfaces.Player;
 
 public class Menu {
 
@@ -54,7 +55,7 @@ public class Menu {
     }
 
     public String showRanking(RankingOption rankingOrder, boolean reverse) {
-        List<PlayerImpl> currentRanking = new ArrayList<>();
+        List<Player> currentRanking = new ArrayList<>();
         RankingImpl ranking = new RankingImpl(currentRanking);
 
         return null;
