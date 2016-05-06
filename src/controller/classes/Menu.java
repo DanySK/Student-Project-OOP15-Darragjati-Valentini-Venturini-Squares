@@ -21,7 +21,14 @@ public class Menu {
 
     private String linesRead;
     private String firstPlayer;
+    /**
+     * 
+     */
+    private StartGame newGame;
 
+    public Menu(){
+        
+    }
     // public String getLineRead() {
     // return this.lineRead;
     // }
@@ -32,7 +39,7 @@ public class Menu {
 
     public String startGame(final int numColonne, final int numRighe, final String namePlayer1, final String namePlayer2,
             final TypeGame mode) {
-        final StartGame newGame = new StartGame(numColonne, numRighe, namePlayer1, namePlayer2, mode);
+        this.newGame = new StartGame(numColonne, numRighe, namePlayer1, namePlayer2, mode);
         this.firstPlayer = newGame.createGrid();
         return this.firstPlayer;
     }
@@ -70,5 +77,9 @@ public class Menu {
 
     public void exit() {
         System.exit(0);
+    }
+    
+    public StartGame getNewGame(){
+        return this.newGame;
     }
 }
