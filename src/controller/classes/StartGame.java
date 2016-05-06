@@ -40,7 +40,7 @@ public class StartGame {
             break;
         case TRIANGLE:
             newGrid = new TriangleGridImpl(this.rowsNumber, this.columnsNumber);
-            
+            break;
         default:
             throw new IllegalStateException();
 
@@ -58,7 +58,7 @@ public class StartGame {
     }
 
     private void firstPlayer(BaseGrid newGrid) {
-        newTurn = new TurnImpl(newGrid);
+        this.newTurn = new TurnImpl(newGrid);
         newTurn.startMatch();
         this.firstMove = newTurn.getCurrentPlayerTurn();
         switch (this.firstMove) {
