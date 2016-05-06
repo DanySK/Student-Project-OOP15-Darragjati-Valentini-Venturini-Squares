@@ -18,6 +18,7 @@ public class StartGame {
     private final TypeGame mode;
     private GridOption firstMove;
     private String firstPlayer;
+    private Turn newTurn;
 
     public StartGame(int columsNumber, int rowsNumber, String namePlayer1, String namePlayer2, TypeGame mode) {
         controlNamePlayers(namePlayer1, namePlayer2);
@@ -56,8 +57,8 @@ public class StartGame {
 
     }
 
-    protected void firstPlayer(BaseGrid newGrid) {
-        Turn newTurn = new TurnImpl(newGrid);
+    private void firstPlayer(BaseGrid newGrid) {
+        newTurn = new TurnImpl(newGrid);
         newTurn.startMatch();
         this.firstMove = newTurn.getCurrentPlayerTurn();
         switch (this.firstMove) {
@@ -91,5 +92,9 @@ public class StartGame {
 
     public String getFirstPlayer() {
         return this.firstPlayer;
+    }
+    
+    public Turn getNewTurn(){
+        return this.newTurn;
     }
 }
