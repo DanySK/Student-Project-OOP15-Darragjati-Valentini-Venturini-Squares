@@ -44,7 +44,7 @@ public class StartGame {
             firstPlayer(newGrid);
             
         }
-        return getFirstPlayer();
+        return this.firstPlayer;
 
     }
 
