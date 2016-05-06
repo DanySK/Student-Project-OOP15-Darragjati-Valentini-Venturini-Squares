@@ -5,7 +5,9 @@ import model.classes.BaseGridImpl;
 import model.classes.PlayerImpl;
 import model.classes.TriangleGridImpl;
 import model.classes.TurnImpl;
+import model.enumerations.GridOption;
 import model.interfaces.BaseGrid;
+import model.interfaces.Turn;
 
 public class StartGame {
 
@@ -14,6 +16,8 @@ public class StartGame {
     private final String namePlayer1;
     private final String namePlayer2;
     private final TypeGame mode;
+    private GridOption firstMove;
+    private String firstPlayer;
 
     public StartGame(int columsNumber, int rowsNumber, String namePlayer1, String namePlayer2, TypeGame mode) {
         controlNamePlayers(namePlayer1, namePlayer2);
@@ -22,18 +26,26 @@ public class StartGame {
         this.namePlayer1 = namePlayer1;
         this.namePlayer2 = namePlayer2;
         this.mode = mode;
+        this.firstMove = null;
+        this.firstPlayer = null;
     }
+    
+    
 
-    public void createGrid() {
+    public String createGrid() {
         BaseGrid newGrid;
         switch (this.mode) {
         case SQUARE:
             newGrid = new BaseGridImpl(this.rowsNumber, this.columnsNumber);
+            firstPlayer(newGrid);
             break;
         case TRIANGLE:
             newGrid = new TriangleGridImpl(this.rowsNumber, this.columnsNumber);
+            firstPlayer(newGrid);
+            
         }
-        
+        return getFirstPlayer();
+
     }
 
     private void controlNamePlayers(String namePlayer1, String namePlayer2) {
@@ -41,6 +53,21 @@ public class StartGame {
             throw new IllegalArgumentException();
         }
 
+    }
+
+    private String firstPlayer(BaseGrid newGrid) {
+        Turn newTurn = new TurnImpl(newGrid);
+        newTurn.startMatch();
+        this.firstMove = newTurn.getCurrentPlayerTurn();
+        switch (this.firstMove) {
+        case PLAYER1:
+            this.firstPlayer = this.namePlayer1;
+        case PLAYER2:
+            this.firstPlayer = this.namePlayer2;
+        case EMPTY:
+            throw new IllegalStateException();
+        }
+        return this.firstPlayer;
     }
 
     public int getNumColonne() {
@@ -57,5 +84,9 @@ public class StartGame {
 
     public String getNamePlayer2() {
         return this.namePlayer2;
+    }
+    
+    public String getFirstPlayer(){
+        return this.firstPlayer;
     }
 }
