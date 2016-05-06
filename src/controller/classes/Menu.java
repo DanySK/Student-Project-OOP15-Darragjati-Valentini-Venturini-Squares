@@ -31,8 +31,8 @@ public class Menu {
     // }
 
     public String startGame(final int numColonne, final int numRighe, final String namePlayer1, final String namePlayer2,
-            TypeGame mode) {
-        StartGame newGame = new StartGame(numColonne, numRighe, namePlayer1, namePlayer2, mode);
+            final TypeGame mode) {
+        final StartGame newGame = new StartGame(numColonne, numRighe, namePlayer1, namePlayer2, mode);
         this.firstPlayer = newGame.createGrid();
         return this.firstPlayer;
     }
