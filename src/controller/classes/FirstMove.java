@@ -9,7 +9,8 @@ public class FirstMove extends AddMove {
     private GridOption firstMove;
 
     public FirstMove(BaseGrid grid) {
-        super.turn = new TurnImpl(grid);
+        super(grid);
+        
     }
 
     public GridOption firstPlayer() {

@@ -13,7 +13,8 @@ public class AddMove {
     private int numLine;
     protected Turn turn;
     
-    public AddMove(){
+    public AddMove(BaseGrid grid){
+        this.turn = new TurnImpl(grid);
     }
     
     
