@@ -28,7 +28,7 @@ public class StartGame {
         this.namePlayer2 = namePlayer2;
         this.mode = mode;
         this.firstPlayer = null;
-        
+
     }
 
     public String createGrid() {
@@ -36,7 +36,6 @@ public class StartGame {
         switch (this.mode) {
         case SQUARE:
             newGrid = new BaseGridImpl(this.rowsNumber, this.columnsNumber);
-            
             break;
         case TRIANGLE:
             newGrid = new TriangleGridImpl(this.rowsNumber, this.columnsNumber);
@@ -47,11 +46,11 @@ public class StartGame {
         }
         this.firstMove = new FirstMove(newGrid);
         this.firstPlayer = firstMove.firstPlayer();
-        randomPlayer();        
+        randomPlayer();
         return this.nameFirstPlayer;
     }
-    
-    private void randomPlayer(){
+
+    private void randomPlayer() {
         switch (this.firstPlayer) {
         case PLAYER1:
             this.nameFirstPlayer = this.namePlayer1;
@@ -71,8 +70,6 @@ public class StartGame {
 
     }
 
-    
-
     public int getNumColonne() {
         return this.columnsNumber;
     }
@@ -89,5 +86,4 @@ public class StartGame {
         return this.namePlayer2;
     }
 
-    
 }
