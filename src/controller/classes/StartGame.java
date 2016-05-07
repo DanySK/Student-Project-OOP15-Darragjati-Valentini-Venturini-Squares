@@ -16,9 +16,9 @@ public class StartGame {
     private final String namePlayer1;
     private final String namePlayer2;
     private final TypeGame mode;
-    private GridOption firstMove;
-    private String firstPlayer;
-    private Turn newTurn;
+    private GridOption firstPlayer;
+    private FirstMove firstMove;
+    private String nameFirstPlayer;
 
     public StartGame(int columsNumber, int rowsNumber, String namePlayer1, String namePlayer2, TypeGame mode) {
         controlNamePlayers(namePlayer1, namePlayer2);
@@ -27,8 +27,8 @@ public class StartGame {
         this.namePlayer1 = namePlayer1;
         this.namePlayer2 = namePlayer2;
         this.mode = mode;
-        this.firstMove = null;
         this.firstPlayer = null;
+        
     }
 
     public String createGrid() {
@@ -45,9 +45,23 @@ public class StartGame {
             throw new IllegalStateException();
 
         }
-        firstPlayer(newGrid);
-        return this.firstPlayer;
-
+        this.firstMove = new FirstMove(newGrid);
+        this.firstPlayer = firstMove.firstPlayer();
+        randomPlayer();        
+        return this.nameFirstPlayer;
+    }
+    
+    private void randomPlayer(){
+        switch (this.firstPlayer) {
+        case PLAYER1:
+            this.nameFirstPlayer = this.namePlayer1;
+            break;
+        case PLAYER2:
+            this.nameFirstPlayer = this.namePlayer2;
+            break;
+        default:
+            throw new IllegalStateException();
+        }
     }
 
     private void controlNamePlayers(String namePlayer1, String namePlayer2) {
@@ -57,22 +71,7 @@ public class StartGame {
 
     }
 
-    private void firstPlayer(BaseGrid newGrid) {
-        this.newTurn = new TurnImpl(newGrid);
-        newTurn.startMatch();
-        this.firstMove = newTurn.getCurrentPlayerTurn();
-        switch (this.firstMove) {
-        case PLAYER1:
-            this.firstPlayer = this.namePlayer1;
-            break;
-        case PLAYER2:
-            this.firstPlayer = this.namePlayer2;
-            break;
-        default:
-            throw new IllegalStateException();
-        }
-        
-    }
+    
 
     public int getNumColonne() {
         return this.columnsNumber;
@@ -90,11 +89,5 @@ public class StartGame {
         return this.namePlayer2;
     }
 
-    public String getFirstPlayer() {
-        return this.firstPlayer;
-    }
     
-    public Turn getNewTurn(){
-        return this.newTurn;
-    }
 }
