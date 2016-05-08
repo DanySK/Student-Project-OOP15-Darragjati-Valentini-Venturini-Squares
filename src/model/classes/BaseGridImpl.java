@@ -96,10 +96,12 @@ public class BaseGridImpl implements BaseGrid {
     }
 
     @Override
-    public void setHorizontalLine(final int listIndex, final int position, final GridOption playerTurn) {
+    public Integer setHorizontalLine(final int listIndex, final int position, final GridOption playerTurn) {
         checkCorrectHorizontalInput(listIndex, position);
+        Integer points = 0;
         if (playerTurn.equals(GridOption.EMPTY)) {
             if (!horizontal.get(listIndex).get(position).equals(GridOption.EMPTY)) {
+                points = horizontalPointScored(listIndex, position);
                 horizontal.get(listIndex).set(position, playerTurn);
             } else {
                 throw new IllegalStateException(); // da mettere il perchè //
@@ -108,13 +110,15 @@ public class BaseGridImpl implements BaseGrid {
         } else {
             if (horizontal.get(listIndex).get(position).equals(GridOption.EMPTY)) {
                 horizontal.get(listIndex).set(position, playerTurn);
+                points = horizontalPointScored(listIndex, position);
             } else {
                 throw new IllegalStateException();
             }
         }
+        return points;
     }
 
-    public Integer horizontalPointScored(final int listIndex, final int position) {
+    private Integer horizontalPointScored(final int listIndex, final int position) {
         int points = 0;
         if (listIndex > 0) {
             if (!getCopyOfHorizontalElement(listIndex - 1, position).equals(GridOption.EMPTY)) {
@@ -152,11 +156,12 @@ public class BaseGridImpl implements BaseGrid {
     }
 
     @Override
-    public void setVerticalLine(final int listIndex, final int position, final GridOption playerTurn) {
+    public Integer setVerticalLine(final int listIndex, final int position, final GridOption playerTurn) {
         checkCorrectVerticalInput(listIndex, position);
-
+        Integer points = 0;
         if (playerTurn.equals(GridOption.EMPTY)) {
             if (!vertical.get(listIndex).get(position).equals(GridOption.EMPTY)) {
+                points = verticalPointScored(listIndex, position);
                 vertical.get(listIndex).set(position, playerTurn);
             } else {
                 throw new IllegalStateException(); // da mettere il perchè //
@@ -165,13 +170,15 @@ public class BaseGridImpl implements BaseGrid {
         } else {
             if (vertical.get(listIndex).get(position).equals(GridOption.EMPTY)) {
                 vertical.get(listIndex).set(position, playerTurn);
+                points = verticalPointScored(listIndex, position);
             } else {
                 throw new IllegalStateException();
             }
         }
+        return points;
     }
 
-    public Integer verticalPointScored(final int listIndex, final int position) {
+    private Integer verticalPointScored(final int listIndex, final int position) {
         int points = 0;
         if (listIndex > 0) {
             if (!getPreviousParallelList(ListType.VERTICAL, listIndex, position).equals(GridOption.EMPTY)) {

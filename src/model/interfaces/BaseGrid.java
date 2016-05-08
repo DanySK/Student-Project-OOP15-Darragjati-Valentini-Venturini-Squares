@@ -35,9 +35,7 @@ public interface BaseGrid {
      * @param position is the position of the chosen list where the player wants to set the line
      * @param playerTurn which one of the two players is making the move
      */
-    void setHorizontalLine(int listIndex, int position, GridOption playerTurn);
-
-    Integer horizontalPointScored(int listIndex, int position);
+    Integer setHorizontalLine(int listIndex, int position, GridOption playerTurn);
     
     /**
      * @param listIndex is the number of the vertical list where the player wants to get the line
@@ -52,9 +50,7 @@ public interface BaseGrid {
      * @param position is the position of the chosen list where the player wants to set the line
      * @param playerTurn which one of the two players is making the move
      */
-    void setVerticalLine(final int listIndex, int position, GridOption playerTurn);
-
-    Integer verticalPointScored(int listIndex, int position);
+    Integer setVerticalLine(final int listIndex, int position, GridOption playerTurn);
     
     /**
      * Gets the number of horizontal lists that makes the grid.

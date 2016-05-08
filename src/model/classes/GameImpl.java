@@ -132,18 +132,16 @@ public class GameImpl implements Turn {
         Integer points = 0;
 
         switch (list) {
-        case HORIZONTAL:
-            grid.setHorizontalLine(listIndex, position, this.turn);
-            points = grid.horizontalPointScored(listIndex, position);
+        case HORIZONTAL:            
+            points = grid.setHorizontalLine(listIndex, position, this.turn);
             if (points > 0) {
                 addPoints(points);
             } else {
                 nextTurn();
             }
             break;
-        case VERTICAL:
-            grid.setVerticalLine(listIndex, position, this.turn);
-            points = grid.verticalPointScored(listIndex, position);
+        case VERTICAL:         
+            points = grid.setVerticalLine(listIndex, position, this.turn);
             if (points > 0) {
                 addPoints(points);
             } else {
@@ -190,25 +188,21 @@ public class GameImpl implements Turn {
         if (lastMoveList.isEmpty()) {
             throw new IllegalStateException("you can't undo if you didn't made a move");
         }
-
+        Integer points = 0;
         switch (getCopyOfLastMove().getLastListType()) {
         case HORIZONTAL:
-            addPoints(-grid.horizontalPointScored(getCopyOfLastMove().getLastListIndex(),
-                    getCopyOfLastMove().getLastPosition()));
-            grid.setHorizontalLine(getCopyOfLastMove().getLastListIndex(), getCopyOfLastMove().getLastPosition(),
+            points = grid.setHorizontalLine(getCopyOfLastMove().getLastListIndex(), getCopyOfLastMove().getLastPosition(),
                     GridOption.EMPTY);
-            if (!(grid.horizontalPointScored(getCopyOfLastMove().getLastListIndex(),
-                    getCopyOfLastMove().getLastPosition()) > 0)) {
+            addPoints(-points);   
+            if (points == 0) {
                 nextTurn();
             }
             break;
         case VERTICAL:
-            addPoints(-grid.verticalPointScored(getCopyOfLastMove().getLastListIndex(),
-                    getCopyOfLastMove().getLastPosition()));
-            grid.setVerticalLine(getCopyOfLastMove().getLastListIndex(), getCopyOfLastMove().getLastPosition(),
+            points = grid.setVerticalLine(getCopyOfLastMove().getLastListIndex(), getCopyOfLastMove().getLastPosition(),
                     GridOption.EMPTY);
-            if (!(grid.verticalPointScored(getCopyOfLastMove().getLastListIndex(),
-                    getCopyOfLastMove().getLastPosition()) > 0)) {
+            addPoints(-points);           
+            if (points == 0) {
                 nextTurn();
             }
             break;
