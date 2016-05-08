@@ -54,7 +54,6 @@ public class PlayerImpl implements Player {
 
     @Override
     public Integer getTotalWins() {
-        checkCorrectInputs();
         return this.wonMatches;
     }
 
@@ -62,12 +61,12 @@ public class PlayerImpl implements Player {
     // CHECKSTYLE:OFF:
     public void setWonMatches(final Integer wonMatches) {
         // CHECKSTYLE:ON:
+        checkCorrectInputs();
         this.wonMatches = wonMatches;
     }
 
     @Override
     public Integer getTotalMatches() {
-        checkCorrectInputs();
         return this.totalMatches;
     }
 
@@ -75,6 +74,7 @@ public class PlayerImpl implements Player {
     // CHECKSTYLE:OFF:
     public void setTotalMatches(final Integer totalMatches) {
         // CHECKSTYLE:ON:
+        checkCorrectInputs();
         this.totalMatches = totalMatches;
     }
 
