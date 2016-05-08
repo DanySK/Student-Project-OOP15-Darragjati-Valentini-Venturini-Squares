@@ -29,7 +29,7 @@ public class TestBaseOptions {
     public void test() {
 
         final BaseGrid squareGrid = new BaseGridImpl(HORIZONTAL_SIZE, VERTICAL_SIZE);
-        final Turn gridOfSize = new TurnImpl(squareGrid);
+        final Turn gridOfSize = new GameImpl(squareGrid);
 
         assertEquals(squareGrid.getTotalMoves(), squareGrid.getRemainingMoves()); // verifies
         // that
@@ -95,7 +95,7 @@ public class TestBaseOptions {
         assertNotEquals(player, gridOfSize.getCurrentPlayerTurn());
 
         final BaseGrid squareGrid2 = new BaseGridImpl(STANDARD_SIZE, STANDARD_SIZE);
-        final Turn gridOfSize2 = new TurnImpl(squareGrid2);
+        final Turn gridOfSize2 = new GameImpl(squareGrid2);
 
         gridOfSize2.startMatch();
 
@@ -141,7 +141,7 @@ public class TestBaseOptions {
         }
 
         exceptionGrid = new BaseGridImpl(STANDARD_SIZE, STANDARD_SIZE);
-        exceptionGame = new TurnImpl(exceptionGrid);
+        exceptionGame = new GameImpl(exceptionGrid);
         try {
             exceptionGame.isEnded();
             fail("the match can't be ended if it isn't started");

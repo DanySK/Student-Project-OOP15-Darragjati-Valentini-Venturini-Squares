@@ -14,7 +14,7 @@ import model.interfaces.Turn;
  * This class is used to start a new match and all the things related to it,
  * like assigning points to a player or knowing when the game is ended.
  */
-public class TurnImpl implements Turn {
+public class GameImpl implements Turn {
 
     private BaseGrid grid;
     private boolean matchStarted = false;
@@ -31,7 +31,7 @@ public class TurnImpl implements Turn {
      *            the playable game field.
      */
     // CHECKSTYLE:OFF:
-    public TurnImpl(final BaseGrid grid) {
+    public GameImpl(final BaseGrid grid) {
         // CHECKSTYLE:ON:
         this.grid = grid;
     }

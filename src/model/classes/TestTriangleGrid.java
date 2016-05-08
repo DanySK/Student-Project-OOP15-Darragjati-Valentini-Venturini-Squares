@@ -30,7 +30,7 @@ public class TestTriangleGrid {
     public void test() {
 
         final TriangleGrid triangleGrid = new TriangleGridImpl(HORIZONTAL_SIZE, VERTICAL_SIZE);
-        final Turn gridOfSize = new TurnImpl(triangleGrid);
+        final Turn gridOfSize = new GameImpl(triangleGrid);
 
         assertEquals(triangleGrid.getTotalMoves(), triangleGrid.getRemainingMoves());
 
@@ -89,7 +89,7 @@ public class TestTriangleGrid {
         assertNotEquals(player, gridOfSize.getCurrentPlayerTurn());
 
         final BaseGrid squareGrid2 = new TriangleGridImpl(STANDARD_SIZE, STANDARD_SIZE);
-        final Turn gridOfSize2 = new TurnImpl(squareGrid2);
+        final Turn gridOfSize2 = new GameImpl(squareGrid2);
 
         gridOfSize2.startMatch();
         // fills the grid with all thepossible moves

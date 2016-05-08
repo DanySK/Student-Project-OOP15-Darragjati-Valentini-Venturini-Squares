@@ -4,7 +4,7 @@ import controller.enumerations.TypeGame;
 import model.classes.BaseGridImpl;
 import model.classes.PlayerImpl;
 import model.classes.TriangleGridImpl;
-import model.classes.TurnImpl;
+import model.classes.GameImpl;
 import model.enumerations.GridOption;
 import model.interfaces.BaseGrid;
 import model.interfaces.Turn;

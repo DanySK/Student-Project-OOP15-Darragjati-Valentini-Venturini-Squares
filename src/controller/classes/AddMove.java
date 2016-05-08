@@ -1,6 +1,6 @@
 package controller.classes;
 
-import model.classes.TurnImpl;
+import model.classes.GameImpl;
 import model.enumerations.GridOption;
 import model.enumerations.ListType;
 import model.interfaces.BaseGrid;
@@ -13,7 +13,7 @@ public class AddMove {
     protected Turn turn;
 
     public AddMove(BaseGrid grid) {
-        this.turn = new TurnImpl(grid);
+        this.turn = new GameImpl(grid);
     }
 
     public AddMove(final ListType direction, final int numLine, final int position) {
