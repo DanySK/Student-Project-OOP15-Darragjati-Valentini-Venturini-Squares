@@ -17,7 +17,7 @@ public class StartGame {
     private final String namePlayer2;
     private final TypeGame mode;
     private GridOption firstPlayer;
-    private FirstMove firstMove;
+    private AddMove firstMove;
     private String nameFirstPlayer;
 
     public StartGame(int columsNumber, int rowsNumber, String namePlayer1, String namePlayer2, TypeGame mode) {
@@ -44,7 +44,7 @@ public class StartGame {
             throw new IllegalStateException();
 
         }
-        this.firstMove = new FirstMove(newGrid);
+        this.firstMove = new AddMove(newGrid);
         this.firstPlayer = firstMove.firstPlayer();
         randomPlayer();
         return this.nameFirstPlayer;
