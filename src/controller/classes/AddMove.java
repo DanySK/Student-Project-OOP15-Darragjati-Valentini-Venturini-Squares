@@ -23,7 +23,7 @@ public class AddMove {
 
     public GridOption firstPlayer() {
         turn.startMatch();
-        this.firstMove = turn.getCurrentPlayerTurn();
+        this.firstMove = turn.getCopyOfCurrentPlayerTurn();
         return this.firstMove;
     }
 }

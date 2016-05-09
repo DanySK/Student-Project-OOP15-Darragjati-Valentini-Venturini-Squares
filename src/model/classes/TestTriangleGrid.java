@@ -63,29 +63,29 @@ public class TestTriangleGrid {
         gridOfSize.setLine(ListType.HORIZONTAL, 0, 0);
         gridOfSize.setLine(ListType.HORIZONTAL, 1, 0);
 
-        GridOption player = gridOfSize.getCurrentPlayerTurn();
+        GridOption player = gridOfSize.getCopyOfCurrentPlayerTurn();
         gridOfSize.setLine(ListType.VERTICAL, 1, 0);
 
         assertEquals(triangleGrid.getRemainingMoves(), (Integer) (triangleGrid.getTotalMoves() - 4));
         // the player points should be the same with this game mode
         assertEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
-        assertNotEquals(player, gridOfSize.getCurrentPlayerTurn());
-        player = gridOfSize.getCurrentPlayerTurn();
+        assertNotEquals(player, gridOfSize.getCopyOfCurrentPlayerTurn());
+        player = gridOfSize.getCopyOfCurrentPlayerTurn();
         gridOfSize.setLine(ListType.DIAGONAL, 0, 0);
         assertNotEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
-        assertEquals(player, gridOfSize.getCurrentPlayerTurn());
+        assertEquals(player, gridOfSize.getCopyOfCurrentPlayerTurn());
         assertEquals(gridOfSize.getCopyOfLastMove().getLastListType(), ListType.DIAGONAL);
         assertEquals(gridOfSize.getCopyOfLastMove().getLastListIndex(), (Integer) 0);
         assertEquals(gridOfSize.getCopyOfLastMove().getLastPosition(), (Integer) 0);
 
         gridOfSize.undoLastMove();
         assertEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
-        assertEquals(player, gridOfSize.getCurrentPlayerTurn());
+        assertEquals(player, gridOfSize.getCopyOfCurrentPlayerTurn());
         assertEquals(gridOfSize.getCopyOfLastMove().getLastListType(), ListType.VERTICAL);
         assertEquals(gridOfSize.getCopyOfLastMove().getLastListIndex(), (Integer) 1);
         assertEquals(gridOfSize.getCopyOfLastMove().getLastPosition(), (Integer) 0);
         gridOfSize.undoLastMove();
-        assertNotEquals(player, gridOfSize.getCurrentPlayerTurn());
+        assertNotEquals(player, gridOfSize.getCopyOfCurrentPlayerTurn());
 
         final BaseGrid squareGrid2 = new TriangleGridImpl(STANDARD_SIZE, STANDARD_SIZE);
         final Turn gridOfSize2 = new GameImpl(squareGrid2);

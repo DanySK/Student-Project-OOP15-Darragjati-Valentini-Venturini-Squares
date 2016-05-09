@@ -58,21 +58,21 @@ public class TestBaseOptions {
         gridOfSize.setLine(ListType.HORIZONTAL, 0, 0);
         gridOfSize.setLine(ListType.HORIZONTAL, 1, 0);
 
-        final GridOption player = gridOfSize.getCurrentPlayerTurn();
+        final GridOption player = gridOfSize.getCopyOfCurrentPlayerTurn();
         gridOfSize.setLine(ListType.VERTICAL, 1, 0);
 
         assertEquals(squareGrid.getRemainingMoves(), (Integer) (squareGrid.getTotalMoves() - 4));
         assertNotEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
         // verifies if the player has received a bonus move
-        assertEquals(player, gridOfSize.getCurrentPlayerTurn());
+        assertEquals(player, gridOfSize.getCopyOfCurrentPlayerTurn());
         gridOfSize.undoLastMove();
         assertEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
-        assertEquals(player, gridOfSize.getCurrentPlayerTurn());
+        assertEquals(player, gridOfSize.getCopyOfCurrentPlayerTurn());
         assertEquals(gridOfSize.getCopyOfLastMove().getLastListType(), ListType.HORIZONTAL);
         assertEquals(gridOfSize.getCopyOfLastMove().getLastListIndex(), (Integer) 1);
         assertEquals(gridOfSize.getCopyOfLastMove().getLastPosition(), (Integer) 0);
         gridOfSize.undoLastMove();
-        assertNotEquals(player, gridOfSize.getCurrentPlayerTurn());
+        assertNotEquals(player, gridOfSize.getCopyOfCurrentPlayerTurn());
 
         final BaseGrid squareGrid2 = new BaseGridImpl(STANDARD_SIZE, STANDARD_SIZE);
         final Turn gridOfSize2 = new GameImpl(squareGrid2);

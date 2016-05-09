@@ -16,13 +16,13 @@ import model.interfaces.Turn;
  */
 public class GameImpl implements Turn {
 
-    private BaseGrid grid;
+    private final BaseGrid grid;
     private boolean matchStarted = false;
     private Integer scorePlayer1;
     private Integer scorePlayer2;
     private static final Integer INITIAL_SCORE = 0;
     private GridOption turn = GridOption.EMPTY;
-    private List<LastMove> lastMoveList = new ArrayList<>();
+    private final List<LastMove> lastMoveList = new ArrayList<>();
 
     /**
      * This constructor takes an object that implements BaseGrid.
@@ -38,28 +38,26 @@ public class GameImpl implements Turn {
 
     @Override
     public void startMatch() {
-        if (!isStarted()) {
+        if (isStarted()) {
+            throw new IllegalStateException("Match already started");
+        } else {
             this.scorePlayer1 = INITIAL_SCORE;
             this.scorePlayer2 = INITIAL_SCORE;
             randomizeTurn();
-            matchStarted = true;
-            // new BaseGridImpl(rowsNumber, columnsNumber);
-        } else {
-            throw new IllegalStateException("Match already started");
+            this.matchStarted = true;
         }
     }
 
     private void randomizeTurn() {
-        if (!isStarted()) {
-            Random randomTurn = new Random();
-
+        if (isStarted()) {
+            throw new IllegalStateException();
+        } else {
+            final Random randomTurn = new Random();
             if (randomTurn.nextInt(2) == 0) {
                 this.turn = GridOption.PLAYER1;
             } else {
                 this.turn = GridOption.PLAYER2;
             }
-        } else {
-            throw new IllegalStateException();
         }
     }
 
@@ -94,10 +92,10 @@ public class GameImpl implements Turn {
                         * (grid.getVerticallListSize() - 1) + diagonalMOves ? true : false;
     }
 
-    // espongo turn, lo devo proteggere?
     @Override
-    public GridOption getCurrentPlayerTurn() {
-        return this.turn;
+    public GridOption getCopyOfCurrentPlayerTurn() {
+        GridOption copyOfTurn = this.turn;
+        return copyOfTurn;
     }
 
     @Override
@@ -128,27 +126,22 @@ public class GameImpl implements Turn {
 
     @Override
     public void setLine(final ListType list, final Integer listIndex, final Integer position) {
-
         Integer points = 0;
 
         switch (list) {
-        case HORIZONTAL:            
+        case HORIZONTAL:
             points = grid.setHorizontalLine(listIndex, position, this.turn);
-           
-                addPoints(points);
-            
-            break;
-        case VERTICAL:         
-            points = grid.setVerticalLine(listIndex, position, this.turn);
-          
             addPoints(points);
-            
+            break;
+        case VERTICAL:
+            points = grid.setVerticalLine(listIndex, position, this.turn);
+            addPoints(points);
             break;
         case DIAGONAL:
-            if(grid.getClass().equals(TriangleGridImpl.class)){
-            points = ((TriangleGrid) grid).setDiagonalLine(listIndex, position, this.turn);
-            addPoints(points);
-            break;
+            if (grid.getClass().equals(TriangleGridImpl.class)) {
+                points = ((TriangleGrid) grid).setDiagonalLine(listIndex, position, this.turn);
+                addPoints(points);
+                break;
             } else {
                 throw new UnsupportedOperationException();
             }
@@ -156,7 +149,7 @@ public class GameImpl implements Turn {
             throw new IllegalArgumentException("the list selected does not exist");
         }
 
-        LastMove lastMove = new LastMoveImpl();
+        final LastMove lastMove = new LastMoveImpl();
         lastMove.setLastListType(list);
         lastMove.setLastListIndex(listIndex);
         lastMove.setLastPosition(position);
@@ -167,19 +160,19 @@ public class GameImpl implements Turn {
         if (!isStarted()) {
             throw new IllegalStateException();
         }
-        if(points != 0){
-            switch(this.turn){
+        if (points == 0) {
+            nextTurn();
+        } else {
+            switch (this.turn) {
             case PLAYER1:
                 scorePlayer1 += points;
-            break;
+                break;
             case PLAYER2:
                 scorePlayer2 += points;
-            break;
+                break;
             default:
                 throw new IllegalArgumentException();
             }
-        } else {
-            nextTurn();
         }
     }
 
@@ -192,26 +185,20 @@ public class GameImpl implements Turn {
         Integer points = 0;
         switch (getCopyOfLastMove().getLastListType()) {
         case HORIZONTAL:
-            points = grid.setHorizontalLine(getCopyOfLastMove().getLastListIndex(), getCopyOfLastMove().getLastPosition(),
-                    GridOption.EMPTY);
-           
-                addPoints(-points);
-           
+            points = grid.setHorizontalLine(getCopyOfLastMove().getLastListIndex(),
+                    getCopyOfLastMove().getLastPosition(), GridOption.EMPTY);
+            addPoints(-points);
             break;
         case VERTICAL:
             points = grid.setVerticalLine(getCopyOfLastMove().getLastListIndex(), getCopyOfLastMove().getLastPosition(),
                     GridOption.EMPTY);
-            
-                addPoints(-points);
-            
+            addPoints(-points);
             break;
         case DIAGONAL:
-            points = ((TriangleGrid) grid).setDiagonalLine(getCopyOfLastMove().getLastListIndex(), getCopyOfLastMove().getLastPosition(),
-                    GridOption.EMPTY);
+            points = ((TriangleGrid) grid).setDiagonalLine(getCopyOfLastMove().getLastListIndex(),
+                    getCopyOfLastMove().getLastPosition(), GridOption.EMPTY);
             System.out.println(points);
-            
-                addPoints(-points);
-            
+            addPoints(-points);
             break;
         default:
             throw new IllegalArgumentException();

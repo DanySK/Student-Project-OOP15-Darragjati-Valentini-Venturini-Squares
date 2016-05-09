@@ -32,7 +32,7 @@ public interface Turn {
      * Gets the player tha should make the next move.
      * @return the player that should make the next move
      */
-    GridOption getCurrentPlayerTurn();
+    GridOption getCopyOfCurrentPlayerTurn();
 
     /**
      * Gets the score of one of the two players.
