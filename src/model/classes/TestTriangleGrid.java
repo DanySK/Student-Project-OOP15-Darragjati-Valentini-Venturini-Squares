@@ -70,7 +70,6 @@ public class TestTriangleGrid {
         // the player points should be the same with this game mode
         assertEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
         assertNotEquals(player, gridOfSize.getCurrentPlayerTurn());
-
         player = gridOfSize.getCurrentPlayerTurn();
         gridOfSize.setLine(ListType.DIAGONAL, 0, 0);
         assertNotEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));

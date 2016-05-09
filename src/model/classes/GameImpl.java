@@ -149,11 +149,7 @@ public class GameImpl implements Turn {
             }
             break;
         case DIAGONAL:
-            if (grid.getClass().equals(BaseGridImpl.class)) {
-                throw new UnsupportedOperationException();
-            }
-            ((TriangleGrid) grid).setDiagonalLine(listIndex, position, this.turn);
-            points = ((TriangleGrid) grid).diagonalPointScored(listIndex, position);
+            points = ((TriangleGrid) grid).setDiagonalLine(listIndex, position, this.turn);
             if (points > 0) {
                 addPoints(points);
             } else {
@@ -193,26 +189,28 @@ public class GameImpl implements Turn {
         case HORIZONTAL:
             points = grid.setHorizontalLine(getCopyOfLastMove().getLastListIndex(), getCopyOfLastMove().getLastPosition(),
                     GridOption.EMPTY);
-            addPoints(-points);   
-            if (points == 0) {
+            if (points > 0) {
+                addPoints(-points);
+            } else {
                 nextTurn();
             }
             break;
         case VERTICAL:
-            points = grid.setVerticalLine(getCopyOfLastMove().getLastListIndex(), getCopyOfLastMove().getLastPosition(),
+            points = ((TriangleGrid) grid).setDiagonalLine(getCopyOfLastMove().getLastListIndex(), getCopyOfLastMove().getLastPosition(),
                     GridOption.EMPTY);
-            addPoints(-points);           
-            if (points == 0) {
+            if (points > 0) {
+                addPoints(-points);
+            } else {
                 nextTurn();
             }
             break;
         case DIAGONAL:
-            addPoints(-((TriangleGrid) grid).diagonalPointScored(getCopyOfLastMove().getLastListIndex(),
-                    getCopyOfLastMove().getLastPosition()));
-            ((TriangleGrid) grid).setDiagonalLine(getCopyOfLastMove().getLastListIndex(),
-                    getCopyOfLastMove().getLastPosition(), GridOption.EMPTY);
-            if (!(((TriangleGrid) grid).diagonalPointScored(getCopyOfLastMove().getLastListIndex(),
-                    getCopyOfLastMove().getLastPosition()) > 0)) {
+            points = ((TriangleGrid) grid).setDiagonalLine(getCopyOfLastMove().getLastListIndex(), getCopyOfLastMove().getLastPosition(),
+                    GridOption.EMPTY);
+            System.out.println(points);
+            if (points > 0) {
+                addPoints(-points);
+            } else {
                 nextTurn();
             }
             break;
