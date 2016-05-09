@@ -91,8 +91,10 @@ public class BaseGridImpl implements BaseGrid {
     @Override
     public GridOption getCopyOfHorizontalElement(final Integer listIndex, final Integer position) {
         checkCorrectHorizontalInput(listIndex, position);
-        GridOption copyOfHorizontalElement = horizontal.get(listIndex).get(position);
+        final GridOption copyOfHorizontalElement = horizontal.get(listIndex).get(position);
+        // CHECKSTYLE:OFF:
         return copyOfHorizontalElement;
+        // CHECKSTYLE:ON:
     }
 
     @Override
@@ -119,22 +121,28 @@ public class BaseGridImpl implements BaseGrid {
     }
 
     /**
-     * This method checks after doing a horizontal move if it has scored a point.
-     * @param listIndex the number of the horizontal list where the player wants to set his line
-     * @param position the index of the chosen list where the player wants to set the line
+     * This method checks after doing a horizontal move if it has scored a
+     * point.
+     * 
+     * @param listIndex
+     *            the number of the horizontal list where the player wants to
+     *            set his line
+     * @param position
+     *            the index of the chosen list where the player wants to set the
+     *            line
      * @return the number of points scored by making a move
      */
     protected Integer horizontalPointScored(final int listIndex, final int position) {
         int points = 0;
         if (listIndex > 0 && !getCopyOfHorizontalElement(listIndex - 1, position).equals(GridOption.EMPTY)
-                && !getCopyOfVerticalElement(position, listIndex - 1).equals(GridOption.EMPTY)
-                && !getCopyOfVerticalElement(position + 1, listIndex - 1).equals(GridOption.EMPTY)) {
+                && !getPreviousTransversalList(ListType.HORIZONTAL, listIndex, position).equals(GridOption.EMPTY)
+                && !getNextTransversalList(ListType.HORIZONTAL, listIndex, position).equals(GridOption.EMPTY)) {
             points++;
         }
         if (listIndex < horizontal.size() - 1
                 && !getCopyOfHorizontalElement(listIndex + 1, position).equals(GridOption.EMPTY)
-                && !getCopyOfVerticalElement(position, listIndex).equals(GridOption.EMPTY)
-                && !getCopyOfVerticalElement(position + 1, listIndex).equals(GridOption.EMPTY)) {
+                && !getPreviousTransversalList(ListType.HORIZONTAL, listIndex, position).equals(GridOption.EMPTY)
+                && !getNextTransversalList(ListType.HORIZONTAL, listIndex, position).equals(GridOption.EMPTY)) {
             points++;
         }
 
@@ -153,8 +161,10 @@ public class BaseGridImpl implements BaseGrid {
     @Override
     public GridOption getCopyOfVerticalElement(final Integer listIndex, final Integer position) {
         checkCorrectVerticalInput(listIndex, position);
-        GridOption copyOfVerticalElement = vertical.get(listIndex).get(position);
+        final GridOption copyOfVerticalElement = vertical.get(listIndex).get(position);
+        // CHECKSTYLE:OFF:
         return copyOfVerticalElement;
+        // CHECKSTYLE:ON:
     }
 
     @Override
@@ -182,27 +192,31 @@ public class BaseGridImpl implements BaseGrid {
 
     /**
      * This method checks after doing a vertical move if it has scored a point.
-     * @param listIndex the number of the vertical list where the player wants to set his line
-     * @param position the index of the chosen list where the player wants to set the line
+     * 
+     * @param listIndex
+     *            the number of the vertical list where the player wants to set
+     *            his line
+     * @param position
+     *            the index of the chosen list where the player wants to set the
+     *            line
      * @return the number of points scored by making a move
      */
     protected Integer verticalPointScored(final int listIndex, final int position) {
         int points = 0;
         if (listIndex > 0 && !getPreviousParallelList(ListType.VERTICAL, listIndex, position).equals(GridOption.EMPTY)
-                && !getCopyOfHorizontalElement(position, listIndex - 1).equals(GridOption.EMPTY)
-                && !getCopyOfHorizontalElement(position + 1, listIndex - 1).equals(GridOption.EMPTY)) {
+                && !getPreviousTransversalList(ListType.VERTICAL, listIndex, position).equals(GridOption.EMPTY)
+                && !getNextTransversalList(ListType.VERTICAL, listIndex, position).equals(GridOption.EMPTY)) {
             points++;
         }
         if (listIndex < vertical.size() - 1
                 && !getNextParallelList(ListType.VERTICAL, listIndex, position).equals(GridOption.EMPTY)
-                && !getCopyOfHorizontalElement(position, listIndex).equals(GridOption.EMPTY)
-                && !getCopyOfHorizontalElement(position + 1, listIndex).equals(GridOption.EMPTY)) {
+                && !getPreviousTransversalList(ListType.VERTICAL, listIndex, position).equals(GridOption.EMPTY)
+                && !getNextTransversalList(ListType.VERTICAL, listIndex, position).equals(GridOption.EMPTY)) {
             points++;
         }
         return points;
     }
 
-    // da tenere?
     private GridOption getPreviousParallelList(final ListType list, final int listIndex, final int position) {
         if (listIndex > 0) {
             switch (list) {
@@ -218,7 +232,6 @@ public class BaseGridImpl implements BaseGrid {
         }
     }
 
-    // da tenere?
     private GridOption getNextParallelList(final ListType list, final int listIndex, final int position) {
         switch (list) {
         case HORIZONTAL:
@@ -230,6 +243,40 @@ public class BaseGridImpl implements BaseGrid {
         case VERTICAL:
             if (listIndex < getVerticallListSize()) {
                 return getCopyOfVerticalElement(listIndex + 1, position);
+            } else {
+                throw new IllegalArgumentException();
+            }
+        default:
+            throw new IllegalStateException("the list does not exist");
+        }
+    }
+
+    private GridOption getPreviousTransversalList(final ListType list, final int listIndex, final int position) {
+        if (listIndex > 0) {
+            switch (list) {
+            case HORIZONTAL:
+                return getCopyOfHorizontalElement(position, listIndex - 1);
+            case VERTICAL:
+                return getCopyOfVerticalElement(position, listIndex - 1);
+            default:
+                throw new IllegalStateException("the list does not exist");
+            }
+        } else {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private GridOption getNextTransversalList(final ListType list, final int listIndex, final int position) {
+        switch (list) {
+        case HORIZONTAL:
+            if (listIndex < getHorizontalListSize()) {
+                return getCopyOfHorizontalElement(position + 1, listIndex - 1);
+            } else {
+                throw new IllegalArgumentException();
+            }
+        case VERTICAL:
+            if (listIndex < getVerticallListSize()) {
+                return getCopyOfVerticalElement(position + 1, listIndex - 1);
             } else {
                 throw new IllegalArgumentException();
             }
