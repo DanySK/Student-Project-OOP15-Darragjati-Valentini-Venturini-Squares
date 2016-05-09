@@ -17,7 +17,7 @@ public class StartGame {
     private final String namePlayer2;
     private final TypeGame mode;
     private GridOption firstPlayer;
-    private AddMove firstMove;
+    private AddMove game;
     private String nameFirstPlayer;
 
     public StartGame(int columsNumber, int rowsNumber, String namePlayer1, String namePlayer2, TypeGame mode) {
@@ -44,13 +44,13 @@ public class StartGame {
             throw new IllegalStateException();
 
         }
-        this.firstMove = new AddMove(newGrid);
-        this.firstPlayer = firstMove.firstPlayer();
-        randomPlayer();
+        this.game = new AddMove(newGrid);
+        this.firstPlayer = game.firstPlayer();
+        namePlayer();
         return this.nameFirstPlayer;
     }
 
-    private void randomPlayer() {
+    private void namePlayer() {
         switch (this.firstPlayer) {
         case PLAYER1:
             this.nameFirstPlayer = this.namePlayer1;
@@ -69,6 +69,8 @@ public class StartGame {
         }
 
     }
+    
+    
 
     public int getNumColonne() {
         return this.columnsNumber;
