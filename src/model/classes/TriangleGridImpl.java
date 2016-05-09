@@ -51,7 +51,7 @@ public class TriangleGridImpl extends BaseGridImpl implements TriangleGrid {
     }
 
     @Override
-    public Integer horizontalPointScored(final int listIndex, final int position) {
+    protected Integer horizontalPointScored(final int listIndex, final int position) {
         int points = 0;
         if (listIndex > 0) {
             if (!super.getCopyOfVerticalElement(position, listIndex - 1).equals(GridOption.EMPTY)
@@ -69,7 +69,7 @@ public class TriangleGridImpl extends BaseGridImpl implements TriangleGrid {
     }
 
     @Override
-    public Integer verticalPointScored(final int listIndex, final int position) {
+    protected Integer verticalPointScored(final int listIndex, final int position) {
         int points = 0;
         if (listIndex > 0) {
             if (!super.getCopyOfHorizontalElement(position, listIndex - 1).equals(GridOption.EMPTY)

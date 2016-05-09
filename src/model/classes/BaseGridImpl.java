@@ -118,7 +118,7 @@ public class BaseGridImpl implements BaseGrid {
         return points;
     }
 
-    private Integer horizontalPointScored(final int listIndex, final int position) {
+    protected Integer horizontalPointScored(final int listIndex, final int position) {
         int points = 0;
         if (listIndex > 0) {
             if (!getCopyOfHorizontalElement(listIndex - 1, position).equals(GridOption.EMPTY)) {
@@ -178,7 +178,7 @@ public class BaseGridImpl implements BaseGrid {
         return points;
     }
 
-    private Integer verticalPointScored(final int listIndex, final int position) {
+    protected Integer verticalPointScored(final int listIndex, final int position) {
         int points = 0;
         if (listIndex > 0) {
             if (!getPreviousParallelList(ListType.VERTICAL, listIndex, position).equals(GridOption.EMPTY)) {

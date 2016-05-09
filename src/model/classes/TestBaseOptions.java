@@ -31,26 +31,16 @@ public class TestBaseOptions {
         final BaseGrid squareGrid = new BaseGridImpl(HORIZONTAL_SIZE, VERTICAL_SIZE);
         final Turn gridOfSize = new GameImpl(squareGrid);
 
-        assertEquals(squareGrid.getTotalMoves(), squareGrid.getRemainingMoves()); // verifies
-        // that
-        // total
-        // moves
-        // are
-        // the
-        // same
-        // as
-        // remaining
-        // moves
+        // verifies that total moves are the same as remaining moves
+        assertEquals(squareGrid.getTotalMoves(), squareGrid.getRemainingMoves());
 
-        // verifies that every element in the list is initialized as EMPTY
+        // verifies that every element in the lists is initialized as EMPTY
         for (int i = 0; i < HORIZONTAL_SIZE + 1; i++) {
             for (int z = 0; z < HORIZONTAL_SIZE; z++) {
                 assertEquals(squareGrid.getCopyOfHorizontalElement(i, z), GridOption.EMPTY);
             }
         }
-        for (int i = 0; i < VERTICAL_SIZE + 1; i++) { // verifies that every
-                                                      // element in
-            // the list is initialized as EMPTY
+        for (int i = 0; i < VERTICAL_SIZE + 1; i++) {
             for (int z = 0; z < VERTICAL_SIZE; z++) {
                 assertEquals(squareGrid.getCopyOfVerticalElement(i, z), GridOption.EMPTY);
             }
@@ -60,8 +50,7 @@ public class TestBaseOptions {
         gridOfSize.startMatch();
         assertTrue(gridOfSize.isStarted());
         gridOfSize.setLine(ListType.VERTICAL, 0, 0);
-        assertEquals(squareGrid.getRemainingMoves(),
-                (Integer) (squareGrid.getTotalMoves() - 1));
+        assertEquals(squareGrid.getRemainingMoves(), (Integer) (squareGrid.getTotalMoves() - 1));
         assertEquals(gridOfSize.getCopyOfLastMove().getLastListType(), ListType.VERTICAL);
         assertEquals(gridOfSize.getCopyOfLastMove().getLastListIndex(), (Integer) 0);
         assertEquals(gridOfSize.getCopyOfLastMove().getLastPosition(), (Integer) 0);
@@ -72,19 +61,10 @@ public class TestBaseOptions {
         final GridOption player = gridOfSize.getCurrentPlayerTurn();
         gridOfSize.setLine(ListType.VERTICAL, 1, 0);
 
-        assertEquals(squareGrid.getRemainingMoves(),
-                (Integer) (squareGrid.getTotalMoves() - 4));
+        assertEquals(squareGrid.getRemainingMoves(), (Integer) (squareGrid.getTotalMoves() - 4));
         assertNotEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
-        assertEquals(player, gridOfSize.getCurrentPlayerTurn()); // verifies
-                                                                 // if
-                                                                 // the
-                                                                 // player
-                                                                 // has
-                                                                 // received
-                                                                 // a
-                                                                 // bonus
-                                                                 // move
-
+        // verifies if the player has received a bonus move
+        assertEquals(player, gridOfSize.getCurrentPlayerTurn());
         gridOfSize.undoLastMove();
         assertEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
         assertEquals(player, gridOfSize.getCurrentPlayerTurn());
@@ -99,7 +79,7 @@ public class TestBaseOptions {
 
         gridOfSize2.startMatch();
 
-        //fills the grid with all the possible moves
+        // fills the grid with all the possible moves
         for (int i = 0; i < STANDARD_SIZE + 1; i++) {
             for (int z = 0; z < STANDARD_SIZE; z++) {
                 gridOfSize2.setLine(ListType.HORIZONTAL, i, z);
@@ -115,14 +95,16 @@ public class TestBaseOptions {
     }
 
     /**
-     * Test if the methods of BaseGridImpl and TurnImpl throws the correct exceptions.
+     * Test if the methods of BaseGridImpl and TurnImpl throws the correct
+     * exceptions.
      */
     @Test
     public void testExceptions() {
 
         BaseGrid exceptionGrid;
         Turn exceptionGame;
-
+        final String error = "Wrong exception thrown";
+        
         try {
             // CHECKSTYLE:OFF:
             exceptionGrid = new BaseGridImpl(STANDARD_SIZE - 4, STANDARD_SIZE - 4);
@@ -130,14 +112,14 @@ public class TestBaseOptions {
             fail("Can't create a grid too small");
         } catch (IllegalArgumentException e) {
         } catch (Exception e) {
-            fail("Wrong exception thrown");
+            fail(error);
         }
         try {
             exceptionGrid = new BaseGridImpl(STANDARD_SIZE + STANDARD_SIZE, STANDARD_SIZE + STANDARD_SIZE);
             fail("Can't create a grid too big");
         } catch (IllegalArgumentException e) {
         } catch (Exception e) {
-            fail("Wrong exception thrown");
+            fail(error);
         }
 
         exceptionGrid = new BaseGridImpl(STANDARD_SIZE, STANDARD_SIZE);
@@ -147,14 +129,14 @@ public class TestBaseOptions {
             fail("the match can't be ended if it isn't started");
         } catch (IllegalStateException e) {
         } catch (Exception e) {
-            fail("Wrong exception thrown");
+            fail(error);
         }
         try {
             exceptionGame.setLine(ListType.HORIZONTAL, 0, 0);
             fail("Can't insert a move when the match isn't started");
         } catch (IllegalStateException e) {
         } catch (Exception e) {
-            fail("Wrong exception thrown");
+            fail(error);
         }
         exceptionGame.startMatch();
         try {
@@ -163,7 +145,7 @@ public class TestBaseOptions {
         } catch (IllegalArgumentException e) { // forse potrebbe essere anche un
                                                // index out of bound
         } catch (Exception e) {
-            fail("Wrong exception thrown");
+            fail(error);
         }
         try {
             // CHECKSTYLE:OFF:
@@ -174,28 +156,28 @@ public class TestBaseOptions {
                                                 // un
                                                 // illegal argument
         } catch (Exception e) {
-            fail("Wrong exception thrown");
+            fail(error);
         }
         try {
             exceptionGame.undoLastMove();
             fail("You can't undo a move if a player didn't do at least one"); // riformulare
         } catch (IllegalStateException e) {
         } catch (Exception e) {
-            fail("Wrong exception thrown");
+            fail(error);
         }
         try {
             exceptionGame.setLine(ListType.DIAGONAL, 0, 0);
             fail("You can't set a diagonal line, the base grid doesn't include this option");
         } catch (UnsupportedOperationException e) {
         } catch (Exception e) {
-            fail("Wrong exception thrown");
+            fail(error);
         }
         try {
             exceptionGame.getWinner();
             fail("");
         } catch (IllegalStateException e) {
         } catch (Exception e) {
-            fail("Wrong exception thrown");
+            fail(error);
         }
     }
 
