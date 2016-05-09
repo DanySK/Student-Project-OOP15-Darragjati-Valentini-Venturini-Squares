@@ -100,12 +100,12 @@ public class BaseGridImpl implements BaseGrid {
         checkCorrectHorizontalInput(listIndex, position);
         Integer points = 0;
         if (playerTurn.equals(GridOption.EMPTY)) {
-            if (!horizontal.get(listIndex).get(position).equals(GridOption.EMPTY)) {
+            if (horizontal.get(listIndex).get(position).equals(GridOption.EMPTY)) {
+                throw new IllegalStateException(); // da mettere il perchè //
+                // lancia quest'eccezione?
+            } else {
                 points = horizontalPointScored(listIndex, position);
                 horizontal.get(listIndex).set(position, playerTurn);
-            } else {
-                throw new IllegalStateException(); // da mettere il perchè //
-                                                   // lancia quest'eccezione?
             }
         } else {
             if (horizontal.get(listIndex).get(position).equals(GridOption.EMPTY)) {
@@ -120,22 +120,18 @@ public class BaseGridImpl implements BaseGrid {
 
     protected Integer horizontalPointScored(final int listIndex, final int position) {
         int points = 0;
-        if (listIndex > 0) {
-            if (!getCopyOfHorizontalElement(listIndex - 1, position).equals(GridOption.EMPTY)) {
-                if (!getCopyOfVerticalElement(position, listIndex - 1).equals(GridOption.EMPTY)
-                        && !getCopyOfVerticalElement(position + 1, listIndex - 1).equals(GridOption.EMPTY)) {
-                    points++;
-                }
-            }
+        if (listIndex > 0 && !getCopyOfHorizontalElement(listIndex - 1, position).equals(GridOption.EMPTY)
+                && !getCopyOfVerticalElement(position, listIndex - 1).equals(GridOption.EMPTY)
+                && !getCopyOfVerticalElement(position + 1, listIndex - 1).equals(GridOption.EMPTY)) {
+            points++;
         }
-        if (listIndex < horizontal.size() - 1) {
-            if (!getCopyOfHorizontalElement(listIndex + 1, position).equals(GridOption.EMPTY)) {
-                if (!getCopyOfVerticalElement(position, listIndex).equals(GridOption.EMPTY)
-                        && !getCopyOfVerticalElement(position + 1, listIndex).equals(GridOption.EMPTY)) {
-                    points++;
-                }
-            }
+        if (listIndex < horizontal.size() - 1
+                && !getCopyOfHorizontalElement(listIndex + 1, position).equals(GridOption.EMPTY)
+                && !getCopyOfVerticalElement(position, listIndex).equals(GridOption.EMPTY)
+                && !getCopyOfVerticalElement(position + 1, listIndex).equals(GridOption.EMPTY)) {
+            points++;
         }
+
         return points;
     }
 
@@ -160,12 +156,12 @@ public class BaseGridImpl implements BaseGrid {
         checkCorrectVerticalInput(listIndex, position);
         Integer points = 0;
         if (playerTurn.equals(GridOption.EMPTY)) {
-            if (!vertical.get(listIndex).get(position).equals(GridOption.EMPTY)) {
+            if (vertical.get(listIndex).get(position).equals(GridOption.EMPTY)) {
+                throw new IllegalStateException(); // da mettere il perchè //
+                // lancia quest'eccezione?
+            } else {
                 points = verticalPointScored(listIndex, position);
                 vertical.get(listIndex).set(position, playerTurn);
-            } else {
-                throw new IllegalStateException(); // da mettere il perchè //
-                                                   // lancia quest'eccezione?
             }
         } else {
             if (vertical.get(listIndex).get(position).equals(GridOption.EMPTY)) {
@@ -180,21 +176,16 @@ public class BaseGridImpl implements BaseGrid {
 
     protected Integer verticalPointScored(final int listIndex, final int position) {
         int points = 0;
-        if (listIndex > 0) {
-            if (!getPreviousParallelList(ListType.VERTICAL, listIndex, position).equals(GridOption.EMPTY)) {
-                if (!getCopyOfHorizontalElement(position, listIndex - 1).equals(GridOption.EMPTY)
-                        && !getCopyOfHorizontalElement(position + 1, listIndex - 1).equals(GridOption.EMPTY)) {
-                    points++;
-                }
-            }
+        if (listIndex > 0 && !getPreviousParallelList(ListType.VERTICAL, listIndex, position).equals(GridOption.EMPTY)
+                && !getCopyOfHorizontalElement(position, listIndex - 1).equals(GridOption.EMPTY)
+                && !getCopyOfHorizontalElement(position + 1, listIndex - 1).equals(GridOption.EMPTY)) {
+            points++;
         }
-        if (listIndex < vertical.size() - 1) {
-            if (!getNextParallelList(ListType.VERTICAL, listIndex, position).equals(GridOption.EMPTY)) {
-                if (!getCopyOfHorizontalElement(position, listIndex).equals(GridOption.EMPTY)
-                        && !getCopyOfHorizontalElement(position + 1, listIndex).equals(GridOption.EMPTY)) {
-                    points++;
-                }
-            }
+        if (listIndex < vertical.size() - 1
+                && !getNextParallelList(ListType.VERTICAL, listIndex, position).equals(GridOption.EMPTY)
+                && !getCopyOfHorizontalElement(position, listIndex).equals(GridOption.EMPTY)
+                && !getCopyOfHorizontalElement(position + 1, listIndex).equals(GridOption.EMPTY)) {
+            points++;
         }
         return points;
     }
