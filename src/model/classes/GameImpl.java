@@ -134,28 +134,24 @@ public class GameImpl implements Turn {
         switch (list) {
         case HORIZONTAL:            
             points = grid.setHorizontalLine(listIndex, position, this.turn);
-            if (points > 0) {
+           
                 addPoints(points);
-            } else {
-                nextTurn();
-            }
+            
             break;
         case VERTICAL:         
             points = grid.setVerticalLine(listIndex, position, this.turn);
-            if (points > 0) {
-                addPoints(points);
-            } else {
-                nextTurn();
-            }
+          
+            addPoints(points);
+            
             break;
         case DIAGONAL:
+            if(grid.getClass().equals(TriangleGridImpl.class)){
             points = ((TriangleGrid) grid).setDiagonalLine(listIndex, position, this.turn);
-            if (points > 0) {
-                addPoints(points);
-            } else {
-                nextTurn();
-            }
+            addPoints(points);
             break;
+            } else {
+                throw new UnsupportedOperationException();
+            }
         default:
             throw new IllegalArgumentException("the list selected does not exist");
         }
@@ -171,10 +167,19 @@ public class GameImpl implements Turn {
         if (!isStarted()) {
             throw new IllegalStateException();
         }
-        if (this.turn.equals(GridOption.PLAYER1)) {
-            scorePlayer1 += points;
+        if(points != 0){
+            switch(this.turn){
+            case PLAYER1:
+                scorePlayer1 += points;
+            break;
+            case PLAYER2:
+                scorePlayer2 += points;
+            break;
+            default:
+                throw new IllegalArgumentException();
+            }
         } else {
-            scorePlayer2 += points;
+            nextTurn();
         }
     }
 
@@ -189,30 +194,24 @@ public class GameImpl implements Turn {
         case HORIZONTAL:
             points = grid.setHorizontalLine(getCopyOfLastMove().getLastListIndex(), getCopyOfLastMove().getLastPosition(),
                     GridOption.EMPTY);
-            if (points > 0) {
+           
                 addPoints(-points);
-            } else {
-                nextTurn();
-            }
+           
             break;
         case VERTICAL:
             points = grid.setVerticalLine(getCopyOfLastMove().getLastListIndex(), getCopyOfLastMove().getLastPosition(),
                     GridOption.EMPTY);
-            if (points > 0) {
+            
                 addPoints(-points);
-            } else {
-                nextTurn();
-            }
+            
             break;
         case DIAGONAL:
             points = ((TriangleGrid) grid).setDiagonalLine(getCopyOfLastMove().getLastListIndex(), getCopyOfLastMove().getLastPosition(),
                     GridOption.EMPTY);
             System.out.println(points);
-            if (points > 0) {
+            
                 addPoints(-points);
-            } else {
-                nextTurn();
-            }
+            
             break;
         default:
             throw new IllegalArgumentException();
