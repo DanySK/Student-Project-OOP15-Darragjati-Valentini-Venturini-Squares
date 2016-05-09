@@ -17,7 +17,7 @@ import model.interfaces.Turn;
 public class GameImpl implements Turn {
 
     private final BaseGrid grid;
-    private boolean matchStarted = false;
+    private boolean matchStarted;
     private Integer scorePlayer1;
     private Integer scorePlayer2;
     private static final Integer INITIAL_SCORE = 0;
@@ -34,6 +34,7 @@ public class GameImpl implements Turn {
     public GameImpl(final BaseGrid grid) {
         // CHECKSTYLE:ON:
         this.grid = grid;
+        this.matchStarted = false;
     }
 
     @Override
@@ -104,7 +105,7 @@ public class GameImpl implements Turn {
             return INITIAL_SCORE;
         }
         if (player.equals(GridOption.PLAYER1) || player.equals(GridOption.PLAYER2)) {
-            return (player.equals(GridOption.PLAYER1)) ? scorePlayer1 : scorePlayer2;
+            return player.equals(GridOption.PLAYER1) ? scorePlayer1 : scorePlayer2;
         } else {
             throw new IllegalArgumentException();
         }
@@ -117,7 +118,7 @@ public class GameImpl implements Turn {
             if (getPlayerPoints(GridOption.PLAYER1).equals(getPlayerPoints(GridOption.PLAYER2))) {
                 return GridOption.EMPTY;
             }
-            return (getPlayerPoints(GridOption.PLAYER1) > getPlayerPoints(GridOption.PLAYER2)) ? GridOption.PLAYER1
+            return getPlayerPoints(GridOption.PLAYER1) > getPlayerPoints(GridOption.PLAYER2) ? GridOption.PLAYER1
                     : GridOption.PLAYER2;
         } else {
             throw new IllegalStateException();

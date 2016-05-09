@@ -53,17 +53,14 @@ public class TriangleGridImpl extends BaseGridImpl implements TriangleGrid {
     @Override
     protected Integer horizontalPointScored(final int listIndex, final int position) {
         int points = 0;
-        if (listIndex > 0) {
-            if (!super.getCopyOfVerticalElement(position, listIndex - 1).equals(GridOption.EMPTY)
-                    && !getCopyOfDiagonalElement(listIndex - 1, position).equals(GridOption.EMPTY)) {
-                points++;
-            }
+        if (listIndex > 0 && !super.getCopyOfVerticalElement(position, listIndex - 1).equals(GridOption.EMPTY)
+                && !getCopyOfDiagonalElement(listIndex - 1, position).equals(GridOption.EMPTY)) {
+            points++;
         }
-        if (listIndex < super.getHorizontalListSize() - 1) {
-            if (!super.getCopyOfVerticalElement(position + 1, listIndex).equals(GridOption.EMPTY)
-                    && !getCopyOfDiagonalElement(listIndex, position).equals(GridOption.EMPTY)) {
-                points++;
-            }
+        if (listIndex < super.getHorizontalListSize() - 1
+                && !super.getCopyOfVerticalElement(position + 1, listIndex).equals(GridOption.EMPTY)
+                && !getCopyOfDiagonalElement(listIndex, position).equals(GridOption.EMPTY)) {
+            points++;
         }
         return points;
     }
@@ -71,17 +68,14 @@ public class TriangleGridImpl extends BaseGridImpl implements TriangleGrid {
     @Override
     protected Integer verticalPointScored(final int listIndex, final int position) {
         int points = 0;
-        if (listIndex > 0) {
-            if (!super.getCopyOfHorizontalElement(position, listIndex - 1).equals(GridOption.EMPTY)
-                    && !getCopyOfDiagonalElement(position, listIndex - 1).equals(GridOption.EMPTY)) {
-                points++;
-            }
+        if (listIndex > 0 && !super.getCopyOfHorizontalElement(position, listIndex - 1).equals(GridOption.EMPTY)
+                && !getCopyOfDiagonalElement(position, listIndex - 1).equals(GridOption.EMPTY)) {
+            points++;
         }
-        if (listIndex < super.getVerticallListSize() - 1) {
-            if (!super.getCopyOfHorizontalElement(position + 1, listIndex).equals(GridOption.EMPTY)
-                    && !getCopyOfDiagonalElement(position, listIndex).equals(GridOption.EMPTY)) {
-                points++;
-            }
+        if (listIndex < super.getVerticallListSize() - 1
+                && !super.getCopyOfHorizontalElement(position + 1, listIndex).equals(GridOption.EMPTY)
+                && !getCopyOfDiagonalElement(position, listIndex).equals(GridOption.EMPTY)) {
+            points++;
         }
         return points;
     }
@@ -107,12 +101,12 @@ public class TriangleGridImpl extends BaseGridImpl implements TriangleGrid {
         checkCorrectDiagonalInput(listIndex, position);
         Integer points = 0;
         if (playerTurn.equals(GridOption.EMPTY)) {
-            if (!diagonal.get(listIndex).get(position).equals(GridOption.EMPTY)) {
+            if (diagonal.get(listIndex).get(position).equals(GridOption.EMPTY)) {
+                // da mettere il perchè lancia quest'eccezione?
+                throw new IllegalStateException();
+            } else {
                 points = diagonalPointScored(listIndex, position);
                 diagonal.get(listIndex).set(position, playerTurn);
-            } else {
-                throw new IllegalStateException(); // da mettere il perchÃ¨ //
-                                                   // lancia quest'eccezione?
             }
         } else {
             if (diagonal.get(listIndex).get(position).equals(GridOption.EMPTY)) {
