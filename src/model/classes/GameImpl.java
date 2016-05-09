@@ -196,7 +196,7 @@ public class GameImpl implements Turn {
             }
             break;
         case VERTICAL:
-            points = ((TriangleGrid) grid).setDiagonalLine(getCopyOfLastMove().getLastListIndex(), getCopyOfLastMove().getLastPosition(),
+            points = grid.setVerticalLine(getCopyOfLastMove().getLastListIndex(), getCopyOfLastMove().getLastPosition(),
                     GridOption.EMPTY);
             if (points > 0) {
                 addPoints(-points);
