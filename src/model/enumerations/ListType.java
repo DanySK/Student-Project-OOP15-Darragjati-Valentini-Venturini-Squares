@@ -5,5 +5,10 @@ package model.enumerations;
  */
 public enum ListType {
 
+    /**
+     * HORIZONTAL is used to make a horizontal move.
+     * VERTICAL is used to make a vertical move.
+     * DIAGONAL is used to make a diagonal move.
+     */
     HORIZONTAL, VERTICAL, DIAGONAL;
 }

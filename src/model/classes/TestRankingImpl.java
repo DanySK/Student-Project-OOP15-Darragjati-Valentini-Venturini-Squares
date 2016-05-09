@@ -84,7 +84,7 @@ public class TestRankingImpl {
         assertEquals(orderingTest.get(2).getPlayerName(), PLAYER1);
         assertEquals(orderingTest.get(3).getPlayerName(), PLAYER2);
         // ordering list by TOTSL SQUARES CATCHED
-        orderingTest = rankingTest.orderListBy(RankingOption.TOTAL_SQUARES_CATCHED, false);
+        orderingTest = rankingTest.orderListBy(RankingOption.TOTAL_POINTS_SCORED, false);
         assertEquals(orderingTest.get(0).getPlayerName(), PLAYER4);
         assertEquals(orderingTest.get(1).getPlayerName(), PLAYER1);
         assertEquals(orderingTest.get(2).getPlayerName(), PLAYER3);

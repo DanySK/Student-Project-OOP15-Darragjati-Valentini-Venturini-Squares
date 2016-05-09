@@ -114,7 +114,7 @@ public class RankingImpl implements Ranking {
                 }
             });
             break;
-        case TOTAL_SQUARES_CATCHED:
+        case TOTAL_POINTS_SCORED:
             playerList.sort(new Comparator<Player>() {
 
                 @Override
