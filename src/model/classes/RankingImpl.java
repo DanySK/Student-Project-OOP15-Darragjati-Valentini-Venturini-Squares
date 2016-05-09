@@ -46,37 +46,35 @@ public class RankingImpl implements Ranking {
         newPlayer.setPlayerName(playerName);
         playerList.add(newPlayer);
         addLastMatchResults(newPlayer, victory, totalPointsScored);
-        
+
     }
 
     private void addLastMatchResults(final Player player, final boolean victory, final Integer totalPointsScored) {
         player.setTotalMatches(player.getTotalMatches() + 1);
         if (victory) {
             player.setWonMatches(player.getTotalWins() + 1);
-        }    
+        }
         player.setTotalPointsScored(player.getTotalPointsScored() + totalPointsScored);
     }
 
     @Override
     public List<Player> orderListBy(final RankingOption option, final boolean reverseRanking) {
-
         switch (option) {
         case WINRATE:
             playerList.sort(new Comparator<Player>() {
 
                 @Override
                 public int compare(final Player player1, final Player player2) {
-
-                    if (player1.getWinRate() == player2.getWinRate()) {
-                        if (player1.getTotalMatches().equals(player2.getTotalMatches())) {
-                            if (player1.getTotalPointsScored().equals(player2.getTotalPointsScored())) {
-                                return player1.getPlayerName().compareTo(player2.getPlayerName());
+                    if (compareWinrate(player1, player2).equals(0)) {
+                        if (compareTotalMatches(player1, player2).equals(0)) {
+                            if (compareTotalPointsScored(player1, player2).equals(0)) {
+                                return compareNames(player1, player2);
                             }
-                            return Integer.compare(player1.getTotalPointsScored(), player2.getTotalPointsScored());
+                            return compareTotalPointsScored(player1, player2);
                         }
-                        return Integer.compare(player1.getTotalMatches(), player2.getTotalMatches());
+                        return compareTotalMatches(player1, player2);
                     }
-                    return Double.compare(player1.getWinRate(), player2.getWinRate());
+                    return compareWinrate(player1, player2);
                 }
             });
             break;
@@ -85,20 +83,17 @@ public class RankingImpl implements Ranking {
 
                 @Override
                 public int compare(final Player player1, final Player player2) {
-
-                    if (player1.getTotalWins().equals(player2.getTotalWins())) {
-                        if (player1.getWinRate() == player2.getWinRate()) {
-                            if (player1.getTotalPointsScored().equals(player2.getTotalPointsScored())) {
-                                return player1.getPlayerName().compareTo(player2.getPlayerName());
+                    if (compareTotalWins(player1, player2).equals(0)) {
+                        if (compareWinrate(player1, player2).equals(0)) {
+                            if (compareTotalPointsScored(player1, player2).equals(0)) {
+                                return compareNames(player1, player2);
                             }
-                            return Integer.compare(player1.getTotalPointsScored(), player2.getTotalPointsScored());
+                            return compareTotalPointsScored(player1, player2);
                         }
-                        return Double.compare(player1.getWinRate(), player2.getWinRate());
+                        return compareWinrate(player1, player2);
                     }
-                    return Integer.compare(player1.getTotalWins(), player2.getTotalWins());
-
+                    return compareTotalWins(player1, player2);
                 }
-
             });
             break;
         case TOTAL_MATCHES:
@@ -106,17 +101,16 @@ public class RankingImpl implements Ranking {
 
                 @Override
                 public int compare(final Player player1, final Player player2) {
-
-                    if (player1.getTotalMatches().equals(player2.getTotalMatches())) {
-                        if (player1.getWinRate() == player2.getWinRate()) {
-                            if (player1.getTotalPointsScored().equals(player2.getTotalPointsScored())) {
-                                return player1.getPlayerName().compareTo(player2.getPlayerName());
+                    if (compareTotalMatches(player1, player2).equals(0)) {
+                        if (compareWinrate(player1, player2).equals(0)) {
+                            if (compareTotalPointsScored(player1, player2).equals(0)) {
+                                return compareNames(player1, player2);
                             }
-                            return Integer.compare(player1.getTotalPointsScored(), player2.getTotalPointsScored());
+                            return compareTotalPointsScored(player1, player2);
                         }
-                        return Double.compare(player1.getWinRate(), player2.getWinRate());
+                        return compareWinrate(player1, player2);
                     }
-                    return Integer.compare(player1.getTotalMatches(), player2.getTotalMatches());
+                    return compareTotalMatches(player1, player2);
                 }
             });
             break;
@@ -125,19 +119,17 @@ public class RankingImpl implements Ranking {
 
                 @Override
                 public int compare(final Player player1, final Player player2) {
-
-                    if (player1.getTotalPointsScored().equals(player2.getTotalPointsScored())) {
-                        if (player1.getWinRate() == player2.getWinRate()) {
-                            if (player1.getTotalMatches().equals(player2.getTotalMatches())) {
-                                return player1.getPlayerName().compareTo(player2.getPlayerName());
+                    if (compareTotalPointsScored(player1, player2).equals(0)) {
+                        if (compareWinrate(player1, player2).equals(0)) {
+                            if (compareTotalMatches(player1, player2).equals(0)) {
+                                return compareNames(player1, player2);
                             }
-                            return Integer.compare(player1.getTotalMatches(), player2.getTotalMatches());
+                            return compareTotalMatches(player1, player2);
                         }
-                        return Double.compare(player1.getWinRate(), player2.getWinRate());
+                        return compareWinrate(player1, player2);
                     }
-                    return Integer.compare(player1.getTotalPointsScored(), player2.getTotalPointsScored());
+                    return compareTotalPointsScored(player1, player2);
                 }
-
             });
             break;
         default:
@@ -148,4 +140,25 @@ public class RankingImpl implements Ranking {
         }
         return Collections.unmodifiableList(playerList);
     }
+
+    private Integer compareWinrate(final Player player1, final Player player2) {
+        return Double.compare(player1.getWinRate(), player2.getWinRate());
+    }
+    
+    private Integer compareTotalMatches(final Player player1, final Player player2) {
+        return Integer.compare(player1.getTotalMatches(), player2.getTotalMatches());
+    }
+    
+    private Integer compareTotalWins(final Player player1, final Player player2) {
+        return Integer.compare(player1.getTotalWins(), player2.getTotalWins());
+    }
+    
+    private Integer compareTotalPointsScored(final Player player1, final Player player2) {
+        return Integer.compare(player1.getTotalPointsScored(), player2.getTotalPointsScored());
+    }
+    
+    private Integer compareNames(final Player player1, final Player player2) {
+        return player1.getPlayerName().compareTo(player2.getPlayerName());
+    }
+    
 }

@@ -42,7 +42,6 @@ public class PlayerImpl implements Player {
     @Override
     public double getWinRate() {
         calculateWinRate();
-        System.out.println(this.winRate);
         return this.winRate;
     }
 

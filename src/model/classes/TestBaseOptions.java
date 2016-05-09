@@ -106,9 +106,7 @@ public class TestBaseOptions {
         Turn exceptionGame;
         
         try {
-            // CHECKSTYLE:OFF:
             exceptionGrid = new BaseGridImpl(STANDARD_SIZE - 4, STANDARD_SIZE - 4);
-            // CHECKSTYLE:ON:
             fail("Can't create a grid too small");
         } catch (IllegalArgumentException e) {
         } catch (Exception e) {
