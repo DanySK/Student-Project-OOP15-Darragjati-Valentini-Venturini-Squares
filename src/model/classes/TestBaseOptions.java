@@ -21,6 +21,7 @@ public class TestBaseOptions {
     private static final Integer STANDARD_SIZE = 6;
     private static final Integer HORIZONTAL_SIZE = 5;
     private static final Integer VERTICAL_SIZE = 4;
+    private static final String ERROR = "Wrong exception thrown";
 
     /**
      * Tests the methods of BaseGridImpl and TurnImpl.
@@ -103,7 +104,6 @@ public class TestBaseOptions {
 
         BaseGrid exceptionGrid;
         Turn exceptionGame;
-        final String error = "Wrong exception thrown";
         
         try {
             // CHECKSTYLE:OFF:
@@ -112,14 +112,14 @@ public class TestBaseOptions {
             fail("Can't create a grid too small");
         } catch (IllegalArgumentException e) {
         } catch (Exception e) {
-            fail(error);
+            fail(ERROR);
         }
         try {
             exceptionGrid = new BaseGridImpl(STANDARD_SIZE + STANDARD_SIZE, STANDARD_SIZE + STANDARD_SIZE);
             fail("Can't create a grid too big");
         } catch (IllegalArgumentException e) {
         } catch (Exception e) {
-            fail(error);
+            fail(ERROR);
         }
 
         exceptionGrid = new BaseGridImpl(STANDARD_SIZE, STANDARD_SIZE);
@@ -129,14 +129,14 @@ public class TestBaseOptions {
             fail("the match can't be ended if it isn't started");
         } catch (IllegalStateException e) {
         } catch (Exception e) {
-            fail(error);
+            fail(ERROR);
         }
         try {
             exceptionGame.setLine(ListType.HORIZONTAL, 0, 0);
             fail("Can't insert a move when the match isn't started");
         } catch (IllegalStateException e) {
         } catch (Exception e) {
-            fail(error);
+            fail(ERROR);
         }
         exceptionGame.startMatch();
         try {
@@ -145,7 +145,7 @@ public class TestBaseOptions {
         } catch (IllegalArgumentException e) { // forse potrebbe essere anche un
                                                // index out of bound
         } catch (Exception e) {
-            fail(error);
+            fail(ERROR);
         }
         try {
             // CHECKSTYLE:OFF:
@@ -156,28 +156,28 @@ public class TestBaseOptions {
                                                 // un
                                                 // illegal argument
         } catch (Exception e) {
-            fail(error);
+            fail(ERROR);
         }
         try {
             exceptionGame.undoLastMove();
             fail("You can't undo a move if a player didn't do at least one"); // riformulare
         } catch (IllegalStateException e) {
         } catch (Exception e) {
-            fail(error);
+            fail(ERROR);
         }
         try {
             exceptionGame.setLine(ListType.DIAGONAL, 0, 0);
             fail("You can't set a diagonal line, the base grid doesn't include this option");
         } catch (UnsupportedOperationException e) {
         } catch (Exception e) {
-            fail(error);
+            fail(ERROR);
         }
         try {
             exceptionGame.getWinner();
             fail("");
         } catch (IllegalStateException e) {
         } catch (Exception e) {
-            fail(error);
+            fail(ERROR);
         }
     }
 
