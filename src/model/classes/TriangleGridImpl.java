@@ -103,10 +103,12 @@ public class TriangleGridImpl extends BaseGridImpl implements TriangleGrid {
     }
 
     @Override
-    public void setDiagonalLine(final int listIndex, final int position, final GridOption playerTurn) {
+    public Integer setDiagonalLine(final int listIndex, final int position, final GridOption playerTurn) {
         checkCorrectDiagonalInput(listIndex, position);
+        Integer points = 0;
         if (playerTurn.equals(GridOption.EMPTY)) {
             if (!diagonal.get(listIndex).get(position).equals(GridOption.EMPTY)) {
+                points = diagonalPointScored(listIndex, position);
                 diagonal.get(listIndex).set(position, playerTurn);
             } else {
                 throw new IllegalStateException(); // da mettere il perchè //
@@ -115,14 +117,15 @@ public class TriangleGridImpl extends BaseGridImpl implements TriangleGrid {
         } else {
             if (diagonal.get(listIndex).get(position).equals(GridOption.EMPTY)) {
                 diagonal.get(listIndex).set(position, playerTurn);
+                points = diagonalPointScored(listIndex, position);
             } else {
                 throw new IllegalStateException();
             }
         }
+        return points;
     }
 
-    @Override
-    public Integer diagonalPointScored(final int listIndex, final int position) {
+    private Integer diagonalPointScored(final int listIndex, final int position) {
         int points = 0;
         if (!super.getCopyOfHorizontalElement(listIndex, position).equals(GridOption.EMPTY)
                 && !super.getCopyOfVerticalElement(position + 1, listIndex).equals(GridOption.EMPTY)) {

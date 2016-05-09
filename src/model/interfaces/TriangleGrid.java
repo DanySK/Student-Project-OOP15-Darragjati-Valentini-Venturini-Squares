@@ -19,10 +19,9 @@ public interface TriangleGrid extends BaseGrid {
      * @param listIndex is the number of the diagonal list where the player wants to set his line
      * @param position is the position of the chosen list where the player wants to set the line
      * @param playerTurn which one of the two players is making the move
+     * @return 
      */
-    void setDiagonalLine(final int listIndex, int position, GridOption playerTurn);
-    
-    Integer diagonalPointScored(int listIndex, int position);
+    Integer setDiagonalLine(final int listIndex, int position, GridOption playerTurn);
    
     Integer getDiagonalListSize(); 
 }
