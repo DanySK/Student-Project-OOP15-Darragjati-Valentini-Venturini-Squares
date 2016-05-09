@@ -11,28 +11,26 @@ import model.enumerations.GridOption;
 public interface BaseGrid {
 
     /**
-     * 
      * @return the number of moves
      */
     Integer getTotalMoves();
 
     /**
-     * 
      * @return the number of moves left
      */
     Integer getRemainingMoves();
 
     /**
      * @param listIndex is the number of the horizontal list where the player wants to get the line
-     * @param position is the position of the chosen list where the player wants to get the line
+     * @param position is the index of the chosen list where the player wants to get the line
      * @return which one of the two players has set the move
      */
     GridOption getCopyOfHorizontalElement(Integer listIndex, Integer position);
 
     /**
-     *
+     * This method makes a player make a horizontal move.
      * @param listIndex is the number of the horizontal list where the player wants to set his line
-     * @param position is the position of the chosen list where the player wants to set the line
+     * @param position is the index of the chosen list where the player wants to set the line
      * @param playerTurn which one of the two players is making the move
      * @return the number of points scored by making a move 
      */
@@ -40,28 +38,26 @@ public interface BaseGrid {
     
     /**
      * @param listIndex is the number of the vertical list where the player wants to get the line
-     * @param position is the position of the chosen list where the player wants to get the line
+     * @param position is the index of the chosen list where the player wants to get the line
      * @return which one of the two players has set the move
      */
     GridOption getCopyOfVerticalElement(Integer listIndex, Integer position);
 
     /**
-     * 
+     * This method makes a player make a vertical move.
      * @param listIndex is the number of the vertical list where the player wants to set his line
-     * @param position is the position of the chosen list where the player wants to set the line
+     * @param position is the index of the chosen list where the player wants to set the line
      * @param playerTurn which one of the two players is making the move
      * @return the number of points scored by making a move
      */
     Integer setVerticalLine(final int listIndex, int position, GridOption playerTurn);
     
     /**
-     * Gets the number of horizontal lists that makes the grid.
      * @return the number of horizontal lists that makes the grid.
      */
     Integer getHorizontalListSize();
 
     /**
-     * Gets the number of vertical lists that makes the grid.
      * @return the number of horizontal lists that makes the grid.
      */
     Integer getVerticallListSize();

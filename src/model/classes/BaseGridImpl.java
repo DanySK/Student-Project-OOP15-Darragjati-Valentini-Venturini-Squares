@@ -118,6 +118,12 @@ public class BaseGridImpl implements BaseGrid {
         return points;
     }
 
+    /**
+     * This method checks after doing a horizontal move if it has scored a point.
+     * @param listIndex the number of the horizontal list where the player wants to set his line
+     * @param position the index of the chosen list where the player wants to set the line
+     * @return the number of points scored by making a move
+     */
     protected Integer horizontalPointScored(final int listIndex, final int position) {
         int points = 0;
         if (listIndex > 0 && !getCopyOfHorizontalElement(listIndex - 1, position).equals(GridOption.EMPTY)
@@ -174,6 +180,12 @@ public class BaseGridImpl implements BaseGrid {
         return points;
     }
 
+    /**
+     * This method checks after doing a vertical move if it has scored a point.
+     * @param listIndex the number of the vertical list where the player wants to set his line
+     * @param position the index of the chosen list where the player wants to set the line
+     * @return the number of points scored by making a move
+     */
     protected Integer verticalPointScored(final int listIndex, final int position) {
         int points = 0;
         if (listIndex > 0 && !getPreviousParallelList(ListType.VERTICAL, listIndex, position).equals(GridOption.EMPTY)

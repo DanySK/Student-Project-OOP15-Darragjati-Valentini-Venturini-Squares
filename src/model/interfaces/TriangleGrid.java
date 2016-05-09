@@ -23,5 +23,8 @@ public interface TriangleGrid extends BaseGrid {
      */
     Integer setDiagonalLine(final int listIndex, int position, GridOption playerTurn);
    
+    /**
+     * @return the number of diagonal lists that makes the grid.
+     */
     Integer getDiagonalListSize(); 
 }

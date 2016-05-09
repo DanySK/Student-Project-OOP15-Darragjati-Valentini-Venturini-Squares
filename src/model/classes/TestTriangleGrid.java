@@ -110,9 +110,4 @@ public class TestTriangleGrid {
         assertTrue(gridOfSize2.isEnded());
         assertNotEquals(GridOption.EMPTY, gridOfSize2.getWinner());
     }
-
-    @Test
-    public void testExceptions() {
-
-    }
 }

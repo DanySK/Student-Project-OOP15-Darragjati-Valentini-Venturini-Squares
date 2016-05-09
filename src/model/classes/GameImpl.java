@@ -95,7 +95,7 @@ public class GameImpl implements Turn {
 
     @Override
     public GridOption getCopyOfCurrentPlayerTurn() {
-        GridOption copyOfTurn = this.turn;
+        final GridOption copyOfTurn = this.turn;
         return copyOfTurn;
     }
 
