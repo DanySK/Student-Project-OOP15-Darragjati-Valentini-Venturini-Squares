@@ -10,7 +10,8 @@ public class AddMove {
     private ListType direction;
     private int position;
     private int numLine;
-    protected Turn turn;
+    private Turn turn;
+    private GridOption firstMove;
 
     public AddMove(BaseGrid grid) {
         this.turn = new GameImpl(grid);
@@ -25,5 +26,11 @@ public class AddMove {
 
     public void addLine() {
         turn.setLine(this.direction, this.numLine, this.position);
+    }
+    
+    public GridOption firstPlayer() {
+        turn.startMatch();
+        this.firstMove = turn.getCurrentPlayerTurn();
+        return this.firstMove;
     }
 }
