@@ -48,13 +48,15 @@ public class MatchImpl {
 
     }
 
-    public void createNewMatch() {
+    public String createNewMatch() {
         this.match = new GameImpl(this.grid);
         match.startMatch();
+        this.numPlayer = match.getCopyOfCurrentPlayerTurn();
+        convertNumToNamePlayer();
+        return this.namePlayer;
     }
 
-    public String namePlayer() {
-        this.numPlayer = match.getCopyOfCurrentPlayerTurn();
+    private void convertNumToNamePlayer() {
         switch (this.numPlayer) {
         case PLAYER1:
             this.namePlayer = this.namePlayer1;
@@ -65,12 +67,15 @@ public class MatchImpl {
         default:
             throw new IllegalStateException();
         }
-        
-        return this.namePlayer;
+
     }
-    
+
     public void addLine(ListType direction, int numLine, int position) {
         this.match.setLine(direction, numLine, position);
+    }
+
+    public void undo() {
+        this.match.undoLastMove();
     }
 
     private void controlNamePlayers(String namePlayer1, String namePlayer2) {
