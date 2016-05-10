@@ -24,7 +24,7 @@ public class Menu {
     /**
      * 
      */
-    private StartGame newGame;
+    
 
     public Menu(){
         
@@ -67,7 +67,5 @@ public class Menu {
         System.exit(0);
     }
     
-    public StartGame getNewGame(){
-        return this.newGame;
-    }
+   
 }
