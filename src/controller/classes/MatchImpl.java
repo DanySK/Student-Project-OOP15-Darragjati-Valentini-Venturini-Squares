@@ -17,7 +17,6 @@ public class MatchImpl {
     private final String namePlayer2;
     private final TypeGame mode;
     private GridOption numPlayer;
-    private AddMove game;
     private String namePlayer;
     private GridOption firstMove;
     private BaseGrid grid;
