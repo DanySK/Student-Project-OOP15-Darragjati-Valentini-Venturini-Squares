@@ -29,20 +29,8 @@ public class Menu {
     public Menu(){
         
     }
-    // public String getLineRead() {
-    // return this.lineRead;
-    // }
-
-    // public Menu(String directory) {
-    // this.directory = directory;
-    // }
-
-    public String startGame(final int numColonne, final int numRighe, final String namePlayer1, final String namePlayer2,
-            final TypeGame mode) {
-        this.newGame = new StartGame(numColonne, numRighe, namePlayer1, namePlayer2, mode);
-        this.firstPlayer = newGame.createGrid();
-        return this.firstPlayer;
-    }
+    
+    
 
     public String showRules() throws IOException {
 
