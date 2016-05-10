@@ -3,10 +3,12 @@ package controller.classes;
 import controller.enumerations.TypeGame;
 import model.classes.BaseGridImpl;
 import model.classes.GameImpl;
+import model.classes.PlayedTimeImpl;
 import model.classes.TriangleGridImpl;
 import model.enumerations.GridOption;
 import model.enumerations.ListType;
 import model.interfaces.BaseGrid;
+import model.interfaces.PlayedTime;
 import model.interfaces.Turn;
 
 public class MatchImpl {
@@ -17,10 +19,10 @@ public class MatchImpl {
     private final String namePlayer2;
     private final TypeGame mode;
     private GridOption numPlayer;
-    private String namePlayer;
-    private GridOption firstMove;
+    private String namePlayer;    
     private BaseGrid grid;
     private GameImpl match;
+    private PlayedTime time;
 
     public MatchImpl(int columsNumber, int rowsNumber, String namePlayer1, String namePlayer2, TypeGame mode) {
         controlNamePlayers(namePlayer1, namePlayer2);
@@ -53,6 +55,8 @@ public class MatchImpl {
         match.startMatch();
         this.numPlayer = this.match.getCopyOfCurrentPlayerTurn();
         convertNumToNamePlayer();
+        this.time = new PlayedTimeImpl(null);
+        this.time.gameStarted(match);
         return this.namePlayer;
     }
 
@@ -90,5 +94,7 @@ public class MatchImpl {
             throw new IllegalArgumentException();
         }
     }
+    
+    
 
 }
