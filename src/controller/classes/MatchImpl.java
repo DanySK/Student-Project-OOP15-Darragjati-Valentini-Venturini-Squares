@@ -51,7 +51,7 @@ public class MatchImpl {
     public String createNewMatch() {
         this.match = new GameImpl(this.grid);
         match.startMatch();
-        this.numPlayer = match.getCopyOfCurrentPlayerTurn();
+        this.numPlayer = this.match.getCopyOfCurrentPlayerTurn();
         convertNumToNamePlayer();
         return this.namePlayer;
     }
@@ -70,8 +70,15 @@ public class MatchImpl {
 
     }
 
-    public void addLine(ListType direction, int numLine, int position) {
+    public String addLine(ListType direction, int numLine, int position) {
         this.match.setLine(direction, numLine, position);
+        if (this.match.isEnded()) {
+            this.numPlayer = this.match.getWinner();
+        } else {
+            this.numPlayer = this.match.getCopyOfCurrentPlayerTurn();
+        }
+        convertNumToNamePlayer();
+        return this.namePlayer;
     }
 
     public void undo() {
