@@ -11,7 +11,7 @@ import org.junit.Test;
 import model.enumerations.GridOption;
 import model.enumerations.ListType;
 import model.interfaces.SquareGrid;
-import model.interfaces.Turn;
+import model.interfaces.Game;
 
 /**
  * This class simulates the possible moves of a game.
@@ -30,7 +30,7 @@ public class TestSquareGrid {
     public void test() {
 
         final SquareGrid squareGrid = new SquareGridImpl(HORIZONTAL_SIZE, VERTICAL_SIZE);
-        final Turn gridOfSize = new GameImpl(squareGrid);
+        final Game gridOfSize = new GameImpl(squareGrid);
 
         // verifies that total moves are the same as remaining moves
         assertEquals(squareGrid.getTotalMoves(), squareGrid.getRemainingMoves());
@@ -76,7 +76,7 @@ public class TestSquareGrid {
         assertNotEquals(player, gridOfSize.getCopyOfCurrentPlayerTurn());
 
         final SquareGrid squareGrid2 = new SquareGridImpl(STANDARD_SIZE, STANDARD_SIZE);
-        final Turn gridOfSize2 = new GameImpl(squareGrid2);
+        final Game gridOfSize2 = new GameImpl(squareGrid2);
 
         gridOfSize2.startMatch();
 
@@ -103,7 +103,7 @@ public class TestSquareGrid {
     public void testExceptions() {
 
         SquareGrid exceptionGrid;
-        Turn exceptionGame;
+        Game exceptionGame;
 
         try {
             exceptionGrid = new SquareGridImpl(STANDARD_SIZE - 4, STANDARD_SIZE - 4);

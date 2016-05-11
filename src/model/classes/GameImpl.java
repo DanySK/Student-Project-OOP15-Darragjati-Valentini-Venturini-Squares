@@ -8,13 +8,13 @@ import model.enumerations.ListType;
 import model.interfaces.SquareGrid;
 import model.interfaces.LastMove;
 import model.interfaces.TriangleGrid;
-import model.interfaces.Turn;
+import model.interfaces.Game;
 
 /**
  * This class is used to start a new match and all the things related to it,
  * like assigning points to a player or knowing when the game is ended.
  */
-public class GameImpl implements Turn {
+public class GameImpl implements Game {
 
     private final SquareGrid grid;
     private boolean matchStarted;

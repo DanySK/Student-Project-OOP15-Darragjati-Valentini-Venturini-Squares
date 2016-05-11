@@ -6,7 +6,7 @@ import model.enumerations.ListType;
 /**
  * This interface is used to manage the rotation between the players' turn.
  */
-public interface Turn {
+public interface Game {
 
     /**
      * Starts a new match.

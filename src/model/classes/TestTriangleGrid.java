@@ -11,7 +11,7 @@ import model.enumerations.GridOption;
 import model.enumerations.ListType;
 import model.interfaces.SquareGrid;
 import model.interfaces.TriangleGrid;
-import model.interfaces.Turn;
+import model.interfaces.Game;
 
 /**
  * This class simulates the possible moves of a game. The games rules are
@@ -30,7 +30,7 @@ public class TestTriangleGrid {
     public void test() {
 
         final TriangleGrid triangleGrid = new TriangleGridImpl(HORIZONTAL_SIZE, VERTICAL_SIZE);
-        final Turn gridOfSize = new GameImpl(triangleGrid);
+        final Game gridOfSize = new GameImpl(triangleGrid);
 
         assertEquals(triangleGrid.getTotalMoves(), triangleGrid.getRemainingMoves());
 
@@ -88,7 +88,7 @@ public class TestTriangleGrid {
         assertNotEquals(player, gridOfSize.getCopyOfCurrentPlayerTurn());
 
         final SquareGrid squareGrid2 = new TriangleGridImpl(STANDARD_SIZE, STANDARD_SIZE);
-        final Turn gridOfSize2 = new GameImpl(squareGrid2);
+        final Game gridOfSize2 = new GameImpl(squareGrid2);
 
         gridOfSize2.startMatch();
         // fills the grid with all thepossible moves

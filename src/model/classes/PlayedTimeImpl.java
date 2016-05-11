@@ -1,7 +1,7 @@
 package model.classes;
 
 import model.interfaces.PlayedTime;
-import model.interfaces.Turn;
+import model.interfaces.Game;
 
 /**
  * This class implements the methods of the interface PlayedTime. It offers the
@@ -21,7 +21,7 @@ public class PlayedTimeImpl implements PlayedTime {
     }
 
     @Override
-    public void setTimeAtMatchStart(final Turn currentGame) {
+    public void setTimeAtMatchStart(final Game currentGame) {
         if (currentGame.isStarted() && this.startGameTime != 0) {
             this.startGameTime = System.currentTimeMillis();
         } else {
@@ -30,7 +30,7 @@ public class PlayedTimeImpl implements PlayedTime {
     }
 
     @Override
-    public void calculateMatchDuration(final Turn currentGame) {
+    public void calculateMatchDuration(final Game currentGame) {
         if (currentGame.isEnded()) {
             Double currentGamePlayTime;
             currentGamePlayTime = (this.startGameTime - System.currentTimeMillis()) / 1000.0;

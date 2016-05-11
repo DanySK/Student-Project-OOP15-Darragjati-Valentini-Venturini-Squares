@@ -11,7 +11,7 @@ import model.enumerations.ListType;
 import model.interfaces.SquareGrid;
 import model.interfaces.LastMove;
 import model.interfaces.PlayedTime;
-import model.interfaces.Turn;
+import model.interfaces.Game;
 
 public class MatchImpl implements Match {
 
@@ -23,7 +23,7 @@ public class MatchImpl implements Match {
     private GridOption numPlayer;
     private String namePlayer;
     private SquareGrid grid;
-    private Turn match;
+    private Game match;
     private PlayedTime time;
     private int playerScore;
 
