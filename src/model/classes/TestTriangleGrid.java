@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import model.enumerations.GridOption;
 import model.enumerations.ListType;
-import model.interfaces.BaseGrid;
+import model.interfaces.SquareGrid;
 import model.interfaces.TriangleGrid;
 import model.interfaces.Turn;
 
@@ -87,7 +87,7 @@ public class TestTriangleGrid {
         gridOfSize.undoLastMove();
         assertNotEquals(player, gridOfSize.getCopyOfCurrentPlayerTurn());
 
-        final BaseGrid squareGrid2 = new TriangleGridImpl(STANDARD_SIZE, STANDARD_SIZE);
+        final SquareGrid squareGrid2 = new TriangleGridImpl(STANDARD_SIZE, STANDARD_SIZE);
         final Turn gridOfSize2 = new GameImpl(squareGrid2);
 
         gridOfSize2.startMatch();

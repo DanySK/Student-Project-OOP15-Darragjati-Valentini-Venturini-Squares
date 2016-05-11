@@ -10,7 +10,7 @@ import model.interfaces.TriangleGrid;
  * This class modifies the base rules of the game adding a new way to set a move
  * to score a point.
  */
-public class TriangleGridImpl extends BaseGridImpl implements TriangleGrid {
+public class TriangleGridImpl extends SquareGridImpl implements TriangleGrid {
 
     private final List<List<GridOption>> diagonal = new ArrayList<>();
 

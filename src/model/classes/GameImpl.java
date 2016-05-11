@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 import model.enumerations.GridOption;
 import model.enumerations.ListType;
-import model.interfaces.BaseGrid;
+import model.interfaces.SquareGrid;
 import model.interfaces.LastMove;
 import model.interfaces.TriangleGrid;
 import model.interfaces.Turn;
@@ -16,7 +16,7 @@ import model.interfaces.Turn;
  */
 public class GameImpl implements Turn {
 
-    private final BaseGrid grid;
+    private final SquareGrid grid;
     private boolean matchStarted;
     private Integer scorePlayer1;
     private Integer scorePlayer2;
@@ -31,7 +31,7 @@ public class GameImpl implements Turn {
      *            the playable game field.
      */
     // CHECKSTYLE:OFF:
-    public GameImpl(final BaseGrid grid) {
+    public GameImpl(final SquareGrid grid) {
         // CHECKSTYLE:ON:
         this.grid = grid;
         this.matchStarted = false;

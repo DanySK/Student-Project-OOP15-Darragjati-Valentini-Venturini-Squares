@@ -10,13 +10,13 @@ import org.junit.Test;
 
 import model.enumerations.GridOption;
 import model.enumerations.ListType;
-import model.interfaces.BaseGrid;
+import model.interfaces.SquareGrid;
 import model.interfaces.Turn;
 
 /**
  * This class simulates the possible moves of a game.
  */
-public class TestBaseOptions {
+public class TestSquareGrid {
 
     private static final Integer STANDARD_SIZE = 6;
     private static final Integer HORIZONTAL_SIZE = 5;
@@ -29,7 +29,7 @@ public class TestBaseOptions {
     @Test
     public void test() {
 
-        final BaseGrid squareGrid = new BaseGridImpl(HORIZONTAL_SIZE, VERTICAL_SIZE);
+        final SquareGrid squareGrid = new SquareGridImpl(HORIZONTAL_SIZE, VERTICAL_SIZE);
         final Turn gridOfSize = new GameImpl(squareGrid);
 
         // verifies that total moves are the same as remaining moves
@@ -75,7 +75,7 @@ public class TestBaseOptions {
         gridOfSize.undoLastMove();
         assertNotEquals(player, gridOfSize.getCopyOfCurrentPlayerTurn());
 
-        final BaseGrid squareGrid2 = new BaseGridImpl(STANDARD_SIZE, STANDARD_SIZE);
+        final SquareGrid squareGrid2 = new SquareGridImpl(STANDARD_SIZE, STANDARD_SIZE);
         final Turn gridOfSize2 = new GameImpl(squareGrid2);
 
         gridOfSize2.startMatch();
@@ -102,25 +102,25 @@ public class TestBaseOptions {
     @Test
     public void testExceptions() {
 
-        BaseGrid exceptionGrid;
+        SquareGrid exceptionGrid;
         Turn exceptionGame;
-        
+
         try {
-            exceptionGrid = new BaseGridImpl(STANDARD_SIZE - 4, STANDARD_SIZE - 4);
+            exceptionGrid = new SquareGridImpl(STANDARD_SIZE - 4, STANDARD_SIZE - 4);
             fail("Can't create a grid too small");
         } catch (IllegalArgumentException e) {
         } catch (Exception e) {
             fail(ERROR);
         }
         try {
-            exceptionGrid = new BaseGridImpl(STANDARD_SIZE + STANDARD_SIZE, STANDARD_SIZE + STANDARD_SIZE);
+            exceptionGrid = new SquareGridImpl(STANDARD_SIZE + STANDARD_SIZE, STANDARD_SIZE + STANDARD_SIZE);
             fail("Can't create a grid too big");
         } catch (IllegalArgumentException e) {
         } catch (Exception e) {
             fail(ERROR);
         }
 
-        exceptionGrid = new BaseGridImpl(STANDARD_SIZE, STANDARD_SIZE);
+        exceptionGrid = new SquareGridImpl(STANDARD_SIZE, STANDARD_SIZE);
         exceptionGame = new GameImpl(exceptionGrid);
         try {
             exceptionGame.isEnded();

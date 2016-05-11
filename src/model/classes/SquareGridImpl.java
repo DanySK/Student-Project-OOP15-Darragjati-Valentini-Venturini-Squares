@@ -5,13 +5,13 @@ import java.util.List;
 
 import model.enumerations.GridOption;
 import model.enumerations.ListType;
-import model.interfaces.BaseGrid;
+import model.interfaces.SquareGrid;
 
 /**
  * This class implements the methods of the interface BaseGrid. It is used to
  * create the game's playable field.
  */
-public class BaseGridImpl implements BaseGrid {
+public class SquareGridImpl implements SquareGrid {
 
     private final List<List<GridOption>> horizontal = new ArrayList<>();
     private final List<List<GridOption>> vertical = new ArrayList<>();
@@ -26,7 +26,7 @@ public class BaseGridImpl implements BaseGrid {
      * @param columnsNumber
      *            the number of columns of the grid
      */
-    public BaseGridImpl(final Integer rowsNumber, final Integer columnsNumber) {
+    public SquareGridImpl(final Integer rowsNumber, final Integer columnsNumber) {
         if (rowsNumber < MINIMUM_SIZE || rowsNumber > MAXIMUM_SIZE || columnsNumber < MINIMUM_SIZE
                 || columnsNumber > MAXIMUM_SIZE) {
             throw new IllegalArgumentException();

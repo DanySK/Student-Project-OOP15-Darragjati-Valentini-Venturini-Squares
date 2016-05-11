@@ -8,7 +8,7 @@ import model.enumerations.GridOption;
  * which player has inserted a move, to set the current player turn,to get all
  * the possible moves and the remaining ones.
  */
-public interface BaseGrid {
+public interface SquareGrid {
 
     /**
      * @return the number of moves

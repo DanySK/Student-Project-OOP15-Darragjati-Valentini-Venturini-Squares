@@ -6,7 +6,7 @@ import model.enumerations.GridOption;
  * This interface is used to extend the functionalities of the interface
  * BaseGrid. It adds a new way to score points, setting a line in a diagonal way.
  */
-public interface TriangleGrid extends BaseGrid {
+public interface TriangleGrid extends SquareGrid {
 
     /**
      * @param listIndex is the number of the diagonal list where the player wants to get the line

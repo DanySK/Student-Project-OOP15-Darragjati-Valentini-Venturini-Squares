@@ -1,8 +1,6 @@
 package model.interfaces;
 
 import java.util.List;
-
-import model.classes.PlayerImpl;
 import model.enumerations.RankingOption;
 
 /**

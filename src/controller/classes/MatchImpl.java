@@ -2,13 +2,13 @@ package controller.classes;
 
 import controller.enumerations.TypeGame;
 import controller.interfaces.Match;
-import model.classes.BaseGridImpl;
+import model.classes.SquareGridImpl;
 import model.classes.GameImpl;
 import model.classes.PlayedTimeImpl;
 import model.classes.TriangleGridImpl;
 import model.enumerations.GridOption;
 import model.enumerations.ListType;
-import model.interfaces.BaseGrid;
+import model.interfaces.SquareGrid;
 import model.interfaces.LastMove;
 import model.interfaces.PlayedTime;
 import model.interfaces.Turn;
@@ -22,7 +22,7 @@ public class MatchImpl implements Match {
     private final TypeGame mode;
     private GridOption numPlayer;
     private String namePlayer;
-    private BaseGrid grid;
+    private SquareGrid grid;
     private Turn match;
     private PlayedTime time;
     private int playerScore;
@@ -41,7 +41,7 @@ public class MatchImpl implements Match {
 
         switch (this.mode) {
         case SQUARE:
-            this.grid = new BaseGridImpl(this.rowsNumber, this.columnsNumber);
+            this.grid = new SquareGridImpl(this.rowsNumber, this.columnsNumber);
             break;
         case TRIANGLE:
             this.grid = new TriangleGridImpl(this.rowsNumber, this.columnsNumber);
