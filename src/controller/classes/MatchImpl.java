@@ -9,10 +9,11 @@ import model.classes.TriangleGridImpl;
 import model.enumerations.GridOption;
 import model.enumerations.ListType;
 import model.interfaces.BaseGrid;
+import model.interfaces.LastMove;
 import model.interfaces.PlayedTime;
+import model.interfaces.Turn;
 
-
-public class MatchImpl implements Match{
+public class MatchImpl implements Match {
 
     private final int columnsNumber;
     private final int rowsNumber;
@@ -20,10 +21,11 @@ public class MatchImpl implements Match{
     private final String namePlayer2;
     private final TypeGame mode;
     private GridOption numPlayer;
-    private String namePlayer;    
+    private String namePlayer;
     private BaseGrid grid;
-    private GameImpl match;
+    private Turn match;
     private PlayedTime time;
+    private int playerScore;
 
     public MatchImpl(int columsNumber, int rowsNumber, String namePlayer1, String namePlayer2, TypeGame mode) {
         controlNamePlayers(namePlayer1, namePlayer2);
@@ -32,9 +34,8 @@ public class MatchImpl implements Match{
         this.namePlayer1 = namePlayer1;
         this.namePlayer2 = namePlayer2;
         this.mode = mode;
-        this.numPlayer = null;
     }
-    
+
     @Override
     public void createGrid() {
 
@@ -51,6 +52,7 @@ public class MatchImpl implements Match{
         }
 
     }
+
     @Override
     public String createNewMatch() {
         this.match = new GameImpl(this.grid);
@@ -75,20 +77,39 @@ public class MatchImpl implements Match{
         }
 
     }
+
     @Override
     public String addLine(ListType direction, int numLine, int position) {
         this.match.setLine(direction, numLine, position);
         if (this.match.isEnded()) {
+            this.time.gameEnded(match);
             this.numPlayer = this.match.getWinner();
+
         } else {
+            this.playerScore = this.match.getPlayerPoints(this.numPlayer);
             this.numPlayer = this.match.getCopyOfCurrentPlayerTurn();
         }
+
         convertNumToNamePlayer();
         return this.namePlayer;
     }
+
     @Override
-    public void undo() {
+    public int getPlayerScore() {
+
+        return this.playerScore;
+    }
+
+    @Override
+    public LastMove undo() {
         this.match.undoLastMove();
+        return this.match.getCopyOfLastMove();
+
+    }
+
+    @Override
+    public Double getMatchTime() {
+        return this.time.getTotalElapsedTime();
     }
 
     private void controlNamePlayers(String namePlayer1, String namePlayer2) {
@@ -96,7 +117,5 @@ public class MatchImpl implements Match{
             throw new IllegalArgumentException();
         }
     }
-    
-    
 
 }
