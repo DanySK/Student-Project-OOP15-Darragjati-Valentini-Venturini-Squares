@@ -9,22 +9,20 @@ import model.interfaces.Turn;
  */
 public class PlayedTimeImpl implements PlayedTime {
 
-    private Double totalPlayTime = 0.0;
-    private long startGameTime = 0;
+    private Double totalPlayTime;
+    private long startGameTime;
 
     /**
-     * @param totalPlayTime
-     *            the total play time before the starting of the new match.
+     * This constructor sets the fields of the object with default values.
      */
-    // CHECKSTYLE:OFF:
-    public PlayedTimeImpl(final Double totalPlayTime) {
-        // CHECKSTYLE:ON:
-        this.totalPlayTime = totalPlayTime;
+    public PlayedTimeImpl() {
+        this.totalPlayTime = 0.0;
+        this.startGameTime = 0;
     }
 
     @Override
-    public void gameStarted(final Turn currentGame) {
-        if (currentGame.isEnded()) {
+    public void setTimeAtMatchStart(final Turn currentGame) {
+        if (currentGame.isStarted() && this.startGameTime != 0) {
             this.startGameTime = System.currentTimeMillis();
         } else {
             throw new IllegalStateException();
@@ -32,7 +30,7 @@ public class PlayedTimeImpl implements PlayedTime {
     }
 
     @Override
-    public void gameEnded(final Turn currentGame) {
+    public void calculateMatchDuration(final Turn currentGame) {
         if (currentGame.isEnded()) {
             Double currentGamePlayTime;
             currentGamePlayTime = (this.startGameTime - System.currentTimeMillis()) / 1000.0;
@@ -44,7 +42,10 @@ public class PlayedTimeImpl implements PlayedTime {
     }
 
     @Override
-    public Double getTotalElapsedTime() {
+    public Double getTotalMatchDuration() {
+        if (this.totalPlayTime.equals(0.0)) {
+            throw new IllegalStateException();
+        }
         return this.totalPlayTime;
     }
 }

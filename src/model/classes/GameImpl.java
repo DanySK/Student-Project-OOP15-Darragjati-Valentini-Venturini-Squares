@@ -183,7 +183,7 @@ public class GameImpl implements Turn {
     public void undoLastMove() {
 
         if (lastMoveList.isEmpty()) {
-            throw new IllegalStateException("you can't undo if you didn't made a move");
+            throw new IllegalStateException("you can't undo if you have't made a move");
         }
         Integer points = 0;
         switch (getCopyOfLastMove().getLastListType()) {

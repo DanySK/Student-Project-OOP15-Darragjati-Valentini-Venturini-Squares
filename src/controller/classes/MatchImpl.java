@@ -60,7 +60,7 @@ public class MatchImpl implements Match {
         this.numPlayer = this.match.getCopyOfCurrentPlayerTurn();
         convertNumToNamePlayer();
         this.time = new PlayedTimeImpl(null);
-        this.time.gameStarted(match);
+        this.time.setTimeAtMatchStart(match);
         return this.namePlayer;
     }
 
@@ -82,7 +82,7 @@ public class MatchImpl implements Match {
     public String addLine(ListType direction, int numLine, int position) {
         this.match.setLine(direction, numLine, position);
         if (this.match.isEnded()) {
-            this.time.gameEnded(match);
+            this.time.calculateMatchDuration(match);
             this.numPlayer = this.match.getWinner();
 
         } else {
@@ -109,7 +109,7 @@ public class MatchImpl implements Match {
 
     @Override
     public Double getMatchTime() {
-        return this.time.getTotalElapsedTime();
+        return this.time.getTotalMatchDuration();
     }
 
     private void controlNamePlayers(String namePlayer1, String namePlayer2) {

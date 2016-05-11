@@ -12,7 +12,7 @@ public interface PlayedTime {
      *            the current running game, it is used to verify if it is
      *            started.
      */
-    void gameStarted(Turn currentGame);
+    void setTimeAtMatchStart(Turn currentGame);
 
     /**
      * This method calculates the duration of the game.
@@ -20,10 +20,10 @@ public interface PlayedTime {
      * @param currentGame
      *            the current running game, it is used to verify if it is ended.
      */
-    void gameEnded(Turn currentGame);
+    void calculateMatchDuration(Turn currentGame);
 
     /**
      * @return the total play time after the last match.
      */
-    Double getTotalElapsedTime();
+    Double getTotalMatchDuration();
 }
