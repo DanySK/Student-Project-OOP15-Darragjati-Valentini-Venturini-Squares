@@ -1,6 +1,7 @@
 package controller.classes;
 
 import controller.enumerations.TypeGame;
+import controller.interfaces.Match;
 import model.classes.BaseGridImpl;
 import model.classes.GameImpl;
 import model.classes.PlayedTimeImpl;
@@ -11,7 +12,7 @@ import model.interfaces.BaseGrid;
 import model.interfaces.PlayedTime;
 
 
-public class MatchImpl {
+public class MatchImpl implements Match{
 
     private final int columnsNumber;
     private final int rowsNumber;
@@ -33,7 +34,8 @@ public class MatchImpl {
         this.mode = mode;
         this.numPlayer = null;
     }
-
+    
+    @Override
     public void createGrid() {
 
         switch (this.mode) {
@@ -49,7 +51,7 @@ public class MatchImpl {
         }
 
     }
-
+    @Override
     public String createNewMatch() {
         this.match = new GameImpl(this.grid);
         match.startMatch();
@@ -73,7 +75,7 @@ public class MatchImpl {
         }
 
     }
-
+    @Override
     public String addLine(ListType direction, int numLine, int position) {
         this.match.setLine(direction, numLine, position);
         if (this.match.isEnded()) {
@@ -84,7 +86,7 @@ public class MatchImpl {
         convertNumToNamePlayer();
         return this.namePlayer;
     }
-
+    @Override
     public void undo() {
         this.match.undoLastMove();
     }
