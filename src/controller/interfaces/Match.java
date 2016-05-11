@@ -1,6 +1,7 @@
 package controller.interfaces;
 
 import model.enumerations.ListType;
+import model.interfaces.LastMove;
 /**
  * Interfaccia della classe MatchImpl.
  * @author Licia Valentini
@@ -28,9 +29,22 @@ public interface Match {
      */
     String addLine(ListType direction, int numLine, int position);
     
+    
+    
     /**
      * Metodo che fa l'undo dell'ultima mossa.
+     * @return 
      */
-    void undo();
+    LastMove undo();
+    /**
+     * 
+     * @return ritorna il punteggio del giocatore corrente.
+     */
+    int getPlayerScore();
+    /**
+     * 
+     * @return il tempo totale di gioco a fine partita.
+     */
+    Double getMatchTime();
     
 }
