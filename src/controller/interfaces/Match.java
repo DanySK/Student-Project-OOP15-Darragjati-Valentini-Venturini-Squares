@@ -1,7 +1,11 @@
 package controller.interfaces;
 
 import model.enumerations.ListType;
-
+/**
+ * Interfaccia della classe MatchImpl.
+ * @author Licia Valentini
+ *
+ */
 public interface Match {
 
     /**
