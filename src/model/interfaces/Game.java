@@ -1,7 +1,6 @@
 package model.interfaces;
 
 import model.enumerations.GridOption;
-import model.enumerations.ListType;
 
 /**
  * This interface is used to manage the rotation between the players' turn.
@@ -27,9 +26,10 @@ public interface Game {
      * @return if there are no more moves left
      */
     boolean isEnded();
-    
+
     /**
      * Gets the player tha should make the next move.
+     * 
      * @return the player that should make the next move
      */
     GridOption getCopyOfCurrentPlayerTurn();
@@ -57,15 +57,8 @@ public interface Game {
     /**
      * Makes a move setting a line in the grid.
      * 
-     * @param list
-     *            wich one between the horizontal and the vertical list is
-     *            chosen to make the move
-     * @param listIndex
-     *            is the number of the list where the player wants to set his
-     *            line
-     * @param position
-     *            is the position of the chosen list where the player wants to
-     *            set the line
+     * @param move
+     *            the move that the player wants to do
      * @throws a
      *             IllegalArgumentException if the parameters insert are not
      *             correct

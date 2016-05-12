@@ -4,9 +4,8 @@ import model.enumerations.ListType;
 import model.interfaces.Move;
 
 /**
- * 
- * @author Turi
- *
+ * This class implements the interface Move and it is used to set the necessary
+ * fields to make a move.
  */
 public class MoveImpl implements Move {
 
