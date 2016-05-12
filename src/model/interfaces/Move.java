@@ -6,7 +6,7 @@ import model.enumerations.ListType;
  * This interface is used to organize the last move done by one of the two
  * players through getters and setters.
  */
-public interface LastMove {
+public interface Move {
 
     /**
      * Gets wich one of the two list types was used last.

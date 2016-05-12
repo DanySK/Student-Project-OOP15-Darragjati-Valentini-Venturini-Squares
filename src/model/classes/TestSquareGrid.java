@@ -12,7 +12,7 @@ import model.enumerations.GridOption;
 import model.enumerations.ListType;
 import model.interfaces.SquareGrid;
 import model.interfaces.Game;
-import model.interfaces.LastMove;
+import model.interfaces.Move;
 
 /**
  * This class simulates the possible moves of a game.
@@ -23,7 +23,7 @@ public class TestSquareGrid {
     private static final Integer HORIZONTAL_SIZE = 5;
     private static final Integer VERTICAL_SIZE = 4;
     private static final String ERROR = "Wrong exception thrown";
-    private final LastMove move = new LastMoveImpl();
+    private final Move move = new MoveImpl();
 
     /**
      * Tests the methods of BaseGridImpl and TurnImpl.

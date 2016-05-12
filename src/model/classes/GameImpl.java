@@ -6,7 +6,7 @@ import java.util.Random;
 import model.enumerations.GridOption;
 import model.enumerations.ListType;
 import model.interfaces.SquareGrid;
-import model.interfaces.LastMove;
+import model.interfaces.Move;
 import model.interfaces.TriangleGrid;
 import model.interfaces.Game;
 
@@ -22,7 +22,7 @@ public class GameImpl implements Game {
     private Integer scorePlayer2;
     private static final Integer INITIAL_SCORE = 0;
     private GridOption turn = GridOption.EMPTY;
-    private final List<LastMove> lastMoveList = new ArrayList<>();
+    private final List<Move> lastMoveList = new ArrayList<>();
 
     /**
      * This constructor takes an object that implements BaseGrid.
@@ -128,7 +128,7 @@ public class GameImpl implements Game {
     }
 
     @Override
-    public void setLine(final LastMove move) {
+    public void setLine(final Move move) {
         Integer points = 0;
         final ListType list = move.getLastListType();
         final Integer listIndex = move.getLastListIndex();
@@ -157,7 +157,7 @@ public class GameImpl implements Game {
             throw new IllegalArgumentException("the list selected does not exist");
         }
 
-        final LastMove lastMove = new LastMoveImpl();
+        final Move lastMove = new MoveImpl();
         lastMove.setLastListType(list);
         lastMove.setLastListIndex(listIndex);
         lastMove.setLastPosition(position);
@@ -217,7 +217,7 @@ public class GameImpl implements Game {
     }
 
     @Override
-    public LastMove getCopyOfLastMove() {
+    public Move getCopyOfLastMove() {
         return lastMoveList.get(lastMoveList.size() - 1);
     }
 }

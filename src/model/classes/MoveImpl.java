@@ -1,14 +1,14 @@
 package model.classes;
 
 import model.enumerations.ListType;
-import model.interfaces.LastMove;
+import model.interfaces.Move;
 
 /**
  * 
  * @author Turi
  *
  */
-public class LastMoveImpl implements LastMove {
+public class MoveImpl implements Move {
 
     private ListType lastListType;
     private Integer lastListIndex;
@@ -17,7 +17,7 @@ public class LastMoveImpl implements LastMove {
     /**
      * This constructor sets the fields of the object.
      */
-    public LastMoveImpl() {
+    public MoveImpl() {
         this.lastListIndex = -1;
         this.lastPosition = -1;
     }

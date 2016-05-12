@@ -9,7 +9,7 @@ import model.classes.TriangleGridImpl;
 import model.enumerations.GridOption;
 import model.enumerations.ListType;
 import model.interfaces.SquareGrid;
-import model.interfaces.LastMove;
+import model.interfaces.Move;
 import model.interfaces.PlayedTime;
 import model.interfaces.Game;
 
@@ -101,7 +101,7 @@ public class MatchImpl implements Match {
     }
 
     @Override
-    public LastMove undo() {
+    public Move undo() {
         this.match.undoLastMove();
         return this.match.getCopyOfLastMove();
 

@@ -1,7 +1,7 @@
 package controller.interfaces;
 
 import model.enumerations.ListType;
-import model.interfaces.LastMove;
+import model.interfaces.Move;
 /**
  * Interfaccia della classe MatchImpl.
  * @author Licia Valentini
@@ -35,7 +35,7 @@ public interface Match {
      * Metodo che fa l'undo dell'ultima mossa.
      * @return 
      */
-    LastMove undo();
+    Move undo();
     /**
      * 
      * @return ritorna il punteggio del giocatore corrente.

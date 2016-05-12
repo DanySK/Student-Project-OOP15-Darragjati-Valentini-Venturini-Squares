@@ -70,7 +70,7 @@ public interface Game {
      *             IllegalArgumentException if the parameters insert are not
      *             correct
      */
-    void setLine(LastMove move);
+    void setLine(Move move);
 
     /**
      * Undo the last player move.
@@ -84,5 +84,5 @@ public interface Game {
      * 
      * @return the copy of the last move.
      */
-    LastMove getCopyOfLastMove();
+    Move getCopyOfLastMove();
 }
