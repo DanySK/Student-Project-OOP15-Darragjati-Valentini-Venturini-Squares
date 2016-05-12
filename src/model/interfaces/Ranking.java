@@ -13,12 +13,10 @@ public interface Ranking {
     /**
      * Add the last match results.
      * 
-     * @param playerName
-     *            the player's name
-     * @param win
-     *            if the player has won the last match
-     * @param score
-     *            the players score
+     * @param playerName  the player's name
+     * @param win  if the player has won the last match
+     * @param score the players score
+     * 
      */
     void addPlayerResults(String playerName, boolean win, Integer score);
 
@@ -27,11 +25,10 @@ public interface Ranking {
      * winrate, per total wins, per total games played and per total squares
      * catched.
      * 
-     * @param option
-     *            wich way the list should be ordered
-     * @param reverseRanking
-     *            true if the list should be ordered in the opposite way
+     * @param option wich way the list should be ordered
+     * @param reverseRanking true if the list should be ordered in the opposite way
      * @return the reordered list
+     * @throws an IllegalArgumentException if the ordering option does not exist
      */
     List<Player> orderListBy(RankingOption option, boolean reverseRanking);
 }

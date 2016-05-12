@@ -19,6 +19,13 @@ public class RankingImpl implements Ranking {
 
     private final List<Player> playerList;
 
+    /**
+     * The consctructor is used to wkow the old players' matches results and
+     * upate them if it is necessary.
+     * 
+     * @param playerList the old list of the players' ranking
+     * @throws an IllegalArgumentException if the playerList contains two or more players with the same name
+     */
     // CHECKSTYLE:OFF:
     public RankingImpl(final List<Player> playerList) {
         // CHECKSTYLE:ON:
@@ -133,7 +140,7 @@ public class RankingImpl implements Ranking {
             });
             break;
         default:
-            throw new IllegalStateException();
+            throw new IllegalArgumentException();
         }
         if (reverseRanking) {
             Collections.reverse(playerList);
@@ -144,21 +151,21 @@ public class RankingImpl implements Ranking {
     private Integer compareWinrate(final Player player1, final Player player2) {
         return Double.compare(player1.getWinRate(), player2.getWinRate());
     }
-    
+
     private Integer compareTotalMatches(final Player player1, final Player player2) {
         return Integer.compare(player1.getTotalMatches(), player2.getTotalMatches());
     }
-    
+
     private Integer compareTotalWins(final Player player1, final Player player2) {
         return Integer.compare(player1.getTotalWins(), player2.getTotalWins());
     }
-    
+
     private Integer compareTotalPointsScored(final Player player1, final Player player2) {
         return Integer.compare(player1.getTotalPointsScored(), player2.getTotalPointsScored());
     }
-    
+
     private Integer compareNames(final Player player1, final Player player2) {
         return player1.getPlayerName().compareTo(player2.getPlayerName());
     }
-    
+
 }

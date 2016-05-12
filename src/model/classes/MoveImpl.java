@@ -17,6 +17,7 @@ public class MoveImpl implements Move {
      * This constructor sets the fields of the object.
      */
     public MoveImpl() {
+        this.lastListType = null;
         this.lastListIndex = -1;
         this.lastPosition = -1;
     }
