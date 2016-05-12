@@ -17,10 +17,8 @@ public class TriangleGridImpl extends SquareGridImpl implements TriangleGrid {
     /**
      * This constructor creates a new playable grid.
      * 
-     * @param rowsNumber
-     *            the number of rows of the grid
-     * @param columnsNumber
-     *            the number of columns of the grid
+     * @param rowsNumber the number of rows of the grid
+     * @param columnsNumber the number of columns of the grid
      */
     public TriangleGridImpl(final Integer rowsNumber, final Integer columnsNumber) {
         super(rowsNumber, columnsNumber);
@@ -37,9 +35,7 @@ public class TriangleGridImpl extends SquareGridImpl implements TriangleGrid {
 
     @Override
     public Integer getRemainingMoves() {
-
         Integer movesLeft = 0;
-
         for (final List<GridOption> list : diagonal) {
             for (final GridOption option : list) {
                 if (option.equals(GridOption.EMPTY)) {
@@ -93,7 +89,9 @@ public class TriangleGridImpl extends SquareGridImpl implements TriangleGrid {
     public GridOption getCopyOfDiagonalElement(final int listIndex, final int position) {
         checkCorrectDiagonalInput(listIndex, position);
         final GridOption copyOfDiagonalElement = diagonal.get(listIndex).get(position);
+        //CHECKSTYLE:OFF:
         return copyOfDiagonalElement;
+      //CHECKSTYLE:ON:
     }
 
     @Override
@@ -103,7 +101,7 @@ public class TriangleGridImpl extends SquareGridImpl implements TriangleGrid {
         if (playerTurn.equals(GridOption.EMPTY)) {
             if (diagonal.get(listIndex).get(position).equals(GridOption.EMPTY)) {
                 // da mettere il perchè lancia quest'eccezione?
-                throw new IllegalStateException();
+                throw new IllegalStateException("You can't undo a move that wasn't made");
             } else {
                 points = diagonalPointScored(listIndex, position);
                 diagonal.get(listIndex).set(position, playerTurn);
@@ -113,7 +111,7 @@ public class TriangleGridImpl extends SquareGridImpl implements TriangleGrid {
                 diagonal.get(listIndex).set(position, playerTurn);
                 points = diagonalPointScored(listIndex, position);
             } else {
-                throw new IllegalStateException();
+                throw new IllegalStateException("You can't make a move that has been already made");
             }
         }
         return points;

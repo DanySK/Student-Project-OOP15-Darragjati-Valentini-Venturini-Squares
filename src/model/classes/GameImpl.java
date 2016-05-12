@@ -141,18 +141,15 @@ public class GameImpl implements Game {
         switch (list) {
         case HORIZONTAL:
             points = grid.setHorizontalLine(listIndex, position, this.turn);
-            System.out.println(points);
             addPoints(points);
             break;
         case VERTICAL:
             points = grid.setVerticalLine(listIndex, position, this.turn);
-            System.out.println(points);
             addPoints(points);
             break;
         case DIAGONAL:
             if (grid.getClass().equals(TriangleGridImpl.class)) {
                 points = ((TriangleGrid) grid).setDiagonalLine(listIndex, position, this.turn);
-                addPoints(points);
                 break;
             } else {
                 throw new UnsupportedOperationException();
@@ -195,8 +192,6 @@ public class GameImpl implements Game {
             throw new IllegalStateException("you can't undo if you haven't made a move");
         }
         Integer points = 0;
-        System.out.println(getCopyOfLastMove().getListType() + " " + getCopyOfLastMove().getListIndex() + " "
-                + getCopyOfLastMove().getPosition());
         switch (getCopyOfLastMove().getListType()) {
         case HORIZONTAL:
             points = grid.setHorizontalLine(getCopyOfLastMove().getListIndex(), getCopyOfLastMove().getPosition(),
@@ -206,13 +201,11 @@ public class GameImpl implements Game {
         case VERTICAL:
             points = grid.setVerticalLine(getCopyOfLastMove().getListIndex(), getCopyOfLastMove().getPosition(),
                     GridOption.EMPTY);
-            System.out.println(points);
             addPoints(-points);
             break;
         case DIAGONAL:
             points = ((TriangleGrid) grid).setDiagonalLine(getCopyOfLastMove().getListIndex(),
                     getCopyOfLastMove().getPosition(), GridOption.EMPTY);
-            System.out.println(points);
             addPoints(-points);
             break;
         default:

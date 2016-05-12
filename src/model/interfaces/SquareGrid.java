@@ -33,6 +33,7 @@ public interface SquareGrid {
      * @param position is the index of the chosen list where the player wants to set the line
      * @param playerTurn which one of the two players is making the move
      * @return the number of points scored by making a move 
+     * @throws an IllegalStateEception if the move has been already made
      */
     Integer setHorizontalLine(int listIndex, int position, GridOption playerTurn);
     
@@ -49,6 +50,7 @@ public interface SquareGrid {
      * @param position is the index of the chosen list where the player wants to set the line
      * @param playerTurn which one of the two players is making the move
      * @return the number of points scored by making a move
+     * @throws an IllegalStateEception if the move has been already made
      */
     Integer setVerticalLine(final int listIndex, int position, GridOption playerTurn);
     

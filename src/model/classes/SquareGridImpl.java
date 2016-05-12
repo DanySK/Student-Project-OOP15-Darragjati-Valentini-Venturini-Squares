@@ -22,10 +22,8 @@ public class SquareGridImpl implements SquareGrid {
     /**
      * This constructor creates a new playable grid.
      * 
-     * @param rowsNumber
-     *            the number of rows of the grid
-     * @param columnsNumber
-     *            the number of columns of the grid
+     * @param rowsNumber the number of rows of the grid
+     * @param columnsNumber the number of columns of the grid
      */
     public SquareGridImpl(final Integer rowsNumber, final Integer columnsNumber) {
         if (rowsNumber < MINIMUM_SIZE || rowsNumber > MAXIMUM_SIZE || columnsNumber < MINIMUM_SIZE
@@ -43,8 +41,7 @@ public class SquareGridImpl implements SquareGrid {
     /**
      * This method creates a list of empty moves.
      * 
-     * @param size
-     *            the list's size
+     * @param size the list's size
      * @return the created list
      */
     protected List<GridOption> createEmptyList(final Integer size) {
@@ -104,8 +101,7 @@ public class SquareGridImpl implements SquareGrid {
         Integer points = 0;
         if (playerTurn.equals(GridOption.EMPTY)) {
             if (horizontal.get(listIndex).get(position).equals(GridOption.EMPTY)) {
-                throw new IllegalStateException(); // da mettere il perchè //
-                // lancia quest'eccezione?
+                throw new IllegalStateException("You can't undo a move that wasn't made");
             } else {
                 points = horizontalPointScored(listIndex, position);
                 horizontal.get(listIndex).set(position, playerTurn);
@@ -115,7 +111,7 @@ public class SquareGridImpl implements SquareGrid {
                 horizontal.get(listIndex).set(position, playerTurn);
                 points = horizontalPointScored(listIndex, position);
             } else {
-                throw new IllegalStateException();
+                throw new IllegalStateException("You can't make a move that has been already made");
             }
         }
         return points;
@@ -125,12 +121,8 @@ public class SquareGridImpl implements SquareGrid {
      * This method checks after doing a horizontal move if it has scored a
      * point.
      * 
-     * @param listIndex
-     *            the number of the horizontal list where the player wants to
-     *            set his line
-     * @param position
-     *            the index of the chosen list where the player wants to set the
-     *            line
+     * @param listIndex the number of the horizontal list where the player wants to set his line
+     * @param position the index of the chosen list where the player wants to set the line
      * @return the number of points scored by making a move
      */
     protected Integer horizontalPointScored(final int listIndex, final int position) {
@@ -146,7 +138,6 @@ public class SquareGridImpl implements SquareGrid {
                 && !getNextTransversalList(ListType.HORIZONTAL, listIndex, position).equals(GridOption.EMPTY)) {
             points++;
         }
-
         return points;
     }
 
@@ -174,8 +165,7 @@ public class SquareGridImpl implements SquareGrid {
         Integer points = 0;
         if (playerTurn.equals(GridOption.EMPTY)) {
             if (vertical.get(listIndex).get(position).equals(GridOption.EMPTY)) {
-                throw new IllegalStateException(); // da mettere il perchè //
-                // lancia quest'eccezione?
+                throw new IllegalStateException("You can't undo a move that wasn't made");
             } else {
                 points = verticalPointScored(listIndex, position);
                 vertical.get(listIndex).set(position, playerTurn);
@@ -185,7 +175,7 @@ public class SquareGridImpl implements SquareGrid {
                 vertical.get(listIndex).set(position, playerTurn);
                 points = verticalPointScored(listIndex, position);
             } else {
-                throw new IllegalStateException();
+                throw new IllegalStateException("You can't make a move that has been already made");
             }
         }
         return points;
