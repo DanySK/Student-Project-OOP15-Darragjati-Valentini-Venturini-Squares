@@ -113,6 +113,7 @@ public class TestSquareGrid {
      * exceptions.
      */
     @Test
+    //CHECKSTYLE:OFF:
     public void testExceptions() {
 
         SquareGrid exceptionGrid;

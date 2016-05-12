@@ -92,7 +92,7 @@ public class TriangleGridImpl extends SquareGridImpl implements TriangleGrid {
     @Override
     public GridOption getCopyOfDiagonalElement(final int listIndex, final int position) {
         checkCorrectDiagonalInput(listIndex, position);
-        GridOption copyOfDiagonalElement = diagonal.get(listIndex).get(position);
+        final GridOption copyOfDiagonalElement = diagonal.get(listIndex).get(position);
         return copyOfDiagonalElement;
     }
 

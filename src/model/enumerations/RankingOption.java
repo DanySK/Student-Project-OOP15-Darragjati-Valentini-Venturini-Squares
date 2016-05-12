@@ -1,6 +1,5 @@
 package model.enumerations;
 
-
 /**
  * This enum represents the possibilities to order the ranking.
  */

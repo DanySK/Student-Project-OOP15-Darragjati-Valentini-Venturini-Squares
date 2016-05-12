@@ -17,6 +17,7 @@ public class SquareGridImpl implements SquareGrid {
     private final List<List<GridOption>> vertical = new ArrayList<>();
     private static final Integer MINIMUM_SIZE = 4;
     private static final Integer MAXIMUM_SIZE = 10;
+    private static final String ERROR_MESSAGE = "the list does not exist";
 
     /**
      * This constructor creates a new playable grid.
@@ -225,7 +226,7 @@ public class SquareGridImpl implements SquareGrid {
             case VERTICAL:
                 return getCopyOfVerticalElement(listIndex - 1, position);
             default:
-                throw new IllegalStateException("the list does not exist");
+                throw new IllegalStateException(ERROR_MESSAGE);
             }
         } else {
             throw new IllegalArgumentException();
@@ -247,7 +248,7 @@ public class SquareGridImpl implements SquareGrid {
                 throw new IllegalArgumentException();
             }
         default:
-            throw new IllegalStateException("the list does not exist");
+            throw new IllegalStateException(ERROR_MESSAGE);
         }
     }
 
@@ -259,7 +260,7 @@ public class SquareGridImpl implements SquareGrid {
             case VERTICAL:
                 return getCopyOfHorizontalElement(position, listIndex - 1);
             default:
-                throw new IllegalStateException("the list does not exist");
+                throw new IllegalStateException(ERROR_MESSAGE);
             }
         } else {
             throw new IllegalArgumentException();
@@ -281,7 +282,7 @@ public class SquareGridImpl implements SquareGrid {
                 throw new IllegalArgumentException();
             }
         default:
-            throw new IllegalStateException("the list does not exist");
+            throw new IllegalStateException(ERROR_MESSAGE);
         }
     }
 
