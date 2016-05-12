@@ -50,10 +50,9 @@ public interface Game {
 
     /**
      * Makes a move setting a line in the grid.
-     * 
      * @param move the move that the player wants to do
      * @throws an UnsupportedOperationException if the list chosen is not supported by the game mode
-     * @throws an IllegalArgumentException if the parameters insert are not correct
+     * @throws an IllegalArgumentException if the inserted parameters are not correct
      */
     void setLine(Move move);
 

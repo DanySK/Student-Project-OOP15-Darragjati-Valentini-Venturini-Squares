@@ -68,16 +68,17 @@ public class TestSquareGrid {
         move.setPosition(0);
         gridOfSize.setLine(move);
         move.setListType(ListType.VERTICAL);
-        //this turn memorization is used later to check if the turn switch is correctly implemented
+        // this turn memorization is used later to check if the turn switch is
+        // correctly implemented
         final GridOption player = gridOfSize.getCopyOfCurrentPlayerTurn();
         move.setListIndex(1);
-        move.setPosition(0);    
+        move.setPosition(0);
         gridOfSize.setLine(move);
         assertEquals(squareGrid.getRemainingMoves(), (Integer) (squareGrid.getTotalMoves() - 4));
         assertNotEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
         // verifies if the player has received a bonus move
         assertEquals(player, gridOfSize.getCopyOfCurrentPlayerTurn());
-        
+
         gridOfSize.undoLastMove();
         assertEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
         assertEquals(player, gridOfSize.getCopyOfCurrentPlayerTurn());
@@ -113,7 +114,7 @@ public class TestSquareGrid {
      * exceptions.
      */
     @Test
-    //CHECKSTYLE:OFF:
+    // CHECKSTYLE:OFF:
     public void testExceptions() {
 
         SquareGrid exceptionGrid;
@@ -139,6 +140,13 @@ public class TestSquareGrid {
         try {
             exceptionGame.isEnded();
             fail("the match can't be ended if it isn't started");
+        } catch (IllegalStateException e) {
+        } catch (Exception e) {
+            fail(ERROR);
+        }
+        try {
+            exceptionGame.getCopyOfCurrentPlayerTurn();
+            fail("you can't get the player turn if the match isn't started");
         } catch (IllegalStateException e) {
         } catch (Exception e) {
             fail(ERROR);
@@ -178,7 +186,14 @@ public class TestSquareGrid {
         }
         try {
             exceptionGame.undoLastMove();
-            fail("You can't undo a move if a player didn't do at least one"); // riformulare
+            fail("You can't undo a move if noone of the two players have set one");
+        } catch (IllegalStateException e) {
+        } catch (Exception e) {
+            fail(ERROR);
+        }
+        try {
+            exceptionGame.getCopyOfLastMove();
+            fail("You can't get the last move if noone of the two players have set one");
         } catch (IllegalStateException e) {
         } catch (Exception e) {
             fail(ERROR);
