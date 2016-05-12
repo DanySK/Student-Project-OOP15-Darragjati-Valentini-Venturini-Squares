@@ -12,6 +12,7 @@ import model.enumerations.GridOption;
 import model.enumerations.ListType;
 import model.interfaces.SquareGrid;
 import model.interfaces.Game;
+import model.interfaces.LastMove;
 
 /**
  * This class simulates the possible moves of a game.
@@ -22,6 +23,7 @@ public class TestSquareGrid {
     private static final Integer HORIZONTAL_SIZE = 5;
     private static final Integer VERTICAL_SIZE = 4;
     private static final String ERROR = "Wrong exception thrown";
+    private final LastMove move = new LastMoveImpl();
 
     /**
      * Tests the methods of BaseGridImpl and TurnImpl.
@@ -46,26 +48,36 @@ public class TestSquareGrid {
                 assertEquals(squareGrid.getCopyOfVerticalElement(i, z), GridOption.EMPTY);
             }
         }
-
         assertFalse(gridOfSize.isStarted());
         gridOfSize.startMatch();
         assertTrue(gridOfSize.isStarted());
-        gridOfSize.setLine(ListType.VERTICAL, 0, 0);
+        move.setLastListType(ListType.VERTICAL);
+        move.setLastListIndex(0);
+        move.setLastPosition(0);
+        gridOfSize.setLine(move);
         assertEquals(squareGrid.getRemainingMoves(), (Integer) (squareGrid.getTotalMoves() - 1));
         assertEquals(gridOfSize.getCopyOfLastMove().getLastListType(), ListType.VERTICAL);
         assertEquals(gridOfSize.getCopyOfLastMove().getLastListIndex(), (Integer) 0);
         assertEquals(gridOfSize.getCopyOfLastMove().getLastPosition(), (Integer) 0);
-
-        gridOfSize.setLine(ListType.HORIZONTAL, 0, 0);
-        gridOfSize.setLine(ListType.HORIZONTAL, 1, 0);
-
+        move.setLastListType(ListType.HORIZONTAL);
+        move.setLastListIndex(0);
+        move.setLastPosition(0);
+        gridOfSize.setLine(move);
+        move.setLastListType(ListType.HORIZONTAL);
+        move.setLastListIndex(1);
+        move.setLastPosition(0);
+        gridOfSize.setLine(move);
+        move.setLastListType(ListType.VERTICAL);
+        //this turn memorization is used later to check if the turn switch is correctly implemented
         final GridOption player = gridOfSize.getCopyOfCurrentPlayerTurn();
-        gridOfSize.setLine(ListType.VERTICAL, 1, 0);
-
+        move.setLastListIndex(1);
+        move.setLastPosition(0);    
+        gridOfSize.setLine(move);
         assertEquals(squareGrid.getRemainingMoves(), (Integer) (squareGrid.getTotalMoves() - 4));
         assertNotEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
         // verifies if the player has received a bonus move
         assertEquals(player, gridOfSize.getCopyOfCurrentPlayerTurn());
+        
         gridOfSize.undoLastMove();
         assertEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
         assertEquals(player, gridOfSize.getCopyOfCurrentPlayerTurn());
@@ -77,17 +89,18 @@ public class TestSquareGrid {
 
         final SquareGrid squareGrid2 = new SquareGridImpl(STANDARD_SIZE, STANDARD_SIZE);
         final Game gridOfSize2 = new GameImpl(squareGrid2);
-
         gridOfSize2.startMatch();
-
         // fills the grid with all the possible moves
         for (int i = 0; i < STANDARD_SIZE + 1; i++) {
             for (int z = 0; z < STANDARD_SIZE; z++) {
-                gridOfSize2.setLine(ListType.HORIZONTAL, i, z);
-                gridOfSize2.setLine(ListType.VERTICAL, i, z);
+                move.setLastListType(ListType.HORIZONTAL);
+                move.setLastListIndex(i);
+                move.setLastPosition(z);
+                gridOfSize2.setLine(move);
+                move.setLastListType(ListType.VERTICAL);
+                gridOfSize2.setLine(move);
             }
         }
-
         assertTrue(squareGrid2.getRemainingMoves().equals(0));
         assertNotEquals(gridOfSize2.getPlayerPoints(GridOption.PLAYER1),
                 gridOfSize2.getPlayerPoints(GridOption.PLAYER2));
@@ -130,7 +143,10 @@ public class TestSquareGrid {
             fail(ERROR);
         }
         try {
-            exceptionGame.setLine(ListType.HORIZONTAL, 0, 0);
+            move.setLastListType(ListType.HORIZONTAL);
+            move.setLastListIndex(0);
+            move.setLastPosition(0);
+            exceptionGame.setLine(move);
             fail("Can't insert a move when the match isn't started");
         } catch (IllegalStateException e) {
         } catch (Exception e) {
@@ -138,21 +154,24 @@ public class TestSquareGrid {
         }
         exceptionGame.startMatch();
         try {
-            exceptionGame.setLine(ListType.HORIZONTAL, -1, -1);
+            move.setLastListType(ListType.HORIZONTAL);
+            move.setLastListIndex(-1);
+            move.setLastPosition(-1);
+            exceptionGame.setLine(move);
             fail("Can't insert those parameters");
-        } catch (IllegalArgumentException e) { // forse potrebbe essere anche un
-                                               // index out of bound
+        } catch (IllegalArgumentException e) {
         } catch (Exception e) {
             fail(ERROR);
         }
         try {
+            move.setLastListType(ListType.HORIZONTAL);
+            move.setLastListIndex(0);
             // CHECKSTYLE:OFF:
-            exceptionGame.setLine(ListType.HORIZONTAL, 0, 7);
+            move.setLastPosition(7);
             // CHECKSTYLE:ON:
+            exceptionGame.setLine(move);
             fail("The grid isn't big enough");
-        } catch (IndexOutOfBoundsException e) { // forse potrebbe essere anche
-                                                // un
-                                                // illegal argument
+        } catch (IndexOutOfBoundsException e) {
         } catch (Exception e) {
             fail(ERROR);
         }
@@ -164,7 +183,10 @@ public class TestSquareGrid {
             fail(ERROR);
         }
         try {
-            exceptionGame.setLine(ListType.DIAGONAL, 0, 0);
+            move.setLastListType(ListType.DIAGONAL);
+            move.setLastListIndex(0);
+            move.setLastPosition(0);
+            exceptionGame.setLine(move);
             fail("You can't set a diagonal line, the base grid doesn't include this option");
         } catch (UnsupportedOperationException e) {
         } catch (Exception e) {
@@ -178,5 +200,4 @@ public class TestSquareGrid {
             fail(ERROR);
         }
     }
-
 }

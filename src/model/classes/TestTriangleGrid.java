@@ -12,6 +12,7 @@ import model.enumerations.ListType;
 import model.interfaces.SquareGrid;
 import model.interfaces.TriangleGrid;
 import model.interfaces.Game;
+import model.interfaces.LastMove;
 
 /**
  * This class simulates the possible moves of a game. The games rules are
@@ -22,7 +23,8 @@ public class TestTriangleGrid {
     private static final Integer STANDARD_SIZE = 6;
     private static final Integer HORIZONTAL_SIZE = 5;
     private static final Integer VERTICAL_SIZE = 4;
-
+    private final LastMove move = new LastMoveImpl();
+    
     /**
      * Tests the methods of TriangleGridImpl and TurnImpl.
      */
@@ -54,24 +56,37 @@ public class TestTriangleGrid {
         assertFalse(gridOfSize.isStarted());
         gridOfSize.startMatch();
         assertTrue(gridOfSize.isStarted());
-        gridOfSize.setLine(ListType.VERTICAL, 0, 0);
+        move.setLastListType(ListType.VERTICAL);
+        move.setLastListIndex(0);
+        move.setLastPosition(0);
+        gridOfSize.setLine(move);
         assertEquals(triangleGrid.getRemainingMoves(), (Integer) (triangleGrid.getTotalMoves() - 1));
         assertEquals(gridOfSize.getCopyOfLastMove().getLastListType(), ListType.VERTICAL);
         assertEquals(gridOfSize.getCopyOfLastMove().getLastListIndex(), (Integer) 0);
         assertEquals(gridOfSize.getCopyOfLastMove().getLastPosition(), (Integer) 0);
-
-        gridOfSize.setLine(ListType.HORIZONTAL, 0, 0);
-        gridOfSize.setLine(ListType.HORIZONTAL, 1, 0);
-
+        move.setLastListType(ListType.HORIZONTAL);
+        move.setLastListIndex(0);
+        move.setLastPosition(0);
+        gridOfSize.setLine(move);
+        move.setLastListType(ListType.HORIZONTAL);
+        move.setLastListIndex(1);
+        move.setLastPosition(0);
+        gridOfSize.setLine(move);
+         //this turn memorization is used later to check if the turn switch is correctly implemented
         GridOption player = gridOfSize.getCopyOfCurrentPlayerTurn();
-        gridOfSize.setLine(ListType.VERTICAL, 1, 0);
-
+        move.setLastListType(ListType.VERTICAL);
+        move.setLastListIndex(1);
+        move.setLastPosition(0);
+        gridOfSize.setLine(move);
         assertEquals(triangleGrid.getRemainingMoves(), (Integer) (triangleGrid.getTotalMoves() - 4));
         // the player points should be the same with this game mode
         assertEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
         assertNotEquals(player, gridOfSize.getCopyOfCurrentPlayerTurn());
         player = gridOfSize.getCopyOfCurrentPlayerTurn();
-        gridOfSize.setLine(ListType.DIAGONAL, 0, 0);
+        move.setLastListType(ListType.DIAGONAL);
+        move.setLastListIndex(0);
+        move.setLastPosition(0);
+        gridOfSize.setLine(move);
         assertNotEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
         assertEquals(player, gridOfSize.getCopyOfCurrentPlayerTurn());
         assertEquals(gridOfSize.getCopyOfLastMove().getLastListType(), ListType.DIAGONAL);
@@ -89,21 +104,26 @@ public class TestTriangleGrid {
 
         final SquareGrid squareGrid2 = new TriangleGridImpl(STANDARD_SIZE, STANDARD_SIZE);
         final Game gridOfSize2 = new GameImpl(squareGrid2);
-
         gridOfSize2.startMatch();
         // fills the grid with all thepossible moves
         for (int i = 0; i < STANDARD_SIZE + 1; i++) {
             for (int z = 0; z < STANDARD_SIZE; z++) {
-                gridOfSize2.setLine(ListType.HORIZONTAL, i, z);
-                gridOfSize2.setLine(ListType.VERTICAL, i, z);
+                move.setLastListType(ListType.HORIZONTAL);
+                move.setLastListIndex(i);
+                move.setLastPosition(z);
+                gridOfSize2.setLine(move);
+                move.setLastListType(ListType.VERTICAL);
+                gridOfSize2.setLine(move);
             }
         }
         for (int i = 0; i < STANDARD_SIZE; i++) {
             for (int z = 0; z < STANDARD_SIZE; z++) {
-                gridOfSize2.setLine(ListType.DIAGONAL, i, z);
+                move.setLastListType(ListType.DIAGONAL);
+                move.setLastListIndex(i);
+                move.setLastPosition(z);
+                gridOfSize2.setLine(move);
             }
         }
-
         assertTrue(squareGrid2.getRemainingMoves().equals(0));
         assertNotEquals(gridOfSize2.getPlayerPoints(GridOption.PLAYER1),
                 gridOfSize2.getPlayerPoints(GridOption.PLAYER2));
