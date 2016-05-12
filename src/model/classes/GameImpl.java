@@ -128,9 +128,12 @@ public class GameImpl implements Game {
     }
 
     @Override
-    public void setLine(final ListType list, final Integer listIndex, final Integer position) {
+    public void setLine(final LastMove move) {
         Integer points = 0;
-
+        final ListType list = move.getLastListType();
+        final Integer listIndex = move.getLastListIndex();
+        final Integer position = move.getLastPosition();
+        
         switch (list) {
         case HORIZONTAL:
             points = grid.setHorizontalLine(listIndex, position, this.turn);
@@ -183,7 +186,7 @@ public class GameImpl implements Game {
     public void undoLastMove() {
 
         if (lastMoveList.isEmpty()) {
-            throw new IllegalStateException("you can't undo if you have't made a move");
+            throw new IllegalStateException("you can't undo if you haven't made a move");
         }
         Integer points = 0;
         switch (getCopyOfLastMove().getLastListType()) {

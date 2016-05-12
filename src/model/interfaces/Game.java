@@ -70,7 +70,7 @@ public interface Game {
      *             IllegalArgumentException if the parameters insert are not
      *             correct
      */
-    void setLine(ListType list, Integer listIndex, Integer position);
+    void setLine(LastMove move);
 
     /**
      * Undo the last player move.
