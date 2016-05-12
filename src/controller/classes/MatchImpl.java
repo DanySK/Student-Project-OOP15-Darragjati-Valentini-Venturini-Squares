@@ -59,7 +59,7 @@ public class MatchImpl implements Match {
         match.startMatch();
         this.numPlayer = this.match.getCopyOfCurrentPlayerTurn();
         convertNumToNamePlayer();
-        this.time = new PlayedTimeImpl(null);
+        this.time = new PlayedTimeImpl();
         this.time.setTimeAtMatchStart(match);
         return this.namePlayer;
     }
