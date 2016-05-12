@@ -56,49 +56,49 @@ public class TestTriangleGrid {
         assertFalse(gridOfSize.isStarted());
         gridOfSize.startMatch();
         assertTrue(gridOfSize.isStarted());
-        move.setLastListType(ListType.VERTICAL);
-        move.setLastListIndex(0);
-        move.setLastPosition(0);
+        move.setListType(ListType.VERTICAL);
+        move.setListIndex(0);
+        move.setPosition(0);
         gridOfSize.setLine(move);
         assertEquals(triangleGrid.getRemainingMoves(), (Integer) (triangleGrid.getTotalMoves() - 1));
-        assertEquals(gridOfSize.getCopyOfLastMove().getLastListType(), ListType.VERTICAL);
-        assertEquals(gridOfSize.getCopyOfLastMove().getLastListIndex(), (Integer) 0);
-        assertEquals(gridOfSize.getCopyOfLastMove().getLastPosition(), (Integer) 0);
-        move.setLastListType(ListType.HORIZONTAL);
-        move.setLastListIndex(0);
-        move.setLastPosition(0);
+        assertEquals(gridOfSize.getCopyOfLastMove().getListType(), ListType.VERTICAL);
+        assertEquals(gridOfSize.getCopyOfLastMove().getListIndex(), (Integer) 0);
+        assertEquals(gridOfSize.getCopyOfLastMove().getPosition(), (Integer) 0);
+        move.setListType(ListType.HORIZONTAL);
+        move.setListIndex(0);
+        move.setPosition(0);
         gridOfSize.setLine(move);
-        move.setLastListType(ListType.HORIZONTAL);
-        move.setLastListIndex(1);
-        move.setLastPosition(0);
+        move.setListType(ListType.HORIZONTAL);
+        move.setListIndex(1);
+        move.setPosition(0);
         gridOfSize.setLine(move);
          //this turn memorization is used later to check if the turn switch is correctly implemented
         GridOption player = gridOfSize.getCopyOfCurrentPlayerTurn();
-        move.setLastListType(ListType.VERTICAL);
-        move.setLastListIndex(1);
-        move.setLastPosition(0);
+        move.setListType(ListType.VERTICAL);
+        move.setListIndex(1);
+        move.setPosition(0);
         gridOfSize.setLine(move);
         assertEquals(triangleGrid.getRemainingMoves(), (Integer) (triangleGrid.getTotalMoves() - 4));
         // the player points should be the same with this game mode
         assertEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
         assertNotEquals(player, gridOfSize.getCopyOfCurrentPlayerTurn());
         player = gridOfSize.getCopyOfCurrentPlayerTurn();
-        move.setLastListType(ListType.DIAGONAL);
-        move.setLastListIndex(0);
-        move.setLastPosition(0);
+        move.setListType(ListType.DIAGONAL);
+        move.setListIndex(0);
+        move.setPosition(0);
         gridOfSize.setLine(move);
         assertNotEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
         assertEquals(player, gridOfSize.getCopyOfCurrentPlayerTurn());
-        assertEquals(gridOfSize.getCopyOfLastMove().getLastListType(), ListType.DIAGONAL);
-        assertEquals(gridOfSize.getCopyOfLastMove().getLastListIndex(), (Integer) 0);
-        assertEquals(gridOfSize.getCopyOfLastMove().getLastPosition(), (Integer) 0);
+        assertEquals(gridOfSize.getCopyOfLastMove().getListType(), ListType.DIAGONAL);
+        assertEquals(gridOfSize.getCopyOfLastMove().getListIndex(), (Integer) 0);
+        assertEquals(gridOfSize.getCopyOfLastMove().getPosition(), (Integer) 0);
 
         gridOfSize.undoLastMove();
         assertEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
         assertEquals(player, gridOfSize.getCopyOfCurrentPlayerTurn());
-        assertEquals(gridOfSize.getCopyOfLastMove().getLastListType(), ListType.VERTICAL);
-        assertEquals(gridOfSize.getCopyOfLastMove().getLastListIndex(), (Integer) 1);
-        assertEquals(gridOfSize.getCopyOfLastMove().getLastPosition(), (Integer) 0);
+        assertEquals(gridOfSize.getCopyOfLastMove().getListType(), ListType.VERTICAL);
+        assertEquals(gridOfSize.getCopyOfLastMove().getListIndex(), (Integer) 1);
+        assertEquals(gridOfSize.getCopyOfLastMove().getPosition(), (Integer) 0);
         gridOfSize.undoLastMove();
         assertNotEquals(player, gridOfSize.getCopyOfCurrentPlayerTurn());
 
@@ -108,19 +108,19 @@ public class TestTriangleGrid {
         // fills the grid with all thepossible moves
         for (int i = 0; i < STANDARD_SIZE + 1; i++) {
             for (int z = 0; z < STANDARD_SIZE; z++) {
-                move.setLastListType(ListType.HORIZONTAL);
-                move.setLastListIndex(i);
-                move.setLastPosition(z);
+                move.setListType(ListType.HORIZONTAL);
+                move.setListIndex(i);
+                move.setPosition(z);
                 gridOfSize2.setLine(move);
-                move.setLastListType(ListType.VERTICAL);
+                move.setListType(ListType.VERTICAL);
                 gridOfSize2.setLine(move);
             }
         }
         for (int i = 0; i < STANDARD_SIZE; i++) {
             for (int z = 0; z < STANDARD_SIZE; z++) {
-                move.setLastListType(ListType.DIAGONAL);
-                move.setLastListIndex(i);
-                move.setLastPosition(z);
+                move.setListType(ListType.DIAGONAL);
+                move.setListIndex(i);
+                move.setPosition(z);
                 gridOfSize2.setLine(move);
             }
         }

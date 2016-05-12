@@ -3,49 +3,42 @@ package model.interfaces;
 import model.enumerations.ListType;
 
 /**
- * This interface is used to organize the last move done by one of the two
+ * This interface is used to organize move done by one of the two
  * players through getters and setters.
  */
 public interface Move {
 
     /**
-     * Gets wich one of the two list types was used last.
-     * @return the last list used, it is respectively ListType.HORIZONTAL or
-     *         ListType.VERTICAL if it is the horizontal or the vertical one
+     * @return the list used to make a move
      */
-    ListType getLastListType();
+    ListType getListType();
 
     /**
-     * Sets wich one of the two list types was used last.
      * @param lastListType
-     *            the type of the last list used
+     *            the type of the list used to make the move
      */
-    void setLastListType(ListType lastListType);
+    void setListType(ListType lastListType);
 
     /**
-     * Gets wich one of the "n" lists was used last.
-     * @return the number of the "n" list was used last
+     * @return wich one of the "n" list is used make a move
      */
-    Integer getLastListIndex();
+    Integer getListIndex();
 
     /**
-     * Sets wich one of the "n" lists was used last.
      * @param lastListIndex
-     *            which one of the "n" lists is used last
+     *            wich one of the "n" list is used make a move
      */
-    void setLastListIndex(Integer lastListIndex);
+    void setListIndex(Integer lastListIndex);
 
     /**
-     * Gets the last index used to make a move.
-     * @return the last index used to make a move
+     * @return the index of the list used to make a move
      */
-    Integer getLastPosition();
+    Integer getPosition();
 
     /**
-     * Sets the last index used to make a move.
      * @param lastPosition
-     *            the index of the list where was insert the last move
+     *            the index of the list used to make a move
      */
-    void setLastPosition(Integer lastPosition);
+    void setPosition(Integer lastPosition);
 
 }

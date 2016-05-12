@@ -130,9 +130,9 @@ public class GameImpl implements Game {
     @Override
     public void setLine(final Move move) {
         Integer points = 0;
-        final ListType list = move.getLastListType();
-        final Integer listIndex = move.getLastListIndex();
-        final Integer position = move.getLastPosition();
+        final ListType list = move.getListType();
+        final Integer listIndex = move.getListIndex();
+        final Integer position = move.getPosition();
         
         switch (list) {
         case HORIZONTAL:
@@ -158,9 +158,9 @@ public class GameImpl implements Game {
         }
 
         final Move lastMove = new MoveImpl();
-        lastMove.setLastListType(list);
-        lastMove.setLastListIndex(listIndex);
-        lastMove.setLastPosition(position);
+        lastMove.setListType(list);
+        lastMove.setListIndex(listIndex);
+        lastMove.setPosition(position);
         lastMoveList.add(lastMove);
     }
 
@@ -191,22 +191,22 @@ public class GameImpl implements Game {
             throw new IllegalStateException("you can't undo if you haven't made a move");
         }
         Integer points = 0;
-        System.out.println(getCopyOfLastMove().getLastListType() + " " + getCopyOfLastMove().getLastListIndex() + " " + getCopyOfLastMove().getLastPosition());
-        switch (getCopyOfLastMove().getLastListType()) {
+        System.out.println(getCopyOfLastMove().getListType() + " " + getCopyOfLastMove().getListIndex() + " " + getCopyOfLastMove().getPosition());
+        switch (getCopyOfLastMove().getListType()) {
         case HORIZONTAL:
-            points = grid.setHorizontalLine(getCopyOfLastMove().getLastListIndex(),
-                    getCopyOfLastMove().getLastPosition(), GridOption.EMPTY);
+            points = grid.setHorizontalLine(getCopyOfLastMove().getListIndex(),
+                    getCopyOfLastMove().getPosition(), GridOption.EMPTY);
             addPoints(-points);
             break;
         case VERTICAL:
-            points = grid.setVerticalLine(getCopyOfLastMove().getLastListIndex(), getCopyOfLastMove().getLastPosition(),
+            points = grid.setVerticalLine(getCopyOfLastMove().getListIndex(), getCopyOfLastMove().getPosition(),
                     GridOption.EMPTY);
             System.out.println(points);
             addPoints(-points);
             break;
         case DIAGONAL:
-            points = ((TriangleGrid) grid).setDiagonalLine(getCopyOfLastMove().getLastListIndex(),
-                    getCopyOfLastMove().getLastPosition(), GridOption.EMPTY);
+            points = ((TriangleGrid) grid).setDiagonalLine(getCopyOfLastMove().getListIndex(),
+                    getCopyOfLastMove().getPosition(), GridOption.EMPTY);
             System.out.println(points);
             addPoints(-points);
             break;

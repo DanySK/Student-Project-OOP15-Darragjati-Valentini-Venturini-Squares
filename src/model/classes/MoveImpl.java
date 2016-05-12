@@ -23,37 +23,37 @@ public class MoveImpl implements Move {
     }
 
     @Override
-    public ListType getLastListType() {
+    public ListType getListType() {
         return lastListType;
     }
 
     @Override
     // CHECKSTYLE:OFF:
-    public void setLastListType(final ListType lastListType) {
+    public void setListType(final ListType lastListType) {
         // CHECKSTYLE:ON:
         this.lastListType = lastListType;
     }
 
     @Override
-    public Integer getLastListIndex() {
+    public Integer getListIndex() {
         return lastListIndex;
     }
 
     @Override
     // CHECKSTYLE:OFF:
-    public void setLastListIndex(final Integer lastListIndex) {
+    public void setListIndex(final Integer lastListIndex) {
         // CHECKSTYLE:ON:
         this.lastListIndex = lastListIndex;
     }
 
     @Override
-    public Integer getLastPosition() {
+    public Integer getPosition() {
         return lastPosition;
     }
 
     @Override
     // CHECKSTYLE:OFF:
-    public void setLastPosition(final Integer lastPosition) {
+    public void setPosition(final Integer lastPosition) {
         // CHECKSTYLE:ON:
         this.lastPosition = lastPosition;
     }
