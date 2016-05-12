@@ -255,9 +255,9 @@ public class SquareGridImpl implements SquareGrid {
         if (listIndex > 0) {
             switch (list) {
             case HORIZONTAL:
-                return getCopyOfHorizontalElement(position, listIndex - 1);
-            case VERTICAL:
                 return getCopyOfVerticalElement(position, listIndex - 1);
+            case VERTICAL:
+                return getCopyOfHorizontalElement(position, listIndex - 1);
             default:
                 throw new IllegalStateException("the list does not exist");
             }
@@ -270,13 +270,13 @@ public class SquareGridImpl implements SquareGrid {
         switch (list) {
         case HORIZONTAL:
             if (listIndex < getHorizontalListSize()) {
-                return getCopyOfHorizontalElement(position + 1, listIndex - 1);
+                return getCopyOfVerticalElement(position + 1, listIndex - 1);
             } else {
                 throw new IllegalArgumentException();
             }
         case VERTICAL:
             if (listIndex < getVerticallListSize()) {
-                return getCopyOfVerticalElement(position + 1, listIndex - 1);
+                return getCopyOfHorizontalElement(position + 1, listIndex - 1);
             } else {
                 throw new IllegalArgumentException();
             }

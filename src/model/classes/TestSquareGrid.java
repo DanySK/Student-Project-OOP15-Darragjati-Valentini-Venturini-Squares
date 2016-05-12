@@ -12,6 +12,7 @@ import model.enumerations.GridOption;
 import model.enumerations.ListType;
 import model.interfaces.SquareGrid;
 import model.interfaces.Game;
+import model.interfaces.LastMove;
 
 /**
  * This class simulates the possible moves of a game.
@@ -46,27 +47,41 @@ public class TestSquareGrid {
                 assertEquals(squareGrid.getCopyOfVerticalElement(i, z), GridOption.EMPTY);
             }
         }
-
+        LastMove move = new LastMoveImpl();
+        move.setLastListType(ListType.VERTICAL);
+        move.setLastListIndex(0);
+        move.setLastPosition(0);
         assertFalse(gridOfSize.isStarted());
         gridOfSize.startMatch();
         assertTrue(gridOfSize.isStarted());
-        gridOfSize.setLine(ListType.VERTICAL, 0, 0);
+        gridOfSize.setLine(move);
         assertEquals(squareGrid.getRemainingMoves(), (Integer) (squareGrid.getTotalMoves() - 1));
         assertEquals(gridOfSize.getCopyOfLastMove().getLastListType(), ListType.VERTICAL);
         assertEquals(gridOfSize.getCopyOfLastMove().getLastListIndex(), (Integer) 0);
         assertEquals(gridOfSize.getCopyOfLastMove().getLastPosition(), (Integer) 0);
-
-        gridOfSize.setLine(ListType.HORIZONTAL, 0, 0);
-        gridOfSize.setLine(ListType.HORIZONTAL, 1, 0);
-
+        
+        move.setLastListType(ListType.HORIZONTAL);
+        move.setLastListIndex(0);
+        move.setLastPosition(0);
+        gridOfSize.setLine(move);
+        move.setLastListType(ListType.HORIZONTAL);
+        move.setLastListIndex(1);
+        move.setLastPosition(0);
+        gridOfSize.setLine(move);
+        
+        move.setLastListType(ListType.VERTICAL);
+        move.setLastListIndex(1);
+        move.setLastPosition(0);
         final GridOption player = gridOfSize.getCopyOfCurrentPlayerTurn();
-        gridOfSize.setLine(ListType.VERTICAL, 1, 0);
-
+        gridOfSize.setLine(move);
+        System.out.println(gridOfSize.getPlayerPoints(GridOption.PLAYER1) + " " + gridOfSize.getPlayerPoints(GridOption.PLAYER2));
         assertEquals(squareGrid.getRemainingMoves(), (Integer) (squareGrid.getTotalMoves() - 4));
         assertNotEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
         // verifies if the player has received a bonus move
         assertEquals(player, gridOfSize.getCopyOfCurrentPlayerTurn());
+        System.out.println(gridOfSize.getPlayerPoints(GridOption.PLAYER1) + " " + gridOfSize.getPlayerPoints(GridOption.PLAYER2));
         gridOfSize.undoLastMove();
+        System.out.println(gridOfSize.getPlayerPoints(GridOption.PLAYER1) + " " + gridOfSize.getPlayerPoints(GridOption.PLAYER2));
         assertEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
         assertEquals(player, gridOfSize.getCopyOfCurrentPlayerTurn());
         assertEquals(gridOfSize.getCopyOfLastMove().getLastListType(), ListType.HORIZONTAL);
@@ -83,8 +98,12 @@ public class TestSquareGrid {
         // fills the grid with all the possible moves
         for (int i = 0; i < STANDARD_SIZE + 1; i++) {
             for (int z = 0; z < STANDARD_SIZE; z++) {
-                gridOfSize2.setLine(ListType.HORIZONTAL, i, z);
-                gridOfSize2.setLine(ListType.VERTICAL, i, z);
+                move.setLastListType(ListType.HORIZONTAL);
+                move.setLastListIndex(i);
+                move.setLastPosition(z);
+                gridOfSize2.setLine(move);
+                move.setLastListType(ListType.VERTICAL);
+                gridOfSize2.setLine(move);
             }
         }
 
@@ -178,5 +197,4 @@ public class TestSquareGrid {
             fail(ERROR);
         }
     }
-
 }
