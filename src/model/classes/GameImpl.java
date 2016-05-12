@@ -95,10 +95,14 @@ public class GameImpl implements Game {
 
     @Override
     public GridOption getCopyOfCurrentPlayerTurn() {
-        final GridOption copyOfTurn = this.turn;
-        //CHECKSTYLE:OFF:
-        return copyOfTurn;
-      //CHECKSTYLE:ON:
+        if (isStarted()) {
+            final GridOption copyOfTurn = this.turn;
+            // CHECKSTYLE:OFF:
+            return copyOfTurn;
+            // CHECKSTYLE:ON:
+        } else {
+            throw new IllegalStateException();
+        }
     }
 
     @Override
@@ -133,7 +137,7 @@ public class GameImpl implements Game {
         final ListType list = move.getListType();
         final Integer listIndex = move.getListIndex();
         final Integer position = move.getPosition();
-        
+
         switch (list) {
         case HORIZONTAL:
             points = grid.setHorizontalLine(listIndex, position, this.turn);
@@ -191,11 +195,12 @@ public class GameImpl implements Game {
             throw new IllegalStateException("you can't undo if you haven't made a move");
         }
         Integer points = 0;
-        System.out.println(getCopyOfLastMove().getListType() + " " + getCopyOfLastMove().getListIndex() + " " + getCopyOfLastMove().getPosition());
+        System.out.println(getCopyOfLastMove().getListType() + " " + getCopyOfLastMove().getListIndex() + " "
+                + getCopyOfLastMove().getPosition());
         switch (getCopyOfLastMove().getListType()) {
         case HORIZONTAL:
-            points = grid.setHorizontalLine(getCopyOfLastMove().getListIndex(),
-                    getCopyOfLastMove().getPosition(), GridOption.EMPTY);
+            points = grid.setHorizontalLine(getCopyOfLastMove().getListIndex(), getCopyOfLastMove().getPosition(),
+                    GridOption.EMPTY);
             addPoints(-points);
             break;
         case VERTICAL:
@@ -218,6 +223,10 @@ public class GameImpl implements Game {
 
     @Override
     public Move getCopyOfLastMove() {
-        return lastMoveList.get(lastMoveList.size() - 1);
+        if (lastMoveList.size() > 0) {
+            return lastMoveList.get(lastMoveList.size() - 1);
+        } else {
+            throw new IllegalStateException();
+        }
     }
 }
