@@ -4,6 +4,7 @@ import controller.enumerations.TypeGame;
 import controller.interfaces.Match;
 import model.classes.SquareGridImpl;
 import model.classes.GameImpl;
+import model.classes.MoveImpl;
 import model.classes.PlayedTimeImpl;
 import model.classes.TriangleGridImpl;
 import model.enumerations.GridOption;
@@ -26,6 +27,7 @@ public class MatchImpl implements Match {
     private Game match;
     private PlayedTime time;
     private int playerScore;
+    private Move addMove;
 
     public MatchImpl(int columsNumber, int rowsNumber, String namePlayer1, String namePlayer2, TypeGame mode) {
         controlNamePlayers(namePlayer1, namePlayer2);
@@ -34,6 +36,7 @@ public class MatchImpl implements Match {
         this.namePlayer1 = namePlayer1;
         this.namePlayer2 = namePlayer2;
         this.mode = mode;
+        this.addMove = new MoveImpl();
     }
 
     @Override
@@ -80,7 +83,10 @@ public class MatchImpl implements Match {
 
     @Override
     public String addLine(ListType direction, int numLine, int position) {
-        this.match.setLine(direction, numLine, position);
+        this.addMove.setListType(direction);
+        this.addMove.setListIndex(numLine);
+        this.addMove.setPosition(position);
+        this.match.setLine(addMove);
         if (this.match.isEnded()) {
             this.time.calculateMatchDuration(match);
             this.numPlayer = this.match.getWinner();
