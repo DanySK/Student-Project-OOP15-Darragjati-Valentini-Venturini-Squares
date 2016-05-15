@@ -28,7 +28,7 @@ public class TestTriangleGrid {
     private static final Integer STANDARD_SIZE = 6;
     private static final Integer HORIZONTAL_SIZE = 5;
     private static final Integer VERTICAL_SIZE = 4;
-    private final Move move = new MoveImpl();
+    private Move move;
     
     /**
      * Tests the methods of TriangleGridImpl and TurnImpl.
@@ -63,9 +63,7 @@ public class TestTriangleGrid {
         assertFalse(gridOfSize.isStarted());
         gridOfSize.startMatch();
         assertTrue(gridOfSize.isStarted());
-        move.setListType(ListType.VERTICAL);
-        move.setListIndex(0);
-        move.setPosition(0);
+        move = new MoveImpl(ListType.VERTICAL, 0, 0);
         gridOfSize.setLine(move);
         assertEquals(triangleGrid.getRemainingMoves(), (Integer) (triangleGrid.getTotalMoves() - 1));
         assertEquals(gridOfSize.getCopyOfLastMove().getListType(), ListType.VERTICAL);
