@@ -138,7 +138,7 @@ public class TestSquareGrid {
         try {
             exceptionGrid = new SquareGridImpl(STANDARD_SIZE + STANDARD_SIZE, STANDARD_SIZE + STANDARD_SIZE);
             fail("Can't create a grid too big");
-        } catch (IllegalArgumentException e) { //GridSizeException
+        } catch (GridSizeException e) {
         } catch (Exception e) {
             fail(ERROR);
         }

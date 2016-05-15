@@ -151,6 +151,7 @@ public class GameImpl implements Game {
         case DIAGONAL:
             if (grid.getClass().equals(TriangleGridImpl.class)) {
                 points = ((TriangleGrid) grid).setDiagonalLine(listIndex, position, this.turn);
+                addPoints(points);
                 break;
             } else {
                 throw new UnsupportedOperationException();
@@ -187,7 +188,7 @@ public class GameImpl implements Game {
     }
 
     @Override
-    public void undoLastMove() throws NoMovesDoneException  {
+    public void undoLastMove() throws NoMovesDoneException {
 
         if (lastMoveList.isEmpty()) {
             throw new NoMovesDoneException();
