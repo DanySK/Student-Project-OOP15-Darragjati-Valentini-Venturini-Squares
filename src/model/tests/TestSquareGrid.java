@@ -28,7 +28,7 @@ public class TestSquareGrid {
     private static final Integer HORIZONTAL_SIZE = 5;
     private static final Integer VERTICAL_SIZE = 4;
     private static final String ERROR = "Wrong exception thrown";
-    private final Move move = new MoveImpl();
+    private Move move;
 
     /**
      * Tests the methods of BaseGridImpl and TurnImpl.
@@ -58,9 +58,7 @@ public class TestSquareGrid {
         assertFalse(gridOfSize.isStarted());
         gridOfSize.startMatch();
         assertTrue(gridOfSize.isStarted());
-        move.setListType(ListType.VERTICAL);
-        move.setListIndex(0);
-        move.setPosition(0);
+        move = new MoveImpl(ListType.VERTICAL, 0, 0);
         gridOfSize.setLine(move);
         assertEquals(squareGrid.getRemainingMoves(), (Integer) (squareGrid.getTotalMoves() - 1));
         assertEquals(gridOfSize.getCopyOfLastMove().getListType(), ListType.VERTICAL);
@@ -160,9 +158,7 @@ public class TestSquareGrid {
             fail(ERROR);
         }
         try {
-            move.setListType(ListType.HORIZONTAL);
-            move.setListIndex(0);
-            move.setPosition(0);
+            move = new MoveImpl(ListType.HORIZONTAL, 0, 0);
             exceptionGame.setLine(move);
             fail("Can't insert a move when the match isn't started");
         } catch (IllegalStateException e) {

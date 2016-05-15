@@ -160,10 +160,7 @@ public class GameImpl implements Game {
             throw new IllegalArgumentException("the list selected does not exist");
         }
 
-        final Move lastMove = new MoveImpl();
-        lastMove.setListType(list);
-        lastMove.setListIndex(listIndex);
-        lastMove.setPosition(position);
+        final Move lastMove = new MoveImpl(list, listIndex, position);
         lastMoveList.add(lastMove);
     }
 

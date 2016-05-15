@@ -27,25 +27,13 @@ public class TestRankingImpl {
 
     private List<Player> createPlayers() {
         // CHECKSTYLE:OFF:
-        final PlayerImpl player1 = new PlayerImpl();
-        player1.setPlayerName(PLAYER1);
-        player1.setTotalMatches(10);
-        player1.setWonMatches(1);
-        player1.setTotalPointsScored(51);
+        final PlayerImpl player1 = new PlayerImpl(PLAYER1, 1, 10, 51);
         assertEquals(player1.getWinRate(), 10.0, 0);
 
-        final PlayerImpl player2 = new PlayerImpl();
-        player2.setPlayerName(PLAYER2);
-        player2.setTotalMatches(10);
-        player2.setWonMatches(8);
-        player2.setTotalPointsScored(456);
+        final PlayerImpl player2 = new PlayerImpl(PLAYER2, 8, 10, 456);
         assertTrue(player2.getWinRate() > player1.getWinRate());
 
-        final PlayerImpl player3 = new PlayerImpl();
-        player3.setPlayerName(PLAYER3);
-        player3.setTotalMatches(5);
-        player3.setWonMatches(4);
-        player3.setTotalPointsScored(223);
+        final PlayerImpl player3 = new PlayerImpl(PLAYER3, 4, 5, 223);
         assertEquals(player3.getWinRate(), player2.getWinRate(), 0);
         // CHECKSTYLE:ON:
         final List<Player> playerList = new ArrayList<>();
@@ -119,7 +107,7 @@ public class TestRankingImpl {
     //CHECKSTYLE:OFF:
     public void testExceptions() {
         final List<Player> playerList = createPlayers();
-        final Player testPlayer = new PlayerImpl();
+        final Player testPlayer = new PlayerImpl(PLAYER1, 0, 0,0);
         RankingImpl testListException = new RankingImpl(playerList);
         try {
             testPlayer.setPlayerName(PLAYER4);
@@ -148,7 +136,6 @@ public class TestRankingImpl {
             testPlayer.setPlayerName(PLAYER4);
             testPlayer.setTotalMatches(4);
             testPlayer.setWonMatches(5);
-            testPlayer.getTotalWins();
             fail("The won matches cant be more than the total matches");
         } catch (IllegalArgumentException e) {
         } catch (Exception e) {
