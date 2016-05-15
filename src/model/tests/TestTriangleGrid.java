@@ -1,4 +1,4 @@
-package model.classes;
+package model.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -7,6 +7,9 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import model.classes.GameImpl;
+import model.classes.MoveImpl;
+import model.classes.TriangleGridImpl;
 import model.enumerations.GridOption;
 import model.enumerations.ListType;
 import model.exceptions.GridSizeException;

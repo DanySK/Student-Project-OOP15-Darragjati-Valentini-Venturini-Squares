@@ -1,4 +1,4 @@
-package model.classes;
+package model.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -6,6 +6,9 @@ import static org.junit.Assert.fail;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
+
+import model.classes.PlayerImpl;
+import model.classes.RankingImpl;
 import model.enumerations.RankingOption;
 import model.interfaces.Player;
 
