@@ -14,13 +14,22 @@ public class PlayerImpl implements Player {
     private Integer totalMatches;
     private Integer totalPointsScored;
 
+    /**
+     * This consctructor sets the fields of the class PlayerImpl.
+     * @param playerName the name of the player
+     * @param wonMatches his won mathces
+     * @param totalMatches his total matches
+     * @param totalPointsScored his total points scored
+     */
     // CHECKSTYLE:OFF:
-    public PlayerImpl() {
+    public PlayerImpl(final String playerName, final Integer wonMatches, final Integer totalMatches, final Integer totalPointsScored) {
         // CHECKSTYLE:ON:
-        this.winRate = 0.0;
-        this.wonMatches = 0;
-        this.totalMatches = 0;
-        this.totalPointsScored = 0;
+        this.playerName = playerName;
+        this.wonMatches = wonMatches;
+        this.totalMatches = totalMatches;
+        checkCorrectInputs();
+        calculateWinRate();
+        this.totalPointsScored = totalPointsScored;
     }
 
     @Override

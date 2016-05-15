@@ -9,53 +9,58 @@ import model.interfaces.Move;
  */
 public class MoveImpl implements Move {
 
-    private ListType lastListType;
-    private Integer lastListIndex;
-    private Integer lastPosition;
+    private ListType listType;
+    private Integer listIndex;
+    private Integer position;
 
     /**
      * This constructor sets the fields of the object.
+     * @param listType the type of the list where a player wants to set a move
+     * @param listIndex the number of the list where a player wants to set a move
+     * @param position the position where a player wants to set a move 
      */
-    public MoveImpl() {
-        this.lastListType = null;
-        this.lastListIndex = -1;
-        this.lastPosition = -1;
+    //CHECKSTYLE:OFF:
+    public MoveImpl(final ListType listType, final Integer listIndex, final Integer position) {
+      //CHECKSTYLE:ON:
+        this.listType = listType;
+        this.listIndex = listIndex;
+        this.position = position;
     }
 
     @Override
     public ListType getListType() {
-        return lastListType;
+        return listType;
     }
 
     @Override
     // CHECKSTYLE:OFF:
     public void setListType(final ListType lastListType) {
         // CHECKSTYLE:ON:
-        this.lastListType = lastListType;
+        this.listType = lastListType;
     }
 
     @Override
     public Integer getListIndex() {
-        return lastListIndex;
+        return listIndex;
     }
 
     @Override
     // CHECKSTYLE:OFF:
     public void setListIndex(final Integer lastListIndex) {
         // CHECKSTYLE:ON:
-        this.lastListIndex = lastListIndex;
+        this.listIndex = lastListIndex;
     }
 
     @Override
     public Integer getPosition() {
-        return lastPosition;
+        return position;
     }
 
     @Override
     // CHECKSTYLE:OFF:
     public void setPosition(final Integer lastPosition) {
         // CHECKSTYLE:ON:
-        this.lastPosition = lastPosition;
+        this.position = lastPosition;
     }
 
 }
