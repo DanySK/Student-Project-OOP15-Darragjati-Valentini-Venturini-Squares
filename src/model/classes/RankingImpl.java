@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import model.enumerations.RankingOption;
+import model.exceptions.DuplicatedPlayerStatsException;
 import model.interfaces.Player;
 import model.interfaces.Ranking;
 
@@ -24,10 +25,10 @@ public class RankingImpl implements Ranking {
      * upate them if it is necessary.
      * 
      * @param playerList the old list of the players' ranking
-     * @throws an IllegalArgumentException if the playerList contains two or more players with the same name
+     * @throws DuplicatedPlayerStatsException if the playerList contains two or more players with the same name
      */
     // CHECKSTYLE:OFF:
-    public RankingImpl(final List<Player> playerList) {
+    public RankingImpl(final List<Player> playerList) throws DuplicatedPlayerStatsException {
         // CHECKSTYLE:ON:
         final List<String> playerNameList = new ArrayList<>();
         final Set<String> playerNameSet = new HashSet<>();
@@ -36,7 +37,7 @@ public class RankingImpl implements Ranking {
             playerNameSet.add(player.getPlayerName());
         }
         if (playerNameList.size() > playerNameSet.size()) {
-            throw new IllegalArgumentException();
+            throw new DuplicatedPlayerStatsException();
         }
         this.playerList = playerList;
     }

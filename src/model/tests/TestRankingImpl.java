@@ -10,6 +10,7 @@ import org.junit.Test;
 import model.classes.PlayerImpl;
 import model.classes.RankingImpl;
 import model.enumerations.RankingOption;
+import model.exceptions.DuplicatedPlayerStatsException;
 import model.interfaces.Player;
 
 /**
@@ -45,9 +46,10 @@ public class TestRankingImpl {
 
     /**
      * Base option test.
+     * @throws DuplicatedPlayerStatsException 
      */
     @Test
-    public void test() {
+    public void test() throws DuplicatedPlayerStatsException {
         final List<Player> playerList = createPlayers();
         assertEquals(playerList.size(), 3);
 
@@ -102,10 +104,11 @@ public class TestRankingImpl {
 
     /**
      * Exceptions Test.
+     * @throws DuplicatedPlayerStatsException 
      */
     @Test
     //CHECKSTYLE:OFF:
-    public void testExceptions() {
+    public void testExceptions() throws DuplicatedPlayerStatsException {
         final List<Player> playerList = createPlayers();
         final Player testPlayer = new PlayerImpl(PLAYER1, 0, 0,0);
         RankingImpl testListException = new RankingImpl(playerList);
@@ -128,7 +131,7 @@ public class TestRankingImpl {
             playerList.add(testPlayer);
             testListException = new RankingImpl(playerList);
             fail("The list can't contain two players with the same name");
-        } catch (IllegalArgumentException e) {
+        } catch (DuplicatedPlayerStatsException e) {
         } catch (Exception e) {
             fail("Wrong exception thrown");
         }
