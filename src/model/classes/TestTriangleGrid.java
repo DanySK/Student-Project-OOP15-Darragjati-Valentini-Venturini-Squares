@@ -9,6 +9,8 @@ import org.junit.Test;
 
 import model.enumerations.GridOption;
 import model.enumerations.ListType;
+import model.exceptions.GridSizeException;
+import model.exceptions.NoMovesDoneException;
 import model.interfaces.SquareGrid;
 import model.interfaces.TriangleGrid;
 import model.interfaces.Game;
@@ -27,9 +29,11 @@ public class TestTriangleGrid {
     
     /**
      * Tests the methods of TriangleGridImpl and TurnImpl.
+     * @throws NoMovesDoneException 
+     * @throws GridSizeException 
      */
     @Test
-    public void test() {
+    public void test() throws NoMovesDoneException, GridSizeException {
 
         final TriangleGrid triangleGrid = new TriangleGridImpl(HORIZONTAL_SIZE, VERTICAL_SIZE);
         final Game gridOfSize = new GameImpl(triangleGrid);

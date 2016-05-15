@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import model.enumerations.GridOption;
 import model.enumerations.ListType;
+import model.exceptions.GridSizeException;
 import model.exceptions.NoMovesDoneException;
 import model.interfaces.SquareGrid;
 import model.interfaces.Game;
@@ -29,9 +30,10 @@ public class TestSquareGrid {
     /**
      * Tests the methods of BaseGridImpl and TurnImpl.
      * @throws NoMovesDoneException
+     * @throws GridSizeException 
      */
     @Test
-    public void test() throws NoMovesDoneException {
+    public void test() throws NoMovesDoneException, GridSizeException {
 
         final SquareGrid squareGrid = new SquareGridImpl(HORIZONTAL_SIZE, VERTICAL_SIZE);
         final Game gridOfSize = new GameImpl(squareGrid);
@@ -114,10 +116,11 @@ public class TestSquareGrid {
     /**
      * Test if the methods of BaseGridImpl and TurnImpl throws the correct
      * exceptions.
+     * @throws GridSizeException 
      */
     @Test
     // CHECKSTYLE:OFF:
-    public void testExceptions() {
+    public void testExceptions() throws GridSizeException {
 
         SquareGrid exceptionGrid;
         Game exceptionGame;
@@ -125,14 +128,14 @@ public class TestSquareGrid {
         try {
             exceptionGrid = new SquareGridImpl(STANDARD_SIZE - 4, STANDARD_SIZE - 4);
             fail("Can't create a grid too small");
-        } catch (IllegalArgumentException e) {
+        } catch (GridSizeException e) {
         } catch (Exception e) {
             fail(ERROR);
         }
         try {
             exceptionGrid = new SquareGridImpl(STANDARD_SIZE + STANDARD_SIZE, STANDARD_SIZE + STANDARD_SIZE);
             fail("Can't create a grid too big");
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) { //GridSizeException
         } catch (Exception e) {
             fail(ERROR);
         }
@@ -189,14 +192,14 @@ public class TestSquareGrid {
         try {
             exceptionGame.undoLastMove();
             fail("You can't undo a move if noone of the two players have set one");
-        } catch (NoMovesDoneException e) {     //noMovesDoneException
+        } catch (NoMovesDoneException e) {
         } catch (Exception e) {
             fail(ERROR);
         }
         try {
             exceptionGame.getCopyOfLastMove();
             fail("You can't get the last move if noone of the two players have set one");
-        } catch (NoMovesDoneException e) {     //noMovesDoneException
+        } catch (NoMovesDoneException e) {
         } catch (Exception e) {
             fail(ERROR);
         }

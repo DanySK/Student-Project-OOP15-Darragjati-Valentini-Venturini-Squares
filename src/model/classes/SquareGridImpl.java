@@ -5,6 +5,7 @@ import java.util.List;
 
 import model.enumerations.GridOption;
 import model.enumerations.ListType;
+import model.exceptions.GridSizeException;
 import model.interfaces.SquareGrid;
 
 /**
@@ -24,11 +25,12 @@ public class SquareGridImpl implements SquareGrid {
      * 
      * @param rowsNumber the number of rows of the grid
      * @param columnsNumber the number of columns of the grid
+     * @throws GridSizeException if the rowsNumber or the coulumnsNumber aren't correct
      */
-    public SquareGridImpl(final Integer rowsNumber, final Integer columnsNumber) {
+    public SquareGridImpl(final Integer rowsNumber, final Integer columnsNumber) throws GridSizeException {
         if (rowsNumber < MINIMUM_SIZE || rowsNumber > MAXIMUM_SIZE || columnsNumber < MINIMUM_SIZE
                 || columnsNumber > MAXIMUM_SIZE) {
-            throw new IllegalArgumentException();
+            throw new GridSizeException();
         }
         for (int i = 0; i < rowsNumber + 1; i++) {
             horizontal.add(createEmptyList(rowsNumber));

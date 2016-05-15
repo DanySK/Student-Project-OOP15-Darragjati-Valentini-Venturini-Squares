@@ -7,13 +7,5 @@ package model.exceptions;
 public class NoMovesDoneException extends Exception {
 
     private static final long serialVersionUID = -3106890178914633902L;
-
-    private String message = "Error no moves done yet";
-
-    /**
-     * 
-     */
-    public NoMovesDoneException() {
-        super();
-    }
+    
 }
