@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import model.enumerations.GridOption;
 import model.enumerations.ListType;
+import model.exceptions.NoMovesDoneException;
 import model.interfaces.SquareGrid;
 import model.interfaces.Game;
 import model.interfaces.Move;
@@ -27,9 +28,10 @@ public class TestSquareGrid {
 
     /**
      * Tests the methods of BaseGridImpl and TurnImpl.
+     * @throws NoMovesDoneException
      */
     @Test
-    public void test() {
+    public void test() throws NoMovesDoneException {
 
         final SquareGrid squareGrid = new SquareGridImpl(HORIZONTAL_SIZE, VERTICAL_SIZE);
         final Game gridOfSize = new GameImpl(squareGrid);
@@ -165,7 +167,7 @@ public class TestSquareGrid {
         try {
             move.setListType(ListType.HORIZONTAL);
             move.setListIndex(-1);
-            move.setPosition(-1);
+            move.setPosition(5);
             exceptionGame.setLine(move);
             fail("Can't insert those parameters");
         } catch (IllegalArgumentException e) {
@@ -187,14 +189,14 @@ public class TestSquareGrid {
         try {
             exceptionGame.undoLastMove();
             fail("You can't undo a move if noone of the two players have set one");
-        } catch (IllegalStateException e) {
+        } catch (NoMovesDoneException e) {     //noMovesDoneException
         } catch (Exception e) {
             fail(ERROR);
         }
         try {
             exceptionGame.getCopyOfLastMove();
             fail("You can't get the last move if noone of the two players have set one");
-        } catch (IllegalStateException e) {
+        } catch (NoMovesDoneException e) {     //noMovesDoneException
         } catch (Exception e) {
             fail(ERROR);
         }

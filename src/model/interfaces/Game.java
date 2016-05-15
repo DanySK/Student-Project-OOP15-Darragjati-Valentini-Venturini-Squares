@@ -1,6 +1,7 @@
 package model.interfaces;
 
 import model.enumerations.GridOption;
+import model.exceptions.NoMovesDoneException;
 
 /**
  * This interface is used to manage the rotation between the players' turn.
@@ -58,15 +59,14 @@ public interface Game {
 
     /**
      * Undo the last player move.
-     * 
-     * @throws an IllegalStateException if no moves are done
+     * @throws NoMovesDoneException if no moves have been done yet
      * @throws an IllegalArgumentException if the the listof the last move does not exist
      */
-    void undoLastMove();
+    void undoLastMove() throws NoMovesDoneException;
 
     /**
      * @return the copy of the last move.
-     * @throws an IllegalStateException() if noone has made a move
+     * @throws NoMovesDoneException if noone has made a move yet
      */
-    Move getCopyOfLastMove();
+    Move getCopyOfLastMove() throws NoMovesDoneException;
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 import model.enumerations.GridOption;
 import model.enumerations.ListType;
+import model.exceptions.NoMovesDoneException;
 import model.interfaces.SquareGrid;
 import model.interfaces.Move;
 import model.interfaces.TriangleGrid;
@@ -186,10 +187,10 @@ public class GameImpl implements Game {
     }
 
     @Override
-    public void undoLastMove() {
+    public void undoLastMove() throws NoMovesDoneException  {
 
         if (lastMoveList.isEmpty()) {
-            throw new IllegalStateException("you can't undo if you haven't made a move");
+            throw new NoMovesDoneException();
         }
         Integer points = 0;
         switch (getCopyOfLastMove().getListType()) {
@@ -215,11 +216,11 @@ public class GameImpl implements Game {
     }
 
     @Override
-    public Move getCopyOfLastMove() {
+    public Move getCopyOfLastMove() throws NoMovesDoneException {
         if (lastMoveList.size() > 0) {
             return lastMoveList.get(lastMoveList.size() - 1);
         } else {
-            throw new IllegalStateException();
+            throw new NoMovesDoneException();
         }
     }
 }
