@@ -28,7 +28,7 @@ public class ShowRankingImpl implements ShowRanking {
     private void createRanking() throws IOException, DuplicatedPlayerStatsException {
 
         List<Player> currentRanking = new ArrayList<>();
-        InputStream readFile = Menu.class.getResourceAsStream("Ranking.txt");
+        InputStream readFile = ShowRanking.class.getResourceAsStream("Ranking.txt");
         try (BufferedReader br = new BufferedReader(new InputStreamReader(readFile))) {
             String s = null;
             String playerName;
@@ -57,7 +57,7 @@ public class ShowRankingImpl implements ShowRanking {
     }
 
     private void readRanking() throws IOException {
-        InputStream readFile = Menu.class.getResourceAsStream("Ranking.txt");
+        InputStream readFile = ShowRanking.class.getResourceAsStream("Ranking.txt");
 
         try (BufferedReader br = new BufferedReader(new InputStreamReader(readFile))) {
             String s;
