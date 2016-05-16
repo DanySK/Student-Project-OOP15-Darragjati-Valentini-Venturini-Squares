@@ -9,6 +9,7 @@ import java.util.List;
 
 import model.classes.RankingImpl;
 import model.enumerations.RankingOption;
+import model.exceptions.DuplicatedPlayerStatsException;
 import model.interfaces.Player;
 
 public class Menu {
@@ -41,32 +42,7 @@ public class Menu {
         return this.linesRead;
     }
 
-    public String showRanking(RankingOption rankingOrder, boolean reverse) throws IOException {
-        List<Player> currentRanking = new ArrayList<>();
-        InputStream readFile = Menu.class.getResourceAsStream("Ranking.txt");
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(readFile))) {
-            String s;
-            while ((s = br.readLine()) != null) {
-                 currentRanking.add(null);
-                 try (BufferedReader br2 = new BufferedReader(new InputStreamReader(readFile))){
-                     String r;
-                     while (true){
-                        
-                         
-                     }
-                 } catch(IOException ex) {
-                     throw new IOException();
-                 }
-                 
-            }
-        } catch (IOException ex) {
-            throw new IOException();
-        }
-        
-        RankingImpl ranking = new RankingImpl(currentRanking);
-
-        return null;
-    }
+    
 
     public void setting() {
         
