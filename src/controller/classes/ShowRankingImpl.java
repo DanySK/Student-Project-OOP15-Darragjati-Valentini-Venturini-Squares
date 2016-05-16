@@ -1,6 +1,7 @@
 package controller.classes;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -28,8 +29,8 @@ public class ShowRankingImpl implements ShowRanking {
     private void createRanking() throws IOException, DuplicatedPlayerStatsException {
 
         List<Player> currentRanking = new ArrayList<>();
-        InputStream readFile = ShowRanking.class.getResourceAsStream("Ranking.txt");
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(readFile))) {
+        InputStream readFile = ShowRankingImpl.class.getResourceAsStream("Ranking.txt");
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(readFile, "UTF8"))) {
             String s = null;
             String playerName;
             String strWonMatches;
@@ -59,18 +60,19 @@ public class ShowRankingImpl implements ShowRanking {
     private void readRanking() throws IOException {
         InputStream readFile = ShowRanking.class.getResourceAsStream("Ranking.txt");
 
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(readFile))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(readFile, "UTF8"))) {
             String s;
             while ((s = br.readLine()) != null) {
                 this.ranking = this.ranking.concat(s);
-               
+
             }
         } catch (IOException ex) {
             throw new IOException();
         }
         readFile.close();
-       
 
     }
+    
+    
 
 }
