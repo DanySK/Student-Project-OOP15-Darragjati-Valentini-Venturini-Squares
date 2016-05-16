@@ -9,6 +9,8 @@ import model.classes.PlayedTimeImpl;
 import model.classes.TriangleGridImpl;
 import model.enumerations.GridOption;
 import model.enumerations.ListType;
+import model.exceptions.GridSizeException;
+import model.exceptions.NoMovesDoneException;
 import model.interfaces.SquareGrid;
 import model.interfaces.Move;
 import model.interfaces.PlayedTime;
@@ -16,8 +18,8 @@ import model.interfaces.Game;
 
 public class MatchImpl implements Match {
 
-    private final int columnsNumber;
-    private final int rowsNumber;
+    private final Integer columnsNumber;
+    private final Integer rowsNumber;
     private final String namePlayer1;
     private final String namePlayer2;
     private final TypeGame mode;
@@ -35,12 +37,11 @@ public class MatchImpl implements Match {
         this.rowsNumber = rowsNumber;
         this.namePlayer1 = namePlayer1;
         this.namePlayer2 = namePlayer2;
-        this.mode = mode;
-        this.addMove = new MoveImpl();
+        this.mode = mode;        
     }
 
     @Override
-    public void createGrid() {
+    public void createGrid() throws GridSizeException {
 
         switch (this.mode) {
         case SQUARE:
@@ -83,9 +84,7 @@ public class MatchImpl implements Match {
 
     @Override
     public String addLine(ListType direction, int numLine, int position) {
-        this.addMove.setListType(direction);
-        this.addMove.setListIndex(numLine);
-        this.addMove.setPosition(position);
+        this.addMove = new MoveImpl(direction, numLine, position);        
         this.match.setLine(addMove);
         if (this.match.isEnded()) {
             this.time.calculateMatchDuration(match);
@@ -107,7 +106,7 @@ public class MatchImpl implements Match {
     }
 
     @Override
-    public Move undo() {
+    public Move undo() throws NoMovesDoneException {
         this.match.undoLastMove();
         return this.match.getCopyOfLastMove();
 
