@@ -185,7 +185,7 @@ public class GameImpl implements Game {
     }
 
     @Override
-    public void undoLastMove() throws NoMovesDoneException {
+    public void undoLastMove() {
 
         if (lastMoveList.isEmpty()) {
             throw new NoMovesDoneException();

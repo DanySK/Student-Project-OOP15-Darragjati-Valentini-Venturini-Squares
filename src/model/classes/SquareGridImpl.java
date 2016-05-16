@@ -186,12 +186,8 @@ public class SquareGridImpl implements SquareGrid {
     /**
      * This method checks after doing a vertical move if it has scored a point.
      * 
-     * @param listIndex
-     *            the number of the vertical list where the player wants to set
-     *            his line
-     * @param position
-     *            the index of the chosen list where the player wants to set the
-     *            line
+     * @param listIndex the number of the vertical list where the player wants to set his line
+     * @param position the index of the chosen list where the player wants to set the line
      * @return the number of points scored by making a move
      */
     protected Integer verticalPointScored(final int listIndex, final int position) {

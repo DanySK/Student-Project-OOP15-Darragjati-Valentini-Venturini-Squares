@@ -32,11 +32,9 @@ public class TestSquareGrid {
 
     /**
      * Tests the methods of BaseGridImpl and TurnImpl.
-     * @throws NoMovesDoneException
-     * @throws GridSizeException 
      */
     @Test
-    public void test() throws NoMovesDoneException, GridSizeException {
+    public void test() {
 
         final SquareGrid squareGrid = new SquareGridImpl(HORIZONTAL_SIZE, VERTICAL_SIZE);
         final Game gridOfSize = new GameImpl(squareGrid);
@@ -117,11 +115,10 @@ public class TestSquareGrid {
     /**
      * Test if the methods of BaseGridImpl and TurnImpl throws the correct
      * exceptions.
-     * @throws GridSizeException 
      */
     @Test
     // CHECKSTYLE:OFF:
-    public void testExceptions() throws GridSizeException {
+    public void testExceptions() {
 
         SquareGrid exceptionGrid;
         Game exceptionGame;
