@@ -87,11 +87,11 @@ public class GameImpl implements Game {
         }
         Integer diagonalMOves = 0;
         if (this.grid.getClass().equals(TriangleGridImpl.class)) {
-            diagonalMOves = (this.grid.getHorizontalListSize() - 1) * (this.grid.getVerticallListSize() - 1);
+            diagonalMOves = (this.grid.getHorizontalListSize() - 1) * (this.grid.getVerticalListSize() - 1);
         }
         return getPlayerPoints(GridOption.PLAYER1)
                 + getPlayerPoints(GridOption.PLAYER2) == (grid.getHorizontalListSize() - 1)
-                        * (grid.getVerticallListSize() - 1) + diagonalMOves ? true : false;
+                        * (grid.getVerticalListSize() - 1) + diagonalMOves ? true : false;
     }
 
     @Override

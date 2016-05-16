@@ -22,27 +22,31 @@ public interface SquareGrid {
     Integer getRemainingMoves();
 
     /**
-     * @param listIndex is the number of the horizontal list where the player wants to get the line
-     * @param position is the index of the chosen list where the player wants to get the line
+     * @param listIndex
+     *            is the number of the horizontal list where the player wants to
+     *            get the line
+     * @param position
+     *            is the index of the chosen list where the player wants to get
+     *            the line
      * @return which one of the two players has set the move
-     * @throws UnexistentLineListException if the listIndex input is not correct
+     * @throws UnexistentLineListException
+     *             if the listIndex input is not correct
      */
     GridOption getCopyOfHorizontalElement(Integer listIndex, Integer position) throws UnexistentLineListException;
 
-    
-   // Integer setHorizontalLine(int listIndex, int position, GridOption playerTurn) throws UnexistentLineListException;
-    
     /**
-     * @param listIndex is the number of the vertical list where the player wants to get the line
-     * @param position is the index of the chosen list where the player wants to get the line
+     * @param listIndex
+     *            is the number of the vertical list where the player wants to
+     *            get the line
+     * @param position
+     *            is the index of the chosen list where the player wants to get
+     *            the line
      * @return which one of the two players has set the move
-     * @throws UnexistentLineListException if the listIndex input is not correct
+     * @throws UnexistentLineListException
+     *             if the listIndex input is not correct
      */
     GridOption getCopyOfVerticalElement(Integer listIndex, Integer position) throws UnexistentLineListException;
 
-    
-    //Integer setVerticalLine(final int listIndex, int position, GridOption playerTurn) throws UnexistentLineListException;
-    
     /**
      * @return the number of horizontal lists that makes the grid.
      */
@@ -51,5 +55,5 @@ public interface SquareGrid {
     /**
      * @return the number of horizontal lists that makes the grid.
      */
-    Integer getVerticallListSize();
+    Integer getVerticalListSize();
 }

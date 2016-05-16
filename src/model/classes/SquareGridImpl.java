@@ -10,8 +10,10 @@ import model.exceptions.UnexistentLineListException;
 import model.interfaces.SquareGrid;
 
 /**
- * This class implements the methods of the interface BaseGrid. It is used to
- * create the game's playable field.
+ * This class implements the methods of the interface SquereGrid. It is used to
+ * create the game's playable field. The class also provides the methods to get
+ * the main informations about it like which one of the two players has set a
+ * move or how much wide is the playeable field.
  */
 public class SquareGridImpl implements SquareGrid {
 
@@ -24,9 +26,12 @@ public class SquareGridImpl implements SquareGrid {
     /**
      * This constructor creates a new playable grid.
      * 
-     * @param rowsNumber the number of rows of the grid
-     * @param columnsNumber the number of columns of the grid
-     * @throws UnsupportedSizeException if the rowsNumber or the coulumnsNumber aren't correct
+     * @param rowsNumber
+     *            the number of rows of the grid
+     * @param columnsNumber
+     *            the number of columns of the grid
+     * @throws UnsupportedSizeException
+     *             if the rowsNumber or the coulumnsNumber aren't correct
      */
     public SquareGridImpl(final Integer rowsNumber, final Integer columnsNumber) throws UnsupportedSizeException {
         if (rowsNumber < MINIMUM_SIZE || rowsNumber > MAXIMUM_SIZE || columnsNumber < MINIMUM_SIZE
@@ -44,7 +49,8 @@ public class SquareGridImpl implements SquareGrid {
     /**
      * This method creates a list of empty moves.
      * 
-     * @param size the list's size
+     * @param size
+     *            the list's size
      * @return the created list
      */
     protected List<GridOption> createEmptyList(final Integer size) {
@@ -80,7 +86,8 @@ public class SquareGridImpl implements SquareGrid {
         return movesLeft;
     }
 
-    private void checkCorrectHorizontalInput(final Integer listIndex, final Integer position) throws UnexistentLineListException {
+    private void checkCorrectHorizontalInput(final Integer listIndex, final Integer position)
+            throws UnexistentLineListException {
         if (listIndex < 0 || listIndex > horizontal.size()) {
             throw new UnexistentLineListException();
         }
@@ -90,7 +97,8 @@ public class SquareGridImpl implements SquareGrid {
     }
 
     @Override
-    public GridOption getCopyOfHorizontalElement(final Integer listIndex, final Integer position) throws UnexistentLineListException {
+    public GridOption getCopyOfHorizontalElement(final Integer listIndex, final Integer position)
+            throws UnexistentLineListException {
         checkCorrectHorizontalInput(listIndex, position);
         final GridOption copyOfHorizontalElement = horizontal.get(listIndex).get(position);
         // CHECKSTYLE:OFF:
@@ -100,14 +108,23 @@ public class SquareGridImpl implements SquareGrid {
 
     /**
      * This method makes a player make a horizontal move.
-     * @param listIndex is the number of the horizontal list where the player wants to set his line
-     * @param position is the index of the chosen list where the player wants to set the line
-     * @param playerTurn which one of the two players is making the move
-     * @return the number of points scored by making a move 
-     * @throws UnexistentLineListException if the listIndex input is not correct
-     * @throws an IllegalStateEception if the move has been already made
+     * 
+     * @param listIndex
+     *            is the number of the horizontal list where the player wants to
+     *            set his line
+     * @param position
+     *            is the index of the chosen list where the player wants to set
+     *            the line
+     * @param playerTurn
+     *            which one of the two players is making the move
+     * @return the number of points scored by making a move
+     * @throws UnexistentLineListException
+     *             if the listIndex input is not correct
+     * @throws IllegalStateEception
+     *             if the move has been already made
      */
-    protected Integer setHorizontalLine(final int listIndex, final int position, final GridOption playerTurn) throws UnexistentLineListException {
+    protected Integer setHorizontalLine(final int listIndex, final int position, final GridOption playerTurn)
+            throws UnexistentLineListException {
         checkCorrectHorizontalInput(listIndex, position);
         Integer points = 0;
         if (playerTurn.equals(GridOption.EMPTY)) {
@@ -132,12 +149,18 @@ public class SquareGridImpl implements SquareGrid {
      * This method checks after doing a horizontal move if it has scored a
      * point.
      * 
-     * @param listIndex the number of the horizontal list where the player wants to set his line
-     * @param position the index of the chosen list where the player wants to set the line
+     * @param listIndex
+     *            the number of the horizontal list where the player wants to
+     *            set his line
+     * @param position
+     *            the index of the chosen list where the player wants to set the
+     *            line
      * @return the number of points scored by making a move
-     * @throws UnexistentLineListException 
+     * @throws UnexistentLineListException
+     *             if the listIndex input is not correct
      */
-    protected Integer horizontalPointScored(final int listIndex, final int position) throws UnexistentLineListException {
+    protected Integer horizontalPointScored(final int listIndex, final int position)
+            throws UnexistentLineListException {
         int points = 0;
         if (listIndex > 0 && !getCopyOfHorizontalElement(listIndex - 1, position).equals(GridOption.EMPTY)
                 && !getPreviousTransversalList(ListType.HORIZONTAL, listIndex, position).equals(GridOption.EMPTY)
@@ -153,7 +176,8 @@ public class SquareGridImpl implements SquareGrid {
         return points;
     }
 
-    private void checkCorrectVerticalInput(final Integer listIndex, final Integer position) throws UnexistentLineListException {
+    private void checkCorrectVerticalInput(final Integer listIndex, final Integer position)
+            throws UnexistentLineListException {
         if (listIndex < 0 || listIndex > vertical.size()) {
             throw new UnexistentLineListException();
         }
@@ -163,7 +187,8 @@ public class SquareGridImpl implements SquareGrid {
     }
 
     @Override
-    public GridOption getCopyOfVerticalElement(final Integer listIndex, final Integer position) throws UnexistentLineListException {
+    public GridOption getCopyOfVerticalElement(final Integer listIndex, final Integer position)
+            throws UnexistentLineListException {
         checkCorrectVerticalInput(listIndex, position);
         final GridOption copyOfVerticalElement = vertical.get(listIndex).get(position);
         // CHECKSTYLE:OFF:
@@ -173,14 +198,23 @@ public class SquareGridImpl implements SquareGrid {
 
     /**
      * This method makes a player make a vertical move.
-     * @param listIndex is the number of the vertical list where the player wants to set his line
-     * @param position is the index of the chosen list where the player wants to set the line
-     * @param playerTurn which one of the two players is making the move
+     * 
+     * @param listIndex
+     *            is the number of the vertical list where the player wants to
+     *            set a line
+     * @param position
+     *            is the index of the chosen list where the player wants to set
+     *            a line
+     * @param playerTurn
+     *            which one of the two players is making the move
      * @return the number of points scored by making a move
-     * @throws UnexistentLineListException if the listIndex input is not correct
-     * @throws an IllegalStateEception if the move has been already made
+     * @throws UnexistentLineListException
+     *             if the listIndex input is not correct
+     * @throws IllegalStateEception
+     *             if the move has been already made
      */
-    protected Integer setVerticalLine(final int listIndex, final int position, final GridOption playerTurn) throws UnexistentLineListException {
+    protected Integer setVerticalLine(final int listIndex, final int position, final GridOption playerTurn)
+            throws UnexistentLineListException {
         checkCorrectVerticalInput(listIndex, position);
         Integer points = 0;
         if (playerTurn.equals(GridOption.EMPTY)) {
@@ -204,10 +238,15 @@ public class SquareGridImpl implements SquareGrid {
     /**
      * This method checks after doing a vertical move if it has scored a point.
      * 
-     * @param listIndex the number of the vertical list where the player wants to set his line
-     * @param position the index of the chosen list where the player wants to set the line
+     * @param listIndex
+     *            the number of the vertical list where the player wants to set
+     *            a line
+     * @param position
+     *            the index of the chosen list where the player wants to set a
+     *            line
      * @return the number of points scored by making a move
-     * @throws UnexistentLineListException if the listIndex input is not correct
+     * @throws UnexistentLineListException
+     *             if the listIndex input is not correct
      */
     protected Integer verticalPointScored(final int listIndex, final int position) throws UnexistentLineListException {
         int points = 0;
@@ -225,7 +264,8 @@ public class SquareGridImpl implements SquareGrid {
         return points;
     }
 
-    private GridOption getPreviousParallelList(final ListType list, final int listIndex, final int position) throws UnexistentLineListException {
+    private GridOption getPreviousParallelList(final ListType list, final int listIndex, final int position)
+            throws UnexistentLineListException {
         if (listIndex > 0) {
             switch (list) {
             case HORIZONTAL:
@@ -240,7 +280,8 @@ public class SquareGridImpl implements SquareGrid {
         }
     }
 
-    private GridOption getNextParallelList(final ListType list, final int listIndex, final int position) throws UnexistentLineListException {
+    private GridOption getNextParallelList(final ListType list, final int listIndex, final int position)
+            throws UnexistentLineListException {
         switch (list) {
         case HORIZONTAL:
             if (listIndex < getHorizontalListSize()) {
@@ -249,7 +290,7 @@ public class SquareGridImpl implements SquareGrid {
                 throw new IllegalArgumentException();
             }
         case VERTICAL:
-            if (listIndex < getVerticallListSize()) {
+            if (listIndex < getVerticalListSize()) {
                 return getCopyOfVerticalElement(listIndex + 1, position);
             } else {
                 throw new IllegalArgumentException();
@@ -259,7 +300,8 @@ public class SquareGridImpl implements SquareGrid {
         }
     }
 
-    private GridOption getPreviousTransversalList(final ListType list, final int listIndex, final int position) throws UnexistentLineListException {
+    private GridOption getPreviousTransversalList(final ListType list, final int listIndex, final int position)
+            throws UnexistentLineListException {
         if (listIndex > 0) {
             switch (list) {
             case HORIZONTAL:
@@ -274,7 +316,8 @@ public class SquareGridImpl implements SquareGrid {
         }
     }
 
-    private GridOption getNextTransversalList(final ListType list, final int listIndex, final int position) throws UnexistentLineListException {
+    private GridOption getNextTransversalList(final ListType list, final int listIndex, final int position)
+            throws UnexistentLineListException {
         switch (list) {
         case HORIZONTAL:
             if (listIndex < getHorizontalListSize()) {
@@ -283,7 +326,7 @@ public class SquareGridImpl implements SquareGrid {
                 throw new IllegalArgumentException();
             }
         case VERTICAL:
-            if (listIndex < getVerticallListSize()) {
+            if (listIndex < getVerticalListSize()) {
                 return getCopyOfHorizontalElement(position + 1, listIndex - 1);
             } else {
                 throw new IllegalArgumentException();
@@ -299,7 +342,7 @@ public class SquareGridImpl implements SquareGrid {
     }
 
     @Override
-    public Integer getVerticallListSize() {
+    public Integer getVerticalListSize() {
         return vertical.size();
     }
 }

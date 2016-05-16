@@ -71,7 +71,7 @@ public class TriangleGridImpl extends SquareGridImpl implements TriangleGrid {
                 && !getCopyOfDiagonalElement(position, listIndex - 1).equals(GridOption.EMPTY)) {
             points++;
         }
-        if (listIndex < super.getVerticallListSize() - 1
+        if (listIndex < super.getVerticalListSize() - 1
                 && !super.getCopyOfHorizontalElement(position + 1, listIndex).equals(GridOption.EMPTY)
                 && !getCopyOfDiagonalElement(position, listIndex).equals(GridOption.EMPTY)) {
             points++;

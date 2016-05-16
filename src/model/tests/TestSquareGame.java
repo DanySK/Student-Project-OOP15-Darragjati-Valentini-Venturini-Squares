@@ -33,8 +33,9 @@ public class TestSquareGame {
 
     /**
      * Tests the methods of BaseGridImpl and TurnImpl.
-     * @throws UnsupportedSizeException 
-     * @throws UnexistentLineListException 
+     * 
+     * @throws UnsupportedSizeException
+     * @throws UnexistentLineListException
      */
     @Test
     public void test() throws UnsupportedSizeException, UnexistentLineListException {
@@ -118,7 +119,8 @@ public class TestSquareGame {
     /**
      * Test if the methods of BaseGridImpl and TurnImpl throws the correct
      * exceptions.
-     * @throws UnsupportedSizeException 
+     * 
+     * @throws UnsupportedSizeException
      */
     @Test
     // CHECKSTYLE:OFF:
