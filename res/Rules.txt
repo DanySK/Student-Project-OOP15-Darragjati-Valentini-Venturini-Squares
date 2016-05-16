@@ -1,0 +1,10 @@
+Game's rules
+
+Standard mode:
+At the start of the game, is asked to the players to set the dimensions of the playable field.
+After that, they can set one move per turn, between two point not already linked. 
+When one player sets the fourth side of a square, he earns a point and gains an extra move. 
+When there are no more moves left, the games ends with a winner.
+
+Triangle mode:
+If the players choose the triangle mode, they should make a triangle instead of a square to score a point.
