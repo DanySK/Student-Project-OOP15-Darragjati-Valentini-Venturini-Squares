@@ -19,9 +19,12 @@ public class TriangleGridImpl extends SquareGridImpl implements TriangleGrid {
     /**
      * This constructor creates a new playable grid.
      * 
-     * @param rowsNumber the number of rows of the grid
-     * @param columnsNumber the number of columns of the grid
-     * @throws UnsupportedSizeException if the rowsNumber or columnsNumber aren't correct
+     * @param rowsNumber
+     *            the number of rows of the grid
+     * @param columnsNumber
+     *            the number of columns of the grid
+     * @throws UnsupportedSizeException
+     *             if the rowsNumber or columnsNumber aren't correct
      */
     public TriangleGridImpl(final Integer rowsNumber, final Integer columnsNumber) throws UnsupportedSizeException {
         super(rowsNumber, columnsNumber);
@@ -50,7 +53,8 @@ public class TriangleGridImpl extends SquareGridImpl implements TriangleGrid {
     }
 
     @Override
-    protected Integer horizontalPointScored(final int listIndex, final int position) throws UnexistentLineListException {
+    protected Integer horizontalPointScored(final int listIndex, final int position)
+            throws UnexistentLineListException {
         int points = 0;
         if (listIndex > 0 && !super.getCopyOfVerticalElement(position, listIndex - 1).equals(GridOption.EMPTY)
                 && !getCopyOfDiagonalElement(listIndex - 1, position).equals(GridOption.EMPTY)) {
@@ -79,9 +83,10 @@ public class TriangleGridImpl extends SquareGridImpl implements TriangleGrid {
         return points;
     }
 
-    private void checkCorrectDiagonalInput(final Integer listIndex, final Integer position) {
+    private void checkCorrectDiagonalInput(final Integer listIndex, final Integer position)
+            throws UnexistentLineListException {
         if (listIndex < 0 || listIndex > diagonal.size()) {
-            throw new IllegalArgumentException();
+            throw new UnexistentLineListException();
         }
         if (position < 0 || position > diagonal.get(listIndex).size()) {
             throw new IndexOutOfBoundsException();
@@ -89,16 +94,32 @@ public class TriangleGridImpl extends SquareGridImpl implements TriangleGrid {
     }
 
     @Override
-    public GridOption getCopyOfDiagonalElement(final int listIndex, final int position) {
+    public GridOption getCopyOfDiagonalElement(final int listIndex, final int position)
+            throws UnexistentLineListException {
         checkCorrectDiagonalInput(listIndex, position);
         final GridOption copyOfDiagonalElement = diagonal.get(listIndex).get(position);
-        //CHECKSTYLE:OFF:
+        // CHECKSTYLE:OFF:
         return copyOfDiagonalElement;
-      //CHECKSTYLE:ON:
+        // CHECKSTYLE:ON:
     }
 
-    @Override
-    public Integer setDiagonalLine(final int listIndex, final int position, final GridOption playerTurn) throws UnexistentLineListException {
+    /**
+     * @param listIndex
+     *            is the number of the diagonal list where the player wants to
+     *            set his line
+     * @param position
+     *            is the position of the chosen list where the player wants to
+     *            set the line
+     * @param playerTurn
+     *            which one of the two players is making the move
+     * @return the number of points scored by making a move
+     * @throws UnexistentLineListException
+     *             if the listIndex input is not correct
+     * @throws IllegalStateEception
+     *             if the move has been already made
+     */
+    protected Integer setDiagonalLine(final int listIndex, final int position, final GridOption playerTurn)
+            throws UnexistentLineListException {
         checkCorrectDiagonalInput(listIndex, position);
         Integer points = 0;
         if (playerTurn.equals(GridOption.EMPTY)) {

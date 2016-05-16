@@ -9,7 +9,6 @@ import model.exceptions.NoMovesDoneException;
 import model.exceptions.UnexistentLineListException;
 import model.interfaces.SquareGrid;
 import model.interfaces.Move;
-import model.interfaces.TriangleGrid;
 import model.interfaces.Game;
 
 /**
@@ -150,7 +149,7 @@ public class GameImpl implements Game {
             break;
         case DIAGONAL:
             if (grid.getClass().equals(TriangleGridImpl.class)) {
-                points = ((TriangleGrid) grid).setDiagonalLine(listIndex, position, this.turn);
+                points = ((TriangleGridImpl) grid).setDiagonalLine(listIndex, position, this.turn);
                 addPoints(points);
                 break;
             } else {
@@ -203,7 +202,7 @@ public class GameImpl implements Game {
             addPoints(-points);
             break;
         case DIAGONAL:
-            points = ((TriangleGrid) grid).setDiagonalLine(getCopyOfLastMove().getListIndex(),
+            points = ((TriangleGridImpl) grid).setDiagonalLine(getCopyOfLastMove().getListIndex(),
                     getCopyOfLastMove().getPosition(), GridOption.EMPTY);
             addPoints(-points);
             break;
