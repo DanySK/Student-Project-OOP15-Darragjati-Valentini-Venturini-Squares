@@ -18,7 +18,8 @@ public class MenuImpl implements Menu {
     
     public String rules() throws IOException{
         
-        InputStream readFile = MenuImpl.class.getResourceAsStream("Rules.txt");
+        
+        InputStream readFile = ClassLoader.class.getResourceAsStream("Rules.txt");
 
         try (BufferedReader br = new BufferedReader(new InputStreamReader(readFile, "UTF8"))) {
             String s;
