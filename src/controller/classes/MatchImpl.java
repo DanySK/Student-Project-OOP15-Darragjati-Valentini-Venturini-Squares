@@ -11,6 +11,7 @@ import model.enumerations.GridOption;
 import model.enumerations.ListType;
 import model.exceptions.UnsupportedSizeException;
 import model.exceptions.NoMovesDoneException;
+import model.exceptions.UnexistentLineListException;
 import model.interfaces.SquareGrid;
 import model.interfaces.Move;
 import model.interfaces.PlayedTime;
@@ -83,7 +84,7 @@ public class MatchImpl implements Match {
     }
 
     @Override
-    public String addLine(ListType direction, int numLine, int position) {
+    public String addLine(ListType direction, int numLine, int position) throws UnexistentLineListException {
         if (this.addMove == null){
             this.addMove = new MoveImpl(direction, numLine, position);   
         } else{
@@ -113,7 +114,7 @@ public class MatchImpl implements Match {
     }
 
     @Override
-    public Move undo() throws NoMovesDoneException {
+    public Move undo() throws NoMovesDoneException, UnexistentLineListException {
         this.match.undoLastMove();
         return this.match.getCopyOfLastMove();
 

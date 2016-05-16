@@ -3,6 +3,7 @@ package controller.interfaces;
 import model.enumerations.ListType;
 import model.exceptions.UnsupportedSizeException;
 import model.exceptions.NoMovesDoneException;
+import model.exceptions.UnexistentLineListException;
 import model.interfaces.Move;
 /**
  * Interfaccia della classe MatchImpl.
@@ -29,8 +30,9 @@ public interface Match {
      * @param numLine Numero linea in cui è posta la mossa.
      * @param position Posizione nella linea della mossa.
      * @return Nome del giocatore che deve fare la prossima mossa
+     * @throws UnexistentLineListException
      */
-    String addLine(ListType direction, int numLine, int position);
+    String addLine(ListType direction, int numLine, int position) throws UnexistentLineListException;
     
     
     
@@ -38,8 +40,9 @@ public interface Match {
      * Metodo che fa l'undo dell'ultima mossa.
      * @return 
      * @throws NoMovesDoneException 
+     * @throws UnexistentLineListException 
      */
-    Move undo() throws NoMovesDoneException;
+    Move undo() throws NoMovesDoneException, UnexistentLineListException;
     /**
      * 
      * @return ritorna il punteggio del giocatore corrente.
