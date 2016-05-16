@@ -12,7 +12,7 @@ import model.classes.MoveImpl;
 import model.classes.TriangleGridImpl;
 import model.enumerations.GridOption;
 import model.enumerations.ListType;
-import model.exceptions.GridSizeException;
+import model.exceptions.UnsupportedSizeException;
 import model.exceptions.NoMovesDoneException;
 import model.exceptions.UnexistentLineListException;
 import model.interfaces.SquareGrid;
@@ -34,11 +34,11 @@ public class TestTriangleGrid {
     /**
      * Tests the methods of TriangleGridImpl and TurnImpl.
      * @throws NoMovesDoneException 
-     * @throws GridSizeException 
+     * @throws UnsupportedSizeException 
      * @throws UnexistentLineListException 
      */
     @Test
-    public void test() throws GridSizeException, UnexistentLineListException {
+    public void test() throws UnsupportedSizeException, UnexistentLineListException {
 
         final TriangleGrid triangleGrid = new TriangleGridImpl(HORIZONTAL_SIZE, VERTICAL_SIZE);
         final Game gridOfSize = new GameImpl(triangleGrid);

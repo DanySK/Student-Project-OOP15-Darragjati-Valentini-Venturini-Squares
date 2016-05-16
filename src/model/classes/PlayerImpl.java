@@ -28,7 +28,6 @@ public class PlayerImpl implements Player {
         this.wonMatches = wonMatches;
         this.totalMatches = totalMatches;
         checkCorrectInputs();
-        calculateWinRate();
         this.totalPointsScored = totalPointsScored;
     }
 

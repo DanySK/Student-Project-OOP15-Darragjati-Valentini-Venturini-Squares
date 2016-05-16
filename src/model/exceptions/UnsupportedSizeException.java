@@ -5,9 +5,8 @@ package model.exceptions;
  * field.
  *
  */
-public class GridSizeException extends Exception {
+public class UnsupportedSizeException extends Exception {
 
     private static final long serialVersionUID = -5747331606606895485L;
 
 }
-//rinominare

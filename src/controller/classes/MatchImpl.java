@@ -9,7 +9,7 @@ import model.classes.PlayedTimeImpl;
 import model.classes.TriangleGridImpl;
 import model.enumerations.GridOption;
 import model.enumerations.ListType;
-import model.exceptions.GridSizeException;
+import model.exceptions.UnsupportedSizeException;
 import model.exceptions.NoMovesDoneException;
 import model.interfaces.SquareGrid;
 import model.interfaces.Move;
@@ -41,7 +41,7 @@ public class MatchImpl implements Match {
     }
 
     @Override
-    public void createGrid() throws GridSizeException {
+    public void createGrid() throws UnsupportedSizeException {
 
         switch (this.mode) {
         case SQUARE:

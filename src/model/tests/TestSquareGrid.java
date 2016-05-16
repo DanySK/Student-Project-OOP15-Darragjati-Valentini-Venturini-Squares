@@ -13,7 +13,7 @@ import model.classes.MoveImpl;
 import model.classes.SquareGridImpl;
 import model.enumerations.GridOption;
 import model.enumerations.ListType;
-import model.exceptions.GridSizeException;
+import model.exceptions.UnsupportedSizeException;
 import model.exceptions.NoMovesDoneException;
 import model.exceptions.UnexistentLineListException;
 import model.interfaces.SquareGrid;
@@ -33,11 +33,11 @@ public class TestSquareGrid {
 
     /**
      * Tests the methods of BaseGridImpl and TurnImpl.
-     * @throws GridSizeException 
+     * @throws UnsupportedSizeException 
      * @throws UnexistentLineListException 
      */
     @Test
-    public void test() throws GridSizeException, UnexistentLineListException {
+    public void test() throws UnsupportedSizeException, UnexistentLineListException {
 
         final SquareGrid squareGrid = new SquareGridImpl(HORIZONTAL_SIZE, VERTICAL_SIZE);
         final Game gridOfSize = new GameImpl(squareGrid);
@@ -118,11 +118,11 @@ public class TestSquareGrid {
     /**
      * Test if the methods of BaseGridImpl and TurnImpl throws the correct
      * exceptions.
-     * @throws GridSizeException 
+     * @throws UnsupportedSizeException 
      */
     @Test
     // CHECKSTYLE:OFF:
-    public void testExceptions() throws GridSizeException {
+    public void testExceptions() throws UnsupportedSizeException {
 
         SquareGrid exceptionGrid;
         Game exceptionGame;
@@ -130,14 +130,14 @@ public class TestSquareGrid {
         try {
             exceptionGrid = new SquareGridImpl(STANDARD_SIZE - 4, STANDARD_SIZE - 4);
             fail("Can't create a grid too small");
-        } catch (GridSizeException e) {
+        } catch (UnsupportedSizeException e) {
         } catch (Exception e) {
             fail(ERROR);
         }
         try {
             exceptionGrid = new SquareGridImpl(STANDARD_SIZE + STANDARD_SIZE, STANDARD_SIZE + STANDARD_SIZE);
             fail("Can't create a grid too big");
-        } catch (GridSizeException e) {
+        } catch (UnsupportedSizeException e) {
         } catch (Exception e) {
             fail(ERROR);
         }

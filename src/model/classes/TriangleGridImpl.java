@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.enumerations.GridOption;
-import model.exceptions.GridSizeException;
+import model.exceptions.UnsupportedSizeException;
 import model.exceptions.UnexistentLineListException;
 import model.interfaces.TriangleGrid;
 
@@ -21,9 +21,9 @@ public class TriangleGridImpl extends SquareGridImpl implements TriangleGrid {
      * 
      * @param rowsNumber the number of rows of the grid
      * @param columnsNumber the number of columns of the grid
-     * @throws GridSizeException if the rowsNumber or columnsNumber aren't correct
+     * @throws UnsupportedSizeException if the rowsNumber or columnsNumber aren't correct
      */
-    public TriangleGridImpl(final Integer rowsNumber, final Integer columnsNumber) throws GridSizeException {
+    public TriangleGridImpl(final Integer rowsNumber, final Integer columnsNumber) throws UnsupportedSizeException {
         super(rowsNumber, columnsNumber);
 
         for (int i = 0; i < rowsNumber; i++) {

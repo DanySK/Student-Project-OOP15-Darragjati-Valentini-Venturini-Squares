@@ -216,10 +216,10 @@ public class GameImpl implements Game {
 
     @Override
     public Move getCopyOfLastMove() throws NoMovesDoneException {
-        if (lastMoveList.size() > 0) {
-            return lastMoveList.get(lastMoveList.size() - 1);
-        } else {
+        if (lastMoveList.isEmpty()) {
             throw new NoMovesDoneException();
+        } else {
+            return lastMoveList.get(lastMoveList.size() - 1);
         }
     }
 }
