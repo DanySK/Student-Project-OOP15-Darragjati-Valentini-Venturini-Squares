@@ -1,6 +1,8 @@
 package controller.interfaces;
 
 import model.enumerations.ListType;
+import model.exceptions.GridSizeException;
+import model.exceptions.NoMovesDoneException;
 import model.interfaces.Move;
 /**
  * Interfaccia della classe MatchImpl.
@@ -11,8 +13,9 @@ public interface Match {
 
     /**
      * Metodo che crea la griglia di gioco, a seconda della tipologia di gioco scelta.
+     * @throws GridSizeException 
      */
-    void createGrid();
+    void createGrid() throws GridSizeException;
     
     /**
      * Metodo che genera una nuova partita e fa partire il tempo di gioco.
@@ -34,8 +37,9 @@ public interface Match {
     /**
      * Metodo che fa l'undo dell'ultima mossa.
      * @return 
+     * @throws NoMovesDoneException 
      */
-    Move undo();
+    Move undo() throws NoMovesDoneException;
     /**
      * 
      * @return ritorna il punteggio del giocatore corrente.
