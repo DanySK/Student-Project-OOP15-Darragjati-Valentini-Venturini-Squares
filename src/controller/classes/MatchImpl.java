@@ -18,8 +18,8 @@ import model.interfaces.Game;
 
 public class MatchImpl implements Match {
 
-    private final Integer columnsNumber;
-    private final Integer rowsNumber;
+    private final int columnsNumber;
+    private final int rowsNumber;
     private final String namePlayer1;
     private final String namePlayer2;
     private final TypeGame mode;
@@ -84,7 +84,14 @@ public class MatchImpl implements Match {
 
     @Override
     public String addLine(ListType direction, int numLine, int position) {
-        this.addMove = new MoveImpl(direction, numLine, position);        
+        if (this.addMove == null){
+            this.addMove = new MoveImpl(direction, numLine, position);   
+        } else{
+            this.addMove.setListType(direction);
+            this.addMove.setListIndex(numLine);
+            this.addMove.setPosition(position);
+        }
+             
         this.match.setLine(addMove);
         if (this.match.isEnded()) {
             this.time.calculateMatchDuration(match);
