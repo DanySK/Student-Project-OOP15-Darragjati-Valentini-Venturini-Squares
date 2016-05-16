@@ -29,7 +29,6 @@ public class TestTriangleGame {
     private static final Integer STANDARD_SIZE = 6;
     private static final Integer HORIZONTAL_SIZE = 5;
     private static final Integer VERTICAL_SIZE = 4;
-    private Move move;
     
     /**
      * Tests the methods of TriangleGridImpl and TurnImpl.
@@ -42,7 +41,8 @@ public class TestTriangleGame {
 
         final TriangleGrid triangleGrid = new TriangleGridImpl(HORIZONTAL_SIZE, VERTICAL_SIZE);
         final Game gridOfSize = new GameImpl(triangleGrid);
-
+        Move move;
+        
         assertEquals(triangleGrid.getTotalMoves(), triangleGrid.getRemainingMoves());
 
         // verifies that every element in the list is initialized as EMPTY

@@ -28,7 +28,7 @@ public interface Game {
     boolean isEnded();
 
     /**
-     * @return the player that should make the next move
+     * @return a defensive copy of the player that should make the next move
      * @throws an IllegalStateException if the match is not started
      */
     GridOption getCopyOfCurrentPlayerTurn();
@@ -68,7 +68,7 @@ public interface Game {
     void undoLastMove() throws NoMovesDoneException, UnexistentLineListException;
 
     /**
-     * @return the copy of the last move.
+     * @return a defensive copy of the last move.
      * @throws NoMovesDoneException if noone has made a move yet
      */
     Move getCopyOfLastMove() throws NoMovesDoneException;

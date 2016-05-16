@@ -29,8 +29,7 @@ public class GameImpl implements Game {
     /**
      * This constructor takes an object that implements BaseGrid.
      * 
-     * @param grid
-     *            the playable game field.
+     * @param grid the playable game field.
      */
     // CHECKSTYLE:OFF:
     public GameImpl(final SquareGrid grid) {
@@ -155,7 +154,7 @@ public class GameImpl implements Game {
                 addPoints(points);
                 break;
             } else {
-                throw new UnsupportedOperationException();
+                throw new UnsupportedOperationException("the diagonal move is not supported by the selected game mode");
             }
         default:
             throw new IllegalArgumentException("the list selected does not exist");
