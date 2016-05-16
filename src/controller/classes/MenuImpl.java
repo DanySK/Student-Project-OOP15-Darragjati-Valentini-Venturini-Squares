@@ -10,8 +10,7 @@ public class MenuImpl implements Menu {
     
     public void exitApp(){
         System.exit(0);
-    }
-        
+    }   
     
 
 }
