@@ -141,11 +141,11 @@ public class GameImpl implements Game {
 
         switch (list) {
         case HORIZONTAL:
-            points = grid.setHorizontalLine(listIndex, position, this.turn);
+            points = ((SquareGridImpl) grid).setHorizontalLine(listIndex, position, this.turn);
             addPoints(points);
             break;
         case VERTICAL:
-            points = grid.setVerticalLine(listIndex, position, this.turn);
+            points = ((SquareGridImpl) grid).setVerticalLine(listIndex, position, this.turn);
             addPoints(points);
             break;
         case DIAGONAL:
@@ -193,12 +193,12 @@ public class GameImpl implements Game {
         Integer points = 0;
         switch (getCopyOfLastMove().getListType()) {
         case HORIZONTAL:
-            points = grid.setHorizontalLine(getCopyOfLastMove().getListIndex(), getCopyOfLastMove().getPosition(),
+            points = ((SquareGridImpl) grid).setHorizontalLine(getCopyOfLastMove().getListIndex(), getCopyOfLastMove().getPosition(),
                     GridOption.EMPTY);
             addPoints(-points);
             break;
         case VERTICAL:
-            points = grid.setVerticalLine(getCopyOfLastMove().getListIndex(), getCopyOfLastMove().getPosition(),
+            points = ((SquareGridImpl) grid).setVerticalLine(getCopyOfLastMove().getListIndex(), getCopyOfLastMove().getPosition(),
                     GridOption.EMPTY);
             addPoints(-points);
             break;

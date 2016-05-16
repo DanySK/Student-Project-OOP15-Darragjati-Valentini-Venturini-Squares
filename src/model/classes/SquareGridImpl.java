@@ -98,8 +98,16 @@ public class SquareGridImpl implements SquareGrid {
         // CHECKSTYLE:ON:
     }
 
-    @Override
-    public Integer setHorizontalLine(final int listIndex, final int position, final GridOption playerTurn) throws UnexistentLineListException {
+    /**
+     * This method makes a player make a horizontal move.
+     * @param listIndex is the number of the horizontal list where the player wants to set his line
+     * @param position is the index of the chosen list where the player wants to set the line
+     * @param playerTurn which one of the two players is making the move
+     * @return the number of points scored by making a move 
+     * @throws UnexistentLineListException if the listIndex input is not correct
+     * @throws an IllegalStateEception if the move has been already made
+     */
+    protected Integer setHorizontalLine(final int listIndex, final int position, final GridOption playerTurn) throws UnexistentLineListException {
         checkCorrectHorizontalInput(listIndex, position);
         Integer points = 0;
         if (playerTurn.equals(GridOption.EMPTY)) {
@@ -114,7 +122,7 @@ public class SquareGridImpl implements SquareGrid {
                 horizontal.get(listIndex).set(position, playerTurn);
                 points = horizontalPointScored(listIndex, position);
             } else {
-                throw new IllegalStateException("You can't make a move that has been already made");//da creare una nuova eccezione
+                throw new IllegalStateException("You can't make a move that has been already made");
             }
         }
         return points;
@@ -163,8 +171,16 @@ public class SquareGridImpl implements SquareGrid {
         // CHECKSTYLE:ON:
     }
 
-    @Override
-    public Integer setVerticalLine(final int listIndex, final int position, final GridOption playerTurn) throws UnexistentLineListException {
+    /**
+     * This method makes a player make a vertical move.
+     * @param listIndex is the number of the vertical list where the player wants to set his line
+     * @param position is the index of the chosen list where the player wants to set the line
+     * @param playerTurn which one of the two players is making the move
+     * @return the number of points scored by making a move
+     * @throws UnexistentLineListException if the listIndex input is not correct
+     * @throws an IllegalStateEception if the move has been already made
+     */
+    protected Integer setVerticalLine(final int listIndex, final int position, final GridOption playerTurn) throws UnexistentLineListException {
         checkCorrectVerticalInput(listIndex, position);
         Integer points = 0;
         if (playerTurn.equals(GridOption.EMPTY)) {
