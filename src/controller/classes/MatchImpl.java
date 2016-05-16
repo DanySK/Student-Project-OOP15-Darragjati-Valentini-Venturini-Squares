@@ -16,7 +16,12 @@ import model.interfaces.SquareGrid;
 import model.interfaces.Move;
 import model.interfaces.PlayedTime;
 import model.interfaces.Game;
-
+/**
+ * 
+ * @author Licia Valentini
+ * Classe creata per gestire la partita, dalla prima all'ultima mossa.
+ *
+ */
 public class MatchImpl implements Match {
 
     private final int columnsNumber;
@@ -31,8 +36,16 @@ public class MatchImpl implements Match {
     private PlayedTime time;
     private int playerScore;
     private Move addMove;
-
-    public MatchImpl(int columsNumber, int rowsNumber, String namePlayer1, String namePlayer2, TypeGame mode) {
+/**
+ * 
+ * @param columsNumber
+ * @param rowsNumber
+ * @param namePlayer1
+ * @param namePlayer2
+ * @param mode
+ * Costruttore della classe.
+ */
+    public MatchImpl(final int columsNumber, final int rowsNumber, final String namePlayer1, final String namePlayer2, final TypeGame mode) {
         controlNamePlayers(namePlayer1, namePlayer2);
         this.columnsNumber = columsNumber;
         this.rowsNumber = rowsNumber;
@@ -84,10 +97,10 @@ public class MatchImpl implements Match {
     }
 
     @Override
-    public String addLine(ListType direction, int numLine, int position) throws UnexistentLineListException {
-        if (this.addMove == null){
+    public String addLine(final ListType direction, final int numLine, final int position) throws UnexistentLineListException {
+        if (this.addMove == null) {
             this.addMove = new MoveImpl(direction, numLine, position);   
-        } else{
+        } else {
             this.addMove.setListType(direction);
             this.addMove.setListIndex(numLine);
             this.addMove.setPosition(position);
@@ -125,7 +138,7 @@ public class MatchImpl implements Match {
         return this.time.getTotalMatchDuration();
     }
 
-    private void controlNamePlayers(String namePlayer1, String namePlayer2) {
+    private void controlNamePlayers(final String namePlayer1, final String namePlayer2) {
         if (namePlayer1.equals(namePlayer2)) {
             throw new IllegalArgumentException();
         }
