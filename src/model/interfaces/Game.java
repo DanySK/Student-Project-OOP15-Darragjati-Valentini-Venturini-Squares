@@ -2,6 +2,7 @@ package model.interfaces;
 
 import model.enumerations.GridOption;
 import model.exceptions.NoMovesDoneException;
+import model.exceptions.UnexistentLineListException;
 
 /**
  * This interface is used to manage the rotation between the players' turn.
@@ -52,17 +53,19 @@ public interface Game {
     /**
      * Makes a move setting a line in the grid.
      * @param move the move that the player wants to do
+     * @throws UnexistentLineListException if the listIndex input is not correct
      * @throws an UnsupportedOperationException if the list chosen is not supported by the game mode
      * @throws an IllegalArgumentException if the inserted parameters are not correct
      */
-    void setLine(Move move);
+    void setLine(Move move) throws UnexistentLineListException;
 
     /**
      * Undo the last player move.
      * @throws NoMovesDoneException if no moves have been done yet
+     * @throws UnexistentLineListException if the listIndex input is not correct
      * @throws an IllegalArgumentException if the the listof the last move does not exist
      */
-    void undoLastMove() throws NoMovesDoneException;
+    void undoLastMove() throws NoMovesDoneException, UnexistentLineListException;
 
     /**
      * @return the copy of the last move.

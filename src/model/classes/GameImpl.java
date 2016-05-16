@@ -6,6 +6,7 @@ import java.util.Random;
 import model.enumerations.GridOption;
 import model.enumerations.ListType;
 import model.exceptions.NoMovesDoneException;
+import model.exceptions.UnexistentLineListException;
 import model.interfaces.SquareGrid;
 import model.interfaces.Move;
 import model.interfaces.TriangleGrid;
@@ -133,7 +134,7 @@ public class GameImpl implements Game {
     }
 
     @Override
-    public void setLine(final Move move) {
+    public void setLine(final Move move) throws UnexistentLineListException {
         Integer points = 0;
         final ListType list = move.getListType();
         final Integer listIndex = move.getListIndex();
@@ -185,7 +186,7 @@ public class GameImpl implements Game {
     }
 
     @Override
-    public void undoLastMove() throws NoMovesDoneException {
+    public void undoLastMove() throws NoMovesDoneException, UnexistentLineListException {
 
         if (lastMoveList.isEmpty()) {
             throw new NoMovesDoneException();
@@ -215,10 +216,10 @@ public class GameImpl implements Game {
 
     @Override
     public Move getCopyOfLastMove() throws NoMovesDoneException {
-        if (lastMoveList.size() > 0) {
-            return lastMoveList.get(lastMoveList.size() - 1);
-        } else {
+        if (lastMoveList.isEmpty()) {
             throw new NoMovesDoneException();
+        } else {
+            return lastMoveList.get(lastMoveList.size() - 1);
         }
     }
 }

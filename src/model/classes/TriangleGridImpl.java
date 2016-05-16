@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.enumerations.GridOption;
-import model.exceptions.GridSizeException;
+import model.exceptions.UnsupportedSizeException;
+import model.exceptions.UnexistentLineListException;
 import model.interfaces.TriangleGrid;
 
 /**
@@ -20,9 +21,9 @@ public class TriangleGridImpl extends SquareGridImpl implements TriangleGrid {
      * 
      * @param rowsNumber the number of rows of the grid
      * @param columnsNumber the number of columns of the grid
-     * @throws GridSizeException if the rowsNumber or columnsNumber aren't correct
+     * @throws UnsupportedSizeException if the rowsNumber or columnsNumber aren't correct
      */
-    public TriangleGridImpl(final Integer rowsNumber, final Integer columnsNumber) throws GridSizeException {
+    public TriangleGridImpl(final Integer rowsNumber, final Integer columnsNumber) throws UnsupportedSizeException {
         super(rowsNumber, columnsNumber);
 
         for (int i = 0; i < rowsNumber; i++) {
@@ -49,7 +50,7 @@ public class TriangleGridImpl extends SquareGridImpl implements TriangleGrid {
     }
 
     @Override
-    protected Integer horizontalPointScored(final int listIndex, final int position) {
+    protected Integer horizontalPointScored(final int listIndex, final int position) throws UnexistentLineListException {
         int points = 0;
         if (listIndex > 0 && !super.getCopyOfVerticalElement(position, listIndex - 1).equals(GridOption.EMPTY)
                 && !getCopyOfDiagonalElement(listIndex - 1, position).equals(GridOption.EMPTY)) {
@@ -64,7 +65,7 @@ public class TriangleGridImpl extends SquareGridImpl implements TriangleGrid {
     }
 
     @Override
-    protected Integer verticalPointScored(final int listIndex, final int position) {
+    protected Integer verticalPointScored(final int listIndex, final int position) throws UnexistentLineListException {
         int points = 0;
         if (listIndex > 0 && !super.getCopyOfHorizontalElement(position, listIndex - 1).equals(GridOption.EMPTY)
                 && !getCopyOfDiagonalElement(position, listIndex - 1).equals(GridOption.EMPTY)) {
@@ -97,7 +98,7 @@ public class TriangleGridImpl extends SquareGridImpl implements TriangleGrid {
     }
 
     @Override
-    public Integer setDiagonalLine(final int listIndex, final int position, final GridOption playerTurn) {
+    public Integer setDiagonalLine(final int listIndex, final int position, final GridOption playerTurn) throws UnexistentLineListException {
         checkCorrectDiagonalInput(listIndex, position);
         Integer points = 0;
         if (playerTurn.equals(GridOption.EMPTY)) {
@@ -119,7 +120,7 @@ public class TriangleGridImpl extends SquareGridImpl implements TriangleGrid {
         return points;
     }
 
-    private Integer diagonalPointScored(final int listIndex, final int position) {
+    private Integer diagonalPointScored(final int listIndex, final int position) throws UnexistentLineListException {
         int points = 0;
         if (!super.getCopyOfHorizontalElement(listIndex, position).equals(GridOption.EMPTY)
                 && !super.getCopyOfVerticalElement(position + 1, listIndex).equals(GridOption.EMPTY)) {

@@ -1,7 +1,7 @@
 package controller.interfaces;
 
 import model.enumerations.ListType;
-import model.exceptions.GridSizeException;
+import model.exceptions.UnsupportedSizeException;
 import model.exceptions.NoMovesDoneException;
 import model.interfaces.Move;
 /**
@@ -13,9 +13,9 @@ public interface Match {
 
     /**
      * Metodo che crea la griglia di gioco, a seconda della tipologia di gioco scelta.
-     * @throws GridSizeException 
+     * @throws UnsupportedSizeException 
      */
-    void createGrid() throws GridSizeException;
+    void createGrid() throws UnsupportedSizeException;
     
     /**
      * Metodo che genera una nuova partita e fa partire il tempo di gioco.
