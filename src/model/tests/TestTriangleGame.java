@@ -24,7 +24,7 @@ import model.interfaces.Move;
  * This class simulates the possible moves of a game. The games rules are
  * modified by using the TriangleGridImpl object.
  */
-public class TestTriangleGrid {
+public class TestTriangleGame {
 
     private static final Integer STANDARD_SIZE = 6;
     private static final Integer HORIZONTAL_SIZE = 5;
