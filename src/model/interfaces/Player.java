@@ -2,8 +2,8 @@ package model.interfaces;
 
 /**
  * This interface is used to organize the player's statistics. It offers getter
- * and setters for all his fields except his winrate that is calculated every
- * time everything is up to date.
+ * and setters for all his fields except his winrate. It has only the getter
+ * because it is calculated every time everything is up to date.
  */
 public interface Player {
 
@@ -13,10 +13,7 @@ public interface Player {
     String getPlayerName();
 
     /**
-     * Set the player's name.
-     * 
-     * @param playerName
-     *            the player's name
+     * @param playerName the player's name
      */
     void setPlayerName(String playerName);
 
@@ -28,13 +25,10 @@ public interface Player {
     /**
      * @return the player's total wins.
      */
-    Integer getTotalWins();
+    Integer getWonMatches();
 
     /**
-     * Set the player's total wins.
-     * 
-     * @param wonMatches
-     *            the player's won matches
+     * @param wonMatches the player's won matches
      */
     void setWonMatches(Integer wonMatches);
 
@@ -44,10 +38,7 @@ public interface Player {
     Integer getTotalMatches();
 
     /**
-     * Set the player's total matches.
-     * 
-     * @param totalMatches
-     *            the player's total matches
+     * @param totalMatches the player's total matches
      */
     void setTotalMatches(Integer totalMatches);
 
@@ -57,10 +48,7 @@ public interface Player {
     Integer getTotalPointsScored();
 
     /**
-     * Set the player's total squares catched.
-     * 
-     * @param totalSquaresCatched
-     *            the player's total squares catched
+     * @param totalSquaresCatched the player's total squares catched
      */
     void setTotalPointsScored(Integer totalSquaresCatched);
 }

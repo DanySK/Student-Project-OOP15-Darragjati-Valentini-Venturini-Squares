@@ -44,7 +44,7 @@ public class PlayerImpl implements Player {
     }
 
     private void calculateWinRate() {
-        this.winRate = getTotalWins() * 100 / (double) getTotalMatches();
+        this.winRate = getWonMatches() * 100 / (double) getTotalMatches();
     }
 
     @Override
@@ -60,7 +60,7 @@ public class PlayerImpl implements Player {
     }
 
     @Override
-    public Integer getTotalWins() {
+    public Integer getWonMatches() {
         return this.wonMatches;
     }
 

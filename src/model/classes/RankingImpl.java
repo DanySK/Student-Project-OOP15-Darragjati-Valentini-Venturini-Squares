@@ -60,7 +60,7 @@ public class RankingImpl implements Ranking {
     private void addLastMatchResults(final Player player, final boolean victory, final Integer totalPointsScored) {
         player.setTotalMatches(player.getTotalMatches() + 1);
         if (victory) {
-            player.setWonMatches(player.getTotalWins() + 1);
+            player.setWonMatches(player.getWonMatches() + 1);
         }
         player.setTotalPointsScored(player.getTotalPointsScored() + totalPointsScored);
     }
@@ -158,7 +158,7 @@ public class RankingImpl implements Ranking {
     }
 
     private Integer compareTotalWins(final Player player1, final Player player2) {
-        return Integer.compare(player1.getTotalWins(), player2.getTotalWins());
+        return Integer.compare(player1.getWonMatches(), player2.getWonMatches());
     }
 
     private Integer compareTotalPointsScored(final Player player1, final Player player2) {
