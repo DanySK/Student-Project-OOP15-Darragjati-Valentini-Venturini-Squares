@@ -5,7 +5,7 @@ package model.exceptions;
  * field.
  *
  */
-public class GridSizeException extends RuntimeException {
+public class GridSizeException extends Exception {
 
     private static final long serialVersionUID = -5747331606606895485L;
 

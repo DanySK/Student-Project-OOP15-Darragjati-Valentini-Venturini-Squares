@@ -36,7 +36,7 @@ public class TestTriangleGrid {
      * @throws GridSizeException 
      */
     @Test
-    public void test() {
+    public void test() throws GridSizeException {
 
         final TriangleGrid triangleGrid = new TriangleGridImpl(HORIZONTAL_SIZE, VERTICAL_SIZE);
         final Game gridOfSize = new GameImpl(triangleGrid);

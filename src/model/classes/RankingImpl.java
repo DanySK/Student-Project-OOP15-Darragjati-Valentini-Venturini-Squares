@@ -28,7 +28,7 @@ public class RankingImpl implements Ranking {
      * @throws DuplicatedPlayerStatsException if the playerList contains two or more players with the same name
      */
     // CHECKSTYLE:OFF:
-    public RankingImpl(final List<Player> playerList) {
+    public RankingImpl(final List<Player> playerList) throws DuplicatedPlayerStatsException {
         // CHECKSTYLE:ON:
         final List<String> playerNameList = new ArrayList<>();
         final Set<String> playerNameSet = new HashSet<>();
