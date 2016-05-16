@@ -38,7 +38,7 @@ public interface Match {
     
     /**
      * Metodo che fa l'undo dell'ultima mossa.
-     * @return 
+     * @return l'oggetto contenente la posizione dell'ultima mossa.
      * @throws NoMovesDoneException 
      * @throws UnexistentLineListException 
      */
