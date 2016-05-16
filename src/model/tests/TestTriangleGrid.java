@@ -14,6 +14,7 @@ import model.enumerations.GridOption;
 import model.enumerations.ListType;
 import model.exceptions.GridSizeException;
 import model.exceptions.NoMovesDoneException;
+import model.exceptions.UnexistentLineListException;
 import model.interfaces.SquareGrid;
 import model.interfaces.TriangleGrid;
 import model.interfaces.Game;
@@ -34,9 +35,10 @@ public class TestTriangleGrid {
      * Tests the methods of TriangleGridImpl and TurnImpl.
      * @throws NoMovesDoneException 
      * @throws GridSizeException 
+     * @throws UnexistentLineListException 
      */
     @Test
-    public void test() throws GridSizeException {
+    public void test() throws GridSizeException, UnexistentLineListException {
 
         final TriangleGrid triangleGrid = new TriangleGridImpl(HORIZONTAL_SIZE, VERTICAL_SIZE);
         final Game gridOfSize = new GameImpl(triangleGrid);

@@ -1,6 +1,7 @@
 package model.interfaces;
 
 import model.enumerations.GridOption;
+import model.exceptions.UnexistentLineListException;
 
 /**
  * This interface is used to create a new playable field with size rowsNumber x
@@ -24,8 +25,9 @@ public interface SquareGrid {
      * @param listIndex is the number of the horizontal list where the player wants to get the line
      * @param position is the index of the chosen list where the player wants to get the line
      * @return which one of the two players has set the move
+     * @throws UnexistentLineListException if the listIndex input is not correct
      */
-    GridOption getCopyOfHorizontalElement(Integer listIndex, Integer position);
+    GridOption getCopyOfHorizontalElement(Integer listIndex, Integer position) throws UnexistentLineListException;
 
     /**
      * This method makes a player make a horizontal move.
@@ -33,16 +35,18 @@ public interface SquareGrid {
      * @param position is the index of the chosen list where the player wants to set the line
      * @param playerTurn which one of the two players is making the move
      * @return the number of points scored by making a move 
+     * @throws UnexistentLineListException if the listIndex input is not correct
      * @throws an IllegalStateEception if the move has been already made
      */
-    Integer setHorizontalLine(int listIndex, int position, GridOption playerTurn);
+    Integer setHorizontalLine(int listIndex, int position, GridOption playerTurn) throws UnexistentLineListException;
     
     /**
      * @param listIndex is the number of the vertical list where the player wants to get the line
      * @param position is the index of the chosen list where the player wants to get the line
      * @return which one of the two players has set the move
+     * @throws UnexistentLineListException if the listIndex input is not correct
      */
-    GridOption getCopyOfVerticalElement(Integer listIndex, Integer position);
+    GridOption getCopyOfVerticalElement(Integer listIndex, Integer position) throws UnexistentLineListException;
 
     /**
      * This method makes a player make a vertical move.
@@ -50,9 +54,10 @@ public interface SquareGrid {
      * @param position is the index of the chosen list where the player wants to set the line
      * @param playerTurn which one of the two players is making the move
      * @return the number of points scored by making a move
+     * @throws UnexistentLineListException if the listIndex input is not correct
      * @throws an IllegalStateEception if the move has been already made
      */
-    Integer setVerticalLine(final int listIndex, int position, GridOption playerTurn);
+    Integer setVerticalLine(final int listIndex, int position, GridOption playerTurn) throws UnexistentLineListException;
     
     /**
      * @return the number of horizontal lists that makes the grid.

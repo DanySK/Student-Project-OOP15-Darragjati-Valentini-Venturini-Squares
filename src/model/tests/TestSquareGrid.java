@@ -15,6 +15,7 @@ import model.enumerations.GridOption;
 import model.enumerations.ListType;
 import model.exceptions.GridSizeException;
 import model.exceptions.NoMovesDoneException;
+import model.exceptions.UnexistentLineListException;
 import model.interfaces.SquareGrid;
 import model.interfaces.Game;
 import model.interfaces.Move;
@@ -33,9 +34,10 @@ public class TestSquareGrid {
     /**
      * Tests the methods of BaseGridImpl and TurnImpl.
      * @throws GridSizeException 
+     * @throws UnexistentLineListException 
      */
     @Test
-    public void test() throws GridSizeException {
+    public void test() throws GridSizeException, UnexistentLineListException {
 
         final SquareGrid squareGrid = new SquareGridImpl(HORIZONTAL_SIZE, VERTICAL_SIZE);
         final Game gridOfSize = new GameImpl(squareGrid);
@@ -171,7 +173,7 @@ public class TestSquareGrid {
             move.setPosition(5);
             exceptionGame.setLine(move);
             fail("Can't insert those parameters");
-        } catch (IllegalArgumentException e) {
+        } catch (UnexistentLineListException e) {
         } catch (Exception e) {
             fail(ERROR);
         }
