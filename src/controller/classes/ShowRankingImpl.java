@@ -17,6 +17,8 @@ import model.interfaces.Player;
 
 public class ShowRankingImpl implements ShowRanking {
 
+    private String ranking;
+
     @Override
     public String showRanking(RankingOption rankingOrder, boolean reverse) {
 
@@ -51,6 +53,23 @@ public class ShowRankingImpl implements ShowRanking {
         }
 
         RankingImpl ranking = new RankingImpl(currentRanking);
+
+    }
+
+    private void readRanking() throws IOException {
+        InputStream readFile = Menu.class.getResourceAsStream("Ranking.txt");
+
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(readFile))) {
+            String s;
+            while ((s = br.readLine()) != null) {
+                this.ranking = this.ranking.concat(s);
+               
+            }
+        } catch (IOException ex) {
+            throw new IOException();
+        }
+        readFile.close();
+       
 
     }
 
