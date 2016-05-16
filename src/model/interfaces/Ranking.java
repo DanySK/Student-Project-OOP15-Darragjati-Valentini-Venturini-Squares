@@ -4,9 +4,9 @@ import java.util.List;
 import model.enumerations.RankingOption;
 
 /**
- * This interface assigns the last two players results and organizas them in a
- * ranking. The ranking by default is ordered by winrate and can be reordered in
- * in other three different ways. The order can also be reverted.
+ * This interface assigns the last two players match results and organizes them 
+ * in a ranking. The ranking by default is ordered by winrate and can be 
+ * reordered in in other three different ways. The order can also be reverted.
  */
 public interface Ranking {
 
@@ -16,7 +16,6 @@ public interface Ranking {
      * @param playerName  the player's name
      * @param win  if the player has won the last match
      * @param score the players score
-     * 
      */
     void addPlayerResults(String playerName, boolean win, Integer score);
 

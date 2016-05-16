@@ -21,7 +21,7 @@ public class RankingImpl implements Ranking {
     private final List<Player> playerList;
 
     /**
-     * The consctructor is used to wkow the old players' matches results and
+     * The consctructor is used to know the old players' matches results and
      * upate them if it is necessary.
      * 
      * @param playerList the old list of the players' ranking
