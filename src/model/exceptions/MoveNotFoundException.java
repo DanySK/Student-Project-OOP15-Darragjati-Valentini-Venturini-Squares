@@ -10,7 +10,7 @@ public class MoveNotFoundException extends RuntimeException {
     
     /**
      * 
-     * @param string the string message
+     * @param string the message to show if the method is called
      */
     public MoveNotFoundException(final String string) {
         super(string);

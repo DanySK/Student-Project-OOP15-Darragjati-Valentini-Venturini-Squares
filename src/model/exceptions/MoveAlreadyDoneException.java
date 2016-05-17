@@ -10,7 +10,7 @@ public class MoveAlreadyDoneException extends RuntimeException {
     
     /**
      * 
-     * @param string
+     * @param string the message to show if the method is called
      */
     public MoveAlreadyDoneException(final String string) {
         super(string);

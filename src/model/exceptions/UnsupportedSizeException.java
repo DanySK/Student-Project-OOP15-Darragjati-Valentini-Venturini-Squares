@@ -1,7 +1,7 @@
 package model.exceptions;
 
 /**
- * This exception is invoked when wrong parameters are used to set the playeable
+ * This exception is thrown when wrong parameters are used to set the playeable
  * field.
  *
  */
