@@ -14,6 +14,7 @@ import model.classes.SquareGridImpl;
 import model.enumerations.GridOption;
 import model.enumerations.ListType;
 import model.exceptions.UnsupportedSizeException;
+import model.exceptions.MoveAlreadyDoneException;
 import model.exceptions.NoMovesDoneException;
 import model.exceptions.UnexistentLineListException;
 import model.interfaces.SquareGrid;
@@ -211,6 +212,17 @@ public class TestSquareGame {
             exceptionGame.setLine(move);
             fail("You can't set a diagonal line, the base grid doesn't include this option");
         } catch (UnsupportedOperationException e) {
+        } catch (Exception e) {
+            fail(ERROR);
+        }
+        try {
+            move.setListType(ListType.HORIZONTAL);
+            move.setListIndex(0);
+            move.setPosition(0);
+            exceptionGame.setLine(move);
+            exceptionGame.setLine(move);
+            fail("You can't set a move where another player has already set it");
+        } catch (MoveAlreadyDoneException e) {
         } catch (Exception e) {
             fail(ERROR);
         }

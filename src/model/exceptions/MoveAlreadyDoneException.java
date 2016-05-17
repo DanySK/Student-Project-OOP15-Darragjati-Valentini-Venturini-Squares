@@ -7,4 +7,12 @@ package model.exceptions;
 public class MoveAlreadyDoneException extends RuntimeException {
 
     private static final long serialVersionUID = -1317069819709809888L;
+    
+    /**
+     * 
+     * @param string
+     */
+    public MoveAlreadyDoneException(final String string) {
+        super(string);
+    }
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import model.enumerations.GridOption;
 import model.exceptions.UnsupportedSizeException;
+import model.exceptions.MoveAlreadyDoneException;
 import model.exceptions.MoveNotFoundException;
 import model.exceptions.UnexistentLineListException;
 import model.interfaces.TriangleGrid;
@@ -135,7 +136,7 @@ public class TriangleGridImpl extends SquareGridImpl implements TriangleGrid {
                 diagonal.get(listIndex).set(position, playerTurn);
                 points = diagonalPointScored(listIndex, position);
             } else {
-                throw new IllegalStateException("You can't make a move that has been already made");
+                throw new MoveAlreadyDoneException("You can't make a move that has been already made");
             }
         }
         return points;

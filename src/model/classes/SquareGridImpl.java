@@ -6,6 +6,7 @@ import java.util.List;
 import model.enumerations.GridOption;
 import model.enumerations.ListType;
 import model.exceptions.UnsupportedSizeException;
+import model.exceptions.MoveAlreadyDoneException;
 import model.exceptions.MoveNotFoundException;
 import model.exceptions.UnexistentLineListException;
 import model.interfaces.SquareGrid;
@@ -140,7 +141,7 @@ public class SquareGridImpl implements SquareGrid {
                 horizontal.get(listIndex).set(position, playerTurn);
                 points = horizontalPointScored(listIndex, position);
             } else {
-                throw new IllegalStateException("You can't make a move that has been already made");
+                throw new MoveAlreadyDoneException("You can't make a move that has been already made");
             }
         }
         return points;
@@ -230,7 +231,7 @@ public class SquareGridImpl implements SquareGrid {
                 vertical.get(listIndex).set(position, playerTurn);
                 points = verticalPointScored(listIndex, position);
             } else {
-                throw new IllegalStateException("You can't make a move that has been already made");
+                throw new MoveAlreadyDoneException("You can't make a move that has been already made");
             }
         }
         return points;
