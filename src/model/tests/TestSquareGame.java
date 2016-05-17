@@ -125,7 +125,6 @@ public class TestSquareGame {
     @Test
     // CHECKSTYLE:OFF:
     public void testExceptions() throws UnsupportedSizeException {
-
         SquareGrid exceptionGrid;
         Game exceptionGame;
 

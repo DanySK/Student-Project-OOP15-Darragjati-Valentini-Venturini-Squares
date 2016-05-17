@@ -7,4 +7,12 @@ package model.exceptions;
 public class MoveNotFoundException extends RuntimeException {
 
     private static final long serialVersionUID = 8851420793026002772L;
+    
+    /**
+     * 
+     * @param string the string message
+     */
+    public MoveNotFoundException(final String string) {
+        super(string);
+    }
 }

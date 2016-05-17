@@ -5,6 +5,7 @@ import java.util.List;
 
 import model.enumerations.GridOption;
 import model.exceptions.UnsupportedSizeException;
+import model.exceptions.MoveNotFoundException;
 import model.exceptions.UnexistentLineListException;
 import model.interfaces.TriangleGrid;
 
@@ -124,8 +125,7 @@ public class TriangleGridImpl extends SquareGridImpl implements TriangleGrid {
         Integer points = 0;
         if (playerTurn.equals(GridOption.EMPTY)) {
             if (diagonal.get(listIndex).get(position).equals(GridOption.EMPTY)) {
-                // da mettere il perchè lancia quest'eccezione?
-                throw new IllegalStateException("You can't undo a move that wasn't made");
+                throw new MoveNotFoundException("You can't undo a move that wasn't made");
             } else {
                 points = diagonalPointScored(listIndex, position);
                 diagonal.get(listIndex).set(position, playerTurn);

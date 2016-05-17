@@ -28,7 +28,8 @@ public class GameImpl implements Game {
     /**
      * This constructor takes an object that implements BaseGrid.
      * 
-     * @param grid the playable game field.
+     * @param grid
+     *            the playable game field.
      */
     // CHECKSTYLE:OFF:
     public GameImpl(final SquareGrid grid) {
@@ -133,11 +134,14 @@ public class GameImpl implements Game {
 
     @Override
     public void setLine(final Move move) throws UnexistentLineListException {
+        if (!this.isStarted()) {
+            throw new IllegalStateException();
+        }   
         Integer points = 0;
         final ListType list = move.getListType();
         final Integer listIndex = move.getListIndex();
         final Integer position = move.getPosition();
-
+      
         switch (list) {
         case HORIZONTAL:
             points = ((SquareGridImpl) grid).setHorizontalLine(listIndex, position, this.turn);
@@ -192,13 +196,13 @@ public class GameImpl implements Game {
         Integer points = 0;
         switch (getCopyOfLastMove().getListType()) {
         case HORIZONTAL:
-            points = ((SquareGridImpl) grid).setHorizontalLine(getCopyOfLastMove().getListIndex(), getCopyOfLastMove().getPosition(),
-                    GridOption.EMPTY);
+            points = ((SquareGridImpl) grid).setHorizontalLine(getCopyOfLastMove().getListIndex(),
+                    getCopyOfLastMove().getPosition(), GridOption.EMPTY);
             addPoints(-points);
             break;
         case VERTICAL:
-            points = ((SquareGridImpl) grid).setVerticalLine(getCopyOfLastMove().getListIndex(), getCopyOfLastMove().getPosition(),
-                    GridOption.EMPTY);
+            points = ((SquareGridImpl) grid).setVerticalLine(getCopyOfLastMove().getListIndex(),
+                    getCopyOfLastMove().getPosition(), GridOption.EMPTY);
             addPoints(-points);
             break;
         case DIAGONAL:

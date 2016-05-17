@@ -6,6 +6,7 @@ import java.util.List;
 import model.enumerations.GridOption;
 import model.enumerations.ListType;
 import model.exceptions.UnsupportedSizeException;
+import model.exceptions.MoveNotFoundException;
 import model.exceptions.UnexistentLineListException;
 import model.interfaces.SquareGrid;
 
@@ -129,7 +130,7 @@ public class SquareGridImpl implements SquareGrid {
         Integer points = 0;
         if (playerTurn.equals(GridOption.EMPTY)) {
             if (horizontal.get(listIndex).get(position).equals(GridOption.EMPTY)) {
-                throw new IllegalStateException("You can't undo a move that wasn't made");
+                throw new MoveNotFoundException("You can't undo a move that wasn't made");
             } else {
                 points = horizontalPointScored(listIndex, position);
                 horizontal.get(listIndex).set(position, playerTurn);
@@ -219,7 +220,7 @@ public class SquareGridImpl implements SquareGrid {
         Integer points = 0;
         if (playerTurn.equals(GridOption.EMPTY)) {
             if (vertical.get(listIndex).get(position).equals(GridOption.EMPTY)) {
-                throw new IllegalStateException("You can't undo a move that wasn't made");
+                throw new MoveNotFoundException("You can't undo a move that wasn't made");
             } else {
                 points = verticalPointScored(listIndex, position);
                 vertical.get(listIndex).set(position, playerTurn);
