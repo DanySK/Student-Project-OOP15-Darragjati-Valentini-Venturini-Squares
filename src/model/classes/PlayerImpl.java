@@ -43,7 +43,8 @@ public class PlayerImpl implements Player {
     }
 
     /**
-     * @param playerName the player's name
+     * @param playerName
+     *            the player's name
      */
     // CHECKSTYLE:OFF:
     protected void setPlayerName(final String playerName) {
@@ -73,12 +74,12 @@ public class PlayerImpl implements Player {
     }
 
     /**
-     * @param wonMatches the player's won matches
+     * @param wonMatches
+     *            the player's won matches
      */
     // CHECKSTYLE:OFF:
     protected void setWonMatches(final Integer wonMatches) {
         // CHECKSTYLE:ON:
-        checkCorrectInputs();
         this.wonMatches = wonMatches;
     }
 
@@ -87,14 +88,13 @@ public class PlayerImpl implements Player {
         return this.totalMatches;
     }
 
-    
     /**
-     * @param totalMatches the player's total matches
+     * @param totalMatches
+     *            the player's total matches
      */
     // CHECKSTYLE:OFF:
     protected void setTotalMatches(final Integer totalMatches) {
         // CHECKSTYLE:ON:
-        checkCorrectInputs();
         this.totalMatches = totalMatches;
     }
 
@@ -103,9 +103,9 @@ public class PlayerImpl implements Player {
         return this.totalPointsScored;
     }
 
-    
     /**
-     * @param totalPointsScored the player's total squares catched
+     * @param totalPointsScored
+     *            the player's total squares catched
      */
     // CHECKSTYLE:OFF:
     protected void setTotalPointsScored(final Integer totalPointsScored) {
@@ -113,34 +113,62 @@ public class PlayerImpl implements Player {
         this.totalPointsScored = totalPointsScored;
     }
 
+    /**
+     * This Builder is used to configure all the needed fields to create a new
+     * player.
+     *
+     */
     public static class Builder {
         private String playerName;
         private Integer wonMatches;
         private Integer totalMatches;
         private Integer totalPointsScored;
 
+        /**
+         * @param playerName the player's name
+         * @return this
+         */
         public Builder playerName(final String playerName) {
             this.playerName = playerName;
             return this;
         }
 
+        /**
+         * 
+         * @param wonMatches the player's won matches
+         * @return this
+         */
         public Builder wonMatches(final Integer wonMatches) {
             this.wonMatches = wonMatches;
             return this;
         }
 
+        /**
+         * 
+         * @param totalMatches the player's total matches
+         * @return this
+         */
         public Builder totalMatches(final Integer totalMatches) {
             this.totalMatches = totalMatches;
             return this;
         }
 
+        /**
+         * 
+         * @param totalPointsScored the player's total points scored
+         * @return this
+         */
         public Builder totalPointsScored(final Integer totalPointsScored) {
             this.totalPointsScored = totalPointsScored;
             return this;
         }
 
-        public PlayerImpl build(){
-            if(this.playerName == null || this.wonMatches == null || this.totalMatches== null || this.totalPointsScored == null){
+        /**
+         * @return a new PlayerImpl
+         */
+        public PlayerImpl build() {
+            if (this.playerName == null || this.wonMatches == null || this.totalMatches == null
+                    || this.totalPointsScored == null) {
                 throw new IllegalStateException();
             }
             return new PlayerImpl(this.playerName, this.wonMatches, this.totalMatches, this.totalPointsScored);
