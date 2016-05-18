@@ -95,31 +95,24 @@ public class TestSquareGame {
         gridOfSize.undoLastMove();
         assertNotEquals(player, gridOfSize.getCopyOfCurrentPlayerTurn());
 
-        final SquareGrid squareGrid2 = new SquareGridImpl(4, 4);
+        final SquareGrid squareGrid2 = new SquareGridImpl(STANDARD_SIZE, STANDARD_SIZE);
         final Game gridOfSize2 = new GameImpl(squareGrid2);
         gridOfSize2.startMatch();
         System.out.println(squareGrid2.getTotalMoves());
         // fills the grid with all the possible moves
-        int turno = 0;
-        for (int i = 0; i < 4 + 1; i++) {
-            for (int z = 0; z < 4; z++) {          
+        for (int i = 0; i < STANDARD_SIZE + 1; i++) {
+            for (int z = 0; z < STANDARD_SIZE; z++) {          
                 move.setListType(ListType.HORIZONTAL);
                 move.setListIndex(i);
                 move.setPosition(z);
                 gridOfSize2.setLine(move);
-                System.out.println(++turno + "     " + gridOfSize2.getPlayerPoints(GridOption.PLAYER1) + "     "
-                        + gridOfSize2.getPlayerPoints(GridOption.PLAYER2));
                 move.setListType(ListType.VERTICAL);
                 gridOfSize2.setLine(move);
-                System.out.println(++turno + "     " + gridOfSize2.getPlayerPoints(GridOption.PLAYER1) + "     "
-                        + gridOfSize2.getPlayerPoints(GridOption.PLAYER2));
             }
         }
         assertTrue(squareGrid2.getRemainingMoves().equals(0));
-       // assertNotEquals(gridOfSize2.getPlayerPoints(GridOption.PLAYER1),
-               // gridOfSize2.getPlayerPoints(GridOption.PLAYER2));
-        System.out.println(gridOfSize2.getPlayerPoints(GridOption.PLAYER1) + "     "
-                + gridOfSize2.getPlayerPoints(GridOption.PLAYER2));
+       assertNotEquals(gridOfSize2.getPlayerPoints(GridOption.PLAYER1),
+               gridOfSize2.getPlayerPoints(GridOption.PLAYER2));
         assertTrue(gridOfSize2.isEnded());
         assertNotEquals(GridOption.EMPTY, gridOfSize2.getWinner());
     }
