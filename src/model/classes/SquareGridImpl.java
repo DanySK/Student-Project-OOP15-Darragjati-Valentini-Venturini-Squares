@@ -342,7 +342,7 @@ public class SquareGridImpl implements SquareGrid {
     public Integer getHorizontalListSize() {
         return horizontal.size();
     }
-
+    
     @Override
     public Integer getVerticalListSize() {
         return vertical.size();
