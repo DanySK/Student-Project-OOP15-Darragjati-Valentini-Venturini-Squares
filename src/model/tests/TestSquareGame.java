@@ -97,7 +97,6 @@ public class TestSquareGame {
         final SquareGrid squareGrid2 = new SquareGridImpl(STANDARD_SIZE, STANDARD_SIZE);
         final Game gridOfSize2 = new GameImpl(squareGrid2);
         gridOfSize2.startMatch();
-        System.out.println(squareGrid2.getTotalMoves());
         // fills the grid with all the possible moves
         for (int i = 0; i < STANDARD_SIZE + 1; i++) {
             for (int z = 0; z < STANDARD_SIZE; z++) {
