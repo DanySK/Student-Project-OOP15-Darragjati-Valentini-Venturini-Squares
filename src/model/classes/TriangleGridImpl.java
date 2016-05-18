@@ -54,36 +54,6 @@ public class TriangleGridImpl extends SquareGridImpl implements TriangleGrid {
         return super.getRemainingMoves() + movesLeft;
     }
 
-
-    protected Integer horizontalPointScored(final int listIndex, final int position)
-            throws UnexistentLineListException {
-        int points = 0;
-        if (listIndex > 0 && !super.getCopyOfVerticalElement(position, listIndex - 1).equals(GridOption.EMPTY)
-                && !getCopyOfDiagonalElement(listIndex - 1, position).equals(GridOption.EMPTY)) {
-            points++;
-        }
-        if (listIndex < super.getHorizontalListSize() - 1
-                && !super.getCopyOfVerticalElement(position + 1, listIndex).equals(GridOption.EMPTY)
-                && !getCopyOfDiagonalElement(listIndex, position).equals(GridOption.EMPTY)) {
-            points++;
-        }
-        return points;
-    }
-
-    protected Integer verticalPointScored(final int listIndex, final int position) throws UnexistentLineListException {
-        int points = 0;
-        if (listIndex > 0 && !super.getCopyOfHorizontalElement(position, listIndex - 1).equals(GridOption.EMPTY)
-                && !getCopyOfDiagonalElement(position, listIndex - 1).equals(GridOption.EMPTY)) {
-            points++;
-        }
-        if (listIndex < super.getVerticalListSize() - 1
-                && !super.getCopyOfHorizontalElement(position + 1, listIndex).equals(GridOption.EMPTY)
-                && !getCopyOfDiagonalElement(position, listIndex).equals(GridOption.EMPTY)) {
-            points++;
-        }
-        return points;
-    }
-
     private void checkCorrectDiagonalInput(final Integer listIndex, final Integer position)
             throws UnexistentLineListException {
         if (listIndex < 0 || listIndex > diagonal.size()) {

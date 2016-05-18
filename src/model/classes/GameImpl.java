@@ -137,27 +137,23 @@ public class GameImpl implements Game {
         if (!this.isStarted()) {
             throw new IllegalStateException();
         }
-        Integer points = 0;
         final ListType list = move.getListType();
         final Integer listIndex = move.getListIndex();
         final Integer position = move.getPosition();
-        CalculatePlayerPoints calculate = new CalculatePlayerPoints(grid);
+        final CalculatePlayerPoints calculatePoints = new CalculatePlayerPoints(grid);
         switch (list) {
         case HORIZONTAL:
-            ((SquareGridImpl) grid).setHorizontalLine(listIndex, position, this.turn);
-            points = calculate.horizontalPointScored(listIndex, position);
-            addPoints(points);
+            ((SquareGridImpl) grid).setHorizontalLine(listIndex, position, this.turn);           
+            addPoints(calculatePoints.horizontalPointScored(listIndex, position));
             break;
         case VERTICAL:
             ((SquareGridImpl) grid).setVerticalLine(listIndex, position, this.turn);
-            points = calculate.verticalPointScored(listIndex, position);
-            addPoints(points);
+            addPoints(calculatePoints.verticalPointScored(listIndex, position));
             break;
         case DIAGONAL:
             if (grid.getClass().equals(TriangleGridImpl.class)) {
                 ((TriangleGridImpl) grid).setDiagonalLine(listIndex, position, this.turn);
-                points = calculate.diagonalPointScored(listIndex, position);
-                addPoints(points);
+                addPoints(calculatePoints.diagonalPointScored(listIndex, position));
                 break;
             } else {
                 throw new UnsupportedOperationException("the diagonal move is not supported by the selected game mode");
@@ -196,30 +192,27 @@ public class GameImpl implements Game {
             throw new NoMovesDoneException();
         }
         Integer points = 0;
-        CalculatePlayerPoints calculate = new CalculatePlayerPoints(grid);
+        final CalculatePlayerPoints calculatePoints = new CalculatePlayerPoints(grid);
         switch (getCopyOfLastMove().getListType()) {
         case HORIZONTAL:
-            points = calculate.horizontalPointScored(getCopyOfLastMove().getListIndex(),
+            points = calculatePoints.horizontalPointScored(getCopyOfLastMove().getListIndex(),
                     getCopyOfLastMove().getPosition());
             ((SquareGridImpl) grid).setHorizontalLine(getCopyOfLastMove().getListIndex(),
                     getCopyOfLastMove().getPosition(), GridOption.EMPTY);
-
             addPoints(-points);
             break;
         case VERTICAL:
-            points = calculate.verticalPointScored(getCopyOfLastMove().getListIndex(),
+            points = calculatePoints.verticalPointScored(getCopyOfLastMove().getListIndex(),
                     getCopyOfLastMove().getPosition());
             ((SquareGridImpl) grid).setVerticalLine(getCopyOfLastMove().getListIndex(),
                     getCopyOfLastMove().getPosition(), GridOption.EMPTY);
-
             addPoints(-points);
             break;
         case DIAGONAL:
-            points = calculate.diagonalPointScored(getCopyOfLastMove().getListIndex(),
+            points = calculatePoints.diagonalPointScored(getCopyOfLastMove().getListIndex(),
                     getCopyOfLastMove().getPosition());
             ((TriangleGridImpl) grid).setDiagonalLine(getCopyOfLastMove().getListIndex(),
                     getCopyOfLastMove().getPosition(), GridOption.EMPTY);
-
             addPoints(-points);
             break;
         default:
