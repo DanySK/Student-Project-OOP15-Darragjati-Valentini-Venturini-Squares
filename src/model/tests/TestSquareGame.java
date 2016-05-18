@@ -34,9 +34,8 @@ public class TestSquareGame {
 
     /**
      * Tests the methods of BaseGridImpl and TurnImpl.
-     * 
-     * @throws UnsupportedSizeException
-     * @throws UnexistentLineListException
+     * @throws UnsupportedSizeException if the list chosen is not supported by the game mode
+     * @throws UnexistentLineListException if the listIndex input is not correct
      */
     @Test
     public void test() throws UnsupportedSizeException, UnexistentLineListException {
@@ -101,7 +100,7 @@ public class TestSquareGame {
         System.out.println(squareGrid2.getTotalMoves());
         // fills the grid with all the possible moves
         for (int i = 0; i < STANDARD_SIZE + 1; i++) {
-            for (int z = 0; z < STANDARD_SIZE; z++) {          
+            for (int z = 0; z < STANDARD_SIZE; z++) {
                 move.setListType(ListType.HORIZONTAL);
                 move.setListIndex(i);
                 move.setPosition(z);
@@ -111,8 +110,8 @@ public class TestSquareGame {
             }
         }
         assertTrue(squareGrid2.getRemainingMoves().equals(0));
-       assertNotEquals(gridOfSize2.getPlayerPoints(GridOption.PLAYER1),
-               gridOfSize2.getPlayerPoints(GridOption.PLAYER2));
+        assertNotEquals(gridOfSize2.getPlayerPoints(GridOption.PLAYER1),
+                gridOfSize2.getPlayerPoints(GridOption.PLAYER2));
         assertTrue(gridOfSize2.isEnded());
         assertNotEquals(GridOption.EMPTY, gridOfSize2.getWinner());
     }

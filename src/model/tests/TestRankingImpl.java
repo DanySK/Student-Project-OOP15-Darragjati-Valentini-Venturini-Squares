@@ -15,8 +15,6 @@ import model.interfaces.Player;
 
 /**
  * Test the options offered by the class RankingImpl.
- * 
- *
  */
 public class TestRankingImpl {
 
