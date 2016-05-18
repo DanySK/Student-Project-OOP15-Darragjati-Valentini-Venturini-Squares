@@ -94,12 +94,12 @@ public class TestTriangleGame {
         move.setListIndex(0);
         move.setPosition(0);
         gridOfSize.setLine(move);
-        assertNotEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
+        assertNotEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));     
         assertEquals(player, gridOfSize.getCopyOfCurrentPlayerTurn());
         assertEquals(gridOfSize.getCopyOfLastMove().getListType(), ListType.DIAGONAL);
         assertEquals(gridOfSize.getCopyOfLastMove().getListIndex(), (Integer) 0);
         assertEquals(gridOfSize.getCopyOfLastMove().getPosition(), (Integer) 0);
-
+        //test if the undo is working correctly 
         gridOfSize.undoLastMove();
         assertEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
         assertEquals(player, gridOfSize.getCopyOfCurrentPlayerTurn());
@@ -108,7 +108,29 @@ public class TestTriangleGame {
         assertEquals(gridOfSize.getCopyOfLastMove().getPosition(), (Integer) 0);
         gridOfSize.undoLastMove();
         assertNotEquals(player, gridOfSize.getCopyOfCurrentPlayerTurn());
-
+        //check if the methods of points assignaments work correctly
+        move.setListType(ListType.DIAGONAL);
+        move.setListIndex(1);
+        move.setPosition(1);
+        gridOfSize.setLine(move);
+        move.setListType(ListType.HORIZONTAL);
+        move.setListIndex(2);
+        move.setPosition(1);
+        gridOfSize.setLine(move);
+        move.setListType(ListType.VERTICAL);
+        move.setListIndex(1);
+        move.setPosition(1);
+        gridOfSize.setLine(move);
+        move.setListType(ListType.VERTICAL);
+        move.setListIndex(2);
+        move.setPosition(1);
+        gridOfSize.setLine(move);
+        move.setListType(ListType.HORIZONTAL);
+        move.setListIndex(1);
+        move.setPosition(1);
+        gridOfSize.setLine(move);   
+        assertEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
+        
         final SquareGrid squareGrid2 = new TriangleGridImpl(STANDARD_SIZE, STANDARD_SIZE);
         final Game gridOfSize2 = new GameImpl(squareGrid2);
         gridOfSize2.startMatch();
