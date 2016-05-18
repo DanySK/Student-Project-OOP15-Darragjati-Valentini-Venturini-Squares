@@ -16,13 +16,19 @@ public class PlayerImpl implements Player {
 
     /**
      * This consctructor sets the fields of the class PlayerImpl.
-     * @param playerName the name of the player
-     * @param wonMatches his won mathces
-     * @param totalMatches his total matches
-     * @param totalPointsScored his total points scored
+     * 
+     * @param playerName
+     *            the name of the player
+     * @param wonMatches
+     *            his won mathces
+     * @param totalMatches
+     *            his total matches
+     * @param totalPointsScored
+     *            his total points scored
      */
     // CHECKSTYLE:OFF:
-    public PlayerImpl(final String playerName, final Integer wonMatches, final Integer totalMatches, final Integer totalPointsScored) {
+    public PlayerImpl(final String playerName, final Integer wonMatches, final Integer totalMatches,
+            final Integer totalPointsScored) {
         // CHECKSTYLE:ON:
         this.playerName = playerName;
         this.wonMatches = wonMatches;
@@ -95,6 +101,40 @@ public class PlayerImpl implements Player {
     public void setTotalPointsScored(final Integer totalPointsScored) {
         // CHECKSTYLE:ON:
         this.totalPointsScored = totalPointsScored;
+    }
+
+    public static class Builder {
+        private String playerName;
+        private Integer wonMatches;
+        private Integer totalMatches;
+        private Integer totalPointsScored;
+
+        public Builder playerName(final String playerName) {
+            this.playerName = playerName;
+            return this;
+        }
+
+        public Builder wonMatches(final Integer wonMatches) {
+            this.wonMatches = wonMatches;
+            return this;
+        }
+
+        public Builder totalMatches(final Integer totalMatches) {
+            this.totalMatches = totalMatches;
+            return this;
+        }
+
+        public Builder totalPointsScored(final Integer totalPointsScored) {
+            this.totalPointsScored = totalPointsScored;
+            return this;
+        }
+
+        public PlayerImpl build(){
+            if(this.playerName == null || this.wonMatches == null || this.totalMatches== null || this.totalPointsScored == null){
+                throw new IllegalStateException();
+            }
+            return new PlayerImpl(this.playerName, this.wonMatches, this.totalMatches, this.totalPointsScored);
+        }
     }
 
     @Override
