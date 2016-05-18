@@ -156,6 +156,7 @@ public class GameImpl implements Game {
         case DIAGONAL:
             if (grid.getClass().equals(TriangleGridImpl.class)) {
                 ((TriangleGridImpl) grid).setDiagonalLine(listIndex, position, this.turn);
+                points = calculate.diagonalPointScored(listIndex, position);
                 addPoints(points);
                 break;
             } else {
