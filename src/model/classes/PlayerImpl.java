@@ -14,20 +14,8 @@ public class PlayerImpl implements Player {
     private Integer totalMatches;
     private Integer totalPointsScored;
 
-    /**
-     * This consctructor sets the fields of the class PlayerImpl.
-     * 
-     * @param playerName
-     *            the name of the player
-     * @param wonMatches
-     *            his won mathces
-     * @param totalMatches
-     *            his total matches
-     * @param totalPointsScored
-     *            his total points scored
-     */
     // CHECKSTYLE:OFF:
-    public PlayerImpl(final String playerName, final Integer wonMatches, final Integer totalMatches,
+    private PlayerImpl(final String playerName, final Integer wonMatches, final Integer totalMatches,
             final Integer totalPointsScored) {
         // CHECKSTYLE:ON:
         this.playerName = playerName;
@@ -37,9 +25,40 @@ public class PlayerImpl implements Player {
         this.totalPointsScored = totalPointsScored;
     }
 
+    private void checkCorrectInputs() {
+        if (this.wonMatches > this.totalMatches) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private void calculateWinRate() {
+        this.winRate = getWonMatches() * 100 / (double) getTotalMatches();
+    }
+
     @Override
     public String getPlayerName() {
         return playerName;
+    }
+
+    @Override
+    public double getWinRate() {
+        calculateWinRate();
+        return this.winRate;
+    }
+
+    @Override
+    public Integer getWonMatches() {
+        return this.wonMatches;
+    }
+
+    @Override
+    public Integer getTotalMatches() {
+        return this.totalMatches;
+    }
+
+    @Override
+    public Integer getTotalPointsScored() {
+        return this.totalPointsScored;
     }
 
     /**
@@ -52,27 +71,6 @@ public class PlayerImpl implements Player {
         this.playerName = playerName;
     }
 
-    private void calculateWinRate() {
-        this.winRate = getWonMatches() * 100 / (double) getTotalMatches();
-    }
-
-    @Override
-    public double getWinRate() {
-        calculateWinRate();
-        return this.winRate;
-    }
-
-    private void checkCorrectInputs() {
-        if (this.wonMatches > this.totalMatches) {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    @Override
-    public Integer getWonMatches() {
-        return this.wonMatches;
-    }
-
     /**
      * @param wonMatches
      *            the player's won matches
@@ -83,11 +81,6 @@ public class PlayerImpl implements Player {
         this.wonMatches = wonMatches;
     }
 
-    @Override
-    public Integer getTotalMatches() {
-        return this.totalMatches;
-    }
-
     /**
      * @param totalMatches
      *            the player's total matches
@@ -96,11 +89,6 @@ public class PlayerImpl implements Player {
     protected void setTotalMatches(final Integer totalMatches) {
         // CHECKSTYLE:ON:
         this.totalMatches = totalMatches;
-    }
-
-    @Override
-    public Integer getTotalPointsScored() {
-        return this.totalPointsScored;
     }
 
     /**
@@ -125,7 +113,8 @@ public class PlayerImpl implements Player {
         private Integer totalPointsScored;
 
         /**
-         * @param playerName the player's name
+         * @param playerName
+         *            the player's name
          * @return this
          */
         public Builder playerName(final String playerName) {
@@ -135,7 +124,8 @@ public class PlayerImpl implements Player {
 
         /**
          * 
-         * @param wonMatches the player's won matches
+         * @param wonMatches
+         *            the player's won matches
          * @return this
          */
         public Builder wonMatches(final Integer wonMatches) {
@@ -145,7 +135,8 @@ public class PlayerImpl implements Player {
 
         /**
          * 
-         * @param totalMatches the player's total matches
+         * @param totalMatches
+         *            the player's total matches
          * @return this
          */
         public Builder totalMatches(final Integer totalMatches) {
@@ -155,7 +146,8 @@ public class PlayerImpl implements Player {
 
         /**
          * 
-         * @param totalPointsScored the player's total points scored
+         * @param totalPointsScored
+         *            the player's total points scored
          * @return this
          */
         public Builder totalPointsScored(final Integer totalPointsScored) {
