@@ -136,24 +136,26 @@ public class GameImpl implements Game {
     public void setLine(final Move move) throws UnexistentLineListException {
         if (!this.isStarted()) {
             throw new IllegalStateException();
-        }   
+        }
         Integer points = 0;
         final ListType list = move.getListType();
         final Integer listIndex = move.getListIndex();
         final Integer position = move.getPosition();
-      
+        CalculatePlayerPoints calculate = new CalculatePlayerPoints(grid);
         switch (list) {
         case HORIZONTAL:
-            points = ((SquareGridImpl) grid).setHorizontalLine(listIndex, position, this.turn);
+            ((SquareGridImpl) grid).setHorizontalLine(listIndex, position, this.turn);
+            points = calculate.horizontalPointScored(grid, listIndex, position);
             addPoints(points);
             break;
         case VERTICAL:
-            points = ((SquareGridImpl) grid).setVerticalLine(listIndex, position, this.turn);
+            ((SquareGridImpl) grid).setVerticalLine(listIndex, position, this.turn);
+            points = calculate.verticalPointScored(grid, listIndex, position);
             addPoints(points);
             break;
         case DIAGONAL:
             if (grid.getClass().equals(TriangleGridImpl.class)) {
-                points = ((TriangleGridImpl) grid).setDiagonalLine(listIndex, position, this.turn);
+                ((TriangleGridImpl) grid).setDiagonalLine(listIndex, position, this.turn);
                 addPoints(points);
                 break;
             } else {
@@ -189,25 +191,34 @@ public class GameImpl implements Game {
 
     @Override
     public void undoLastMove() throws NoMovesDoneException, UnexistentLineListException {
-
         if (lastMoveList.isEmpty()) {
             throw new NoMovesDoneException();
         }
         Integer points = 0;
+        CalculatePlayerPoints calculate = new CalculatePlayerPoints(grid);
         switch (getCopyOfLastMove().getListType()) {
         case HORIZONTAL:
-            points = ((SquareGridImpl) grid).setHorizontalLine(getCopyOfLastMove().getListIndex(),
+            points = calculate.horizontalPointScored(grid, getCopyOfLastMove().getListIndex(),
+                    getCopyOfLastMove().getPosition());
+            ((SquareGridImpl) grid).setHorizontalLine(getCopyOfLastMove().getListIndex(),
                     getCopyOfLastMove().getPosition(), GridOption.EMPTY);
+            
             addPoints(-points);
             break;
         case VERTICAL:
-            points = ((SquareGridImpl) grid).setVerticalLine(getCopyOfLastMove().getListIndex(),
+            points = calculate.verticalPointScored(grid, getCopyOfLastMove().getListIndex(),
+                    getCopyOfLastMove().getPosition());
+            ((SquareGridImpl) grid).setVerticalLine(getCopyOfLastMove().getListIndex(),
                     getCopyOfLastMove().getPosition(), GridOption.EMPTY);
+            
             addPoints(-points);
             break;
         case DIAGONAL:
-            points = ((TriangleGridImpl) grid).setDiagonalLine(getCopyOfLastMove().getListIndex(),
+            points = calculate.diagonalPointScored(getCopyOfLastMove().getListIndex(),
+                    getCopyOfLastMove().getPosition());
+            ((TriangleGridImpl) grid).setDiagonalLine(getCopyOfLastMove().getListIndex(),
                     getCopyOfLastMove().getPosition(), GridOption.EMPTY);
+            
             addPoints(-points);
             break;
         default:

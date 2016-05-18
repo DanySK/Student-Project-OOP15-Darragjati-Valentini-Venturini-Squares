@@ -125,26 +125,26 @@ public class SquareGridImpl implements SquareGrid {
      * @throws IllegalStateEception
      *             if the move has been already made
      */
-    protected Integer setHorizontalLine(final int listIndex, final int position, final GridOption playerTurn)
+    protected void setHorizontalLine(final int listIndex, final int position, final GridOption playerTurn)
             throws UnexistentLineListException {
         checkCorrectHorizontalInput(listIndex, position);
-        Integer points = 0;
+        //Integer points = 0;
         if (playerTurn.equals(GridOption.EMPTY)) {
             if (horizontal.get(listIndex).get(position).equals(GridOption.EMPTY)) {
                 throw new MoveNotFoundException("You can't undo a move that wasn't made");
             } else {
-                points = horizontalPointScored(listIndex, position);
+             //   points = horizontalPointScored(listIndex, position);
                 horizontal.get(listIndex).set(position, playerTurn);
             }
         } else {
             if (horizontal.get(listIndex).get(position).equals(GridOption.EMPTY)) {
                 horizontal.get(listIndex).set(position, playerTurn);
-                points = horizontalPointScored(listIndex, position);
+              //  points = horizontalPointScored(listIndex, position);
             } else {
                 throw new MoveAlreadyDoneException("You can't make a move that has been already made");
             }
         }
-        return points;
+      //  return points;
     }
 
     /**
@@ -164,17 +164,22 @@ public class SquareGridImpl implements SquareGrid {
     protected Integer horizontalPointScored(final int listIndex, final int position)
             throws UnexistentLineListException {
         int points = 0;
-        if (listIndex > 0 && !getCopyOfHorizontalElement(listIndex - 1, position).equals(GridOption.EMPTY)
-                && !getPreviousTransversalList(ListType.HORIZONTAL, listIndex, position).equals(GridOption.EMPTY)
-                && !getNextTransversalList(ListType.HORIZONTAL, listIndex, position).equals(GridOption.EMPTY)) {
-            points++;
-        }
-        if (listIndex < horizontal.size() - 1
-                && !getCopyOfHorizontalElement(listIndex + 1, position).equals(GridOption.EMPTY)
-                && !getPreviousTransversalList(ListType.HORIZONTAL, listIndex, position).equals(GridOption.EMPTY)
-                && !getNextTransversalList(ListType.HORIZONTAL, listIndex, position).equals(GridOption.EMPTY)) {
-            points++;
-        }
+       // CalculatePlayerPoints calculatePoints = new CalculatePlayerPoints();
+        //points = calculatePoints.horizontalPointScored(this.getClass(), listIndex, position);
+        /*
+         * if (listIndex > 0 && !getCopyOfHorizontalElement(listIndex - 1,
+         * position).equals(GridOption.EMPTY) &&
+         * !getPreviousTransversalList(ListType.HORIZONTAL, listIndex,
+         * position).equals(GridOption.EMPTY) &&
+         * !getNextTransversalList(ListType.HORIZONTAL, listIndex,
+         * position).equals(GridOption.EMPTY)) { points++; } if (listIndex <
+         * horizontal.size() - 1 && !getCopyOfHorizontalElement(listIndex + 1,
+         * position).equals(GridOption.EMPTY) &&
+         * !getPreviousTransversalList(ListType.HORIZONTAL, listIndex,
+         * position).equals(GridOption.EMPTY) &&
+         * !getNextTransversalList(ListType.HORIZONTAL, listIndex,
+         * position).equals(GridOption.EMPTY)) { points++; }
+         */
         return points;
     }
 
@@ -215,26 +220,26 @@ public class SquareGridImpl implements SquareGrid {
      * @throws IllegalStateEception
      *             if the move has been already made
      */
-    protected Integer setVerticalLine(final int listIndex, final int position, final GridOption playerTurn)
+    protected void setVerticalLine(final int listIndex, final int position, final GridOption playerTurn)
             throws UnexistentLineListException {
         checkCorrectVerticalInput(listIndex, position);
-        Integer points = 0;
+       // Integer points = 0;
         if (playerTurn.equals(GridOption.EMPTY)) {
             if (vertical.get(listIndex).get(position).equals(GridOption.EMPTY)) {
                 throw new MoveNotFoundException("You can't undo a move that wasn't made");
             } else {
-                points = verticalPointScored(listIndex, position);
+               // points = verticalPointScored(listIndex, position);
                 vertical.get(listIndex).set(position, playerTurn);
             }
         } else {
             if (vertical.get(listIndex).get(position).equals(GridOption.EMPTY)) {
                 vertical.get(listIndex).set(position, playerTurn);
-                points = verticalPointScored(listIndex, position);
+               // points = verticalPointScored(listIndex, position);
             } else {
                 throw new MoveAlreadyDoneException("You can't make a move that has been already made");
             }
         }
-        return points;
+       // return points;
     }
 
     /**
@@ -250,9 +255,12 @@ public class SquareGridImpl implements SquareGrid {
      * @throws UnexistentLineListException
      *             if the listIndex input is not correct
      */
-    protected Integer verticalPointScored(final int listIndex, final int position) throws UnexistentLineListException {
+    protected Integer verticalPointScored(final Integer listIndex, final Integer position) {
         int points = 0;
-        if (listIndex > 0 && !getPreviousParallelList(ListType.VERTICAL, listIndex, position).equals(GridOption.EMPTY)
+ //       CalculatePlayerPoints calculatePoints = new CalculatePlayerPoints();
+      //  points = calculatePoints.verticalPointScored(this.getClass(), listIndex, position);
+       
+       /* if (listIndex > 0 && !getPreviousParallelList(ListType.VERTICAL, listIndex, position).equals(GridOption.EMPTY)
                 && !getPreviousTransversalList(ListType.VERTICAL, listIndex, position).equals(GridOption.EMPTY)
                 && !getNextTransversalList(ListType.VERTICAL, listIndex, position).equals(GridOption.EMPTY)) {
             points++;
@@ -262,87 +270,17 @@ public class SquareGridImpl implements SquareGrid {
                 && !getPreviousTransversalList(ListType.VERTICAL, listIndex, position).equals(GridOption.EMPTY)
                 && !getNextTransversalList(ListType.VERTICAL, listIndex, position).equals(GridOption.EMPTY)) {
             points++;
-        }
+        }*/
         return points;
     }
 
-    private GridOption getPreviousParallelList(final ListType list, final int listIndex, final int position)
-            throws UnexistentLineListException {
-        if (listIndex > 0) {
-            switch (list) {
-            case HORIZONTAL:
-                return getCopyOfHorizontalElement(listIndex - 1, position);
-            case VERTICAL:
-                return getCopyOfVerticalElement(listIndex - 1, position);
-            default:
-                throw new IllegalStateException(ERROR_MESSAGE);
-            }
-        } else {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    private GridOption getNextParallelList(final ListType list, final int listIndex, final int position)
-            throws UnexistentLineListException {
-        switch (list) {
-        case HORIZONTAL:
-            if (listIndex < getHorizontalListSize()) {
-                return getCopyOfHorizontalElement(listIndex + 1, position);
-            } else {
-                throw new IllegalArgumentException();
-            }
-        case VERTICAL:
-            if (listIndex < getVerticalListSize()) {
-                return getCopyOfVerticalElement(listIndex + 1, position);
-            } else {
-                throw new IllegalArgumentException();
-            }
-        default:
-            throw new IllegalStateException(ERROR_MESSAGE);
-        }
-    }
-
-    private GridOption getPreviousTransversalList(final ListType list, final int listIndex, final int position)
-            throws UnexistentLineListException {
-        if (listIndex > 0) {
-            switch (list) {
-            case HORIZONTAL:
-                return getCopyOfVerticalElement(position, listIndex - 1);
-            case VERTICAL:
-                return getCopyOfHorizontalElement(position, listIndex - 1);
-            default:
-                throw new IllegalStateException(ERROR_MESSAGE);
-            }
-        } else {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    private GridOption getNextTransversalList(final ListType list, final int listIndex, final int position)
-            throws UnexistentLineListException {
-        switch (list) {
-        case HORIZONTAL:
-            if (listIndex < getHorizontalListSize()) {
-                return getCopyOfVerticalElement(position + 1, listIndex - 1);
-            } else {
-                throw new IllegalArgumentException();
-            }
-        case VERTICAL:
-            if (listIndex < getVerticalListSize()) {
-                return getCopyOfHorizontalElement(position + 1, listIndex - 1);
-            } else {
-                throw new IllegalArgumentException();
-            }
-        default:
-            throw new IllegalStateException(ERROR_MESSAGE);
-        }
-    }
+   
 
     @Override
     public Integer getHorizontalListSize() {
         return horizontal.size();
     }
-    
+
     @Override
     public Integer getVerticalListSize() {
         return vertical.size();
