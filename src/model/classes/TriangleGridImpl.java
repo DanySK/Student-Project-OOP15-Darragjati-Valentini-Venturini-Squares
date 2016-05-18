@@ -54,7 +54,7 @@ public class TriangleGridImpl extends SquareGridImpl implements TriangleGrid {
         return super.getRemainingMoves() + movesLeft;
     }
 
-    @Override
+
     protected Integer horizontalPointScored(final int listIndex, final int position)
             throws UnexistentLineListException {
         int points = 0;
@@ -70,7 +70,6 @@ public class TriangleGridImpl extends SquareGridImpl implements TriangleGrid {
         return points;
     }
 
-    @Override
     protected Integer verticalPointScored(final int listIndex, final int position) throws UnexistentLineListException {
         int points = 0;
         if (listIndex > 0 && !super.getCopyOfHorizontalElement(position, listIndex - 1).equals(GridOption.EMPTY)
@@ -114,45 +113,27 @@ public class TriangleGridImpl extends SquareGridImpl implements TriangleGrid {
      *            set the line
      * @param playerTurn
      *            which one of the two players is making the move
-     * @return the number of points scored by making a move
      * @throws UnexistentLineListException
      *             if the listIndex input is not correct
      * @throws IllegalStateEception
      *             if the move has been already made
      */
-    protected Integer setDiagonalLine(final int listIndex, final int position, final GridOption playerTurn)
+    protected void setDiagonalLine(final int listIndex, final int position, final GridOption playerTurn)
             throws UnexistentLineListException {
         checkCorrectDiagonalInput(listIndex, position);
-        Integer points = 0;
         if (playerTurn.equals(GridOption.EMPTY)) {
             if (diagonal.get(listIndex).get(position).equals(GridOption.EMPTY)) {
                 throw new MoveNotFoundException("You can't undo a move that wasn't made");
             } else {
-                points = diagonalPointScored(listIndex, position);
                 diagonal.get(listIndex).set(position, playerTurn);
             }
         } else {
             if (diagonal.get(listIndex).get(position).equals(GridOption.EMPTY)) {
                 diagonal.get(listIndex).set(position, playerTurn);
-                points = diagonalPointScored(listIndex, position);
             } else {
                 throw new MoveAlreadyDoneException("You can't make a move that has been already made");
             }
         }
-        return points;
-    }
-
-    private Integer diagonalPointScored(final int listIndex, final int position) throws UnexistentLineListException {
-        int points = 0;
-        if (!super.getCopyOfHorizontalElement(listIndex, position).equals(GridOption.EMPTY)
-                && !super.getCopyOfVerticalElement(position + 1, listIndex).equals(GridOption.EMPTY)) {
-            points++;
-        }
-        if (!super.getCopyOfHorizontalElement(listIndex + 1, position).equals(GridOption.EMPTY)
-                && !super.getCopyOfVerticalElement(position, listIndex).equals(GridOption.EMPTY)) {
-            points++;
-        }
-        return points;
     }
 
     @Override
