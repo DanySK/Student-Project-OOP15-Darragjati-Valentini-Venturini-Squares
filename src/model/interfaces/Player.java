@@ -13,11 +13,6 @@ public interface Player {
     String getPlayerName();
 
     /**
-     * @param playerName the player's name
-     */
-    void setPlayerName(String playerName);
-
-    /**
      * @return the player's winrate.
      */
     double getWinRate();
@@ -28,27 +23,12 @@ public interface Player {
     Integer getWonMatches();
 
     /**
-     * @param wonMatches the player's won matches
-     */
-    void setWonMatches(Integer wonMatches);
-
-    /**
      * @return the player's total matches.
      */
     Integer getTotalMatches();
 
     /**
-     * @param totalMatches the player's total matches
-     */
-    void setTotalMatches(Integer totalMatches);
-
-    /**
      * @return the player's total points scored
      */
     Integer getTotalPointsScored();
-
-    /**
-     * @param totalSquaresCatched the player's total squares catched
-     */
-    void setTotalPointsScored(Integer totalSquaresCatched);
 }

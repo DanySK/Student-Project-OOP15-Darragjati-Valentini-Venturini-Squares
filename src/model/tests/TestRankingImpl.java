@@ -28,13 +28,14 @@ public class TestRankingImpl {
 
     private List<Player> createPlayers() {
         // CHECKSTYLE:OFF:
-        final PlayerImpl player1 = new PlayerImpl(PLAYER1, 1, 10, 51);
+        final PlayerImpl player1 = new PlayerImpl.Builder().playerName(PLAYER1).wonMatches(1).totalMatches(10)
+                .totalPointsScored(51).build();
         assertEquals(player1.getWinRate(), 10.0, 0);
 
-        final PlayerImpl player2 = new PlayerImpl(PLAYER2, 8, 10, 456);
+        final PlayerImpl player2 = new PlayerImpl.Builder().playerName(PLAYER2).wonMatches(8).totalMatches(10).totalPointsScored(456).build();
         assertTrue(player2.getWinRate() > player1.getWinRate());
 
-        final PlayerImpl player3 = new PlayerImpl(PLAYER3, 4, 5, 223);
+        final PlayerImpl player3 = new PlayerImpl.Builder().playerName(PLAYER3).wonMatches(4).totalMatches(5).totalPointsScored(223).build();
         assertEquals(player3.getWinRate(), player2.getWinRate(), 0);
         // CHECKSTYLE:ON:
         final List<Player> playerList = new ArrayList<>();
@@ -54,9 +55,7 @@ public class TestRankingImpl {
         assertEquals(playerList.size(), 3);
 
         final RankingImpl rankingTest = new RankingImpl(playerList);
-        // CHECKSTYLE:OFF:
         rankingTest.addPlayerResults(PLAYER4, true, 37);
-        // CHECKSTYLE:ON:
         assertEquals(playerList.size(), 4);
         // ordering list by WINRATE
         List<Player> orderingTest = rankingTest.orderListBy(RankingOption.WINRATE, false);
@@ -83,9 +82,7 @@ public class TestRankingImpl {
         assertEquals(orderingTest.get(2).getPlayerName(), PLAYER3);
         assertEquals(orderingTest.get(3).getPlayerName(), PLAYER2);
 
-        // CHECKSTYLE:OFF:
         rankingTest.addPlayerResults(PLAYER5, true, 37);
-        // CHECKSTYLE:ON:
         // ordering list by WINRATE
         final List<Player> testWinRateOrderedList = rankingTest.orderListBy(RankingOption.WINRATE, false);
         assertEquals(testWinRateOrderedList.get(0).getPlayerName(), PLAYER1);
@@ -103,20 +100,17 @@ public class TestRankingImpl {
     }
 
     /**
-     * Exceptions Test.
+     * Exceptions test.
      * @throws DuplicatedPlayerStatsException 
      */
     @Test
     //CHECKSTYLE:OFF:
     public void testExceptions() throws DuplicatedPlayerStatsException {
         final List<Player> playerList = createPlayers();
-        final Player testPlayer = new PlayerImpl(PLAYER1, 0, 0,0);
         RankingImpl testListException = new RankingImpl(playerList);
+        Player testPlayer;
         try {
-            testPlayer.setPlayerName(PLAYER4);
-            testPlayer.setTotalMatches(6);
-            testPlayer.setWonMatches(5);
-            testPlayer.setTotalPointsScored(467);
+            testPlayer = new PlayerImpl.Builder().playerName(PLAYER4).wonMatches(5).totalMatches(6).totalPointsScored(467).build();
             testListException.orderListBy(RankingOption.WINRATE, false).add(testPlayer);
             fail("You can't add a player to the list, it should be unmodifiable");
         } catch (UnsupportedOperationException e) {
@@ -124,10 +118,7 @@ public class TestRankingImpl {
             fail("Wrong exception thrown");
         }
         try {
-            testPlayer.setPlayerName(PLAYER1);
-            testPlayer.setTotalMatches(6);
-            testPlayer.setWonMatches(5);
-            testPlayer.setTotalPointsScored(467);
+            testPlayer = new PlayerImpl.Builder().playerName(PLAYER1).wonMatches(5).totalMatches(6).totalPointsScored(467).build();
             playerList.add(testPlayer);
             testListException = new RankingImpl(playerList);
             fail("The list can't contain two players with the same name");
@@ -136,9 +127,7 @@ public class TestRankingImpl {
             fail("Wrong exception thrown");
         }
         try {
-            testPlayer.setPlayerName(PLAYER4);
-            testPlayer.setTotalMatches(4);
-            testPlayer.setWonMatches(5);
+            testPlayer = new PlayerImpl.Builder().playerName(PLAYER4).wonMatches(6).totalMatches(5).totalPointsScored(467).build();
             fail("The won matches cant be more than the total matches");
         } catch (IllegalArgumentException e) {
         } catch (Exception e) {

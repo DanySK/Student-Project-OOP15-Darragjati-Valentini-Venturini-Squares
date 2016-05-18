@@ -42,9 +42,11 @@ public class PlayerImpl implements Player {
         return playerName;
     }
 
-    @Override
+    /**
+     * @param playerName the player's name
+     */
     // CHECKSTYLE:OFF:
-    public void setPlayerName(final String playerName) {
+    protected void setPlayerName(final String playerName) {
         // CHECKSTYLE:ON:
         this.playerName = playerName;
     }
@@ -70,9 +72,11 @@ public class PlayerImpl implements Player {
         return this.wonMatches;
     }
 
-    @Override
+    /**
+     * @param wonMatches the player's won matches
+     */
     // CHECKSTYLE:OFF:
-    public void setWonMatches(final Integer wonMatches) {
+    protected void setWonMatches(final Integer wonMatches) {
         // CHECKSTYLE:ON:
         checkCorrectInputs();
         this.wonMatches = wonMatches;
@@ -83,9 +87,12 @@ public class PlayerImpl implements Player {
         return this.totalMatches;
     }
 
-    @Override
+    
+    /**
+     * @param totalMatches the player's total matches
+     */
     // CHECKSTYLE:OFF:
-    public void setTotalMatches(final Integer totalMatches) {
+    protected void setTotalMatches(final Integer totalMatches) {
         // CHECKSTYLE:ON:
         checkCorrectInputs();
         this.totalMatches = totalMatches;
@@ -96,9 +103,12 @@ public class PlayerImpl implements Player {
         return this.totalPointsScored;
     }
 
-    @Override
+    
+    /**
+     * @param totalPointsScored the player's total squares catched
+     */
     // CHECKSTYLE:OFF:
-    public void setTotalPointsScored(final Integer totalPointsScored) {
+    protected void setTotalPointsScored(final Integer totalPointsScored) {
         // CHECKSTYLE:ON:
         this.totalPointsScored = totalPointsScored;
     }

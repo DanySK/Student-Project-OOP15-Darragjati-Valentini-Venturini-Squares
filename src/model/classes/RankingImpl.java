@@ -50,19 +50,19 @@ public class RankingImpl implements Ranking {
                 return;
             }
         }
-        final PlayerImpl newPlayer = new PlayerImpl(playerName, 0, 0, 0);
-        newPlayer.setPlayerName(playerName);
+        final PlayerImpl newPlayer = new PlayerImpl.Builder().playerName(playerName).wonMatches(0).totalMatches(0).totalPointsScored(0).build();
+
         playerList.add(newPlayer);
         addLastMatchResults(newPlayer, victory, totalPointsScored);
 
     }
 
     private void addLastMatchResults(final Player player, final boolean victory, final Integer totalPointsScored) {
-        player.setTotalMatches(player.getTotalMatches() + 1);
+        ((PlayerImpl) player).setTotalMatches(player.getTotalMatches() + 1);
         if (victory) {
-            player.setWonMatches(player.getWonMatches() + 1);
+            ((PlayerImpl) player).setWonMatches(player.getWonMatches() + 1);
         }
-        player.setTotalPointsScored(player.getTotalPointsScored() + totalPointsScored);
+        ((PlayerImpl) player).setTotalPointsScored(player.getTotalPointsScored() + totalPointsScored);
     }
 
     @Override
