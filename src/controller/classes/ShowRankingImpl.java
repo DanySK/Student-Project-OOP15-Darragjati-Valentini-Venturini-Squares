@@ -45,7 +45,7 @@ public class ShowRankingImpl implements ShowRanking {
                 int totalMatches = Integer.parseInt(srtTotalMatches);
                 strTotalPointsScored = st.nextToken();
                 int totalPointsScored = Integer.parseInt(strTotalPointsScored);
-                Player player = new PlayerImpl(playerName, wonMatches, totalMatches, totalPointsScored);
+                Player player = new PlayerImpl.Builder().playerName(playerName).wonMatches(wonMatches).totalMatches(totalMatches).totalPointsScored(totalPointsScored);
                 currentRanking.add(player);
 
             }
