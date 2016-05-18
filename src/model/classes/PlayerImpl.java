@@ -6,7 +6,7 @@ import model.interfaces.Player;
  * THis class implements the interface Player. It is used to manage the player's
  * informations.
  */
-public class PlayerImpl implements Player {
+public final class PlayerImpl implements Player {
 
     private String playerName;
     private Double winRate;

@@ -24,8 +24,11 @@ public class RankingImpl implements Ranking {
      * The consctructor is used to know the old players' matches results and
      * upate them if it is necessary.
      * 
-     * @param playerList the old list of the players' ranking
-     * @throws DuplicatedPlayerStatsException if the playerList contains two or more players with the same name
+     * @param playerList
+     *            the old list of the players' ranking
+     * @throws DuplicatedPlayerStatsException
+     *             if the playerList contains two or more players with the same
+     *             name
      */
     // CHECKSTYLE:OFF:
     public RankingImpl(final List<Player> playerList) throws DuplicatedPlayerStatsException {
@@ -44,25 +47,23 @@ public class RankingImpl implements Ranking {
 
     @Override
     public void addPlayerResults(final String playerName, final boolean victory, final Integer totalPointsScored) {
+        Integer wonMatch = 0;
+        if (victory) {
+            wonMatch = 1;
+        }
         for (final Player player : playerList) {
             if (player.getPlayerName().equals(playerName)) {
-                addLastMatchResults(player, victory, totalPointsScored);
+                final Player updatedPlayer = new PlayerImpl.Builder().playerName(playerName)
+                        .wonMatches(player.getWonMatches() + wonMatch).totalMatches(player.getTotalMatches() + 1)
+                        .totalPointsScored(player.getTotalPointsScored() + totalPointsScored).build();
+                playerList.remove(player);
+                playerList.add(updatedPlayer);
                 return;
             }
         }
-        final PlayerImpl newPlayer = new PlayerImpl.Builder().playerName(playerName).wonMatches(0).totalMatches(0).totalPointsScored(0).build();
-
+        final Player newPlayer = new PlayerImpl.Builder().playerName(playerName).wonMatches(wonMatch).totalMatches(1)
+                .totalPointsScored(totalPointsScored).build();
         playerList.add(newPlayer);
-        addLastMatchResults(newPlayer, victory, totalPointsScored);
-
-    }
-
-    private void addLastMatchResults(final Player player, final boolean victory, final Integer totalPointsScored) {
-        ((PlayerImpl) player).setTotalMatches(player.getTotalMatches() + 1);
-        if (victory) {
-            ((PlayerImpl) player).setWonMatches(player.getWonMatches() + 1);
-        }
-        ((PlayerImpl) player).setTotalPointsScored(player.getTotalPointsScored() + totalPointsScored);
     }
 
     @Override
