@@ -45,7 +45,7 @@ public class ShowRankingImpl implements ShowRanking {
                 int totalMatches = Integer.parseInt(srtTotalMatches);
                 strTotalPointsScored = st.nextToken();
                 int totalPointsScored = Integer.parseInt(strTotalPointsScored);
-                Player player = new PlayerImpl.Builder().playerName(playerName).wonMatches(wonMatches).totalMatches(totalMatches).totalPointsScored(totalPointsScored);
+                Player player = new PlayerImpl.Builder().playerName(playerName).wonMatches(wonMatches).totalMatches(totalMatches).totalPointsScored(totalPointsScored).build();
                 currentRanking.add(player);
 
             }
@@ -63,7 +63,7 @@ public class ShowRankingImpl implements ShowRanking {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(readFile, "UTF8"))) {
             String s;
             while ((s = br.readLine()) != null) {
-                this.ranking = this.ranking.concat(s);
+                this.ranking = this.ranking + s;
 
             }
         } catch (IOException ex) {
