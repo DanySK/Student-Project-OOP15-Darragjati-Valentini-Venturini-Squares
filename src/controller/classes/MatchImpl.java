@@ -16,10 +16,11 @@ import model.interfaces.SquareGrid;
 import model.interfaces.Move;
 import model.interfaces.PlayedTime;
 import model.interfaces.Game;
+
 /**
  * 
- * @author Licia Valentini
- * Classe creata per gestire la partita, dalla prima all'ultima mossa.
+ * @author Licia Valentini Classe creata per gestire la partita, dalla prima
+ *         all'ultima mossa.
  *
  */
 public class MatchImpl implements Match {
@@ -36,22 +37,24 @@ public class MatchImpl implements Match {
     private PlayedTime time;
     private int playerScore;
     private Move addMove;
-/**
- * 
- * @param columsNumber
- * @param rowsNumber
- * @param namePlayer1
- * @param namePlayer2
- * @param mode
- * Costruttore della classe.
- */
-    public MatchImpl(final int columsNumber, final int rowsNumber, final String namePlayer1, final String namePlayer2, final TypeGame mode) {
+
+    /**
+     * 
+     * @param columsNumber
+     * @param rowsNumber
+     * @param namePlayer1
+     * @param namePlayer2
+     * @param mode
+     *            Costruttore della classe.
+     */
+    public MatchImpl(final int columsNumber, final int rowsNumber, final String namePlayer1, final String namePlayer2,
+            final TypeGame mode) {
         controlNamePlayers(namePlayer1, namePlayer2);
         this.columnsNumber = columsNumber;
         this.rowsNumber = rowsNumber;
         this.namePlayer1 = namePlayer1;
         this.namePlayer2 = namePlayer2;
-        this.mode = mode;        
+        this.mode = mode;
     }
 
     @Override
@@ -97,15 +100,11 @@ public class MatchImpl implements Match {
     }
 
     @Override
-    public String addLine(final ListType direction, final int numLine, final int position) throws UnexistentLineListException {
-        if (this.addMove == null) {
-            this.addMove = new MoveImpl(direction, numLine, position);   
-        } else {
-            this.addMove.setListType(direction);
-            this.addMove.setListIndex(numLine);
-            this.addMove.setPosition(position);
-        }
-             
+    public String addLine(final ListType direction, final int numLine, final int position)
+            throws UnexistentLineListException {
+
+        this.addMove = new MoveImpl(direction, numLine, position);
+
         this.match.setLine(addMove);
         if (this.match.isEnded()) {
             this.time.calculateMatchDuration(match);
