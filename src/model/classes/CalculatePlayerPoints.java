@@ -1,19 +1,18 @@
 package model.classes;
 
 import model.enumerations.GridOption;
-import model.enumerations.ListType;
 import model.exceptions.UnexistentLineListException;
 import model.interfaces.SquareGrid;
 
 public class CalculatePlayerPoints {
 
-    SquareGrid grid;
+    private SquareGrid grid;
 
     public CalculatePlayerPoints(SquareGrid grid) {
         this.grid = grid;
     }
 
-    protected Integer horizontalPointScored(SquareGrid grid, Integer listIndex, Integer position)
+    protected Integer horizontalPointScored(Integer listIndex, Integer position)
             throws UnexistentLineListException {
         int points = 0;
         if (listIndex > 0 && !grid.getCopyOfHorizontalElement(listIndex - 1, position).equals(GridOption.EMPTY)
@@ -30,7 +29,7 @@ public class CalculatePlayerPoints {
         return points;
     }
 
-    protected Integer verticalPointScored(SquareGrid grid, Integer listIndex, Integer position)
+    protected Integer verticalPointScored(Integer listIndex, Integer position)
             throws UnexistentLineListException {
         int points = 0;
         if (listIndex > 0 && !grid.getCopyOfVerticalElement(listIndex - 1, position).equals(GridOption.EMPTY)

@@ -145,12 +145,12 @@ public class GameImpl implements Game {
         switch (list) {
         case HORIZONTAL:
             ((SquareGridImpl) grid).setHorizontalLine(listIndex, position, this.turn);
-            points = calculate.horizontalPointScored(grid, listIndex, position);
+            points = calculate.horizontalPointScored(listIndex, position);
             addPoints(points);
             break;
         case VERTICAL:
             ((SquareGridImpl) grid).setVerticalLine(listIndex, position, this.turn);
-            points = calculate.verticalPointScored(grid, listIndex, position);
+            points = calculate.verticalPointScored(listIndex, position);
             addPoints(points);
             break;
         case DIAGONAL:
@@ -198,19 +198,19 @@ public class GameImpl implements Game {
         CalculatePlayerPoints calculate = new CalculatePlayerPoints(grid);
         switch (getCopyOfLastMove().getListType()) {
         case HORIZONTAL:
-            points = calculate.horizontalPointScored(grid, getCopyOfLastMove().getListIndex(),
+            points = calculate.horizontalPointScored(getCopyOfLastMove().getListIndex(),
                     getCopyOfLastMove().getPosition());
             ((SquareGridImpl) grid).setHorizontalLine(getCopyOfLastMove().getListIndex(),
                     getCopyOfLastMove().getPosition(), GridOption.EMPTY);
-            
+
             addPoints(-points);
             break;
         case VERTICAL:
-            points = calculate.verticalPointScored(grid, getCopyOfLastMove().getListIndex(),
+            points = calculate.verticalPointScored(getCopyOfLastMove().getListIndex(),
                     getCopyOfLastMove().getPosition());
             ((SquareGridImpl) grid).setVerticalLine(getCopyOfLastMove().getListIndex(),
                     getCopyOfLastMove().getPosition(), GridOption.EMPTY);
-            
+
             addPoints(-points);
             break;
         case DIAGONAL:
@@ -218,7 +218,7 @@ public class GameImpl implements Game {
                     getCopyOfLastMove().getPosition());
             ((TriangleGridImpl) grid).setDiagonalLine(getCopyOfLastMove().getListIndex(),
                     getCopyOfLastMove().getPosition(), GridOption.EMPTY);
-            
+
             addPoints(-points);
             break;
         default:
