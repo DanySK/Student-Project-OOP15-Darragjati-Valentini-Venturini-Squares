@@ -8,11 +8,11 @@ import model.interfaces.Player;
  */
 public final class PlayerImpl implements Player {
 
-    private String playerName;
+    private final String playerName;
     private Double winRate;
-    private Integer wonMatches;
-    private Integer totalMatches;
-    private Integer totalPointsScored;
+    private final Integer wonMatches;
+    private final Integer totalMatches;
+    private final Integer totalPointsScored;
 
     // CHECKSTYLE:OFF:
     private PlayerImpl(final String playerName, final Integer wonMatches, final Integer totalMatches,
@@ -22,6 +22,7 @@ public final class PlayerImpl implements Player {
         this.wonMatches = wonMatches;
         this.totalMatches = totalMatches;
         checkCorrectInputs();
+        calculateWinRate();
         this.totalPointsScored = totalPointsScored;
     }
 
@@ -42,7 +43,6 @@ public final class PlayerImpl implements Player {
 
     @Override
     public double getWinRate() {
-        calculateWinRate();
         return this.winRate;
     }
 
@@ -62,50 +62,11 @@ public final class PlayerImpl implements Player {
     }
 
     /**
-     * @param playerName
-     *            the player's name
-     */
-    // CHECKSTYLE:OFF:
-    protected void setPlayerName(final String playerName) {
-        // CHECKSTYLE:ON:
-        this.playerName = playerName;
-    }
-
-    /**
-     * @param wonMatches
-     *            the player's won matches
-     */
-    // CHECKSTYLE:OFF:
-    protected void setWonMatches(final Integer wonMatches) {
-        // CHECKSTYLE:ON:
-        this.wonMatches = wonMatches;
-    }
-
-    /**
-     * @param totalMatches
-     *            the player's total matches
-     */
-    // CHECKSTYLE:OFF:
-    protected void setTotalMatches(final Integer totalMatches) {
-        // CHECKSTYLE:ON:
-        this.totalMatches = totalMatches;
-    }
-
-    /**
-     * @param totalPointsScored
-     *            the player's total squares catched
-     */
-    // CHECKSTYLE:OFF:
-    protected void setTotalPointsScored(final Integer totalPointsScored) {
-        // CHECKSTYLE:ON:
-        this.totalPointsScored = totalPointsScored;
-    }
-
-    /**
      * This Builder is used to configure all the needed fields to create a new
      * player.
      *
      */
+    //CHECKSTYLE:OFF:
     public static class Builder {
         private String playerName;
         private Integer wonMatches;
