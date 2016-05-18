@@ -19,8 +19,8 @@ import model.interfaces.Game;
 
 /**
  * 
- * @author Licia Valentini Classe creata per gestire la partita, dalla prima
- *         all'ultima mossa.
+ * @author Licia Valentini 
+ * Classe creata per gestire la partita, dalla prima all'ultima mossa.
  *
  */
 public class MatchImpl implements Match {
