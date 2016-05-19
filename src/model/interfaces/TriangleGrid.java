@@ -5,7 +5,7 @@ import model.exceptions.UnexistentLineListException;
 
 /**
  * This interface is used to extend the functionalities of the interface
- * BaseGrid. It adds a new way to score points, setting a line in a diagonal
+ * SquareGrid. It adds a new way to score points, setting a line in a diagonal
  * way.
  */
 public interface TriangleGrid extends SquareGrid {

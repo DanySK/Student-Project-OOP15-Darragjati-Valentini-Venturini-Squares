@@ -6,8 +6,8 @@ import model.exceptions.UnexistentLineListException;
 /**
  * This interface is used to create a new playable field with size rowsNumber x
  * columnNumber. It offers the methods to insert a new move in the field, to get
- * which player has inserted a move, to set the current player turn,to get all
- * the possible moves and the remaining ones.
+ * which player has inserted a move, to get all the possible moves and the
+ * remaining ones.
  */
 public interface SquareGrid {
 
