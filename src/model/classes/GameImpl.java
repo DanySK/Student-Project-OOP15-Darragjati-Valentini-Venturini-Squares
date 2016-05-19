@@ -39,7 +39,7 @@ public class GameImpl implements Game {
         this.grid = grid;
         this.matchStarted = false;
         if (grid.getClass().equals(SquareGridImpl.class)) {
-            calculatePoints = new CalculatePlayerPoints(grid);
+            calculatePoints = new SquareGridPointsCounterImpl(grid);
         } else {
             if (grid.getClass().equals(TriangleGridImpl.class)) {
                 calculatePoints = new TriangleGridPointsCounterImpl(grid);

@@ -8,7 +8,7 @@ import model.interfaces.SquareGrid;
 /**
  * This class is used to calculate the points after a player has made a move.
  */
-public class CalculatePlayerPoints implements PointsCounterStrategy {
+public class SquareGridPointsCounterImpl implements PointsCounterStrategy {
 
     private final SquareGrid grid;
 
@@ -19,7 +19,7 @@ public class CalculatePlayerPoints implements PointsCounterStrategy {
      *            the current grid
      */
     // CHECKSTYLE:OFF:
-    public CalculatePlayerPoints(final SquareGrid grid) {
+    public SquareGridPointsCounterImpl(final SquareGrid grid) {
         // CHECKSTYLE:ON:
         this.grid = grid;
     }
