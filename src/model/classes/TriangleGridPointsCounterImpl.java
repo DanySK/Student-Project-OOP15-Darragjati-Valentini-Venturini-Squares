@@ -5,6 +5,10 @@ import model.exceptions.UnexistentLineListException;
 import model.interfaces.PointsCounterStrategy;
 import model.interfaces.SquareGrid;
 
+/**
+ * This class implements the interface PointsCounterStrategy. It is used to
+ * calculate the points in a "triangle game" after a player has made a move.
+ */
 public class TriangleGridPointsCounterImpl implements PointsCounterStrategy {
 
     private final SquareGrid grid;
@@ -55,19 +59,6 @@ public class TriangleGridPointsCounterImpl implements PointsCounterStrategy {
         return points;
     }
 
-    /**
-     * This method calculate the player points after an diagonal line is set.
-     * 
-     * @param listIndex
-     *            is the number of the horizontal list where the player wants to
-     *            set his line
-     * @param position
-     *            is the index of the chosen list where the player wants to set
-     *            the line
-     * @return the points scored
-     * @throws UnexistentLineListException
-     *             if the listIndex input is not correct
-     */
     @Override
     public Integer diagonalPointScored(final Integer listIndex, final Integer position)
             throws UnexistentLineListException {
