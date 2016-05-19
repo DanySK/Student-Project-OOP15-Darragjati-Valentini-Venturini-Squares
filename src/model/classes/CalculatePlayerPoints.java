@@ -2,18 +2,18 @@ package model.classes;
 
 import model.enumerations.GridOption;
 import model.exceptions.UnexistentLineListException;
+import model.interfaces.PointsCounterStrategy;
 import model.interfaces.SquareGrid;
 
 /**
  * This class is used to calculate the points after a player has made a move.
  */
-public class CalculatePlayerPoints {
+public class CalculatePlayerPoints implements PointsCounterStrategy {
 
     private final SquareGrid grid;
 
     /**
-     * The consctructor takes in input the grid to determinate how to calculate
-     * the points.
+     * The consctructor takes in input the current playable grid.
      * 
      * @param grid
      *            the current grid
@@ -37,35 +37,21 @@ public class CalculatePlayerPoints {
      * @throws UnexistentLineListException
      *             if the listIndex input is not correct
      */
-    protected Integer horizontalPointScored(final Integer listIndex, final Integer position)
+    @Override
+    public Integer horizontalPointScored(final Integer listIndex, final Integer position)
             throws UnexistentLineListException {
-        int points = 0;
-        if (this.grid.getClass().equals(SquareGridImpl.class)) {
-            if (listIndex > 0 && !grid.getCopyOfHorizontalElement(listIndex - 1, position).equals(GridOption.EMPTY)
-                    && !grid.getCopyOfVerticalElement(position, listIndex - 1).equals(GridOption.EMPTY)
-                    && !grid.getCopyOfVerticalElement(position + 1, listIndex - 1).equals(GridOption.EMPTY)) {
-                points++;
-            }
-            if (listIndex < grid.getHorizontalListSize() - 1
-                    && !grid.getCopyOfHorizontalElement(listIndex + 1, position).equals(GridOption.EMPTY)
-                    && !grid.getCopyOfVerticalElement(position, listIndex - 1).equals(GridOption.EMPTY)
-                    && !grid.getCopyOfVerticalElement(position + 1, listIndex - 1).equals(GridOption.EMPTY)) {
-                points++;
-
-            }
+        Integer points = 0;
+        if (listIndex > 0 && !grid.getCopyOfHorizontalElement(listIndex - 1, position).equals(GridOption.EMPTY)
+                && !grid.getCopyOfVerticalElement(position, listIndex - 1).equals(GridOption.EMPTY)
+                && !grid.getCopyOfVerticalElement(position + 1, listIndex - 1).equals(GridOption.EMPTY)) {
+            points++;
         }
-        if (this.grid.getClass().equals(TriangleGridImpl.class)) {
-            if (listIndex > 0 && !grid.getCopyOfVerticalElement(position, listIndex - 1).equals(GridOption.EMPTY)
-                    && !((TriangleGridImpl) grid).getCopyOfDiagonalElement(listIndex - 1, position)
-                            .equals(GridOption.EMPTY)) {
-                points++;
-            }
-            if (listIndex < grid.getHorizontalListSize() - 1
-                    && !grid.getCopyOfVerticalElement(position + 1, listIndex).equals(GridOption.EMPTY)
-                    && !((TriangleGridImpl) grid).getCopyOfDiagonalElement(listIndex, position)
-                            .equals(GridOption.EMPTY)) {
-                points++;
-            }
+        if (listIndex < grid.getHorizontalListSize() - 1
+                && !grid.getCopyOfHorizontalElement(listIndex + 1, position).equals(GridOption.EMPTY)
+                && !grid.getCopyOfVerticalElement(position, listIndex - 1).equals(GridOption.EMPTY)
+                && !grid.getCopyOfVerticalElement(position + 1, listIndex - 1).equals(GridOption.EMPTY)) {
+            points++;
+
         }
         return points;
     }
@@ -83,34 +69,20 @@ public class CalculatePlayerPoints {
      * @throws UnexistentLineListException
      *             if the listIndex input is not correct
      */
-    protected Integer verticalPointScored(final Integer listIndex, final Integer position)
+    @Override
+    public Integer verticalPointScored(final Integer listIndex, final Integer position)
             throws UnexistentLineListException {
-        int points = 0;
-        if (this.grid.getClass().equals(SquareGridImpl.class)) {
-            if (listIndex > 0 && !grid.getCopyOfVerticalElement(listIndex - 1, position).equals(GridOption.EMPTY)
-                    && !grid.getCopyOfHorizontalElement(position, listIndex - 1).equals(GridOption.EMPTY)
-                    && !grid.getCopyOfHorizontalElement(position + 1, listIndex - 1).equals(GridOption.EMPTY)) {
-                points++;
-            }
-            if (listIndex < grid.getVerticalListSize() - 1
-                    && !grid.getCopyOfVerticalElement(listIndex + 1, position).equals(GridOption.EMPTY)
-                    && !grid.getCopyOfHorizontalElement(position, listIndex - 1).equals(GridOption.EMPTY)
-                    && !grid.getCopyOfHorizontalElement(position + 1, listIndex - 1).equals(GridOption.EMPTY)) {
-                points++;
-            }
+        Integer points = 0;
+        if (listIndex > 0 && !grid.getCopyOfVerticalElement(listIndex - 1, position).equals(GridOption.EMPTY)
+                && !grid.getCopyOfHorizontalElement(position, listIndex - 1).equals(GridOption.EMPTY)
+                && !grid.getCopyOfHorizontalElement(position + 1, listIndex - 1).equals(GridOption.EMPTY)) {
+            points++;
         }
-        if (this.grid.getClass().equals(TriangleGridImpl.class)) {
-            if (listIndex > 0 && !grid.getCopyOfHorizontalElement(position, listIndex - 1).equals(GridOption.EMPTY)
-                    && !((TriangleGridImpl) grid).getCopyOfDiagonalElement(position, listIndex - 1)
-                            .equals(GridOption.EMPTY)) {
-                points++;
-            }
-            if (listIndex < grid.getVerticalListSize() - 1
-                    && !grid.getCopyOfHorizontalElement(position + 1, listIndex).equals(GridOption.EMPTY)
-                    && !((TriangleGridImpl) grid).getCopyOfDiagonalElement(position, listIndex)
-                            .equals(GridOption.EMPTY)) {
-                points++;
-            }
+        if (listIndex < grid.getVerticalListSize() - 1
+                && !grid.getCopyOfVerticalElement(listIndex + 1, position).equals(GridOption.EMPTY)
+                && !grid.getCopyOfHorizontalElement(position, listIndex - 1).equals(GridOption.EMPTY)
+                && !grid.getCopyOfHorizontalElement(position + 1, listIndex - 1).equals(GridOption.EMPTY)) {
+            points++;
         }
         return points;
     }
@@ -128,17 +100,9 @@ public class CalculatePlayerPoints {
      * @throws UnexistentLineListException
      *             if the listIndex input is not correct
      */
-    protected Integer diagonalPointScored(final Integer listIndex, final Integer position)
+    @Override
+    public Integer diagonalPointScored(final Integer listIndex, final Integer position)
             throws UnexistentLineListException {
-        int points = 0;
-        if (!grid.getCopyOfHorizontalElement(listIndex, position).equals(GridOption.EMPTY)
-                && !grid.getCopyOfVerticalElement(position + 1, listIndex).equals(GridOption.EMPTY)) {
-            points++;
-        }
-        if (!grid.getCopyOfHorizontalElement(listIndex + 1, position).equals(GridOption.EMPTY)
-                && !grid.getCopyOfVerticalElement(position, listIndex).equals(GridOption.EMPTY)) {
-            points++;
-        }
-        return points;
+        throw new UnsupportedOperationException();
     }
 }

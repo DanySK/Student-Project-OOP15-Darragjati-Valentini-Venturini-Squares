@@ -9,6 +9,7 @@ import model.exceptions.NoMovesDoneException;
 import model.exceptions.UnexistentLineListException;
 import model.interfaces.SquareGrid;
 import model.interfaces.Move;
+import model.interfaces.PointsCounterStrategy;
 import model.interfaces.Game;
 
 /**
@@ -24,6 +25,7 @@ public class GameImpl implements Game {
     private static final Integer INITIAL_SCORE = 0;
     private GridOption turn = GridOption.EMPTY;
     private final List<Move> lastMoveList = new ArrayList<>();
+    private final PointsCounterStrategy calculatePoints;
 
     /**
      * This constructor takes an object that implements BaseGrid.
@@ -36,6 +38,15 @@ public class GameImpl implements Game {
         // CHECKSTYLE:ON:
         this.grid = grid;
         this.matchStarted = false;
+        if (grid.getClass().equals(SquareGridImpl.class)) {
+            calculatePoints = new CalculatePlayerPoints(grid);
+        } else {
+            if (grid.getClass().equals(TriangleGridImpl.class)) {
+                calculatePoints = new TriangleGridPointsCounterImpl(grid);
+            } else {
+                throw new IllegalArgumentException();
+            }
+        }
     }
 
     @Override
@@ -140,10 +151,9 @@ public class GameImpl implements Game {
         final ListType list = move.getListType();
         final Integer listIndex = move.getListIndex();
         final Integer position = move.getPosition();
-        final CalculatePlayerPoints calculatePoints = new CalculatePlayerPoints(grid);
         switch (list) {
         case HORIZONTAL:
-            ((SquareGridImpl) grid).setHorizontalLine(listIndex, position, this.turn);           
+            ((SquareGridImpl) grid).setHorizontalLine(listIndex, position, this.turn);
             addPoints(calculatePoints.horizontalPointScored(listIndex, position));
             break;
         case VERTICAL:
@@ -192,7 +202,6 @@ public class GameImpl implements Game {
             throw new NoMovesDoneException();
         }
         Integer points = 0;
-        final CalculatePlayerPoints calculatePoints = new CalculatePlayerPoints(grid);
         switch (getCopyOfLastMove().getListType()) {
         case HORIZONTAL:
             points = calculatePoints.horizontalPointScored(getCopyOfLastMove().getListIndex(),
