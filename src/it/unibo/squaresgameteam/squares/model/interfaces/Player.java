@@ -1,4 +1,4 @@
-package model.interfaces;
+package it.unibo.squaresgameteam.squares.model.interfaces;
 
 /**
  * This interface is used to organize the player's statistics. It offers getter

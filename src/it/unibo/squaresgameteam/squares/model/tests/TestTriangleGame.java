@@ -1,4 +1,4 @@
-package model.tests;
+package it.unibo.squaresgameteam.squares.model.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -7,18 +7,18 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import model.classes.GameImpl;
-import model.classes.MoveImpl;
-import model.classes.TriangleGridImpl;
-import model.enumerations.GridOption;
-import model.enumerations.ListType;
-import model.exceptions.UnsupportedSizeException;
-import model.exceptions.NoMovesDoneException;
-import model.exceptions.UnexistentLineListException;
-import model.interfaces.SquareGrid;
-import model.interfaces.TriangleGrid;
-import model.interfaces.Game;
-import model.interfaces.Move;
+import it.unibo.squaresgameteam.squares.model.classes.GameImpl;
+import it.unibo.squaresgameteam.squares.model.classes.MoveImpl;
+import it.unibo.squaresgameteam.squares.model.classes.TriangleGridImpl;
+import it.unibo.squaresgameteam.squares.model.enumerations.GridOption;
+import it.unibo.squaresgameteam.squares.model.enumerations.ListType;
+import it.unibo.squaresgameteam.squares.model.exceptions.UnsupportedSizeException;
+import it.unibo.squaresgameteam.squares.model.exceptions.NoMovesDoneException;
+import it.unibo.squaresgameteam.squares.model.exceptions.UnexistentLineListException;
+import it.unibo.squaresgameteam.squares.model.interfaces.SquareGrid;
+import it.unibo.squaresgameteam.squares.model.interfaces.TriangleGrid;
+import it.unibo.squaresgameteam.squares.model.interfaces.Game;
+import it.unibo.squaresgameteam.squares.model.interfaces.Move;
 
 /**
  * This class simulates the possible moves of a game. The games rules are

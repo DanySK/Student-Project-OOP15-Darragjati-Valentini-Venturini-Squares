@@ -1,4 +1,4 @@
-package model.enumerations;
+package it.unibo.squaresgameteam.squares.model.enumerations;
 
 /**
  * This enum is used to order the ranking. The players can choose between four

@@ -1,16 +1,16 @@
-package model.classes;
+package it.unibo.squaresgameteam.squares.model.classes;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import model.enumerations.GridOption;
-import model.enumerations.ListType;
-import model.exceptions.NoMovesDoneException;
-import model.exceptions.UnexistentLineListException;
-import model.interfaces.SquareGrid;
-import model.interfaces.Move;
-import model.interfaces.PointsCounterStrategy;
-import model.interfaces.Game;
+import it.unibo.squaresgameteam.squares.model.enumerations.GridOption;
+import it.unibo.squaresgameteam.squares.model.enumerations.ListType;
+import it.unibo.squaresgameteam.squares.model.exceptions.NoMovesDoneException;
+import it.unibo.squaresgameteam.squares.model.exceptions.UnexistentLineListException;
+import it.unibo.squaresgameteam.squares.model.interfaces.SquareGrid;
+import it.unibo.squaresgameteam.squares.model.interfaces.Move;
+import it.unibo.squaresgameteam.squares.model.interfaces.PointsCounterStrategy;
+import it.unibo.squaresgameteam.squares.model.interfaces.Game;
 
 /**
  * This class is used to start a new match and all the things related to it,

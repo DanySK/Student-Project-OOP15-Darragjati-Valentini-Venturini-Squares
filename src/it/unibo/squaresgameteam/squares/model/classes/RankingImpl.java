@@ -1,4 +1,4 @@
-package model.classes;
+package it.unibo.squaresgameteam.squares.model.classes;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,10 +7,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import model.enumerations.RankingOption;
-import model.exceptions.DuplicatedPlayerStatsException;
-import model.interfaces.Player;
-import model.interfaces.Ranking;
+import it.unibo.squaresgameteam.squares.model.enumerations.RankingOption;
+import it.unibo.squaresgameteam.squares.model.exceptions.DuplicatedPlayerStatsException;
+import it.unibo.squaresgameteam.squares.model.interfaces.Player;
+import it.unibo.squaresgameteam.squares.model.interfaces.Ranking;
 
 /**
  * This class implements the interface Ranking. It is used to manage the ranking

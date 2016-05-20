@@ -1,7 +1,7 @@
-package model.interfaces;
+package it.unibo.squaresgameteam.squares.model.interfaces;
 
-import model.enumerations.GridOption;
-import model.exceptions.UnexistentLineListException;
+import it.unibo.squaresgameteam.squares.model.enumerations.GridOption;
+import it.unibo.squaresgameteam.squares.model.exceptions.UnexistentLineListException;
 
 /**
  * This interface is used to create a new playable field with size rowsNumber x

@@ -1,4 +1,4 @@
-package main;
+package it.unibo.squaresgameteam.squares.main;
 
 import controller.interfaces.Menu;
 

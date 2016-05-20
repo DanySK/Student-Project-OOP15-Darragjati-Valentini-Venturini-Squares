@@ -1,4 +1,4 @@
-package model.tests;
+package it.unibo.squaresgameteam.squares.model.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
 
-import model.classes.PlayerImpl;
-import model.classes.RankingImpl;
-import model.enumerations.RankingOption;
-import model.exceptions.DuplicatedPlayerStatsException;
-import model.interfaces.Player;
+import it.unibo.squaresgameteam.squares.model.classes.PlayerImpl;
+import it.unibo.squaresgameteam.squares.model.classes.RankingImpl;
+import it.unibo.squaresgameteam.squares.model.enumerations.RankingOption;
+import it.unibo.squaresgameteam.squares.model.exceptions.DuplicatedPlayerStatsException;
+import it.unibo.squaresgameteam.squares.model.interfaces.Player;
 
 /**
  * Test the options offered by the class RankingImpl.

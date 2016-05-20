@@ -1,6 +1,6 @@
-package model.interfaces;
+package it.unibo.squaresgameteam.squares.model.interfaces;
 
-import model.enumerations.ListType;
+import it.unibo.squaresgameteam.squares.model.enumerations.ListType;
 
 /**
  * This interface is used to organize move done by one of the two

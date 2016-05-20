@@ -1,9 +1,9 @@
-package model.classes;
+package it.unibo.squaresgameteam.squares.model.classes;
 
-import model.enumerations.GridOption;
-import model.exceptions.UnexistentLineListException;
-import model.interfaces.PointsCounterStrategy;
-import model.interfaces.SquareGrid;
+import it.unibo.squaresgameteam.squares.model.enumerations.GridOption;
+import it.unibo.squaresgameteam.squares.model.exceptions.UnexistentLineListException;
+import it.unibo.squaresgameteam.squares.model.interfaces.PointsCounterStrategy;
+import it.unibo.squaresgameteam.squares.model.interfaces.SquareGrid;
 
 /**
  * This class implements the interface PointsCounterStrategy. It is used to

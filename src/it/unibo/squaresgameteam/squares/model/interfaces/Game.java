@@ -1,8 +1,8 @@
-package model.interfaces;
+package it.unibo.squaresgameteam.squares.model.interfaces;
 
-import model.enumerations.GridOption;
-import model.exceptions.NoMovesDoneException;
-import model.exceptions.UnexistentLineListException;
+import it.unibo.squaresgameteam.squares.model.enumerations.GridOption;
+import it.unibo.squaresgameteam.squares.model.exceptions.NoMovesDoneException;
+import it.unibo.squaresgameteam.squares.model.exceptions.UnexistentLineListException;
 
 /**
  * This interface is used to manage a match. The main methods the players can

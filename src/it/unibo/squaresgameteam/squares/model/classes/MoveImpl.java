@@ -1,7 +1,7 @@
-package model.classes;
+package it.unibo.squaresgameteam.squares.model.classes;
 
-import model.enumerations.ListType;
-import model.interfaces.Move;
+import it.unibo.squaresgameteam.squares.model.enumerations.ListType;
+import it.unibo.squaresgameteam.squares.model.interfaces.Move;
 
 /**
  * This class implements the interface Move and it is used to set the necessary

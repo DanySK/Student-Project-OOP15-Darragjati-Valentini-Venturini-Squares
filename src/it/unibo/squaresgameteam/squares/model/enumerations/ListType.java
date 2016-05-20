@@ -1,4 +1,4 @@
-package model.enumerations;
+package it.unibo.squaresgameteam.squares.model.enumerations;
 
 /**
  * This enum represents wich one of the lists is chosen to make a move.

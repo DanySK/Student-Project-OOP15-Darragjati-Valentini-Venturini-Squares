@@ -1,4 +1,4 @@
-package model.interfaces;
+package it.unibo.squaresgameteam.squares.model.interfaces;
 
 /**
  * This interface is used to calculate the total time spent playing the game.

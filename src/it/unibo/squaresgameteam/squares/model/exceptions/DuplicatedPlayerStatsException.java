@@ -1,4 +1,4 @@
-package model.exceptions;
+package it.unibo.squaresgameteam.squares.model.exceptions;
 
 /**
  * This exception is thrown when in the ranking list are found two players with

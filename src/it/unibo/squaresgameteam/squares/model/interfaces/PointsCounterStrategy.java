@@ -1,6 +1,6 @@
-package model.interfaces;
+package it.unibo.squaresgameteam.squares.model.interfaces;
 
-import model.exceptions.UnexistentLineListException;
+import it.unibo.squaresgameteam.squares.model.exceptions.UnexistentLineListException;
 
 /**
  * This interface is used to calculate the player's points after they have done

@@ -1,14 +1,14 @@
-package model.classes;
+package it.unibo.squaresgameteam.squares.model.classes;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import model.enumerations.GridOption;
-import model.exceptions.UnsupportedSizeException;
-import model.exceptions.MoveAlreadyDoneException;
-import model.exceptions.MoveNotFoundException;
-import model.exceptions.UnexistentLineListException;
-import model.interfaces.SquareGrid;
+import it.unibo.squaresgameteam.squares.model.enumerations.GridOption;
+import it.unibo.squaresgameteam.squares.model.exceptions.UnsupportedSizeException;
+import it.unibo.squaresgameteam.squares.model.exceptions.MoveAlreadyDoneException;
+import it.unibo.squaresgameteam.squares.model.exceptions.MoveNotFoundException;
+import it.unibo.squaresgameteam.squares.model.exceptions.UnexistentLineListException;
+import it.unibo.squaresgameteam.squares.model.interfaces.SquareGrid;
 
 /**
  * This class implements the methods of the interface SquereGrid. It is used to

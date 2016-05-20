@@ -1,4 +1,4 @@
-package model.exceptions;
+package it.unibo.squaresgameteam.squares.model.exceptions;
 
 /**
  * This exception is thrown when the method undo is called and noone has done a

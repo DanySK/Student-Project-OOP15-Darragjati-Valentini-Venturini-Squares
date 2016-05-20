@@ -1,4 +1,4 @@
-package model.exceptions;
+package it.unibo.squaresgameteam.squares.model.exceptions;
 
 /**
  * This exception is thrown when a player tries to insert a move that was done

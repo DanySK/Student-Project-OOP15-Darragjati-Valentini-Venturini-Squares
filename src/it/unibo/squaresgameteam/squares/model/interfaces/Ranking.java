@@ -1,7 +1,9 @@
-package model.interfaces;
+package it.unibo.squaresgameteam.squares.model.interfaces;
 
 import java.util.List;
-import model.enumerations.RankingOption;
+
+import it.unibo.squaresgameteam.squares.model.enumerations.RankingOption;
+
 
 /**
  * This interface assigns the last two players match results and organizes them 

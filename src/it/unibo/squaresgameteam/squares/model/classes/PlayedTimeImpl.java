@@ -1,7 +1,7 @@
-package model.classes;
+package it.unibo.squaresgameteam.squares.model.classes;
 
-import model.interfaces.PlayedTime;
-import model.interfaces.Game;
+import it.unibo.squaresgameteam.squares.model.interfaces.PlayedTime;
+import it.unibo.squaresgameteam.squares.model.interfaces.Game;
 
 /**
  * This class implements the methods of the interface PlayedTime. It offers the
