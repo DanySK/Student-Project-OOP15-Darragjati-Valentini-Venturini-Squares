@@ -1,10 +1,11 @@
 package it.unibo.squaresgameteam.squares.main;
 
-import controller.interfaces.Menu;
-
 import java.io.IOException;
 
-import controller.classes.MenuImpl;
+import it.unibo.squaresgameteam.squares.controller.classes.MenuImpl;
+import it.unibo.squaresgameteam.squares.controller.interfaces.Menu;
+
+
 
 /**
  * 

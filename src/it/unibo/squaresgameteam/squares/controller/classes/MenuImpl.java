@@ -1,4 +1,4 @@
-package controller.classes;
+package it.unibo.squaresgameteam.squares.controller.classes;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -8,8 +8,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import controller.interfaces.Menu;
-import controller.interfaces.ShowRanking;
+import it.unibo.squaresgameteam.squares.controller.interfaces.Menu;
+import it.unibo.squaresgameteam.squares.controller.interfaces.ShowRanking;
 
 public class MenuImpl implements Menu {
 

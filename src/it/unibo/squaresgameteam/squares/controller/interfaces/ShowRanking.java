@@ -1,6 +1,6 @@
-package controller.interfaces;
+package it.unibo.squaresgameteam.squares.controller.interfaces;
 
-import model.enumerations.RankingOption;
+import it.unibo.squaresgameteam.squares.model.enumerations.RankingOption;
 /**
  * 
  * @author Licia Valentini

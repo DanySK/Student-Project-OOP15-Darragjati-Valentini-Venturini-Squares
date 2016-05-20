@@ -1,6 +1,6 @@
-package controller.classes;
+package it.unibo.squaresgameteam.squares.controller.classes;
 
-import controller.interfaces.Setting;
+import it.unibo.squaresgameteam.squares.controller.interfaces.Setting;
 
 public class SettingImpl implements Setting {
 

@@ -1,21 +1,21 @@
-package controller.classes;
+package it.unibo.squaresgameteam.squares.controller.classes;
 
-import controller.enumerations.TypeGame;
-import controller.interfaces.Match;
-import model.classes.SquareGridImpl;
-import model.classes.GameImpl;
-import model.classes.MoveImpl;
-import model.classes.PlayedTimeImpl;
-import model.classes.TriangleGridImpl;
-import model.enumerations.GridOption;
-import model.enumerations.ListType;
-import model.exceptions.UnsupportedSizeException;
-import model.exceptions.NoMovesDoneException;
-import model.exceptions.UnexistentLineListException;
-import model.interfaces.SquareGrid;
-import model.interfaces.Move;
-import model.interfaces.PlayedTime;
-import model.interfaces.Game;
+import it.unibo.squaresgameteam.squares.controller.enumerations.TypeGame;
+import it.unibo.squaresgameteam.squares.controller.interfaces.Match;
+import it.unibo.squaresgameteam.squares.model.classes.SquareGridImpl;
+import it.unibo.squaresgameteam.squares.model.classes.GameImpl;
+import it.unibo.squaresgameteam.squares.model.classes.MoveImpl;
+import it.unibo.squaresgameteam.squares.model.classes.PlayedTimeImpl;
+import it.unibo.squaresgameteam.squares.model.classes.TriangleGridImpl;
+import it.unibo.squaresgameteam.squares.model.enumerations.GridOption;
+import it.unibo.squaresgameteam.squares.model.enumerations.ListType;
+import it.unibo.squaresgameteam.squares.model.exceptions.UnsupportedSizeException;
+import it.unibo.squaresgameteam.squares.model.exceptions.NoMovesDoneException;
+import it.unibo.squaresgameteam.squares.model.exceptions.UnexistentLineListException;
+import it.unibo.squaresgameteam.squares.model.interfaces.SquareGrid;
+import it.unibo.squaresgameteam.squares.model.interfaces.Move;
+import it.unibo.squaresgameteam.squares.model.interfaces.PlayedTime;
+import it.unibo.squaresgameteam.squares.model.interfaces.Game;
 
 /**
  * 

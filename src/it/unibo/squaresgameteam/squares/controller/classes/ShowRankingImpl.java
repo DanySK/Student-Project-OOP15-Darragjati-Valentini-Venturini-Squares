@@ -1,4 +1,4 @@
-package controller.classes;
+package it.unibo.squaresgameteam.squares.controller.classes;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import controller.interfaces.ShowRanking;
-import model.classes.PlayerImpl;
-import model.classes.RankingImpl;
-import model.enumerations.RankingOption;
-import model.exceptions.DuplicatedPlayerStatsException;
-import model.interfaces.Player;
+import it.unibo.squaresgameteam.squares.controller.interfaces.ShowRanking;
+import it.unibo.squaresgameteam.squares.model.classes.PlayerImpl;
+import it.unibo.squaresgameteam.squares.model.classes.RankingImpl;
+import it.unibo.squaresgameteam.squares.model.enumerations.RankingOption;
+import it.unibo.squaresgameteam.squares.model.exceptions.DuplicatedPlayerStatsException;
+import it.unibo.squaresgameteam.squares.model.interfaces.Player;
 
 public class ShowRankingImpl implements ShowRanking {
 

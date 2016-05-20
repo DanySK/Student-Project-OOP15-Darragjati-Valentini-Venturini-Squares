@@ -1,10 +1,10 @@
-package controller.interfaces;
+package it.unibo.squaresgameteam.squares.controller.interfaces;
 
-import model.enumerations.ListType;
-import model.exceptions.UnsupportedSizeException;
-import model.exceptions.NoMovesDoneException;
-import model.exceptions.UnexistentLineListException;
-import model.interfaces.Move;
+import it.unibo.squaresgameteam.squares.model.enumerations.ListType;
+import it.unibo.squaresgameteam.squares.model.exceptions.UnsupportedSizeException;
+import it.unibo.squaresgameteam.squares.model.exceptions.NoMovesDoneException;
+import it.unibo.squaresgameteam.squares.model.exceptions.UnexistentLineListException;
+import it.unibo.squaresgameteam.squares.model.interfaces.Move;
 /**
  * Interfaccia della classe MatchImpl.
  * @author Licia Valentini
@@ -25,9 +25,9 @@ public interface Match {
     String createNewMatch();
     
     /**
-     * Metodo che permette di aggiungere una mossa e controlla se la partita è finita.
-     * @param direction Verticale, orizzontale o diagonale (se la griglia è triangolare).
-     * @param numLine Numero linea in cui è posta la mossa.
+     * Metodo che permette di aggiungere una mossa e controlla se la partita ï¿½ finita.
+     * @param direction Verticale, orizzontale o diagonale (se la griglia ï¿½ triangolare).
+     * @param numLine Numero linea in cui ï¿½ posta la mossa.
      * @param position Posizione nella linea della mossa.
      * @return Nome del giocatore che deve fare la prossima mossa
      * @throws UnexistentLineListException

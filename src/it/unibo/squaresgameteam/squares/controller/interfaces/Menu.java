@@ -1,4 +1,4 @@
-package controller.interfaces;
+package it.unibo.squaresgameteam.squares.controller.interfaces;
 
 import java.io.IOException;
 
