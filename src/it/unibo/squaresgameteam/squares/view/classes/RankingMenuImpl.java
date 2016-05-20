@@ -1,6 +1,6 @@
-package view.classes;
+package it.unibo.squaresgameteam.squares.view.classes;
 
-import view.interfaces.*;
+import it.unibo.squaresgameteam.squares.view.interfaces.*;
 
 public class RankingMenuImpl implements RankingMenu {
 

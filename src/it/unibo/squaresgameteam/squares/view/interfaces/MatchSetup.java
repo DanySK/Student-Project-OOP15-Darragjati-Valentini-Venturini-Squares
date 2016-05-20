@@ -1,4 +1,4 @@
-package view.interfaces;
+package it.unibo.squaresgameteam.squares.view.interfaces;
 
 /**
  * This interface is used to set all the needed fields before starting the new

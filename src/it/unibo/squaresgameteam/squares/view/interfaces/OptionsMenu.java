@@ -1,4 +1,4 @@
-package view.interfaces;
+package it.unibo.squaresgameteam.squares.view.interfaces;
 
 /**
  * This interface is used to custom the application's interface. The user can
