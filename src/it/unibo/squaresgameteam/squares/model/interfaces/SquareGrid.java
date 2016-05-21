@@ -22,26 +22,34 @@ public interface SquareGrid {
     Integer getRemainingMoves();
 
     /**
+     * This method is used to know which one of the two players has set the
+     * horizontal line.
+     * 
      * @param listIndex
      *            is the number of the horizontal list where the player wants to
      *            get the line
      * @param position
      *            is the index of the chosen list where the player wants to get
      *            the line
-     * @return which one of the two players has set the move
+     * @return which one of the two players has set the move, it is
+     *         GridOption.Empty if noone has set the line
      * @throws UnexistentLineListException
      *             if the listIndex input is not correct
      */
     GridOption getHorizontalLinePlayer(Integer listIndex, Integer position) throws UnexistentLineListException;
 
     /**
+     * This method is used to know which one of the two players has set the
+     * vertical line.
+     * 
      * @param listIndex
      *            is the number of the vertical list where the player wants to
      *            get the line
      * @param position
      *            is the index of the chosen list where the player wants to get
      *            the line
-     * @return which one of the two players has set the move
+     * @return which one of the two players has set the move, it is
+     *         GridOption.Empty if noone has set the line
      * @throws UnexistentLineListException
      *             if the listIndex input is not correct
      */

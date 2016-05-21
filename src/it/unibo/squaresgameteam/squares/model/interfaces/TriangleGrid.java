@@ -11,13 +11,17 @@ import it.unibo.squaresgameteam.squares.model.exceptions.UnexistentLineListExcep
 public interface TriangleGrid extends SquareGrid {
 
     /**
+     * This method is used to know which one of the two players has set the
+     * diagonal line.
+     * 
      * @param listIndex
      *            is the number of the diagonal list where the player wants to
      *            get the line
      * @param position
      *            is the position of the chosen list where the player wants to
      *            get the line
-     * @return which one of the two players has set the move
+     * @return which one of the two players has set the move, it is
+     *         GridOption.Empty if noone has set the line
      * @throws UnexistentLineListException
      *             if the rowsNumber or the coulumnsNumber aren't correct
      */
