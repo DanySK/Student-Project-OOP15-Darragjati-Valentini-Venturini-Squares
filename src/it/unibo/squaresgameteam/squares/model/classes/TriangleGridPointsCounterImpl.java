@@ -29,14 +29,14 @@ public class TriangleGridPointsCounterImpl implements PointsCounterStrategy {
     public Integer horizontalPointScored(final Integer listIndex, final Integer position)
             throws UnexistentLineListException {
         Integer points = 0;
-        if (listIndex > 0 && !grid.getCopyOfVerticalElement(position, listIndex - 1).equals(GridOption.EMPTY)
-                && !((TriangleGridImpl) grid).getCopyOfDiagonalElement(listIndex - 1, position)
+        if (listIndex > 0 && !grid.getVerticalLinePlayer(position, listIndex - 1).equals(GridOption.EMPTY)
+                && !((TriangleGridImpl) grid).getDiagonalLinePlayer(listIndex - 1, position)
                         .equals(GridOption.EMPTY)) {
             points++;
         }
         if (listIndex < grid.getHorizontalListSize() - 1
-                && !grid.getCopyOfVerticalElement(position + 1, listIndex).equals(GridOption.EMPTY)
-                && !((TriangleGridImpl) grid).getCopyOfDiagonalElement(listIndex, position).equals(GridOption.EMPTY)) {
+                && !grid.getVerticalLinePlayer(position + 1, listIndex).equals(GridOption.EMPTY)
+                && !((TriangleGridImpl) grid).getDiagonalLinePlayer(listIndex, position).equals(GridOption.EMPTY)) {
             points++;
         }
         return points;
@@ -46,14 +46,14 @@ public class TriangleGridPointsCounterImpl implements PointsCounterStrategy {
     public Integer verticalPointScored(final Integer listIndex, final Integer position)
             throws UnexistentLineListException {
         Integer points = 0;
-        if (listIndex > 0 && !grid.getCopyOfHorizontalElement(position, listIndex - 1).equals(GridOption.EMPTY)
-                && !((TriangleGridImpl) grid).getCopyOfDiagonalElement(position, listIndex - 1)
+        if (listIndex > 0 && !grid.getHorizontalLinePlayer(position, listIndex - 1).equals(GridOption.EMPTY)
+                && !((TriangleGridImpl) grid).getDiagonalLinePlayer(position, listIndex - 1)
                         .equals(GridOption.EMPTY)) {
             points++;
         }
         if (listIndex < grid.getVerticalListSize() - 1
-                && !grid.getCopyOfHorizontalElement(position + 1, listIndex).equals(GridOption.EMPTY)
-                && !((TriangleGridImpl) grid).getCopyOfDiagonalElement(position, listIndex).equals(GridOption.EMPTY)) {
+                && !grid.getHorizontalLinePlayer(position + 1, listIndex).equals(GridOption.EMPTY)
+                && !((TriangleGridImpl) grid).getDiagonalLinePlayer(position, listIndex).equals(GridOption.EMPTY)) {
             points++;
         }
         return points;
@@ -63,12 +63,12 @@ public class TriangleGridPointsCounterImpl implements PointsCounterStrategy {
     public Integer diagonalPointScored(final Integer listIndex, final Integer position)
             throws UnexistentLineListException {
         Integer points = 0;
-        if (!grid.getCopyOfHorizontalElement(listIndex, position).equals(GridOption.EMPTY)
-                && !grid.getCopyOfVerticalElement(position + 1, listIndex).equals(GridOption.EMPTY)) {
+        if (!grid.getHorizontalLinePlayer(listIndex, position).equals(GridOption.EMPTY)
+                && !grid.getVerticalLinePlayer(position + 1, listIndex).equals(GridOption.EMPTY)) {
             points++;
         }
-        if (!grid.getCopyOfHorizontalElement(listIndex + 1, position).equals(GridOption.EMPTY)
-                && !grid.getCopyOfVerticalElement(position, listIndex).equals(GridOption.EMPTY)) {
+        if (!grid.getHorizontalLinePlayer(listIndex + 1, position).equals(GridOption.EMPTY)
+                && !grid.getVerticalLinePlayer(position, listIndex).equals(GridOption.EMPTY)) {
             points++;
         }
         return points;

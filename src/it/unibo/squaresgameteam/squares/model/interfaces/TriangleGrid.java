@@ -21,7 +21,7 @@ public interface TriangleGrid extends SquareGrid {
      * @throws UnexistentLineListException
      *             if the rowsNumber or the coulumnsNumber aren't correct
      */
-    GridOption getCopyOfDiagonalElement(final int listIndex, int position) throws UnexistentLineListException;
+    GridOption getDiagonalLinePlayer(final int listIndex, int position) throws UnexistentLineListException;
 
     /**
      * @return the number of diagonal lists that makes the grid.

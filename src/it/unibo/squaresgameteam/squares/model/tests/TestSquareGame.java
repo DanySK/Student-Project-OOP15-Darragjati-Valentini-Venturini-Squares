@@ -49,12 +49,12 @@ public class TestSquareGame {
         // verifies that every element in the lists is initialized as EMPTY
         for (int i = 0; i < HORIZONTAL_SIZE + 1; i++) {
             for (int z = 0; z < HORIZONTAL_SIZE; z++) {
-                assertEquals(squareGrid.getCopyOfHorizontalElement(i, z), GridOption.EMPTY);
+                assertEquals(squareGrid.getHorizontalLinePlayer(i, z), GridOption.EMPTY);
             }
         }
         for (int i = 0; i < VERTICAL_SIZE + 1; i++) {
             for (int z = 0; z < VERTICAL_SIZE; z++) {
-                assertEquals(squareGrid.getCopyOfVerticalElement(i, z), GridOption.EMPTY);
+                assertEquals(squareGrid.getVerticalLinePlayer(i, z), GridOption.EMPTY);
             }
         }
         assertFalse(gridOfSize.isStarted());

@@ -32,7 +32,7 @@ public interface SquareGrid {
      * @throws UnexistentLineListException
      *             if the listIndex input is not correct
      */
-    GridOption getCopyOfHorizontalElement(Integer listIndex, Integer position) throws UnexistentLineListException;
+    GridOption getHorizontalLinePlayer(Integer listIndex, Integer position) throws UnexistentLineListException;
 
     /**
      * @param listIndex
@@ -45,7 +45,7 @@ public interface SquareGrid {
      * @throws UnexistentLineListException
      *             if the listIndex input is not correct
      */
-    GridOption getCopyOfVerticalElement(Integer listIndex, Integer position) throws UnexistentLineListException;
+    GridOption getVerticalLinePlayer(Integer listIndex, Integer position) throws UnexistentLineListException;
 
     /**
      * @return the number of horizontal lists that makes the grid.

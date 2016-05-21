@@ -48,17 +48,17 @@ public class TestTriangleGame {
         // verifies that every element in the list is initialized as EMPTY
         for (int i = 0; i < HORIZONTAL_SIZE + 1; i++) {
             for (int z = 0; z < HORIZONTAL_SIZE; z++) {
-                assertEquals(triangleGrid.getCopyOfHorizontalElement(i, z), GridOption.EMPTY);
+                assertEquals(triangleGrid.getHorizontalLinePlayer(i, z), GridOption.EMPTY);
             }
         }
         for (int i = 0; i < VERTICAL_SIZE + 1; i++) {
             for (int z = 0; z < VERTICAL_SIZE; z++) {
-                assertEquals(triangleGrid.getCopyOfVerticalElement(i, z), GridOption.EMPTY);
+                assertEquals(triangleGrid.getVerticalLinePlayer(i, z), GridOption.EMPTY);
             }
         }
         for (int i = 0; i < HORIZONTAL_SIZE; i++) {
             for (int z = 0; z < VERTICAL_SIZE; z++) {
-                assertEquals(triangleGrid.getCopyOfDiagonalElement(i, z), GridOption.EMPTY);
+                assertEquals(triangleGrid.getDiagonalLinePlayer(i, z), GridOption.EMPTY);
             }
         }
 

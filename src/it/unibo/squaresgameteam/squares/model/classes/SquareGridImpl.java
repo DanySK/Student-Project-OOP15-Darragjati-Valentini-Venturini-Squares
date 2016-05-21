@@ -97,13 +97,12 @@ public class SquareGridImpl implements SquareGrid {
     }
 
     @Override
-    public GridOption getCopyOfHorizontalElement(final Integer listIndex, final Integer position)
+    public GridOption getHorizontalLinePlayer(final Integer listIndex, final Integer position)
             throws UnexistentLineListException {
         checkCorrectHorizontalInput(listIndex, position);
-        final GridOption copyOfHorizontalElement = horizontal.get(listIndex).get(position);
-        // CHECKSTYLE:OFF:
-        return copyOfHorizontalElement;
-        // CHECKSTYLE:ON:
+        return horizontal.get(listIndex).get(position).equals(GridOption.EMPTY) ? GridOption.EMPTY
+                : horizontal.get(listIndex).get(position).equals(GridOption.PLAYER1) ? GridOption.PLAYER1
+                        : GridOption.PLAYER2;
     }
 
     /**
@@ -151,13 +150,12 @@ public class SquareGridImpl implements SquareGrid {
     }
 
     @Override
-    public GridOption getCopyOfVerticalElement(final Integer listIndex, final Integer position)
+    public GridOption getVerticalLinePlayer(final Integer listIndex, final Integer position)
             throws UnexistentLineListException {
         checkCorrectVerticalInput(listIndex, position);
-        final GridOption copyOfVerticalElement = vertical.get(listIndex).get(position);
-        // CHECKSTYLE:OFF:
-        return copyOfVerticalElement;
-        // CHECKSTYLE:ON:
+        return vertical.get(listIndex).get(position).equals(GridOption.EMPTY) ? GridOption.EMPTY
+                : vertical.get(listIndex).get(position).equals(GridOption.PLAYER1) ? GridOption.PLAYER1
+                        : GridOption.PLAYER2;
     }
 
     /**

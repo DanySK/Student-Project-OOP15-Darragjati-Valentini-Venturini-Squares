@@ -65,13 +65,12 @@ public class TriangleGridImpl extends SquareGridImpl implements TriangleGrid {
     }
 
     @Override
-    public GridOption getCopyOfDiagonalElement(final int listIndex, final int position)
+    public GridOption getDiagonalLinePlayer(final int listIndex, final int position)
             throws UnexistentLineListException {
         checkCorrectDiagonalInput(listIndex, position);
-        final GridOption copyOfDiagonalElement = diagonal.get(listIndex).get(position);
-        // CHECKSTYLE:OFF:
-        return copyOfDiagonalElement;
-        // CHECKSTYLE:ON:
+        return diagonal.get(listIndex).get(position).equals(GridOption.EMPTY) ? GridOption.EMPTY
+                : diagonal.get(listIndex).get(position).equals(GridOption.PLAYER1) ? GridOption.PLAYER1
+                        : GridOption.PLAYER2;
     }
 
     /**

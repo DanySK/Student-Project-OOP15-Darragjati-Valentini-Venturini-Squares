@@ -29,15 +29,15 @@ public class SquareGridPointsCounterImpl implements PointsCounterStrategy {
     public Integer horizontalPointScored(final Integer listIndex, final Integer position)
             throws UnexistentLineListException {
         Integer points = 0;
-        if (listIndex > 0 && !grid.getCopyOfHorizontalElement(listIndex - 1, position).equals(GridOption.EMPTY)
-                && !grid.getCopyOfVerticalElement(position, listIndex - 1).equals(GridOption.EMPTY)
-                && !grid.getCopyOfVerticalElement(position + 1, listIndex - 1).equals(GridOption.EMPTY)) {
+        if (listIndex > 0 && !grid.getHorizontalLinePlayer(listIndex - 1, position).equals(GridOption.EMPTY)
+                && !grid.getVerticalLinePlayer(position, listIndex - 1).equals(GridOption.EMPTY)
+                && !grid.getVerticalLinePlayer(position + 1, listIndex - 1).equals(GridOption.EMPTY)) {
             points++;
         }
         if (listIndex < grid.getHorizontalListSize() - 1
-                && !grid.getCopyOfHorizontalElement(listIndex + 1, position).equals(GridOption.EMPTY)
-                && !grid.getCopyOfVerticalElement(position, listIndex - 1).equals(GridOption.EMPTY)
-                && !grid.getCopyOfVerticalElement(position + 1, listIndex - 1).equals(GridOption.EMPTY)) {
+                && !grid.getHorizontalLinePlayer(listIndex + 1, position).equals(GridOption.EMPTY)
+                && !grid.getVerticalLinePlayer(position, listIndex - 1).equals(GridOption.EMPTY)
+                && !grid.getVerticalLinePlayer(position + 1, listIndex - 1).equals(GridOption.EMPTY)) {
             points++;
 
         }
@@ -48,15 +48,15 @@ public class SquareGridPointsCounterImpl implements PointsCounterStrategy {
     public Integer verticalPointScored(final Integer listIndex, final Integer position)
             throws UnexistentLineListException {
         Integer points = 0;
-        if (listIndex > 0 && !grid.getCopyOfVerticalElement(listIndex - 1, position).equals(GridOption.EMPTY)
-                && !grid.getCopyOfHorizontalElement(position, listIndex - 1).equals(GridOption.EMPTY)
-                && !grid.getCopyOfHorizontalElement(position + 1, listIndex - 1).equals(GridOption.EMPTY)) {
+        if (listIndex > 0 && !grid.getVerticalLinePlayer(listIndex - 1, position).equals(GridOption.EMPTY)
+                && !grid.getHorizontalLinePlayer(position, listIndex - 1).equals(GridOption.EMPTY)
+                && !grid.getHorizontalLinePlayer(position + 1, listIndex - 1).equals(GridOption.EMPTY)) {
             points++;
         }
         if (listIndex < grid.getVerticalListSize() - 1
-                && !grid.getCopyOfVerticalElement(listIndex + 1, position).equals(GridOption.EMPTY)
-                && !grid.getCopyOfHorizontalElement(position, listIndex - 1).equals(GridOption.EMPTY)
-                && !grid.getCopyOfHorizontalElement(position + 1, listIndex - 1).equals(GridOption.EMPTY)) {
+                && !grid.getVerticalLinePlayer(listIndex + 1, position).equals(GridOption.EMPTY)
+                && !grid.getHorizontalLinePlayer(position, listIndex - 1).equals(GridOption.EMPTY)
+                && !grid.getHorizontalLinePlayer(position + 1, listIndex - 1).equals(GridOption.EMPTY)) {
             points++;
         }
         return points;
