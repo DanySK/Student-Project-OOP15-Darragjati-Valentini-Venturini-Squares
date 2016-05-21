@@ -1,6 +1,7 @@
 package it.unibo.squaresgameteam.squares.model.classes;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import it.unibo.squaresgameteam.squares.model.enumerations.GridOption;
@@ -108,10 +109,7 @@ public class GameImpl implements Game {
     @Override
     public GridOption getCopyOfCurrentPlayerTurn() {
         if (isStarted()) {
-            final GridOption copyOfTurn = this.turn;
-            // CHECKSTYLE:OFF:
-            return copyOfTurn;
-            // CHECKSTYLE:ON:
+            return this.turn;
         } else {
             throw new IllegalStateException();
         }
@@ -235,7 +233,9 @@ public class GameImpl implements Game {
         if (lastMoveList.isEmpty()) {
             throw new NoMovesDoneException();
         } else {
-            return lastMoveList.get(lastMoveList.size() - 1);
+            return new MoveImpl(lastMoveList.get(lastMoveList.size() - 1).getListType(),
+                    lastMoveList.get(lastMoveList.size() - 1).getListIndex(),
+                    lastMoveList.get(lastMoveList.size() - 1).getPosition());
         }
     }
 }

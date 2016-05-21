@@ -91,6 +91,10 @@ public class TestSquareGame {
         assertEquals(gridOfSize.getCopyOfLastMove().getListType(), ListType.HORIZONTAL);
         assertEquals(gridOfSize.getCopyOfLastMove().getListIndex(), (Integer) 1);
         assertEquals(gridOfSize.getCopyOfLastMove().getPosition(), (Integer) 0);
+        //verifies that if you can't modify the last move
+        gridOfSize.getCopyOfLastMove().setListType(ListType.VERTICAL);
+        gridOfSize.getCopyOfLastMove().setListIndex(3);
+        gridOfSize.getCopyOfLastMove().setPosition(3);
         gridOfSize.undoLastMove();
         assertNotEquals(player, gridOfSize.getCopyOfCurrentPlayerTurn());
 
