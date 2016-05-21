@@ -78,7 +78,7 @@ public class MatchImpl implements Match {
     public String createNewMatch() {
         this.match = new GameImpl(this.grid);
         match.startMatch();
-        this.numPlayer = this.match.getCopyOfCurrentPlayerTurn();
+        this.numPlayer = this.match.getCurrentPlayerTurn();
         convertNumToNamePlayer();
         this.time = new PlayedTimeImpl();
         this.time.setTimeAtMatchStart(match);
@@ -112,7 +112,7 @@ public class MatchImpl implements Match {
 
         } else {
             this.playerScore = this.match.getPlayerPoints(this.numPlayer);
-            this.numPlayer = this.match.getCopyOfCurrentPlayerTurn();
+            this.numPlayer = this.match.getCurrentPlayerTurn();
         }
 
         convertNumToNamePlayer();

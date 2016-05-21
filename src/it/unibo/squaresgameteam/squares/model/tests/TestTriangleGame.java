@@ -80,7 +80,7 @@ public class TestTriangleGame {
         move.setPosition(0);
         gridOfSize.setLine(move);
          //this turn memorization is used later to check if the turn switch is correctly implemented
-        GridOption player = gridOfSize.getCopyOfCurrentPlayerTurn();
+        GridOption player = gridOfSize.getCurrentPlayerTurn();
         move.setListType(ListType.VERTICAL);
         move.setListIndex(1);
         move.setPosition(0);
@@ -88,26 +88,26 @@ public class TestTriangleGame {
         assertEquals(triangleGrid.getRemainingMoves(), (Integer) (triangleGrid.getTotalMoves() - 4));
         // the player points should be the same with this game mode
         assertEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
-        assertNotEquals(player, gridOfSize.getCopyOfCurrentPlayerTurn());
-        player = gridOfSize.getCopyOfCurrentPlayerTurn();
+        assertNotEquals(player, gridOfSize.getCurrentPlayerTurn());
+        player = gridOfSize.getCurrentPlayerTurn();
         move.setListType(ListType.DIAGONAL);
         move.setListIndex(0);
         move.setPosition(0);
         gridOfSize.setLine(move);
         assertNotEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));     
-        assertEquals(player, gridOfSize.getCopyOfCurrentPlayerTurn());
+        assertEquals(player, gridOfSize.getCurrentPlayerTurn());
         assertEquals(gridOfSize.getCopyOfLastMove().getListType(), ListType.DIAGONAL);
         assertEquals(gridOfSize.getCopyOfLastMove().getListIndex(), (Integer) 0);
         assertEquals(gridOfSize.getCopyOfLastMove().getPosition(), (Integer) 0);
         //test if the undo is working correctly 
         gridOfSize.undoLastMove();
         assertEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
-        assertEquals(player, gridOfSize.getCopyOfCurrentPlayerTurn());
+        assertEquals(player, gridOfSize.getCurrentPlayerTurn());
         assertEquals(gridOfSize.getCopyOfLastMove().getListType(), ListType.VERTICAL);
         assertEquals(gridOfSize.getCopyOfLastMove().getListIndex(), (Integer) 1);
         assertEquals(gridOfSize.getCopyOfLastMove().getPosition(), (Integer) 0);
         gridOfSize.undoLastMove();
-        assertNotEquals(player, gridOfSize.getCopyOfCurrentPlayerTurn());
+        assertNotEquals(player, gridOfSize.getCurrentPlayerTurn());
         //check if the methods of points assignaments work correctly
         move.setListType(ListType.DIAGONAL);
         move.setListIndex(1);

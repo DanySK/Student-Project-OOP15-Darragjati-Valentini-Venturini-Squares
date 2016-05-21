@@ -77,17 +77,17 @@ public class TestSquareGame {
         move.setListType(ListType.VERTICAL);
         // this turn memorization is used later to check if the turn switch is
         // correctly implemented
-        final GridOption player = gridOfSize.getCopyOfCurrentPlayerTurn();
+        final GridOption player = gridOfSize.getCurrentPlayerTurn();
         move.setListIndex(1);
         move.setPosition(0);
         gridOfSize.setLine(move);
         assertEquals(squareGrid.getRemainingMoves(), (Integer) (squareGrid.getTotalMoves() - 4));
         assertNotEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
         // verifies if the player has received a bonus move
-        assertEquals(player, gridOfSize.getCopyOfCurrentPlayerTurn());
+        assertEquals(player, gridOfSize.getCurrentPlayerTurn());
         gridOfSize.undoLastMove();
         assertEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
-        assertEquals(player, gridOfSize.getCopyOfCurrentPlayerTurn());
+        assertEquals(player, gridOfSize.getCurrentPlayerTurn());
         assertEquals(gridOfSize.getCopyOfLastMove().getListType(), ListType.HORIZONTAL);
         assertEquals(gridOfSize.getCopyOfLastMove().getListIndex(), (Integer) 1);
         assertEquals(gridOfSize.getCopyOfLastMove().getPosition(), (Integer) 0);
@@ -95,8 +95,11 @@ public class TestSquareGame {
         gridOfSize.getCopyOfLastMove().setListType(ListType.VERTICAL);
         gridOfSize.getCopyOfLastMove().setListIndex(3);
         gridOfSize.getCopyOfLastMove().setPosition(3);
+        assertEquals(gridOfSize.getCopyOfLastMove().getListType(), ListType.HORIZONTAL);
+        assertEquals(gridOfSize.getCopyOfLastMove().getListIndex(), (Integer) 1);
+        assertEquals(gridOfSize.getCopyOfLastMove().getPosition(), (Integer) 0);
         gridOfSize.undoLastMove();
-        assertNotEquals(player, gridOfSize.getCopyOfCurrentPlayerTurn());
+        assertNotEquals(player, gridOfSize.getCurrentPlayerTurn());
 
         final SquareGrid squareGrid2 = new SquareGridImpl(STANDARD_SIZE, STANDARD_SIZE);
         final Game gridOfSize2 = new GameImpl(squareGrid2);
@@ -156,7 +159,7 @@ public class TestSquareGame {
             fail(ERROR);
         }
         try {
-            exceptionGame.getCopyOfCurrentPlayerTurn();
+            exceptionGame.getCurrentPlayerTurn();
             fail("you can't get the player turn if the match isn't started");
         } catch (IllegalStateException e) {
         } catch (Exception e) {

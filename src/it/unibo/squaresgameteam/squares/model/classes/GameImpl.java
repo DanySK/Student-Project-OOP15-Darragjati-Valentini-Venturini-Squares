@@ -1,7 +1,6 @@
 package it.unibo.squaresgameteam.squares.model.classes;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import it.unibo.squaresgameteam.squares.model.enumerations.GridOption;
@@ -107,7 +106,7 @@ public class GameImpl implements Game {
     }
 
     @Override
-    public GridOption getCopyOfCurrentPlayerTurn() {
+    public GridOption getCurrentPlayerTurn() {
         if (isStarted()) {
             return this.turn;
         } else {

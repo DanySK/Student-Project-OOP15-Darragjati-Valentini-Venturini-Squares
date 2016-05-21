@@ -32,11 +32,11 @@ public interface Game {
     boolean isEnded();
 
     /**
-     * @return a defensive copy of the player that should make the next move
+     * @return the player that should make the next move
      * @throws an
      *             IllegalStateException if the match is not started
      */
-    GridOption getCopyOfCurrentPlayerTurn();
+    GridOption getCurrentPlayerTurn();
 
     /**
      * Gets the score of one of the two players.
