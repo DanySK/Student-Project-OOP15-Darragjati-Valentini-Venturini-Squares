@@ -54,6 +54,11 @@ public class TriangleGridImpl extends SquareGridImpl implements TriangleGrid {
         return super.getRemainingMoves() + movesLeft;
     }
 
+    @Override
+    public Integer getMatchMaximumPoints() {
+        return super.getMatchMaximumPoints() + (getHorizontalListSize() - 1) * (getVerticalListSize() - 1);
+    }
+
     private void checkCorrectDiagonalInput(final Integer listIndex, final Integer position)
             throws UnexistentLineListException {
         if (listIndex < 0 || listIndex > diagonal.size()) {

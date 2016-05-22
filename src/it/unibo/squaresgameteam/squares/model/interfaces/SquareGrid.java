@@ -22,6 +22,14 @@ public interface SquareGrid {
     Integer getRemainingMoves();
 
     /**
+     * This method is used to know the maximum points that can be done in a
+     * game.
+     * 
+     * @return the maximum points that can be done in this game
+     */
+    Integer getMatchMaximumPoints();
+
+    /**
      * This method is used to know which one of the two players has set the
      * horizontal line.
      * 

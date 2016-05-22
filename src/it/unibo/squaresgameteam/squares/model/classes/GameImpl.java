@@ -83,7 +83,6 @@ public class GameImpl implements Game {
         if (!isStarted()) {
             throw new IllegalStateException();
         }
-
         if (this.turn.equals(GridOption.PLAYER1)) {
             this.turn = GridOption.PLAYER2;
         } else {
@@ -96,13 +95,8 @@ public class GameImpl implements Game {
         if (!isStarted()) {
             throw new IllegalStateException("the match can't be ended if it isn't even started");
         }
-        Integer diagonalMOves = 0;
-        if (this.grid.getClass().equals(TriangleGridImpl.class)) {
-            diagonalMOves = (this.grid.getHorizontalListSize() - 1) * (this.grid.getVerticalListSize() - 1);
-        }
         return getPlayerPoints(GridOption.PLAYER1)
-                + getPlayerPoints(GridOption.PLAYER2) == (grid.getHorizontalListSize() - 1)
-                        * (grid.getVerticalListSize() - 1) + diagonalMOves ? true : false;
+                + getPlayerPoints(GridOption.PLAYER2) == grid.getMatchMaximumPoints() ? true : false;
     }
 
     @Override

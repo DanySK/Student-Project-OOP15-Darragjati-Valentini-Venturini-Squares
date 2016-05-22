@@ -86,6 +86,11 @@ public class SquareGridImpl implements SquareGrid {
         return movesLeft;
     }
 
+    @Override
+    public Integer getMatchMaximumPoints() {
+        return (getHorizontalListSize() - 1) * (getVerticalListSize() - 1);
+    }
+
     private void checkCorrectHorizontalInput(final Integer listIndex, final Integer position)
             throws UnexistentLineListException {
         if (listIndex < 0 || listIndex > horizontal.size()) {
