@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertSame;
 
 import org.junit.Test;
 
@@ -34,8 +35,11 @@ public class TestSquareGame {
 
     /**
      * Tests the methods of BaseGridImpl and TurnImpl.
-     * @throws UnsupportedSizeException if the list chosen is not supported by the game mode
-     * @throws UnexistentLineListException if the listIndex input is not correct
+     * 
+     * @throws UnsupportedSizeException
+     *             if the list chosen is not supported by the game mode
+     * @throws UnexistentLineListException
+     *             if the listIndex input is not correct
      */
     @Test
     public void test() throws UnsupportedSizeException, UnexistentLineListException {
@@ -57,6 +61,7 @@ public class TestSquareGame {
                 assertEquals(squareGrid.getVerticalLinePlayer(i, z), GridOption.EMPTY);
             }
         }
+        assertSame(VERTICAL_SIZE * HORIZONTAL_SIZE, squareGrid.getMatchMaximumPoints());
         assertFalse(gridOfSize.isStarted());
         gridOfSize.startMatch();
         assertTrue(gridOfSize.isStarted());
@@ -91,7 +96,7 @@ public class TestSquareGame {
         assertEquals(gridOfSize.getCopyOfLastMove().getListType(), ListType.HORIZONTAL);
         assertEquals(gridOfSize.getCopyOfLastMove().getListIndex(), (Integer) 1);
         assertEquals(gridOfSize.getCopyOfLastMove().getPosition(), (Integer) 0);
-        //verifies that if you can't modify the last move
+        // verifies that if you can't modify the last move
         gridOfSize.getCopyOfLastMove().setListType(ListType.VERTICAL);
         gridOfSize.getCopyOfLastMove().setListIndex(3);
         gridOfSize.getCopyOfLastMove().setPosition(3);

@@ -3,6 +3,7 @@ package it.unibo.squaresgameteam.squares.model.tests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -61,7 +62,7 @@ public class TestTriangleGame {
                 assertEquals(triangleGrid.getDiagonalLinePlayer(i, z), GridOption.EMPTY);
             }
         }
-
+        assertSame(VERTICAL_SIZE * HORIZONTAL_SIZE * 2, triangleGrid.getMatchMaximumPoints());
         assertFalse(gridOfSize.isStarted());
         gridOfSize.startMatch();
         assertTrue(gridOfSize.isStarted());
