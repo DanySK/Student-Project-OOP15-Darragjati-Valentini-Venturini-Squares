@@ -58,8 +58,16 @@ public interface Game {
      */
     GridOption getWinner();
 
-    Player getPlayerStats(GridOption player);
-    
+    /**
+     * This method returns the players match results one the game is ended.
+     * 
+     * @param player
+     *            wich one of the two players you want to get
+     * @return an object of the class player ready for being added in the
+     *         ranking
+     */
+    Player getPlayerMatchResult(GridOption player);
+
     /**
      * Makes a move setting a line in the grid.
      * 
@@ -94,5 +102,5 @@ public interface Game {
      * @throws NoMovesDoneException
      *             if noone has made a move yet
      */
-    Move getCopyOfLastMove() throws NoMovesDoneException;   
+    Move getCopyOfLastMove() throws NoMovesDoneException;
 }

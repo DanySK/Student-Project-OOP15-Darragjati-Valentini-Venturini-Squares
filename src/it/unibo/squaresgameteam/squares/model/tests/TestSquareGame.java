@@ -45,7 +45,7 @@ public class TestSquareGame {
     public void test() throws UnsupportedSizeException, UnexistentLineListException {
 
         final SquareGrid squareGrid = new SquareGridImpl(HORIZONTAL_SIZE, VERTICAL_SIZE);
-        final Game gridOfSize = new GameImpl(squareGrid);
+        final Game gridOfSize = new GameImpl(squareGrid, "Rei Ayanami", "Shinji Ikari");
 
         // verifies that total moves are the same as remaining moves
         assertEquals(squareGrid.getTotalMoves(), squareGrid.getRemainingMoves());
@@ -107,7 +107,7 @@ public class TestSquareGame {
         assertNotEquals(player, gridOfSize.getCurrentPlayerTurn());
 
         final SquareGrid squareGrid2 = new SquareGridImpl(STANDARD_SIZE, STANDARD_SIZE);
-        final Game gridOfSize2 = new GameImpl(squareGrid2);
+        final Game gridOfSize2 = new GameImpl(squareGrid2, "Rei Ayanami", "Shinji Ikari");
         gridOfSize2.startMatch();
         // fills the grid with all the possible moves
         for (int i = 0; i < STANDARD_SIZE + 1; i++) {
@@ -155,7 +155,7 @@ public class TestSquareGame {
         }
 
         exceptionGrid = new SquareGridImpl(STANDARD_SIZE, STANDARD_SIZE);
-        exceptionGame = new GameImpl(exceptionGrid);
+        exceptionGame = new GameImpl(exceptionGrid, "Rei Ayanami", "Shinji Ikari");
         try {
             exceptionGame.isEnded();
             fail("the match can't be ended if it isn't started");

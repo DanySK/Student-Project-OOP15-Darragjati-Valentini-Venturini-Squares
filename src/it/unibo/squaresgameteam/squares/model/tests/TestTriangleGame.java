@@ -41,7 +41,7 @@ public class TestTriangleGame {
     public void test() throws UnsupportedSizeException, UnexistentLineListException {
 
         final TriangleGrid triangleGrid = new TriangleGridImpl(HORIZONTAL_SIZE, VERTICAL_SIZE);
-        final Game gridOfSize = new GameImpl(triangleGrid);
+        final Game gridOfSize = new GameImpl(triangleGrid, "Rei Ayanami", "Shinji Ikari");
         Move move;
         
         assertEquals(triangleGrid.getTotalMoves(), triangleGrid.getRemainingMoves());
@@ -133,7 +133,7 @@ public class TestTriangleGame {
         assertEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
         
         final SquareGrid squareGrid2 = new TriangleGridImpl(STANDARD_SIZE, STANDARD_SIZE);
-        final Game gridOfSize2 = new GameImpl(squareGrid2);
+        final Game gridOfSize2 = new GameImpl(squareGrid2, "Rei Ayanami", "Shinji Ikari");
         gridOfSize2.startMatch();
         // fills the grid with all thepossible moves
         for (int i = 0; i < STANDARD_SIZE + 1; i++) {

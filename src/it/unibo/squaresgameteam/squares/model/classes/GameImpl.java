@@ -11,7 +11,6 @@ import it.unibo.squaresgameteam.squares.model.interfaces.SquareGrid;
 import it.unibo.squaresgameteam.squares.model.interfaces.Move;
 import it.unibo.squaresgameteam.squares.model.interfaces.Player;
 import it.unibo.squaresgameteam.squares.model.interfaces.PointsCounterStrategy;
-import it.unibo.squaresgameteam.squares.model.interfaces.Ranking;
 import it.unibo.squaresgameteam.squares.model.interfaces.Game;
 
 /**
@@ -24,8 +23,8 @@ public class GameImpl implements Game {
     private boolean matchStarted;
     private Player player1;
     private Player player2;
-    private String namePlayer1;
-    private String namePlayer2;
+    private final String namePlayer1;
+    private final String namePlayer2;
     private Integer scorePlayer1;
     private Integer scorePlayer2;
     private static final Integer INITIAL_SCORE = 0;
@@ -38,6 +37,10 @@ public class GameImpl implements Game {
      * 
      * @param grid
      *            the playable game field.
+     * @param namePlayer1
+     *            the name of the first player
+     * @param namePlayer2
+     *            the name of the second player
      */
     // CHECKSTYLE:OFF:
     public GameImpl(final SquareGrid grid, final String namePlayer1, final String namePlayer2) {
@@ -126,7 +129,6 @@ public class GameImpl implements Game {
         } else {
             throw new IllegalArgumentException();
         }
-
     }
 
     @Override
@@ -172,7 +174,7 @@ public class GameImpl implements Game {
     }
 
     @Override
-    public Player getPlayerStats(final GridOption player) {
+    public Player getPlayerMatchResult(final GridOption player) {
         if (isEnded()) {
             switch (player) {
             case PLAYER1:

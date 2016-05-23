@@ -26,16 +26,28 @@ public class TestRankingImpl {
 
     private List<Player> createPlayers() {
         // CHECKSTYLE:OFF:
-        final PlayerImpl player1 = new PlayerImpl.Builder().playerName(PLAYER1).wonMatches(1).totalMatches(10)
-                .totalPointsScored(51).build();
+        final PlayerImpl player1 = new PlayerImpl.Builder()
+                                                 .playerName(PLAYER1)
+                                                 .wonMatches(1)
+                                                 .totalMatches(10)
+                                                 .totalPointsScored(51)
+                                                 .build();
         assertEquals(player1.getWinRate(), 10.0, 0);
 
-        final PlayerImpl player2 = new PlayerImpl.Builder().playerName(PLAYER2).wonMatches(8).totalMatches(10)
-                .totalPointsScored(456).build();
+        final PlayerImpl player2 = new PlayerImpl.Builder()
+                                                 .playerName(PLAYER2)
+                                                 .wonMatches(8)
+                                                 .totalMatches(10)
+                                                 .totalPointsScored(456)
+                                                 .build();
         assertTrue(player2.getWinRate() > player1.getWinRate());
 
-        final PlayerImpl player3 = new PlayerImpl.Builder().playerName(PLAYER3).wonMatches(4).totalMatches(5)
-                .totalPointsScored(223).build();
+        final PlayerImpl player3 = new PlayerImpl.Builder()
+                                                 .playerName(PLAYER3)
+                                                 .wonMatches(4)
+                                                 .totalMatches(5)
+                                                 .totalPointsScored(223)
+                                                 .build();
         assertEquals(player3.getWinRate(), player2.getWinRate(), 0);
         // CHECKSTYLE:ON:
         final List<Player> playerList = new ArrayList<>();
@@ -56,13 +68,16 @@ public class TestRankingImpl {
         assertEquals(playerList.size(), 3);
 
         final RankingImpl rankingTest = new RankingImpl(playerList);
-        Player newPlayer = new PlayerImpl.Builder().playerName(PLAYER4).wonMatches(1).totalMatches(1)
-                .totalPointsScored(37).build();
+        final Player newPlayer = new PlayerImpl.Builder()
+                                               .playerName(PLAYER4)
+                                               .wonMatches(1)
+                                               .totalMatches(1)
+                                               .totalPointsScored(37)
+                                               .build();
         rankingTest.addPlayerResults(newPlayer);
         assertEquals(playerList.size(), 4);
         // ordering list by WINRATE
         List<Player> orderingTest = rankingTest.orderListBy(RankingOption.WINRATE, false);
-        System.out.println(orderingTest.get(0).getPlayerName() + " " + orderingTest.get(1).getPlayerName() + " " + orderingTest.get(2).getPlayerName() + " " + orderingTest.get(3).getPlayerName());
         assertEquals(orderingTest.get(0).getPlayerName(), PLAYER4);
         assertEquals(orderingTest.get(1).getPlayerName(), PLAYER2);
         assertEquals(orderingTest.get(2).getPlayerName(), PLAYER3);
@@ -86,8 +101,12 @@ public class TestRankingImpl {
         assertEquals(orderingTest.get(2).getPlayerName(), PLAYER1);
         assertEquals(orderingTest.get(3).getPlayerName(), PLAYER4);
 
-        Player newPlayer2 = new PlayerImpl.Builder().playerName(PLAYER5).wonMatches(1).totalMatches(1)
-                .totalPointsScored(37).build();
+        final Player newPlayer2 = new PlayerImpl.Builder()
+                                                .playerName(PLAYER5)
+                                                .wonMatches(1)
+                                                .totalMatches(1)
+                                                .totalPointsScored(37)
+                                                .build();
         rankingTest.addPlayerResults(newPlayer2);
         // ordering list by WINRATE
         final List<Player> testWinRateOrderedList = rankingTest.orderListBy(RankingOption.WINRATE, false);

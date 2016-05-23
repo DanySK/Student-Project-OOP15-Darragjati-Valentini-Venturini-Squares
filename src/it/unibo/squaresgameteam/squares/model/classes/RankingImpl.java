@@ -57,8 +57,6 @@ public class RankingImpl implements Ranking {
                 return;
             }
         }
- //       final Player newPlayer = new PlayerImpl.Builder().playerName(playerName).wonMatches(wonMatch).totalMatches(1)
- //               .totalPointsScored(totalPointsScored).build();
         playerList.add(player);
     }
 
