@@ -1,7 +1,10 @@
 package it.unibo.squaresgameteam.squares.controller.interfaces;
 
+import java.io.IOException;
+
 import it.unibo.squaresgameteam.squares.model.enumerations.ListType;
 import it.unibo.squaresgameteam.squares.model.exceptions.UnsupportedSizeException;
+import it.unibo.squaresgameteam.squares.model.exceptions.DuplicatedPlayerStatsException;
 import it.unibo.squaresgameteam.squares.model.exceptions.NoMovesDoneException;
 import it.unibo.squaresgameteam.squares.model.exceptions.UnexistentLineListException;
 import it.unibo.squaresgameteam.squares.model.interfaces.Move;
@@ -31,8 +34,10 @@ public interface Match {
      * @param position Posizione nella linea della mossa.
      * @return Nome del giocatore che deve fare la prossima mossa
      * @throws UnexistentLineListException
+     * @throws DuplicatedPlayerStatsException 
+     * @throws IOException 
      */
-    String addLine(ListType direction, int numLine, int position) throws UnexistentLineListException;
+    String addLine(ListType direction, int numLine, int position) throws UnexistentLineListException, IOException, DuplicatedPlayerStatsException;
     
     
     
