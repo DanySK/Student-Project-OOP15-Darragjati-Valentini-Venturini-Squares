@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import it.unibo.squaresgameteam.squares.model.classes.GameImpl;
 import it.unibo.squaresgameteam.squares.model.classes.MoveImpl;
+import it.unibo.squaresgameteam.squares.model.classes.SquareGridImpl;
 import it.unibo.squaresgameteam.squares.model.classes.TriangleGridImpl;
 import it.unibo.squaresgameteam.squares.model.enumerations.GridOption;
 import it.unibo.squaresgameteam.squares.model.enumerations.ListType;
@@ -18,6 +19,7 @@ import it.unibo.squaresgameteam.squares.model.exceptions.NoMovesDoneException;
 import it.unibo.squaresgameteam.squares.model.exceptions.UnexistentLineListException;
 import it.unibo.squaresgameteam.squares.model.interfaces.SquareGrid;
 import it.unibo.squaresgameteam.squares.model.interfaces.TriangleGrid;
+import it.unibo.squaresgameteam.squares.model.interfaces.BaseGrid;
 import it.unibo.squaresgameteam.squares.model.interfaces.Game;
 import it.unibo.squaresgameteam.squares.model.interfaces.Move;
 
@@ -40,7 +42,7 @@ public class TestTriangleGame {
     @Test
     public void test() throws UnsupportedSizeException, UnexistentLineListException {
 
-        final TriangleGrid triangleGrid = new TriangleGridImpl(HORIZONTAL_SIZE, VERTICAL_SIZE);
+        final BaseGrid triangleGrid = new TriangleGridImpl(HORIZONTAL_SIZE, VERTICAL_SIZE);
         final Game gridOfSize = new GameImpl(triangleGrid, "Rei Ayanami", "Shinji Ikari");
         Move move;
         
@@ -49,17 +51,17 @@ public class TestTriangleGame {
         // verifies that every element in the list is initialized as EMPTY
         for (int i = 0; i < HORIZONTAL_SIZE + 1; i++) {
             for (int z = 0; z < HORIZONTAL_SIZE; z++) {
-                assertEquals(triangleGrid.getHorizontalLinePlayer(i, z), GridOption.EMPTY);
+                assertEquals(((SquareGridImpl) triangleGrid).getHorizontalLinePlayer(i, z), GridOption.EMPTY);
             }
         }
         for (int i = 0; i < VERTICAL_SIZE + 1; i++) {
             for (int z = 0; z < VERTICAL_SIZE; z++) {
-                assertEquals(triangleGrid.getVerticalLinePlayer(i, z), GridOption.EMPTY);
+                assertEquals(((SquareGridImpl) triangleGrid).getVerticalLinePlayer(i, z), GridOption.EMPTY);
             }
         }
         for (int i = 0; i < HORIZONTAL_SIZE; i++) {
             for (int z = 0; z < VERTICAL_SIZE; z++) {
-                assertEquals(triangleGrid.getDiagonalLinePlayer(i, z), GridOption.EMPTY);
+                assertEquals(((TriangleGridImpl) triangleGrid).getDiagonalLinePlayer(i, z), GridOption.EMPTY);
             }
         }
         assertSame(VERTICAL_SIZE * HORIZONTAL_SIZE * 2, triangleGrid.getMatchMaximumPoints());

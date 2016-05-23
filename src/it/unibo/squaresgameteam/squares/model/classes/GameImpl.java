@@ -11,6 +11,7 @@ import it.unibo.squaresgameteam.squares.model.interfaces.SquareGrid;
 import it.unibo.squaresgameteam.squares.model.interfaces.Move;
 import it.unibo.squaresgameteam.squares.model.interfaces.Player;
 import it.unibo.squaresgameteam.squares.model.interfaces.PointsCounterStrategy;
+import it.unibo.squaresgameteam.squares.model.interfaces.BaseGrid;
 import it.unibo.squaresgameteam.squares.model.interfaces.Game;
 
 /**
@@ -19,7 +20,7 @@ import it.unibo.squaresgameteam.squares.model.interfaces.Game;
  */
 public class GameImpl implements Game {
 
-    private final SquareGrid grid;
+    private final BaseGrid grid;
     private boolean matchStarted;
     private Player player1;
     private Player player2;
@@ -43,15 +44,15 @@ public class GameImpl implements Game {
      *            the name of the second player
      */
     // CHECKSTYLE:OFF:
-    public GameImpl(final SquareGrid grid, final String namePlayer1, final String namePlayer2) {
+    public GameImpl(final BaseGrid grid, final String namePlayer1, final String namePlayer2) {
         // CHECKSTYLE:ON:
         this.grid = grid;
         this.matchStarted = false;
         if (grid.getClass().equals(SquareGridImpl.class)) {
-            calculatePoints = new SquareGridPointsCounterImpl(grid);
+            calculatePoints = new SquareGridPointsCounterImpl((SquareGrid) grid);
         } else {
             if (grid.getClass().equals(TriangleGridImpl.class)) {
-                calculatePoints = new TriangleGridPointsCounterImpl(grid);
+                calculatePoints = new TriangleGridPointsCounterImpl((SquareGrid) grid);
             } else {
                 throw new IllegalArgumentException();
             }

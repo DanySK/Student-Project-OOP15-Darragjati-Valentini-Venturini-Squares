@@ -19,6 +19,7 @@ import it.unibo.squaresgameteam.squares.model.exceptions.MoveAlreadyDoneExceptio
 import it.unibo.squaresgameteam.squares.model.exceptions.NoMovesDoneException;
 import it.unibo.squaresgameteam.squares.model.exceptions.UnexistentLineListException;
 import it.unibo.squaresgameteam.squares.model.interfaces.SquareGrid;
+import it.unibo.squaresgameteam.squares.model.interfaces.BaseGrid;
 import it.unibo.squaresgameteam.squares.model.interfaces.Game;
 import it.unibo.squaresgameteam.squares.model.interfaces.Move;
 
@@ -44,7 +45,7 @@ public class TestSquareGame {
     @Test
     public void test() throws UnsupportedSizeException, UnexistentLineListException {
 
-        final SquareGrid squareGrid = new SquareGridImpl(HORIZONTAL_SIZE, VERTICAL_SIZE);
+        final BaseGrid squareGrid = new SquareGridImpl(HORIZONTAL_SIZE, VERTICAL_SIZE);
         final Game gridOfSize = new GameImpl(squareGrid, "Rei Ayanami", "Shinji Ikari");
 
         // verifies that total moves are the same as remaining moves
@@ -53,12 +54,12 @@ public class TestSquareGame {
         // verifies that every element in the lists is initialized as EMPTY
         for (int i = 0; i < HORIZONTAL_SIZE + 1; i++) {
             for (int z = 0; z < HORIZONTAL_SIZE; z++) {
-                assertEquals(squareGrid.getHorizontalLinePlayer(i, z), GridOption.EMPTY);
+                assertEquals(((SquareGridImpl) squareGrid).getHorizontalLinePlayer(i, z), GridOption.EMPTY);
             }
         }
         for (int i = 0; i < VERTICAL_SIZE + 1; i++) {
             for (int z = 0; z < VERTICAL_SIZE; z++) {
-                assertEquals(squareGrid.getVerticalLinePlayer(i, z), GridOption.EMPTY);
+                assertEquals(((SquareGridImpl) squareGrid).getVerticalLinePlayer(i, z), GridOption.EMPTY);
             }
         }
         assertSame(VERTICAL_SIZE * HORIZONTAL_SIZE, squareGrid.getMatchMaximumPoints());

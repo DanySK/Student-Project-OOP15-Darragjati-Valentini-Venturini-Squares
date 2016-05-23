@@ -30,7 +30,6 @@ public class TriangleGridImpl extends SquareGridImpl implements TriangleGrid {
      */
     public TriangleGridImpl(final Integer rowsNumber, final Integer columnsNumber) throws UnsupportedSizeException {
         super(rowsNumber, columnsNumber);
-
         for (int i = 0; i < rowsNumber; i++) {
             diagonal.add(super.createEmptyList(columnsNumber));
         }

@@ -9,25 +9,7 @@ import it.unibo.squaresgameteam.squares.model.exceptions.UnexistentLineListExcep
  * which player has inserted a move, to get all the possible moves and the
  * remaining ones.
  */
-public interface SquareGrid {
-
-    /**
-     * @return the number of moves
-     */
-    Integer getTotalMoves();
-
-    /**
-     * @return the number of moves left
-     */
-    Integer getRemainingMoves();
-
-    /**
-     * This method is used to know the maximum points that can be done in a
-     * game.
-     * 
-     * @return the maximum points that can be done in this game
-     */
-    Integer getMatchMaximumPoints();
+public interface SquareGrid extends BaseGrid {
 
     /**
      * This method is used to know which one of the two players has set the
