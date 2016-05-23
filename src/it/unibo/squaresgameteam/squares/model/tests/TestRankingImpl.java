@@ -30,10 +30,12 @@ public class TestRankingImpl {
                 .totalPointsScored(51).build();
         assertEquals(player1.getWinRate(), 10.0, 0);
 
-        final PlayerImpl player2 = new PlayerImpl.Builder().playerName(PLAYER2).wonMatches(8).totalMatches(10).totalPointsScored(456).build();
+        final PlayerImpl player2 = new PlayerImpl.Builder().playerName(PLAYER2).wonMatches(8).totalMatches(10)
+                .totalPointsScored(456).build();
         assertTrue(player2.getWinRate() > player1.getWinRate());
 
-        final PlayerImpl player3 = new PlayerImpl.Builder().playerName(PLAYER3).wonMatches(4).totalMatches(5).totalPointsScored(223).build();
+        final PlayerImpl player3 = new PlayerImpl.Builder().playerName(PLAYER3).wonMatches(4).totalMatches(5)
+                .totalPointsScored(223).build();
         assertEquals(player3.getWinRate(), player2.getWinRate(), 0);
         // CHECKSTYLE:ON:
         final List<Player> playerList = new ArrayList<>();
@@ -45,7 +47,8 @@ public class TestRankingImpl {
 
     /**
      * Base option test.
-     * @throws DuplicatedPlayerStatsException 
+     * 
+     * @throws DuplicatedPlayerStatsException
      */
     @Test
     public void test() throws DuplicatedPlayerStatsException {
@@ -57,58 +60,61 @@ public class TestRankingImpl {
         assertEquals(playerList.size(), 4);
         // ordering list by WINRATE
         List<Player> orderingTest = rankingTest.orderListBy(RankingOption.WINRATE, false);
-        assertEquals(orderingTest.get(0).getPlayerName(), PLAYER1);
-        assertEquals(orderingTest.get(1).getPlayerName(), PLAYER3);
-        assertEquals(orderingTest.get(2).getPlayerName(), PLAYER2);
-        assertEquals(orderingTest.get(3).getPlayerName(), PLAYER4);
+        System.out.println(orderingTest.get(0).getPlayerName() + " " + orderingTest.get(1).getPlayerName() + " " + orderingTest.get(2).getPlayerName() + " " + orderingTest.get(3).getPlayerName());
+        assertEquals(orderingTest.get(0).getPlayerName(), PLAYER4);
+        assertEquals(orderingTest.get(1).getPlayerName(), PLAYER2);
+        assertEquals(orderingTest.get(2).getPlayerName(), PLAYER3);
+        assertEquals(orderingTest.get(3).getPlayerName(), PLAYER1);
         // ordering list by TOTAL WINS
         orderingTest = rankingTest.orderListBy(RankingOption.TOTAL_WINS, false);
-        assertEquals(orderingTest.get(0).getPlayerName(), PLAYER1);
-        assertEquals(orderingTest.get(1).getPlayerName(), PLAYER4);
-        assertEquals(orderingTest.get(2).getPlayerName(), PLAYER3);
-        assertEquals(orderingTest.get(3).getPlayerName(), PLAYER2);
+        assertEquals(orderingTest.get(0).getPlayerName(), PLAYER2);
+        assertEquals(orderingTest.get(1).getPlayerName(), PLAYER3);
+        assertEquals(orderingTest.get(2).getPlayerName(), PLAYER4);
+        assertEquals(orderingTest.get(3).getPlayerName(), PLAYER1);
         // ordering list by TOTAL MATCHES done
         orderingTest = rankingTest.orderListBy(RankingOption.TOTAL_MATCHES, false);
-        assertEquals(orderingTest.get(0).getPlayerName(), PLAYER4);
-        assertEquals(orderingTest.get(1).getPlayerName(), PLAYER3);
-        assertEquals(orderingTest.get(2).getPlayerName(), PLAYER1);
-        assertEquals(orderingTest.get(3).getPlayerName(), PLAYER2);
-        // ordering list by TOTSL SQUARES CATCHED
-        orderingTest = rankingTest.orderListBy(RankingOption.TOTAL_POINTS_SCORED, false);
-        assertEquals(orderingTest.get(0).getPlayerName(), PLAYER4);
+        assertEquals(orderingTest.get(0).getPlayerName(), PLAYER2);
         assertEquals(orderingTest.get(1).getPlayerName(), PLAYER1);
         assertEquals(orderingTest.get(2).getPlayerName(), PLAYER3);
-        assertEquals(orderingTest.get(3).getPlayerName(), PLAYER2);
+        assertEquals(orderingTest.get(3).getPlayerName(), PLAYER4);
+        // ordering list by TOTSL SQUARES CATCHED
+        orderingTest = rankingTest.orderListBy(RankingOption.TOTAL_POINTS_SCORED, false);
+        assertEquals(orderingTest.get(0).getPlayerName(), PLAYER2);
+        assertEquals(orderingTest.get(1).getPlayerName(), PLAYER3);
+        assertEquals(orderingTest.get(2).getPlayerName(), PLAYER1);
+        assertEquals(orderingTest.get(3).getPlayerName(), PLAYER4);
 
         rankingTest.addPlayerResults(PLAYER5, true, 37);
         // ordering list by WINRATE
         final List<Player> testWinRateOrderedList = rankingTest.orderListBy(RankingOption.WINRATE, false);
-        assertEquals(testWinRateOrderedList.get(0).getPlayerName(), PLAYER1);
-        assertEquals(testWinRateOrderedList.get(1).getPlayerName(), PLAYER3);
+        assertEquals(testWinRateOrderedList.get(0).getPlayerName(), PLAYER4);
+        assertEquals(testWinRateOrderedList.get(1).getPlayerName(), PLAYER5);
         assertEquals(testWinRateOrderedList.get(2).getPlayerName(), PLAYER2);
-        assertEquals(testWinRateOrderedList.get(3).getPlayerName(), PLAYER5);
-        assertEquals(testWinRateOrderedList.get(4).getPlayerName(), PLAYER4);
+        assertEquals(testWinRateOrderedList.get(3).getPlayerName(), PLAYER3);
+        assertEquals(testWinRateOrderedList.get(4).getPlayerName(), PLAYER1);
         // reversing the list ordered by WINRATE
         final List<Player> testReverseOrderedList = rankingTest.orderListBy(RankingOption.WINRATE, true);
-        assertEquals(testReverseOrderedList.get(0).getPlayerName(), PLAYER4);
-        assertEquals(testReverseOrderedList.get(1).getPlayerName(), PLAYER5);
+        assertEquals(testReverseOrderedList.get(0).getPlayerName(), PLAYER1);
+        assertEquals(testReverseOrderedList.get(1).getPlayerName(), PLAYER3);
         assertEquals(testReverseOrderedList.get(2).getPlayerName(), PLAYER2);
-        assertEquals(testReverseOrderedList.get(3).getPlayerName(), PLAYER3);
-        assertEquals(testReverseOrderedList.get(4).getPlayerName(), PLAYER1);
+        assertEquals(testReverseOrderedList.get(3).getPlayerName(), PLAYER5);
+        assertEquals(testReverseOrderedList.get(4).getPlayerName(), PLAYER4);
     }
 
     /**
      * Exceptions test.
-     * @throws DuplicatedPlayerStatsException 
+     * 
+     * @throws DuplicatedPlayerStatsException
      */
     @Test
-    //CHECKSTYLE:OFF:
+    // CHECKSTYLE:OFF:
     public void testExceptions() throws DuplicatedPlayerStatsException {
         final List<Player> playerList = createPlayers();
         RankingImpl testListException = new RankingImpl(playerList);
         Player testPlayer;
         try {
-            testPlayer = new PlayerImpl.Builder().playerName(PLAYER4).wonMatches(5).totalMatches(6).totalPointsScored(467).build();
+            testPlayer = new PlayerImpl.Builder().playerName(PLAYER4).wonMatches(5).totalMatches(6)
+                    .totalPointsScored(467).build();
             testListException.orderListBy(RankingOption.WINRATE, false).add(testPlayer);
             fail("You can't add a player to the list, it should be unmodifiable");
         } catch (UnsupportedOperationException e) {
@@ -116,7 +122,8 @@ public class TestRankingImpl {
             fail("Wrong exception thrown");
         }
         try {
-            testPlayer = new PlayerImpl.Builder().playerName(PLAYER1).wonMatches(5).totalMatches(6).totalPointsScored(467).build();
+            testPlayer = new PlayerImpl.Builder().playerName(PLAYER1).wonMatches(5).totalMatches(6)
+                    .totalPointsScored(467).build();
             playerList.add(testPlayer);
             testListException = new RankingImpl(playerList);
             fail("The list can't contain two players with the same name");
@@ -125,7 +132,8 @@ public class TestRankingImpl {
             fail("Wrong exception thrown");
         }
         try {
-            testPlayer = new PlayerImpl.Builder().playerName(PLAYER4).wonMatches(6).totalMatches(5).totalPointsScored(467).build();
+            testPlayer = new PlayerImpl.Builder().playerName(PLAYER4).wonMatches(6).totalMatches(5)
+                    .totalPointsScored(467).build();
             fail("The won matches cant be more than the total matches");
         } catch (IllegalArgumentException e) {
         } catch (Exception e) {

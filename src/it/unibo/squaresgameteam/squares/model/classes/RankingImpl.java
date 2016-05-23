@@ -151,23 +151,23 @@ public class RankingImpl implements Ranking {
     }
 
     private Integer compareWinrate(final Player player1, final Player player2) {
-        return Double.compare(player1.getWinRate(), player2.getWinRate());
+        return Double.compare(player2.getWinRate(), player1.getWinRate());
     }
 
     private Integer compareTotalMatches(final Player player1, final Player player2) {
-        return Integer.compare(player1.getTotalMatches(), player2.getTotalMatches());
+        return Integer.compare(player2.getTotalMatches(), player1.getTotalMatches());
     }
 
     private Integer compareTotalWins(final Player player1, final Player player2) {
-        return Integer.compare(player1.getWonMatches(), player2.getWonMatches());
+        return Integer.compare(player2.getWonMatches(), player1.getWonMatches());
     }
 
     private Integer compareTotalPointsScored(final Player player1, final Player player2) {
-        return Integer.compare(player1.getTotalPointsScored(), player2.getTotalPointsScored());
+        return Integer.compare(player2.getTotalPointsScored(), player1.getTotalPointsScored());
     }
 
     private Integer compareNames(final Player player1, final Player player2) {
-        return player1.getPlayerName().compareTo(player2.getPlayerName());
+        return player2.getPlayerName().compareTo(player1.getPlayerName());
     }
 
 }
