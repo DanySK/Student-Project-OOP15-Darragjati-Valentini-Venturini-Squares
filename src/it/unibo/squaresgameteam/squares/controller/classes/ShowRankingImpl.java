@@ -97,7 +97,12 @@ public class ShowRankingImpl implements ShowRanking {
         this.rankingFile = new File(
                 System.getProperty("user.home") + System.getProperty("file.separator") + "Ranking.txt");
         if (!this.rankingFile.exists()) {
-            this.rankingFile.createNewFile();
+            try {
+                this.rankingFile.createNewFile();
+            } catch (IOException ex) {
+                throw new IOException();
+            }
+            
         }
     }
 
