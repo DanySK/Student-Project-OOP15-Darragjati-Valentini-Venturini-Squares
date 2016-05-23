@@ -146,30 +146,39 @@ public class GameImpl implements Game {
 
     private void createPlayers() {
         if (isEnded()) {
+            player1 = new PlayerImpl.Builder()
+                                    .playerName(namePlayer1)
+                                    .wonMatches(0)
+                                    .totalMatches(1)
+                                    .totalPointsScored(scorePlayer1)
+                                    .build();
+            player2 = new PlayerImpl.Builder()
+                                    .playerName(namePlayer2)
+                                    .wonMatches(0)
+                                    .totalMatches(1)
+                                    .totalPointsScored(scorePlayer2)
+                                    .build();
             switch (getWinner()) {
             case PLAYER1:
-                player1 = new PlayerImpl.Builder().playerName(namePlayer1).wonMatches(1).totalMatches(1)
-                        .totalPointsScored(scorePlayer1).build();
-                player2 = new PlayerImpl.Builder().playerName(namePlayer2).wonMatches(0).totalMatches(1)
-                        .totalPointsScored(scorePlayer2).build();
+                player1 = new PlayerImpl.Builder()
+                                        .playerName(namePlayer1)
+                                        .wonMatches(1)
+                                        .totalMatches(1)
+                                        .totalPointsScored(scorePlayer1)
+                                        .build();
                 break;
             case PLAYER2:
-                player1 = new PlayerImpl.Builder().playerName(namePlayer1).wonMatches(0).totalMatches(1)
-                        .totalPointsScored(scorePlayer1).build();
-                player2 = new PlayerImpl.Builder().playerName(namePlayer2).wonMatches(1).totalMatches(1)
-                        .totalPointsScored(scorePlayer2).build();
+                player2 = new PlayerImpl.Builder()
+                                        .playerName(namePlayer2)
+                                        .wonMatches(1)
+                                        .totalMatches(1)
+                                        .totalPointsScored(scorePlayer2)
+                                        .build();
                 break;
-            case EMPTY:
-                player1 = new PlayerImpl.Builder().playerName(namePlayer1).wonMatches(0).totalMatches(1)
-                        .totalPointsScored(scorePlayer1).build();
-                player2 = new PlayerImpl.Builder().playerName(namePlayer2).wonMatches(0).totalMatches(1)
-                        .totalPointsScored(scorePlayer2).build();
-                break;
-            default:
-                throw new IllegalArgumentException();
+            default:    
             }
         } else {
-            throw new IllegalStateException(); // da testare
+            throw new IllegalStateException();
         }
     }
 

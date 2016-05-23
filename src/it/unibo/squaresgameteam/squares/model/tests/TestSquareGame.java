@@ -125,6 +125,7 @@ public class TestSquareGame {
                 gridOfSize2.getPlayerPoints(GridOption.PLAYER2));
         assertTrue(gridOfSize2.isEnded());
         assertNotEquals(GridOption.EMPTY, gridOfSize2.getWinner());
+        assertNotEquals(gridOfSize2.getPlayerMatchResult(GridOption.PLAYER1), gridOfSize2.getPlayerMatchResult(GridOption.PLAYER2));
     }
 
     /**
@@ -132,10 +133,11 @@ public class TestSquareGame {
      * exceptions.
      * 
      * @throws UnsupportedSizeException
+     * @throws UnexistentLineListException 
      */
     @Test
     // CHECKSTYLE:OFF:
-    public void testExceptions() throws UnsupportedSizeException {
+    public void testExceptions() throws UnsupportedSizeException, UnexistentLineListException {
         SquareGrid exceptionGrid;
         Game exceptionGame;
 
@@ -240,6 +242,34 @@ public class TestSquareGame {
             exceptionGame.getWinner();
             fail("");
         } catch (IllegalStateException e) {
+        } catch (Exception e) {
+            fail(ERROR);
+        }
+        try {
+            exceptionGame.getPlayerMatchResult(GridOption.PLAYER1);
+            fail("You can't get the player match results if the match is not ended");
+        } catch (IllegalStateException e) {
+        } catch (Exception e) {
+            fail(ERROR);
+        }
+        
+        SquareGrid exceptionGrid2 = new SquareGridImpl(STANDARD_SIZE, STANDARD_SIZE);
+        Game exceptionGame2 = new GameImpl(exceptionGrid2, "Rei Ayanami", "Shinji Ikari");
+        exceptionGame2.startMatch();
+        for (int i = 0; i < STANDARD_SIZE + 1; i++) {
+            for (int z = 0; z < STANDARD_SIZE; z++) {
+                move.setListType(ListType.HORIZONTAL);
+                move.setListIndex(i);
+                move.setPosition(z);
+                exceptionGame2.setLine(move);
+                move.setListType(ListType.VERTICAL);
+                exceptionGame2.setLine(move);
+            }
+        }
+        try {
+            exceptionGame2.getPlayerMatchResult(GridOption.EMPTY);
+            fail("You can't get put as parameter GridOption.EMPTY, it is not a player!");
+        } catch (IllegalArgumentException e) {
         } catch (Exception e) {
             fail(ERROR);
         }
