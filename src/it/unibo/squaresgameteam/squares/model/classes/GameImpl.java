@@ -72,7 +72,7 @@ public class GameImpl implements Game {
             this.scorePlayer2 = INITIAL_SCORE;
             randomizeTurn();
             this.matchStarted = true;
-            playedTime.setTimeAtMatchStart(isStarted());
+            ((PlayedTimeImpl) playedTime).setTimeAtMatchStart(isStarted());
         }
     }
 
@@ -232,7 +232,7 @@ public class GameImpl implements Game {
             throw new IllegalArgumentException("the list selected does not exist");
         }
         if (isEnded()) {
-            playedTime.calculateMatchDuration(isEnded());
+            ((PlayedTimeImpl) playedTime).calculateMatchDuration(isEnded());
             createPlayers();
         }
         final Move lastMove = new MoveImpl(list, listIndex, position);

@@ -4,20 +4,18 @@ import java.util.List;
 
 import it.unibo.squaresgameteam.squares.model.enumerations.RankingOption;
 
-
 /**
- * This interface assigns the last two players match results and organizes them 
- * in a ranking. The ranking by default is ordered by winrate and can be 
+ * This interface assigns the last two players match results and organizes them
+ * in a ranking. The ranking by default is ordered by winrate and can be
  * reordered in in other three different ways. The order can also be reverted.
  */
 public interface Ranking {
 
     /**
-     * Add the last match results.
+     * Add a player last match results to the ranking.
      * 
-     * @param playerName  the player's name
-     * @param win  if the player has won the last match
-     * @param score the players score
+     * @param player
+     *            the player results that should be added to the ranking.
      */
     void addPlayerResults(Player player);
 
@@ -26,10 +24,14 @@ public interface Ranking {
      * winrate, per total wins, per total games played and per total squares
      * catched.
      * 
-     * @param option wich way the list should be ordered
-     * @param reverseRanking true if the list should be ordered in the opposite way
+     * @param option
+     *            wich way the list should be ordered
+     * @param reverseRanking
+     *            true if the list should be ordered in the opposite way
      * @return the reordered list
-     * @throws an IllegalArgumentException if the ordering option does not exist
+     * @throws an
+     *             IllegalArgumentException if the ordering option does not
+     *             exist
      */
     List<Player> orderListBy(RankingOption option, boolean reverseRanking);
 }
