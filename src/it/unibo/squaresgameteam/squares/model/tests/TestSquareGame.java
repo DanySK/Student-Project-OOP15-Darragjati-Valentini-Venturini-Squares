@@ -127,6 +127,7 @@ public class TestSquareGame {
         assertTrue(gridOfSize2.isEnded());
         assertNotEquals(GridOption.EMPTY, gridOfSize2.getWinner());
         assertNotEquals(gridOfSize2.getPlayerMatchResult(GridOption.PLAYER1), gridOfSize2.getPlayerMatchResult(GridOption.PLAYER2));
+        assertNotEquals(gridOfSize2.getMatchDuration(), -1.0);
     }
 
     /**

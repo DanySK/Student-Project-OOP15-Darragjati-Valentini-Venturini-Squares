@@ -202,6 +202,11 @@ public class GameImpl implements Game {
             throw new IllegalStateException();
         }
     }
+    
+    @Override
+    public Double getMatchDuration() {
+        return playedTime.getTotalMatchDuration();
+    }
 
     @Override
     public void setLine(final Move move) throws UnexistentLineListException {

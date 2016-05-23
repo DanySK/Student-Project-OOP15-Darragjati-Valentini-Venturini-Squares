@@ -46,7 +46,7 @@ public class PlayedTimeImpl implements PlayedTime {
      */
     protected void calculateMatchDuration(final boolean isEnded) {
         if (isEnded) {
-            this.totalPlayTime = (this.startGameTime - System.currentTimeMillis()) / 1000.0;
+            this.totalPlayTime = (System.currentTimeMillis() - this.startGameTime) / 1000.0;
         } else {
             throw new IllegalStateException();
         }

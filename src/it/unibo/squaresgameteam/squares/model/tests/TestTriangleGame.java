@@ -161,5 +161,6 @@ public class TestTriangleGame {
                 gridOfSize2.getPlayerPoints(GridOption.PLAYER2));
         assertTrue(gridOfSize2.isEnded());
         assertNotEquals(GridOption.EMPTY, gridOfSize2.getWinner());
+        assertNotEquals(gridOfSize2.getMatchDuration(), -1.0);
     }
 }

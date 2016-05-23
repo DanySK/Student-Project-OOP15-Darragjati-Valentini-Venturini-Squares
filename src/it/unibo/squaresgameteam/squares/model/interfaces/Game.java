@@ -69,6 +69,12 @@ public interface Game {
     Player getPlayerMatchResult(GridOption player);
 
     /**
+     * 
+     * @return the duration of the match
+     */
+    Double getMatchDuration();
+
+    /**
      * Makes a move setting a line in the grid.
      * 
      * @param move
