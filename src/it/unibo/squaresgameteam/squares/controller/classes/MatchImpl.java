@@ -1,15 +1,20 @@
 package it.unibo.squaresgameteam.squares.controller.classes;
 
+import java.io.IOException;
+
 import it.unibo.squaresgameteam.squares.controller.enumerations.TypeGame;
 import it.unibo.squaresgameteam.squares.controller.interfaces.Match;
+import it.unibo.squaresgameteam.squares.controller.interfaces.ShowRanking;
 import it.unibo.squaresgameteam.squares.model.classes.SquareGridImpl;
 import it.unibo.squaresgameteam.squares.model.classes.GameImpl;
 import it.unibo.squaresgameteam.squares.model.classes.MoveImpl;
 import it.unibo.squaresgameteam.squares.model.classes.PlayedTimeImpl;
+import it.unibo.squaresgameteam.squares.model.classes.RankingImpl;
 import it.unibo.squaresgameteam.squares.model.classes.TriangleGridImpl;
 import it.unibo.squaresgameteam.squares.model.enumerations.GridOption;
 import it.unibo.squaresgameteam.squares.model.enumerations.ListType;
 import it.unibo.squaresgameteam.squares.model.exceptions.UnsupportedSizeException;
+import it.unibo.squaresgameteam.squares.model.exceptions.DuplicatedPlayerStatsException;
 import it.unibo.squaresgameteam.squares.model.exceptions.NoMovesDoneException;
 import it.unibo.squaresgameteam.squares.model.exceptions.UnexistentLineListException;
 import it.unibo.squaresgameteam.squares.model.interfaces.SquareGrid;
@@ -37,6 +42,7 @@ public class MatchImpl implements Match {
     private PlayedTime time;
     private int playerScore;
     private Move addMove;
+    private GridOption winner;
 
     /**
      * 
@@ -101,7 +107,7 @@ public class MatchImpl implements Match {
 
     @Override
     public String addLine(final ListType direction, final int numLine, final int position)
-            throws UnexistentLineListException {
+            throws UnexistentLineListException, IOException, DuplicatedPlayerStatsException {
 
         this.addMove = new MoveImpl(direction, numLine, position);
 
@@ -109,6 +115,9 @@ public class MatchImpl implements Match {
         if (this.match.isEnded()) {
             this.time.calculateMatchDuration(match);
             this.numPlayer = this.match.getWinner();
+            this.winner = numPlayer;
+            addPlayerRank();
+            this.numPlayer = this.winner;
 
         } else {
             this.playerScore = this.match.getPlayerPoints(this.numPlayer);
@@ -121,7 +130,6 @@ public class MatchImpl implements Match {
 
     @Override
     public int getPlayerScore() {
-
         return this.playerScore;
     }
 
@@ -141,6 +149,19 @@ public class MatchImpl implements Match {
         if (namePlayer1.equals(namePlayer2)) {
             throw new IllegalArgumentException();
         }
+    }
+
+    private void addPlayerRank() throws IOException, DuplicatedPlayerStatsException {
+        ShowRanking ranking = new ShowRankingImpl();
+        convertNumToNamePlayer();
+        ranking.addPlayer(this.namePlayer, true, this.playerScore);
+        if (this.numPlayer.equals(GridOption.PLAYER1)) {
+            this.numPlayer = GridOption.PLAYER2;
+        } else {
+            this.numPlayer = GridOption.PLAYER1;
+        }
+        convertNumToNamePlayer();
+        ranking.addPlayer(this.namePlayer, false, this.match.getPlayerPoints(this.numPlayer));
     }
 
 }
