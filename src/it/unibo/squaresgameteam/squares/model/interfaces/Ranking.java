@@ -19,7 +19,7 @@ public interface Ranking {
      * @param win  if the player has won the last match
      * @param score the players score
      */
-    void addPlayerResults(String playerName, boolean win, Integer score);
+    void addPlayerResults(Player player);
 
     /**
      * Reorders the list that memorizes the ranking in four differnt ways: per

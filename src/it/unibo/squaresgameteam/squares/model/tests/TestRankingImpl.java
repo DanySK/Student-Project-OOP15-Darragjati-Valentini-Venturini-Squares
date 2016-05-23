@@ -56,7 +56,9 @@ public class TestRankingImpl {
         assertEquals(playerList.size(), 3);
 
         final RankingImpl rankingTest = new RankingImpl(playerList);
-        rankingTest.addPlayerResults(PLAYER4, true, 37);
+        Player newPlayer = new PlayerImpl.Builder().playerName(PLAYER4).wonMatches(1).totalMatches(1)
+                .totalPointsScored(37).build();
+        rankingTest.addPlayerResults(newPlayer);
         assertEquals(playerList.size(), 4);
         // ordering list by WINRATE
         List<Player> orderingTest = rankingTest.orderListBy(RankingOption.WINRATE, false);
@@ -84,7 +86,9 @@ public class TestRankingImpl {
         assertEquals(orderingTest.get(2).getPlayerName(), PLAYER1);
         assertEquals(orderingTest.get(3).getPlayerName(), PLAYER4);
 
-        rankingTest.addPlayerResults(PLAYER5, true, 37);
+        Player newPlayer2 = new PlayerImpl.Builder().playerName(PLAYER5).wonMatches(1).totalMatches(1)
+                .totalPointsScored(37).build();
+        rankingTest.addPlayerResults(newPlayer2);
         // ordering list by WINRATE
         final List<Player> testWinRateOrderedList = rankingTest.orderListBy(RankingOption.WINRATE, false);
         assertEquals(testWinRateOrderedList.get(0).getPlayerName(), PLAYER4);

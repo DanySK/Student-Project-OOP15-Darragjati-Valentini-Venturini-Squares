@@ -9,7 +9,9 @@ import it.unibo.squaresgameteam.squares.model.exceptions.NoMovesDoneException;
 import it.unibo.squaresgameteam.squares.model.exceptions.UnexistentLineListException;
 import it.unibo.squaresgameteam.squares.model.interfaces.SquareGrid;
 import it.unibo.squaresgameteam.squares.model.interfaces.Move;
+import it.unibo.squaresgameteam.squares.model.interfaces.Player;
 import it.unibo.squaresgameteam.squares.model.interfaces.PointsCounterStrategy;
+import it.unibo.squaresgameteam.squares.model.interfaces.Ranking;
 import it.unibo.squaresgameteam.squares.model.interfaces.Game;
 
 /**
@@ -20,6 +22,10 @@ public class GameImpl implements Game {
 
     private final SquareGrid grid;
     private boolean matchStarted;
+    private Player player1;
+    private Player player2;
+    private String namePlayer1;
+    private String namePlayer2;
     private Integer scorePlayer1;
     private Integer scorePlayer2;
     private static final Integer INITIAL_SCORE = 0;
@@ -34,7 +40,7 @@ public class GameImpl implements Game {
      *            the playable game field.
      */
     // CHECKSTYLE:OFF:
-    public GameImpl(final SquareGrid grid) {
+    public GameImpl(final SquareGrid grid, final String namePlayer1, final String namePlayer2) {
         // CHECKSTYLE:ON:
         this.grid = grid;
         this.matchStarted = false;
@@ -47,6 +53,8 @@ public class GameImpl implements Game {
                 throw new IllegalArgumentException();
             }
         }
+        this.namePlayer1 = namePlayer1;
+        this.namePlayer2 = namePlayer2;
     }
 
     @Override
@@ -95,8 +103,8 @@ public class GameImpl implements Game {
         if (!isStarted()) {
             throw new IllegalStateException("the match can't be ended if it isn't even started");
         }
-        return getPlayerPoints(GridOption.PLAYER1)
-                + getPlayerPoints(GridOption.PLAYER2) == grid.getMatchMaximumPoints() ? true : false;
+        return getPlayerPoints(GridOption.PLAYER1) + getPlayerPoints(GridOption.PLAYER2) == grid.getMatchMaximumPoints()
+                ? true : false;
     }
 
     @Override
@@ -134,6 +142,52 @@ public class GameImpl implements Game {
         }
     }
 
+    private void createPlayers() {
+        if (isEnded()) {
+            switch (getWinner()) {
+            case PLAYER1:
+                player1 = new PlayerImpl.Builder().playerName(namePlayer1).wonMatches(1).totalMatches(1)
+                        .totalPointsScored(scorePlayer1).build();
+                player2 = new PlayerImpl.Builder().playerName(namePlayer2).wonMatches(0).totalMatches(1)
+                        .totalPointsScored(scorePlayer2).build();
+                break;
+            case PLAYER2:
+                player1 = new PlayerImpl.Builder().playerName(namePlayer1).wonMatches(0).totalMatches(1)
+                        .totalPointsScored(scorePlayer1).build();
+                player2 = new PlayerImpl.Builder().playerName(namePlayer2).wonMatches(1).totalMatches(1)
+                        .totalPointsScored(scorePlayer2).build();
+                break;
+            case EMPTY:
+                player1 = new PlayerImpl.Builder().playerName(namePlayer1).wonMatches(0).totalMatches(1)
+                        .totalPointsScored(scorePlayer1).build();
+                player2 = new PlayerImpl.Builder().playerName(namePlayer2).wonMatches(0).totalMatches(1)
+                        .totalPointsScored(scorePlayer2).build();
+                break;
+            default:
+                throw new IllegalArgumentException();
+            }
+        } else {
+            throw new IllegalStateException(); // da testare
+        }
+    }
+
+    @Override
+    public Player getPlayerStats(final GridOption player) {
+        if (isEnded()) {
+            switch (player) {
+            case PLAYER1:
+                return player1;
+            case PLAYER2:
+                return player2;
+            default:
+                throw new IllegalArgumentException();
+
+            }
+        } else {
+            throw new IllegalStateException();
+        }
+    }
+
     @Override
     public void setLine(final Move move) throws UnexistentLineListException {
         if (!this.isStarted()) {
@@ -161,6 +215,9 @@ public class GameImpl implements Game {
             }
         default:
             throw new IllegalArgumentException("the list selected does not exist");
+        }
+        if (isEnded()) {
+            createPlayers();
         }
         final Move lastMove = new MoveImpl(list, listIndex, position);
         lastMoveList.add(lastMove);

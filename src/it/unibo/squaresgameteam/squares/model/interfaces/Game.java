@@ -58,6 +58,8 @@ public interface Game {
      */
     GridOption getWinner();
 
+    Player getPlayerStats(GridOption player);
+    
     /**
      * Makes a move setting a line in the grid.
      * 
@@ -92,5 +94,5 @@ public interface Game {
      * @throws NoMovesDoneException
      *             if noone has made a move yet
      */
-    Move getCopyOfLastMove() throws NoMovesDoneException;
+    Move getCopyOfLastMove() throws NoMovesDoneException;   
 }

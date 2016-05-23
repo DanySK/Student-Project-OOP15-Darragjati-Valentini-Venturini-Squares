@@ -46,24 +46,20 @@ public class RankingImpl implements Ranking {
     }
 
     @Override
-    public void addPlayerResults(final String playerName, final boolean victory, final Integer totalPointsScored) {
-        Integer wonMatch = 0;
-        if (victory) {
-            wonMatch = 1;
-        }
-        for (final Player player : playerList) {
-            if (player.getPlayerName().equals(playerName)) {
-                final Player updatedPlayer = new PlayerImpl.Builder().playerName(playerName)
-                        .wonMatches(player.getWonMatches() + wonMatch).totalMatches(player.getTotalMatches() + 1)
-                        .totalPointsScored(player.getTotalPointsScored() + totalPointsScored).build();
-                playerList.remove(player);
+    public void addPlayerResults(final Player player) {       
+        for (final Player p : playerList) {
+            if (p.getPlayerName().equals(player.getPlayerName())) {
+                final Player updatedPlayer = new PlayerImpl.Builder().playerName(player.getPlayerName())
+                        .wonMatches(p.getWonMatches() + player.getWonMatches()).totalMatches(p.getTotalMatches() + player.getTotalMatches())
+                        .totalPointsScored(p.getTotalPointsScored() + player.getTotalPointsScored()).build();
+                playerList.remove(p);
                 playerList.add(updatedPlayer);
                 return;
             }
         }
-        final Player newPlayer = new PlayerImpl.Builder().playerName(playerName).wonMatches(wonMatch).totalMatches(1)
-                .totalPointsScored(totalPointsScored).build();
-        playerList.add(newPlayer);
+ //       final Player newPlayer = new PlayerImpl.Builder().playerName(playerName).wonMatches(wonMatch).totalMatches(1)
+ //               .totalPointsScored(totalPointsScored).build();
+        playerList.add(player);
     }
 
     @Override
