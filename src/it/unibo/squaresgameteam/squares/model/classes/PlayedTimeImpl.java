@@ -16,25 +16,23 @@ public class PlayedTimeImpl implements PlayedTime {
      * This constructor sets the fields of the object with default values.
      */
     public PlayedTimeImpl() {
-        this.totalPlayTime = 0.0;
-        this.startGameTime = 0;
+        this.totalPlayTime = -1.0;
+        this.startGameTime = -1;
     }
 
-    @Override
-    public void setTimeAtMatchStart(final Game currentGame) {
-        if (currentGame.isStarted() && this.startGameTime != 0) {
+ 
+    protected void setTimeAtMatchStart(boolean isStarted) {
+        if (isStarted && this.startGameTime == -1) {
             this.startGameTime = System.currentTimeMillis();
         } else {
             throw new IllegalStateException();
         }
     }
 
-    @Override
-    public void calculateMatchDuration(final Game currentGame) {
-        if (currentGame.isEnded()) {
-            Double currentGamePlayTime;
-            currentGamePlayTime = (this.startGameTime - System.currentTimeMillis()) / 1000.0;
-            this.totalPlayTime += currentGamePlayTime;
+    
+    protected void calculateMatchDuration(boolean isEnded) {
+        if (isEnded) {
+            this.totalPlayTime = (this.startGameTime - System.currentTimeMillis()) / 1000.0;
         } else {
             throw new IllegalStateException();
         }
@@ -43,7 +41,7 @@ public class PlayedTimeImpl implements PlayedTime {
 
     @Override
     public Double getTotalMatchDuration() {
-        if (this.totalPlayTime.equals(0.0)) {
+        if (this.totalPlayTime.equals(-1.0)) {
             throw new IllegalStateException();
         }
         return this.totalPlayTime;

@@ -9,6 +9,7 @@ import it.unibo.squaresgameteam.squares.model.exceptions.NoMovesDoneException;
 import it.unibo.squaresgameteam.squares.model.exceptions.UnexistentLineListException;
 import it.unibo.squaresgameteam.squares.model.interfaces.SquareGrid;
 import it.unibo.squaresgameteam.squares.model.interfaces.Move;
+import it.unibo.squaresgameteam.squares.model.interfaces.PlayedTime;
 import it.unibo.squaresgameteam.squares.model.interfaces.Player;
 import it.unibo.squaresgameteam.squares.model.interfaces.PointsCounterStrategy;
 import it.unibo.squaresgameteam.squares.model.interfaces.BaseGrid;
@@ -32,6 +33,7 @@ public class GameImpl implements Game {
     private GridOption turn = GridOption.EMPTY;
     private final List<Move> lastMoveList = new ArrayList<>();
     private final PointsCounterStrategy calculatePoints;
+    private PlayedTime playedTime = new PlayedTimeImpl();
 
     /**
      * This constructor takes an object that implements BaseGrid.
@@ -70,6 +72,7 @@ public class GameImpl implements Game {
             this.scorePlayer2 = INITIAL_SCORE;
             randomizeTurn();
             this.matchStarted = true;
+            playedTime.setTimeAtMatchStart(isStarted());
         }
     }
 
@@ -229,6 +232,7 @@ public class GameImpl implements Game {
             throw new IllegalArgumentException("the list selected does not exist");
         }
         if (isEnded()) {
+            playedTime.calculateMatchDuration(isEnded());
             createPlayers();
         }
         final Move lastMove = new MoveImpl(list, listIndex, position);
