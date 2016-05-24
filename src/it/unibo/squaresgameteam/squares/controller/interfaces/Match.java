@@ -36,8 +36,9 @@ public interface Match {
      * @throws UnexistentLineListException
      * @throws DuplicatedPlayerStatsException 
      * @throws IOException 
+     * @throws ClassNotFoundException 
      */
-    String addLine(ListType direction, int numLine, int position) throws UnexistentLineListException, IOException, DuplicatedPlayerStatsException;
+    String addLine(ListType direction, int numLine, int position) throws UnexistentLineListException, IOException, DuplicatedPlayerStatsException, ClassNotFoundException;
     
     
     
