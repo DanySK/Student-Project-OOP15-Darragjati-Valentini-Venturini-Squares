@@ -20,10 +20,11 @@ public interface ShowRanking {
      * @return classifica sotto forma di stringa.
      * @throws IOException 
      * @throws DuplicatedPlayerStatsException 
+     * @throws ClassNotFoundException 
      */
-    String showRanking(RankingOption rankingOrder, boolean reverse) throws IOException, DuplicatedPlayerStatsException;
+    String showRanking(RankingOption rankingOrder, boolean reverse) throws IOException, DuplicatedPlayerStatsException, ClassNotFoundException;
     
-    void addPlayer(Player player) throws IOException, DuplicatedPlayerStatsException;
+    void addPlayer(Player player) throws IOException, DuplicatedPlayerStatsException, ClassNotFoundException;
    
     
 
