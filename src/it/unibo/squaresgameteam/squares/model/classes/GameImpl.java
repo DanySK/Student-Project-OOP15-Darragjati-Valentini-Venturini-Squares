@@ -8,6 +8,7 @@ import it.unibo.squaresgameteam.squares.model.enumerations.ListType;
 import it.unibo.squaresgameteam.squares.model.exceptions.NoMovesDoneException;
 import it.unibo.squaresgameteam.squares.model.exceptions.UnexistentLineListException;
 import it.unibo.squaresgameteam.squares.model.interfaces.SquareGrid;
+import it.unibo.squaresgameteam.squares.model.interfaces.TriangleGrid;
 import it.unibo.squaresgameteam.squares.model.interfaces.Move;
 import it.unibo.squaresgameteam.squares.model.interfaces.PlayedTime;
 import it.unibo.squaresgameteam.squares.model.interfaces.Player;
@@ -51,7 +52,7 @@ public class GameImpl implements Game {
         this.grid = grid;
         this.matchStarted = false;
         if (grid instanceof TriangleGridImpl) {
-            calculatePoints = new TriangleGridPointsCounterImpl((SquareGrid) grid);
+            calculatePoints = new TriangleGridPointsCounterImpl((TriangleGrid) grid);
         } else {
             if (grid instanceof SquareGridImpl) {
                 calculatePoints = new SquareGridPointsCounterImpl((SquareGrid) grid);

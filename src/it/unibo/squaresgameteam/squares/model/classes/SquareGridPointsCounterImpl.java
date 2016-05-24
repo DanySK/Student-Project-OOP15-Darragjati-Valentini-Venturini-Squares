@@ -2,7 +2,6 @@ package it.unibo.squaresgameteam.squares.model.classes;
 
 import it.unibo.squaresgameteam.squares.model.enumerations.GridOption;
 import it.unibo.squaresgameteam.squares.model.exceptions.UnexistentLineListException;
-import it.unibo.squaresgameteam.squares.model.interfaces.BaseGrid;
 import it.unibo.squaresgameteam.squares.model.interfaces.PointsCounterStrategy;
 import it.unibo.squaresgameteam.squares.model.interfaces.SquareGrid;
 
@@ -12,7 +11,7 @@ import it.unibo.squaresgameteam.squares.model.interfaces.SquareGrid;
  */
 public class SquareGridPointsCounterImpl implements PointsCounterStrategy {
 
-    private final BaseGrid grid;
+    private final SquareGrid grid;
 
     /**
      * The consctructor takes in input the current playable grid.
@@ -30,15 +29,15 @@ public class SquareGridPointsCounterImpl implements PointsCounterStrategy {
     public Integer horizontalPointScored(final Integer listIndex, final Integer position)
             throws UnexistentLineListException {
         Integer points = 0;
-        if (listIndex > 0 && !((SquareGrid) grid).getHorizontalLinePlayer(listIndex - 1, position).equals(GridOption.EMPTY)
-                && !((SquareGrid) grid).getVerticalLinePlayer(position, listIndex - 1).equals(GridOption.EMPTY)
-                && !((SquareGrid) grid).getVerticalLinePlayer(position + 1, listIndex - 1).equals(GridOption.EMPTY)) {
+        if (listIndex > 0 && !grid.getHorizontalLinePlayer(listIndex - 1, position).equals(GridOption.EMPTY)
+                && !grid.getVerticalLinePlayer(position, listIndex - 1).equals(GridOption.EMPTY)
+                && !grid.getVerticalLinePlayer(position + 1, listIndex - 1).equals(GridOption.EMPTY)) {
             points++;
         }
-        if (listIndex < ((SquareGrid) grid).getHorizontalListSize() - 1
-                && !((SquareGrid) grid).getHorizontalLinePlayer(listIndex + 1, position).equals(GridOption.EMPTY)
-                && !((SquareGrid) grid).getVerticalLinePlayer(position, listIndex - 1).equals(GridOption.EMPTY)
-                && !((SquareGrid) grid).getVerticalLinePlayer(position + 1, listIndex - 1).equals(GridOption.EMPTY)) {
+        if (listIndex < grid.getHorizontalListSize() - 1
+                && !grid.getHorizontalLinePlayer(listIndex + 1, position).equals(GridOption.EMPTY)
+                && !grid.getVerticalLinePlayer(position, listIndex - 1).equals(GridOption.EMPTY)
+                && !grid.getVerticalLinePlayer(position + 1, listIndex - 1).equals(GridOption.EMPTY)) {
             points++;
 
         }
@@ -49,15 +48,15 @@ public class SquareGridPointsCounterImpl implements PointsCounterStrategy {
     public Integer verticalPointScored(final Integer listIndex, final Integer position)
             throws UnexistentLineListException {
         Integer points = 0;
-        if (listIndex > 0 && !((SquareGrid) grid).getVerticalLinePlayer(listIndex - 1, position).equals(GridOption.EMPTY)
-                && !((SquareGrid) grid).getHorizontalLinePlayer(position, listIndex - 1).equals(GridOption.EMPTY)
-                && !((SquareGrid) grid).getHorizontalLinePlayer(position + 1, listIndex - 1).equals(GridOption.EMPTY)) {
+        if (listIndex > 0 && !grid.getVerticalLinePlayer(listIndex - 1, position).equals(GridOption.EMPTY)
+                && !grid.getHorizontalLinePlayer(position, listIndex - 1).equals(GridOption.EMPTY)
+                && !grid.getHorizontalLinePlayer(position + 1, listIndex - 1).equals(GridOption.EMPTY)) {
             points++;
         }
-        if (listIndex < ((SquareGrid) grid).getVerticalListSize() - 1
-                && !((SquareGrid) grid).getVerticalLinePlayer(listIndex + 1, position).equals(GridOption.EMPTY)
-                && !((SquareGrid) grid).getHorizontalLinePlayer(position, listIndex - 1).equals(GridOption.EMPTY)
-                && !((SquareGrid) grid).getHorizontalLinePlayer(position + 1, listIndex - 1).equals(GridOption.EMPTY)) {
+        if (listIndex < grid.getVerticalListSize() - 1
+                && !grid.getVerticalLinePlayer(listIndex + 1, position).equals(GridOption.EMPTY)
+                && !grid.getHorizontalLinePlayer(position, listIndex - 1).equals(GridOption.EMPTY)
+                && !grid.getHorizontalLinePlayer(position + 1, listIndex - 1).equals(GridOption.EMPTY)) {
             points++;
         }
         return points;

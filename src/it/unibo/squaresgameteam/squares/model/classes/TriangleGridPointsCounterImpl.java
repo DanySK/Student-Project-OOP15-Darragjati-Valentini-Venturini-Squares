@@ -2,9 +2,8 @@ package it.unibo.squaresgameteam.squares.model.classes;
 
 import it.unibo.squaresgameteam.squares.model.enumerations.GridOption;
 import it.unibo.squaresgameteam.squares.model.exceptions.UnexistentLineListException;
-import it.unibo.squaresgameteam.squares.model.interfaces.BaseGrid;
 import it.unibo.squaresgameteam.squares.model.interfaces.PointsCounterStrategy;
-import it.unibo.squaresgameteam.squares.model.interfaces.SquareGrid;
+import it.unibo.squaresgameteam.squares.model.interfaces.TriangleGrid;
 
 /**
  * This class implements the interface PointsCounterStrategy. It is used to
@@ -12,7 +11,7 @@ import it.unibo.squaresgameteam.squares.model.interfaces.SquareGrid;
  */
 public class TriangleGridPointsCounterImpl implements PointsCounterStrategy {
 
-    private final BaseGrid grid;
+    private final TriangleGrid grid;
 
     /**
      * The consctructor takes in input the current playable grid.
@@ -21,7 +20,7 @@ public class TriangleGridPointsCounterImpl implements PointsCounterStrategy {
      *            the current grid
      */
     // CHECKSTYLE:OFF:
-    public TriangleGridPointsCounterImpl(final SquareGrid grid) {
+    public TriangleGridPointsCounterImpl(final TriangleGrid grid) {
         // CHECKSTYLE:ON:
         this.grid = grid;
     }
@@ -30,14 +29,14 @@ public class TriangleGridPointsCounterImpl implements PointsCounterStrategy {
     public Integer horizontalPointScored(final Integer listIndex, final Integer position)
             throws UnexistentLineListException {
         Integer points = 0;
-        if (listIndex > 0 && !((SquareGrid) grid).getVerticalLinePlayer(position, listIndex - 1).equals(GridOption.EMPTY)
-                && !((TriangleGridImpl) grid).getDiagonalLinePlayer(listIndex - 1, position)
+        if (listIndex > 0 && !grid.getVerticalLinePlayer(position, listIndex - 1).equals(GridOption.EMPTY)
+                && !grid.getDiagonalLinePlayer(listIndex - 1, position)
                         .equals(GridOption.EMPTY)) {
             points++;
         }
-        if (listIndex < ((SquareGrid) grid).getHorizontalListSize() - 1
-                && !((SquareGrid) grid).getVerticalLinePlayer(position + 1, listIndex).equals(GridOption.EMPTY)
-                && !((TriangleGridImpl) grid).getDiagonalLinePlayer(listIndex, position).equals(GridOption.EMPTY)) {
+        if (listIndex < grid.getHorizontalListSize() - 1
+                && !grid.getVerticalLinePlayer(position + 1, listIndex).equals(GridOption.EMPTY)
+                && !grid.getDiagonalLinePlayer(listIndex, position).equals(GridOption.EMPTY)) {
             points++;
         }
         return points;
@@ -47,14 +46,14 @@ public class TriangleGridPointsCounterImpl implements PointsCounterStrategy {
     public Integer verticalPointScored(final Integer listIndex, final Integer position)
             throws UnexistentLineListException {
         Integer points = 0;
-        if (listIndex > 0 && !((SquareGrid) grid).getHorizontalLinePlayer(position, listIndex - 1).equals(GridOption.EMPTY)
-                && !((TriangleGridImpl) grid).getDiagonalLinePlayer(position, listIndex - 1)
+        if (listIndex > 0 && !grid.getHorizontalLinePlayer(position, listIndex - 1).equals(GridOption.EMPTY)
+                && !grid.getDiagonalLinePlayer(position, listIndex - 1)
                         .equals(GridOption.EMPTY)) {
             points++;
         }
-        if (listIndex < ((SquareGrid) grid).getVerticalListSize() - 1
-                && !((SquareGrid) grid).getHorizontalLinePlayer(position + 1, listIndex).equals(GridOption.EMPTY)
-                && !((TriangleGridImpl) grid).getDiagonalLinePlayer(position, listIndex).equals(GridOption.EMPTY)) {
+        if (listIndex < grid.getVerticalListSize() - 1
+                && !grid.getHorizontalLinePlayer(position + 1, listIndex).equals(GridOption.EMPTY)
+                && !grid.getDiagonalLinePlayer(position, listIndex).equals(GridOption.EMPTY)) {
             points++;
         }
         return points;
@@ -64,12 +63,12 @@ public class TriangleGridPointsCounterImpl implements PointsCounterStrategy {
     public Integer diagonalPointScored(final Integer listIndex, final Integer position)
             throws UnexistentLineListException {
         Integer points = 0;
-        if (!((SquareGrid) grid).getHorizontalLinePlayer(listIndex, position).equals(GridOption.EMPTY)
-                && !((SquareGrid) grid).getVerticalLinePlayer(position + 1, listIndex).equals(GridOption.EMPTY)) {
+        if (!grid.getHorizontalLinePlayer(listIndex, position).equals(GridOption.EMPTY)
+                && !grid.getVerticalLinePlayer(position + 1, listIndex).equals(GridOption.EMPTY)) {
             points++;
         }
-        if (!((SquareGrid) grid).getHorizontalLinePlayer(listIndex + 1, position).equals(GridOption.EMPTY)
-                && !((SquareGrid) grid).getVerticalLinePlayer(position, listIndex).equals(GridOption.EMPTY)) {
+        if (!grid.getHorizontalLinePlayer(listIndex + 1, position).equals(GridOption.EMPTY)
+                && !grid.getVerticalLinePlayer(position, listIndex).equals(GridOption.EMPTY)) {
             points++;
         }
         return points;
