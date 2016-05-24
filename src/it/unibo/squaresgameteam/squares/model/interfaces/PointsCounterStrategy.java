@@ -8,6 +8,8 @@ import it.unibo.squaresgameteam.squares.model.exceptions.UnexistentLineListExcep
  */
 public interface PointsCounterStrategy {
 
+    Integer getPoints();
+    
     /**
      * This method calculate the player points after an horizontal line is set.
      * 
@@ -21,7 +23,7 @@ public interface PointsCounterStrategy {
      * @throws UnexistentLineListException
      *             if the listIndex input is not correct
      */
-    Integer horizontalPointScored(final Integer listIndex, final Integer position) throws UnexistentLineListException;
+ //   Integer horizontalPointScored(final Integer listIndex, final Integer position) throws UnexistentLineListException;
 
     /**
      * This method calculate the player points after an vertical line is set.
@@ -36,7 +38,7 @@ public interface PointsCounterStrategy {
      * @throws UnexistentLineListException
      *             if the listIndex input is not correct
      */
-    Integer verticalPointScored(final Integer listIndex, final Integer position) throws UnexistentLineListException;
+ //   Integer verticalPointScored(final Integer listIndex, final Integer position) throws UnexistentLineListException;
 
     /**
      * This method calculate the player points after an diagonal line is set.
@@ -53,5 +55,5 @@ public interface PointsCounterStrategy {
      * @throws UnexistentLineListException
      *             if the listIndex input is not correct
      */
-    Integer diagonalPointScored(final Integer listIndex, final Integer position) throws UnexistentLineListException;
+ //   Integer diagonalPointScored(final Integer listIndex, final Integer position) throws UnexistentLineListException;
 }

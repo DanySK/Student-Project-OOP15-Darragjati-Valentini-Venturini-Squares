@@ -32,9 +32,9 @@ public class GameImpl implements Game {
     private Integer scorePlayer2;
     private static final Integer INITIAL_SCORE = 0;
     private GridOption turn = GridOption.EMPTY;
-    private final List<Move> lastMoveList = new ArrayList<>();
+    private final List<Move> lastMoveList;
     private final PointsCounterStrategy calculatePoints;
-    private PlayedTime playedTime = new PlayedTimeImpl();
+    private PlayedTime playedTime;
 
     /**
      * This constructor takes an object that implements BaseGrid.
@@ -62,6 +62,8 @@ public class GameImpl implements Game {
         }
         this.namePlayer1 = namePlayer1;
         this.namePlayer2 = namePlayer2;
+        lastMoveList = new ArrayList<>();
+        playedTime = new PlayedTimeImpl();
     }
 
     @Override
@@ -220,16 +222,30 @@ public class GameImpl implements Game {
         switch (list) {
         case HORIZONTAL:
             ((SquareGridImpl) grid).setHorizontalLine(listIndex, position, this.turn);
-            addPoints(calculatePoints.horizontalPointScored(listIndex, position));
+            if (grid instanceof TriangleGridImpl) {
+                ((TriangleGridPointsCounter) calculatePoints).horizontalPointScored(listIndex, position);
+            } else {
+                if (grid instanceof SquareGridImpl) {
+                    ((SquareGridPointsCounter) calculatePoints).horizontalPointScored(listIndex, position);
+                } else {
+                    throw new IllegalStateException();
+                }
+            }
             break;
         case VERTICAL:
             ((SquareGridImpl) grid).setVerticalLine(listIndex, position, this.turn);
-            addPoints(calculatePoints.verticalPointScored(listIndex, position));
+            if (grid instanceof TriangleGridImpl) {
+                ((TriangleGridPointsCounter) calculatePoints).verticalPointScored(listIndex, position);
+            } else {
+                if (grid instanceof SquareGridImpl) {
+                    ((SquareGridPointsCounter) calculatePoints).verticalPointScored(listIndex, position);
+                }
+            }
             break;
         case DIAGONAL:
             if (grid instanceof TriangleGridImpl) {
                 ((TriangleGridImpl) grid).setDiagonalLine(listIndex, position, this.turn);
-                addPoints(calculatePoints.diagonalPointScored(listIndex, position));
+                ((TriangleGridPointsCounter) calculatePoints).diagonalPointScored(listIndex, position);
                 break;
             } else {
                 throw new UnsupportedOperationException("the diagonal move is not supported by the selected game mode");
@@ -237,6 +253,7 @@ public class GameImpl implements Game {
         default:
             throw new IllegalArgumentException("the list selected does not exist");
         }
+        addPoints(calculatePoints.getPoints());
         if (isEnded()) {
             ((PlayedTimeImpl) playedTime).calculateMatchDuration(isEnded());
             createPlayers();
@@ -273,29 +290,47 @@ public class GameImpl implements Game {
         Integer points = 0;
         switch (getCopyOfLastMove().getListType()) {
         case HORIZONTAL:
-            points = calculatePoints.horizontalPointScored(getCopyOfLastMove().getListIndex(),
-                    getCopyOfLastMove().getPosition());
+            if (grid instanceof TriangleGridImpl) {
+                ((TriangleGridPointsCounter) calculatePoints).horizontalPointScored(getCopyOfLastMove().getListIndex(),
+                        getCopyOfLastMove().getPosition());
+            } else {
+                if (grid instanceof SquareGridImpl) {
+                    ((SquareGridPointsCounter) calculatePoints).horizontalPointScored(getCopyOfLastMove().getListIndex(),
+                            getCopyOfLastMove().getPosition());
+                } else {
+                    throw new IllegalStateException();
+                }
+            }
             ((SquareGridImpl) grid).setHorizontalLine(getCopyOfLastMove().getListIndex(),
                     getCopyOfLastMove().getPosition(), GridOption.EMPTY);
-            addPoints(-points);
             break;
         case VERTICAL:
-            points = calculatePoints.verticalPointScored(getCopyOfLastMove().getListIndex(),
-                    getCopyOfLastMove().getPosition());
+            if (grid instanceof TriangleGridImpl) {
+                ((TriangleGridPointsCounter) calculatePoints).verticalPointScored(getCopyOfLastMove().getListIndex(),
+                        getCopyOfLastMove().getPosition());
+            } else {
+                if (grid instanceof SquareGridImpl) {
+                    ((SquareGridPointsCounter) calculatePoints).verticalPointScored(getCopyOfLastMove().getListIndex(),
+                            getCopyOfLastMove().getPosition());
+                }
+            }
             ((SquareGridImpl) grid).setVerticalLine(getCopyOfLastMove().getListIndex(),
                     getCopyOfLastMove().getPosition(), GridOption.EMPTY);
-            addPoints(-points);
             break;
         case DIAGONAL:
-            points = calculatePoints.diagonalPointScored(getCopyOfLastMove().getListIndex(),
-                    getCopyOfLastMove().getPosition());
-            ((TriangleGridImpl) grid).setDiagonalLine(getCopyOfLastMove().getListIndex(),
+            if (grid instanceof TriangleGridImpl) {
+                ((TriangleGridPointsCounter) calculatePoints).diagonalPointScored(getCopyOfLastMove().getListIndex(),
+                        getCopyOfLastMove().getPosition());
+                ((TriangleGridImpl) grid).setDiagonalLine(getCopyOfLastMove().getListIndex(),
                     getCopyOfLastMove().getPosition(), GridOption.EMPTY);
-            addPoints(-points);
+            } else {
+                throw new UnsupportedOperationException();
+            }
             break;
         default:
             throw new IllegalArgumentException();
         }
+        addPoints(-calculatePoints.getPoints());
         lastMoveList.remove(lastMoveList.size() - 1);
     }
 

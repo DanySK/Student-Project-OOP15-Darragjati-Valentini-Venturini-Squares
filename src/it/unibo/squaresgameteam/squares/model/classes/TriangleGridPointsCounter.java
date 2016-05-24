@@ -12,7 +12,8 @@ import it.unibo.squaresgameteam.squares.model.interfaces.TriangleGrid;
 public class TriangleGridPointsCounter implements PointsCounterStrategy {
 
     private final TriangleGrid grid;
-
+    private Integer points;
+    
     /**
      * The consctructor takes in input the current playable grid.
      * 
@@ -26,7 +27,12 @@ public class TriangleGridPointsCounter implements PointsCounterStrategy {
     }
 
     @Override
-    public Integer horizontalPointScored(final Integer listIndex, final Integer position)
+    public Integer getPoints() {
+        // TODO Auto-generated method stub
+        return this.points;
+    }
+ 
+    protected Integer horizontalPointScored(final Integer listIndex, final Integer position)
             throws UnexistentLineListException {
         Integer points = 0;
         if (listIndex > 0 && !grid.getVerticalLinePlayer(position, listIndex - 1).equals(GridOption.EMPTY)
@@ -39,11 +45,12 @@ public class TriangleGridPointsCounter implements PointsCounterStrategy {
                 && !grid.getDiagonalLinePlayer(listIndex, position).equals(GridOption.EMPTY)) {
             points++;
         }
+        this.points = points;
         return points;
     }
 
-    @Override
-    public Integer verticalPointScored(final Integer listIndex, final Integer position)
+    
+    protected Integer verticalPointScored(final Integer listIndex, final Integer position)
             throws UnexistentLineListException {
         Integer points = 0;
         if (listIndex > 0 && !grid.getHorizontalLinePlayer(position, listIndex - 1).equals(GridOption.EMPTY)
@@ -56,11 +63,12 @@ public class TriangleGridPointsCounter implements PointsCounterStrategy {
                 && !grid.getDiagonalLinePlayer(position, listIndex).equals(GridOption.EMPTY)) {
             points++;
         }
+        this.points = points;
         return points;
     }
 
-    @Override
-    public Integer diagonalPointScored(final Integer listIndex, final Integer position)
+   
+    protected Integer diagonalPointScored(final Integer listIndex, final Integer position)
             throws UnexistentLineListException {
         Integer points = 0;
         if (!grid.getHorizontalLinePlayer(listIndex, position).equals(GridOption.EMPTY)
@@ -71,6 +79,7 @@ public class TriangleGridPointsCounter implements PointsCounterStrategy {
                 && !grid.getVerticalLinePlayer(position, listIndex).equals(GridOption.EMPTY)) {
             points++;
         }
+        this.points = points;
         return points;
     }
 }
