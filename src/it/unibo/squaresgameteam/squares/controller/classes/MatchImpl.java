@@ -108,7 +108,7 @@ public class MatchImpl implements Match {
 
     @Override
     public String addLine(final ListType direction, final int numLine, final int position)
-            throws UnexistentLineListException, IOException, DuplicatedPlayerStatsException {
+            throws UnexistentLineListException, IOException, DuplicatedPlayerStatsException, ClassNotFoundException {
 
         this.addMove = new MoveImpl(direction, numLine, position);
 
@@ -151,7 +151,7 @@ public class MatchImpl implements Match {
         }
     }
 
-    private void addPlayerRank() throws IOException, DuplicatedPlayerStatsException {
+    private void addPlayerRank() throws IOException, DuplicatedPlayerStatsException, ClassNotFoundException {
         ShowRanking ranking = new ShowRankingImpl();
         this.playerResult = this.match.getPlayerMatchResult(numPlayer);
         ranking.addPlayer(this.playerResult);
