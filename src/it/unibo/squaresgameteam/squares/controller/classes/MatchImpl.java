@@ -20,6 +20,7 @@ import it.unibo.squaresgameteam.squares.model.exceptions.UnexistentLineListExcep
 import it.unibo.squaresgameteam.squares.model.interfaces.SquareGrid;
 import it.unibo.squaresgameteam.squares.model.interfaces.Move;
 import it.unibo.squaresgameteam.squares.model.interfaces.PlayedTime;
+import it.unibo.squaresgameteam.squares.model.interfaces.Player;
 import it.unibo.squaresgameteam.squares.model.interfaces.Game;
 
 /**
@@ -43,6 +44,7 @@ public class MatchImpl implements Match {
     private int playerScore;
     private Move addMove;
     private GridOption winner;
+    private Player playerResult;
 
     /**
      * 
@@ -86,8 +88,7 @@ public class MatchImpl implements Match {
         match.startMatch();
         this.numPlayer = this.match.getCurrentPlayerTurn();
         convertNumToNamePlayer();
-        this.time = new PlayedTimeImpl();
-        this.time.setTimeAtMatchStart(match);
+        this.time = new PlayedTimeImpl();        
         return this.namePlayer;
     }
 
@@ -112,8 +113,7 @@ public class MatchImpl implements Match {
         this.addMove = new MoveImpl(direction, numLine, position);
 
         this.match.setLine(addMove);
-        if (this.match.isEnded()) {
-            this.time.calculateMatchDuration(match);
+        if (this.match.isEnded()) {            
             this.numPlayer = this.match.getWinner();
             this.winner = numPlayer;
             addPlayerRank();
@@ -153,15 +153,15 @@ public class MatchImpl implements Match {
 
     private void addPlayerRank() throws IOException, DuplicatedPlayerStatsException {
         ShowRanking ranking = new ShowRankingImpl();
-        convertNumToNamePlayer();
-        ranking.addPlayer(this.namePlayer, true, this.playerScore);
+        this.playerResult = this.match.getPlayerMatchResult(numPlayer);
+        ranking.addPlayer(this.playerResult);
         if (this.numPlayer.equals(GridOption.PLAYER1)) {
             this.numPlayer = GridOption.PLAYER2;
         } else {
             this.numPlayer = GridOption.PLAYER1;
         }
-        convertNumToNamePlayer();
-        ranking.addPlayer(this.namePlayer, false, this.match.getPlayerPoints(this.numPlayer));
+        this.playerResult = this.match.getPlayerMatchResult(numPlayer);
+        ranking.addPlayer(this.playerResult);
     }
 
 }
