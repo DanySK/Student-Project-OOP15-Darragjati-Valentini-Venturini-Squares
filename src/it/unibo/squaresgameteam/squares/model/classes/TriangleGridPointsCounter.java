@@ -12,7 +12,7 @@ import it.unibo.squaresgameteam.squares.model.interfaces.TriangleGrid;
 public class TriangleGridPointsCounter implements PointsCounterStrategy {
 
     private final TriangleGrid grid;
-    private Integer points;
+    private Integer pointsScored;
     
     /**
      * The consctructor takes in input the current playable grid.
@@ -28,11 +28,22 @@ public class TriangleGridPointsCounter implements PointsCounterStrategy {
 
     @Override
     public Integer getPoints() {
-        // TODO Auto-generated method stub
-        return this.points;
+        return this.pointsScored;
     }
  
-    protected Integer horizontalPointScored(final Integer listIndex, final Integer position)
+    /**
+     * This method calculates the player points after an horizontal line is set.
+     * 
+     * @param listIndex
+     *            is the number of the horizontal list where the player wants to
+     *            set his line
+     * @param position
+     *            is the index of the chosen list where the player wants to set
+     *            the line
+     * @throws UnexistentLineListException
+     *             if the listIndex input is not correct
+     */
+    protected void horizontalPointScored(final Integer listIndex, final Integer position)
             throws UnexistentLineListException {
         Integer points = 0;
         if (listIndex > 0 && !grid.getVerticalLinePlayer(position, listIndex - 1).equals(GridOption.EMPTY)
@@ -45,12 +56,22 @@ public class TriangleGridPointsCounter implements PointsCounterStrategy {
                 && !grid.getDiagonalLinePlayer(listIndex, position).equals(GridOption.EMPTY)) {
             points++;
         }
-        this.points = points;
-        return points;
+        this.pointsScored = points;
     }
 
-    
-    protected Integer verticalPointScored(final Integer listIndex, final Integer position)
+    /**
+     * This method calculates the player points after an vertical line is set.
+     * 
+     * @param listIndex
+     *            is the number of the horizontal list where the player wants to
+     *            set his line
+     * @param position
+     *            is the index of the chosen list where the player wants to set
+     *            the line
+     * @throws UnexistentLineListException
+     *             if the listIndex input is not correct
+     */
+    protected void verticalPointScored(final Integer listIndex, final Integer position)
             throws UnexistentLineListException {
         Integer points = 0;
         if (listIndex > 0 && !grid.getHorizontalLinePlayer(position, listIndex - 1).equals(GridOption.EMPTY)
@@ -63,12 +84,24 @@ public class TriangleGridPointsCounter implements PointsCounterStrategy {
                 && !grid.getDiagonalLinePlayer(position, listIndex).equals(GridOption.EMPTY)) {
             points++;
         }
-        this.points = points;
-        return points;
+        this.pointsScored = points;
     }
 
-   
-    protected Integer diagonalPointScored(final Integer listIndex, final Integer position)
+    /**
+     * This method calculates the player points after an diagonal line is set.
+     * 
+     * @param listIndex
+     *            is the number of the horizontal list where the player wants to
+     *            set his line
+     * @param position
+     *            is the index of the chosen list where the player wants to set
+     *            the line
+     * @throws UnsupportedOperationException
+     *             if the grid doesn't support that action
+     * @throws UnexistentLineListException
+     *             if the listIndex input is not correct
+     */
+    protected void diagonalPointScored(final Integer listIndex, final Integer position)
             throws UnexistentLineListException {
         Integer points = 0;
         if (!grid.getHorizontalLinePlayer(listIndex, position).equals(GridOption.EMPTY)
@@ -79,7 +112,6 @@ public class TriangleGridPointsCounter implements PointsCounterStrategy {
                 && !grid.getVerticalLinePlayer(position, listIndex).equals(GridOption.EMPTY)) {
             points++;
         }
-        this.points = points;
-        return points;
+        this.pointsScored = points;
     }
 }

@@ -12,7 +12,7 @@ import it.unibo.squaresgameteam.squares.model.interfaces.SquareGrid;
 public class SquareGridPointsCounter implements PointsCounterStrategy {
 
     private final SquareGrid grid;
-    private Integer points;
+    private Integer pointsScored;
     /**
      * The consctructor takes in input the current playable grid.
      * 
@@ -27,11 +27,22 @@ public class SquareGridPointsCounter implements PointsCounterStrategy {
 
     @Override
     public Integer getPoints() {      
-        return this.points;
+        return this.pointsScored;
     }
     
-  
-    protected Integer horizontalPointScored(final Integer listIndex, final Integer position)
+    /**
+     * This method calculates the player points after an horizontal line is set.
+     * 
+     * @param listIndex
+     *            is the number of the horizontal list where the player wants to
+     *            set his line
+     * @param position
+     *            is the index of the chosen list where the player wants to set
+     *            the line
+     * @throws UnexistentLineListException
+     *             if the listIndex input is not correct
+     */
+    protected void horizontalPointScored(final Integer listIndex, final Integer position)
             throws UnexistentLineListException {
         Integer points = 0;
         if (listIndex > 0 && !grid.getHorizontalLinePlayer(listIndex - 1, position).equals(GridOption.EMPTY)
@@ -46,11 +57,22 @@ public class SquareGridPointsCounter implements PointsCounterStrategy {
             points++;
 
         }
-        this.points = points;
-        return points;
+        this.pointsScored = points;
     }
 
-    protected Integer verticalPointScored(final Integer listIndex, final Integer position)
+    /**
+     * This method calculates the player points after an vertical line is set.
+     * 
+     * @param listIndex
+     *            is the number of the horizontal list where the player wants to
+     *            set his line
+     * @param position
+     *            is the index of the chosen list where the player wants to set
+     *            the line
+     * @throws UnexistentLineListException
+     *             if the listIndex input is not correct
+     */
+    protected void verticalPointScored(final Integer listIndex, final Integer position)
             throws UnexistentLineListException {
         Integer points = 0;
         if (listIndex > 0 && !grid.getVerticalLinePlayer(listIndex - 1, position).equals(GridOption.EMPTY)
@@ -64,12 +86,6 @@ public class SquareGridPointsCounter implements PointsCounterStrategy {
                 && !grid.getHorizontalLinePlayer(position + 1, listIndex - 1).equals(GridOption.EMPTY)) {
             points++;
         }
-        this.points = points;
-        return points;
+        this.pointsScored = points;
     }
-/*
-    public Integer diagonalPointScored(final Integer listIndex, final Integer position)
-            throws UnexistentLineListException {
-        throw new UnsupportedOperationException();
-    }*/
 }

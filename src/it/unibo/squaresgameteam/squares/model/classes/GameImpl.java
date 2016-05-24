@@ -287,7 +287,6 @@ public class GameImpl implements Game {
         if (lastMoveList.isEmpty()) {
             throw new NoMovesDoneException();
         }
-        Integer points = 0;
         switch (getCopyOfLastMove().getListType()) {
         case HORIZONTAL:
             if (grid instanceof TriangleGridImpl) {
