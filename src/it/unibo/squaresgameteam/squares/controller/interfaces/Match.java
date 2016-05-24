@@ -33,7 +33,7 @@ public interface Match {
      * @param numLine Numero linea in cui � posta la mossa.
      * @param position Posizione nella linea della mossa.
      * @return Nome del giocatore che deve fare la prossima mossa
-     * @throws UnexistentLineListException
+     * @throws UnexistentLineListException Eccezione in caso di lista inesistente
      * @throws DuplicatedPlayerStatsException 
      * @throws IOException 
      * @throws ClassNotFoundException 

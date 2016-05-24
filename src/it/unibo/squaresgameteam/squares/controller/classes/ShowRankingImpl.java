@@ -24,17 +24,14 @@ import it.unibo.squaresgameteam.squares.model.exceptions.DuplicatedPlayerStatsEx
 import it.unibo.squaresgameteam.squares.model.interfaces.Player;
 import it.unibo.squaresgameteam.squares.model.interfaces.Ranking;
 
-public class ShowRankingImpl implements ShowRanking, Serializable {
+public class ShowRankingImpl implements ShowRanking {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -3147523685520034640L;
+    
     private String rankingString;
     private File rankingFile;
     private Ranking rankingList;
     private List<Player> currentRanking;
-    private String path;
+    
 
     public ShowRankingImpl() {
 

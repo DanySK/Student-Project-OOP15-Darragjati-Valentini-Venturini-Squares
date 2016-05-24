@@ -1,5 +1,7 @@
 package it.unibo.squaresgameteam.squares.model.classes;
 
+import java.io.Serializable;
+
 import it.unibo.squaresgameteam.squares.model.interfaces.Player;
 
 /**
@@ -8,6 +10,9 @@ import it.unibo.squaresgameteam.squares.model.interfaces.Player;
  */
 public final class PlayerImpl implements Player {
 
+    
+    
+   
     private final String playerName;
     private Double winRate;
     private final Integer wonMatches;

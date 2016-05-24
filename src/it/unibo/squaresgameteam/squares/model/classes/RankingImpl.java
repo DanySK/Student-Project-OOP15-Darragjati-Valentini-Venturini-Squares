@@ -1,5 +1,6 @@
 package it.unibo.squaresgameteam.squares.model.classes;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -18,6 +19,8 @@ import it.unibo.squaresgameteam.squares.model.interfaces.Ranking;
  */
 public class RankingImpl implements Ranking {
 
+    
+    
     private final List<Player> playerList;
 
     /**

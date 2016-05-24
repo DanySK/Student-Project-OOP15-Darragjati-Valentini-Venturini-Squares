@@ -9,7 +9,6 @@ import it.unibo.squaresgameteam.squares.model.classes.SquareGridImpl;
 import it.unibo.squaresgameteam.squares.model.classes.GameImpl;
 import it.unibo.squaresgameteam.squares.model.classes.MoveImpl;
 import it.unibo.squaresgameteam.squares.model.classes.PlayedTimeImpl;
-import it.unibo.squaresgameteam.squares.model.classes.RankingImpl;
 import it.unibo.squaresgameteam.squares.model.classes.TriangleGridImpl;
 import it.unibo.squaresgameteam.squares.model.enumerations.GridOption;
 import it.unibo.squaresgameteam.squares.model.enumerations.ListType;
@@ -42,9 +41,8 @@ public class MatchImpl implements Match {
     private Game match;
     private PlayedTime time;
     private int playerScore;
-    private Move addMove;
     private GridOption winner;
-    private Player playerResult;
+    
 
     /**
      * 
@@ -110,7 +108,7 @@ public class MatchImpl implements Match {
     public String addLine(final ListType direction, final int numLine, final int position)
             throws UnexistentLineListException, IOException, DuplicatedPlayerStatsException, ClassNotFoundException {
 
-        this.addMove = new MoveImpl(direction, numLine, position);
+        final Move addMove = new MoveImpl(direction, numLine, position);
 
         this.match.setLine(addMove);
         if (this.match.isEnded()) {            
@@ -152,16 +150,16 @@ public class MatchImpl implements Match {
     }
 
     private void addPlayerRank() throws IOException, DuplicatedPlayerStatsException, ClassNotFoundException {
-        ShowRanking ranking = new ShowRankingImpl();
-        this.playerResult = this.match.getPlayerMatchResult(numPlayer);
-        ranking.addPlayer(this.playerResult);
+        final ShowRanking ranking = new ShowRankingImpl();
+        Player playerResult = this.match.getPlayerMatchResult(numPlayer);
+        ranking.addPlayer(playerResult);
         if (this.numPlayer.equals(GridOption.PLAYER1)) {
             this.numPlayer = GridOption.PLAYER2;
         } else {
             this.numPlayer = GridOption.PLAYER1;
         }
-        this.playerResult = this.match.getPlayerMatchResult(numPlayer);
-        ranking.addPlayer(this.playerResult);
+        playerResult = this.match.getPlayerMatchResult(numPlayer);
+        ranking.addPlayer(playerResult);
     }
 
 }

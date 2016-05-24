@@ -1,13 +1,12 @@
 package it.unibo.squaresgameteam.squares.controller.classes;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import it.unibo.squaresgameteam.squares.controller.enumerations.TypeGame;
+import it.unibo.squaresgameteam.squares.controller.interfaces.Match;
 import it.unibo.squaresgameteam.squares.controller.interfaces.Menu;
 import it.unibo.squaresgameteam.squares.controller.interfaces.ShowRanking;
 
@@ -16,12 +15,16 @@ public class MenuImpl implements Menu {
     private String rules;
 
     public MenuImpl() {
-        this.rules = null;
+        
     }
 
-    public String rules() throws IOException {
+    public Match createMatch(int columsNumber, int rowsNumber, String namePlayer1, String namePlayer2, TypeGame mode){
+        return  new MatchImpl(columsNumber, rowsNumber, namePlayer1, namePlayer2, mode);
+        
+    }
+    public String showRules() throws IOException {
 
-        String txtDirectory = ClassLoader.class.getResource("/Rules.txt").getPath();
+        final String txtDirectory = ClassLoader.class.getResource("/Rules.txt").getPath();
         //final FileReader in = new FileReader(txtDirectory);
         
 
@@ -38,6 +41,10 @@ public class MenuImpl implements Menu {
         
         return this.rules;
 
+    }
+    
+    public ShowRanking createRankingClass(){     
+       return  new ShowRankingImpl();
     }
 
     public void exitApp() {
