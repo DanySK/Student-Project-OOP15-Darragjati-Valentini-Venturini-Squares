@@ -9,7 +9,7 @@ import it.unibo.squaresgameteam.squares.model.interfaces.SquareGrid;
  * This class implements the interface PointsCounterStrategy. It is used to
  * calculate the points in a "square game" after a player has made a move.
  */
-public class SquareGridPointsCounterImpl implements PointsCounterStrategy {
+public class SquareGridPointsCounter implements PointsCounterStrategy {
 
     private final SquareGrid grid;
 
@@ -20,7 +20,7 @@ public class SquareGridPointsCounterImpl implements PointsCounterStrategy {
      *            the current grid
      */
     // CHECKSTYLE:OFF:
-    public SquareGridPointsCounterImpl(final SquareGrid grid) {
+    public SquareGridPointsCounter(final SquareGrid grid) {
         // CHECKSTYLE:ON:
         this.grid = grid;
     }

@@ -9,7 +9,7 @@ import it.unibo.squaresgameteam.squares.model.interfaces.TriangleGrid;
  * This class implements the interface PointsCounterStrategy. It is used to
  * calculate the points in a "triangle game" after a player has made a move.
  */
-public class TriangleGridPointsCounterImpl implements PointsCounterStrategy {
+public class TriangleGridPointsCounter implements PointsCounterStrategy {
 
     private final TriangleGrid grid;
 
@@ -20,7 +20,7 @@ public class TriangleGridPointsCounterImpl implements PointsCounterStrategy {
      *            the current grid
      */
     // CHECKSTYLE:OFF:
-    public TriangleGridPointsCounterImpl(final TriangleGrid grid) {
+    public TriangleGridPointsCounter(final TriangleGrid grid) {
         // CHECKSTYLE:ON:
         this.grid = grid;
     }

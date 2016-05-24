@@ -52,10 +52,10 @@ public class GameImpl implements Game {
         this.grid = grid;
         this.matchStarted = false;
         if (grid instanceof TriangleGridImpl) {
-            calculatePoints = new TriangleGridPointsCounterImpl((TriangleGrid) grid);
+            calculatePoints = new TriangleGridPointsCounter((TriangleGrid) grid);
         } else {
             if (grid instanceof SquareGridImpl) {
-                calculatePoints = new SquareGridPointsCounterImpl((SquareGrid) grid);
+                calculatePoints = new SquareGridPointsCounter((SquareGrid) grid);
         } else {
                 throw new IllegalArgumentException();
             }

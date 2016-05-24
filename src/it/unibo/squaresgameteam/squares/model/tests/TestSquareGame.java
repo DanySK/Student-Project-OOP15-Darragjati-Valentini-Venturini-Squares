@@ -254,6 +254,13 @@ public class TestSquareGame {
         } catch (Exception e) {
             fail(ERROR);
         }
+        try {
+            exceptionGame.getMatchDuration();
+            fail("You can't get the match duration if the match is not ended");
+        } catch (IllegalStateException e) {    
+        } catch (Exception e) {
+            fail(ERROR);
+        }
         
         SquareGrid exceptionGrid2 = new SquareGridImpl(STANDARD_SIZE, STANDARD_SIZE);
         Game exceptionGame2 = new GameImpl(exceptionGrid2, "Rei Ayanami", "Shinji Ikari");
