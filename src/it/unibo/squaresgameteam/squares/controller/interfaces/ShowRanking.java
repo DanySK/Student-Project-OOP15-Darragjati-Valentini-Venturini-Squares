@@ -23,7 +23,7 @@ public interface ShowRanking {
      */
     String showRanking(RankingOption rankingOrder, boolean reverse) throws IOException, DuplicatedPlayerStatsException;
     
-    void addPlayer(String player) throws IOException, DuplicatedPlayerStatsException;
+    void addPlayer(Player player) throws IOException, DuplicatedPlayerStatsException;
    
     
 
