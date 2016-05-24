@@ -211,40 +211,32 @@ public class GameImpl implements Game {
         return playedTime.getTotalMatchDuration();
     }
 
-    @Override
-    public void setLine(final Move move) throws UnexistentLineListException {
-        if (!this.isStarted()) {
-            throw new IllegalStateException();
-        }
-        final ListType list = move.getListType();
-        final Integer listIndex = move.getListIndex();
-        final Integer position = move.getPosition();
-        switch (list) {
+    private void callCorrectPointsCounter(final ListType listType, final Integer listIndex, final Integer position) throws UnexistentLineListException {
+        switch(listType) {
         case HORIZONTAL:
-            ((SquareGridImpl) grid).setHorizontalLine(listIndex, position, this.turn);
             if (grid instanceof TriangleGridImpl) {
                 ((TriangleGridPointsCounter) calculatePoints).horizontalPointScored(listIndex, position);
             } else {
                 if (grid instanceof SquareGridImpl) {
                     ((SquareGridPointsCounter) calculatePoints).horizontalPointScored(listIndex, position);
                 } else {
-                    throw new IllegalStateException();
+                    throw new UnsupportedOperationException("the horizontal move is not supported by the selected game mode");
                 }
             }
             break;
         case VERTICAL:
-            ((SquareGridImpl) grid).setVerticalLine(listIndex, position, this.turn);
-            if (grid instanceof TriangleGridImpl) {
-                ((TriangleGridPointsCounter) calculatePoints).verticalPointScored(listIndex, position);
+        if (grid instanceof TriangleGridImpl) {
+            ((TriangleGridPointsCounter) calculatePoints).verticalPointScored(listIndex, position);
+        } else {
+            if (grid instanceof SquareGridImpl) {
+                ((SquareGridPointsCounter) calculatePoints).verticalPointScored(listIndex, position);
             } else {
-                if (grid instanceof SquareGridImpl) {
-                    ((SquareGridPointsCounter) calculatePoints).verticalPointScored(listIndex, position);
-                }
+                throw new UnsupportedOperationException("the vertical move is not supported by the selected game mode");
             }
+        }
             break;
         case DIAGONAL:
-            if (grid instanceof TriangleGridImpl) {
-                ((TriangleGridImpl) grid).setDiagonalLine(listIndex, position, this.turn);
+            if (grid instanceof TriangleGridImpl) {         
                 ((TriangleGridPointsCounter) calculatePoints).diagonalPointScored(listIndex, position);
                 break;
             } else {
@@ -253,12 +245,40 @@ public class GameImpl implements Game {
         default:
             throw new IllegalArgumentException("the list selected does not exist");
         }
+    }
+    
+    @Override
+    public void setLine(final Move move) throws UnexistentLineListException {
+        if (!this.isStarted()) {
+            throw new IllegalStateException();
+        }
+        final ListType listType = move.getListType();
+        final Integer listIndex = move.getListIndex();
+        final Integer position = move.getPosition();
+        switch (listType) {
+        case HORIZONTAL:
+            ((SquareGridImpl) grid).setHorizontalLine(listIndex, position, this.turn);
+            break;
+        case VERTICAL:
+            ((SquareGridImpl) grid).setVerticalLine(listIndex, position, this.turn);
+            break;
+        case DIAGONAL:
+            if (grid instanceof TriangleGridImpl) {
+                ((TriangleGridImpl) grid).setDiagonalLine(listIndex, position, this.turn);          
+            } else {
+                throw new UnsupportedOperationException("the diagonal move is not supported by the selected game mode");
+            }
+            break;
+        default:
+            throw new IllegalArgumentException("the list selected does not exist");
+        }
+        callCorrectPointsCounter(listType, listIndex, position);
         addPoints(calculatePoints.getPoints());
         if (isEnded()) {
             ((PlayedTimeImpl) playedTime).calculateMatchDuration(isEnded());
             createPlayers();
         }
-        final Move lastMove = new MoveImpl(list, listIndex, position);
+        final Move lastMove = new MoveImpl(listType, listIndex, position);
         lastMoveList.add(lastMove);
     }
 
