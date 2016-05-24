@@ -50,12 +50,12 @@ public class GameImpl implements Game {
         // CHECKSTYLE:ON:
         this.grid = grid;
         this.matchStarted = false;
-        if (grid.getClass().equals(SquareGridImpl.class)) {
-            calculatePoints = new SquareGridPointsCounterImpl((SquareGrid) grid);
+        if (grid instanceof TriangleGridImpl) {
+            calculatePoints = new TriangleGridPointsCounterImpl((SquareGrid) grid);
         } else {
-            if (grid.getClass().equals(TriangleGridImpl.class)) {
-                calculatePoints = new TriangleGridPointsCounterImpl((SquareGrid) grid);
-            } else {
+            if (grid instanceof SquareGridImpl) {
+                calculatePoints = new SquareGridPointsCounterImpl((SquareGrid) grid);
+        } else {
                 throw new IllegalArgumentException();
             }
         }
@@ -226,7 +226,7 @@ public class GameImpl implements Game {
             addPoints(calculatePoints.verticalPointScored(listIndex, position));
             break;
         case DIAGONAL:
-            if (grid.getClass().equals(TriangleGridImpl.class)) {
+            if (grid instanceof TriangleGridImpl) {
                 ((TriangleGridImpl) grid).setDiagonalLine(listIndex, position, this.turn);
                 addPoints(calculatePoints.diagonalPointScored(listIndex, position));
                 break;
