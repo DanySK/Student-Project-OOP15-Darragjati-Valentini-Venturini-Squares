@@ -1,5 +1,7 @@
 package it.unibo.squaresgameteam.squares.controller.interfaces;
 
+import java.io.IOException;
+
 public interface Setting {
     
     void setColorPlayer1();
@@ -9,5 +11,7 @@ public interface Setting {
     void turnVolumeOn();
     
     void turnVolumeOff();
+    
+    void createAudio() throws IOException;
 
 }
