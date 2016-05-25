@@ -43,18 +43,6 @@ public class SquareGridPointsCounter implements PointsCounterStrategy {
         return this.pointsScored;
     }
 
-    /**
-     * This method calculates the player points after an horizontal line is set.
-     * 
-     * @param listIndex
-     *            is the number of the horizontal list where the player wants to
-     *            set his line
-     * @param position
-     *            is the index of the chosen list where the player wants to set
-     *            the line
-     * @throws UnexistentLineListException
-     *             if the listIndex input is not correct
-     */
     private void horizontalPointScored(final Integer listIndex, final Integer position)
             throws UnexistentLineListException {
         Integer points = 0;
@@ -73,18 +61,6 @@ public class SquareGridPointsCounter implements PointsCounterStrategy {
         this.pointsScored = points;
     }
 
-    /**
-     * This method calculates the player points after an vertical line is set.
-     * 
-     * @param listIndex
-     *            is the number of the horizontal list where the player wants to
-     *            set his line
-     * @param position
-     *            is the index of the chosen list where the player wants to set
-     *            the line
-     * @throws UnexistentLineListException
-     *             if the listIndex input is not correct
-     */
     private void verticalPointScored(final Integer listIndex, final Integer position)
             throws UnexistentLineListException {
         Integer points = 0;
