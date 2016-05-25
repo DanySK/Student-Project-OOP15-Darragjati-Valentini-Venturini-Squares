@@ -35,7 +35,7 @@ public class TestSquareGame {
     private Move move;
 
     /**
-     * Tests the methods of BaseGridImpl and TurnImpl.
+     * Tests the basic move option offered by a square game.
      * 
      * @throws UnsupportedSizeException
      *             if the list chosen is not supported by the game mode
@@ -43,7 +43,7 @@ public class TestSquareGame {
      *             if the listIndex input is not correct
      */
     @Test
-    public void test() throws UnsupportedSizeException, UnexistentLineListException {
+    public void testBasicMoveOperation() throws UnsupportedSizeException, UnexistentLineListException {
 
         final BaseGrid squareGrid = new SquareGridImpl(HORIZONTAL_SIZE, VERTICAL_SIZE);
         final Game gridOfSize = new GameImpl(squareGrid, "Rei Ayanami", "Shinji Ikari");
@@ -72,50 +72,70 @@ public class TestSquareGame {
         assertEquals(gridOfSize.getCopyOfLastMove().getListType(), ListType.VERTICAL);
         assertEquals(gridOfSize.getCopyOfLastMove().getListIndex(), (Integer) 0);
         assertEquals(gridOfSize.getCopyOfLastMove().getPosition(), (Integer) 0);
-        move.setListType(ListType.HORIZONTAL);
-        move.setListIndex(0);
-        move.setPosition(0);
+        move = new MoveImpl(ListType.HORIZONTAL, 0, 0);
         gridOfSize.setLine(move);
-        move.setListType(ListType.HORIZONTAL);
-        move.setListIndex(1);
-        move.setPosition(0);
+        move = new MoveImpl(ListType.HORIZONTAL, 1, 0);
         gridOfSize.setLine(move);
-        move.setListType(ListType.VERTICAL);
-        // this turn memorization is used later to check if the turn switch is
-        // correctly implemented
+        // this player turn memorization is used later to check if the turn
+        // switch is correctly implemented
         final GridOption player = gridOfSize.getCurrentPlayerTurn();
-        move.setListIndex(1);
-        move.setPosition(0);
+        move = new MoveImpl(ListType.VERTICAL, 1, 0);
         gridOfSize.setLine(move);
         assertEquals(squareGrid.getRemainingMoves(), (Integer) (squareGrid.getTotalMoves() - 4));
         assertNotEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
         // verifies if the player has received a bonus move
         assertEquals(player, gridOfSize.getCurrentPlayerTurn());
+
+        // test if the undo is working correctly
         gridOfSize.undoLastMove();
         assertEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
         assertEquals(player, gridOfSize.getCurrentPlayerTurn());
         assertEquals(gridOfSize.getCopyOfLastMove().getListType(), ListType.HORIZONTAL);
         assertEquals(gridOfSize.getCopyOfLastMove().getListIndex(), (Integer) 1);
         assertEquals(gridOfSize.getCopyOfLastMove().getPosition(), (Integer) 0);
-        // verifies that if you can't modify the last move
+        //verifies that the player points are now the same
+        assertEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
+        gridOfSize.undoLastMove();
+        assertNotEquals(player, gridOfSize.getCurrentPlayerTurn());
+        
+        // verifies that you can't modify the last move
         gridOfSize.getCopyOfLastMove().setListType(ListType.VERTICAL);
         gridOfSize.getCopyOfLastMove().setListIndex(3);
         gridOfSize.getCopyOfLastMove().setPosition(3);
         assertEquals(gridOfSize.getCopyOfLastMove().getListType(), ListType.HORIZONTAL);
-        assertEquals(gridOfSize.getCopyOfLastMove().getListIndex(), (Integer) 1);
+        assertEquals(gridOfSize.getCopyOfLastMove().getListIndex(), (Integer) 0);
         assertEquals(gridOfSize.getCopyOfLastMove().getPosition(), (Integer) 0);
-        gridOfSize.undoLastMove();
-        assertNotEquals(player, gridOfSize.getCurrentPlayerTurn());
+              
+        // check if the other method of points assignaments works correctly
+        move = new MoveImpl(ListType.HORIZONTAL, 1, 1);
+        gridOfSize.setLine(move);
+        move = new MoveImpl(ListType.VERTICAL, 1, 1);
+        gridOfSize.setLine(move);
+        move = new MoveImpl(ListType.VERTICAL, 2, 1);
+        gridOfSize.setLine(move);
+        move = new MoveImpl(ListType.HORIZONTAL, 2, 1);
+        gridOfSize.setLine(move);
+        assertNotEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
+    }
 
+    /**
+     * Tests a complete match.
+     * 
+     * @throws UnsupportedSizeException
+     *             if the list chosen is not supported by the game mode
+     * @throws UnexistentLineListException
+     *             if the listIndex input is not correctF
+     */
+    public void testCompleteMatch() throws UnsupportedSizeException, UnexistentLineListException {
         final SquareGrid squareGrid2 = new SquareGridImpl(STANDARD_SIZE, STANDARD_SIZE);
         final Game gridOfSize2 = new GameImpl(squareGrid2, "Rei Ayanami", "Shinji Ikari");
         gridOfSize2.startMatch();
         // fills the grid with all the possible moves
         for (int i = 0; i < STANDARD_SIZE + 1; i++) {
             for (int z = 0; z < STANDARD_SIZE; z++) {
-                move.setListType(ListType.HORIZONTAL);
                 move.setListIndex(i);
                 move.setPosition(z);
+                move.setListType(ListType.HORIZONTAL);
                 gridOfSize2.setLine(move);
                 move.setListType(ListType.VERTICAL);
                 gridOfSize2.setLine(move);
@@ -126,16 +146,16 @@ public class TestSquareGame {
                 gridOfSize2.getPlayerPoints(GridOption.PLAYER2));
         assertTrue(gridOfSize2.isEnded());
         assertNotEquals(GridOption.EMPTY, gridOfSize2.getWinner());
-        assertNotEquals(gridOfSize2.getPlayerMatchResult(GridOption.PLAYER1), gridOfSize2.getPlayerMatchResult(GridOption.PLAYER2));
+        assertNotEquals(gridOfSize2.getPlayerMatchResult(GridOption.PLAYER1),
+                gridOfSize2.getPlayerMatchResult(GridOption.PLAYER2));
         assertNotEquals(gridOfSize2.getMatchDuration(), -1.0);
     }
 
     /**
-     * Test if the methods of BaseGridImpl and TurnImpl throws the correct
-     * exceptions.
+     * Test if the exceptions are thrown correctly.
      * 
      * @throws UnsupportedSizeException
-     * @throws UnexistentLineListException 
+     * @throws UnexistentLineListException
      */
     @Test
     // CHECKSTYLE:OFF:
@@ -257,11 +277,11 @@ public class TestSquareGame {
         try {
             exceptionGame.getMatchDuration();
             fail("You can't get the match duration if the match is not ended");
-        } catch (IllegalStateException e) {    
+        } catch (IllegalStateException e) {
         } catch (Exception e) {
             fail(ERROR);
         }
-        
+
         SquareGrid exceptionGrid2 = new SquareGridImpl(STANDARD_SIZE, STANDARD_SIZE);
         Game exceptionGame2 = new GameImpl(exceptionGrid2, "Rei Ayanami", "Shinji Ikari");
         exceptionGame2.startMatch();
