@@ -1,5 +1,8 @@
 package it.unibo.squaresgameteam.squares.model.classes;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,11 +20,10 @@ import it.unibo.squaresgameteam.squares.model.interfaces.Ranking;
  * This class implements the interface Ranking. It is used to manage the ranking
  * system and to set the player's last match results.
  */
-public class RankingImpl implements Ranking {
+public class RankingImpl implements Ranking, Serializable {
 
-    
-    
-    private final List<Player> playerList;
+    private static final long serialVersionUID = 5010913422706825614L;
+    private List<Player> playerList;
 
     /**
      * The consctructor is used to know the old players' matches results and
@@ -167,4 +169,14 @@ public class RankingImpl implements Ranking {
         return player2.getPlayerName().compareTo(player1.getPlayerName());
     }
 
+    private void writeObject(final ObjectOutputStream out) throws IOException {
+        out.defaultWriteObject();
+        out.writeObject(playerList);
+    }
+
+    @SuppressWarnings("unchecked")
+    private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        this.playerList = (List<Player>) in.readObject();
+    }
 }

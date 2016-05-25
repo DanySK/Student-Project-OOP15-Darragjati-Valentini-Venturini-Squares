@@ -8,13 +8,11 @@ import it.unibo.squaresgameteam.squares.model.interfaces.Player;
  * THis class implements the interface Player. It is used to manage the player's
  * informations.
  */
-public final class PlayerImpl implements Player {
+public final class PlayerImpl implements Player, Serializable {
 
-    
-    
-   
+    private static final long serialVersionUID = -9041141395276250548L;
     private final String playerName;
-    private Double winRate;
+    private transient Double winRate;
     private final Integer wonMatches;
     private final Integer totalMatches;
     private final Integer totalPointsScored;
@@ -48,6 +46,7 @@ public final class PlayerImpl implements Player {
 
     @Override
     public double getWinRate() {
+        calculateWinRate();
         return this.winRate;
     }
 
@@ -71,7 +70,7 @@ public final class PlayerImpl implements Player {
      * player.
      *
      */
-    //CHECKSTYLE:OFF:
+    // CHECKSTYLE:OFF:
     public static class Builder {
         private String playerName;
         private Integer wonMatches;
@@ -138,5 +137,4 @@ public final class PlayerImpl implements Player {
         return "Player [playerName=" + playerName + ", winRate=" + winRate + ", wonMatches=" + wonMatches
                 + ", totalMatches=" + totalMatches + ", totalPointScored=" + totalPointsScored + "]";
     }
-
 }
