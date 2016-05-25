@@ -18,7 +18,6 @@ import it.unibo.squaresgameteam.squares.model.exceptions.UnsupportedSizeExceptio
 import it.unibo.squaresgameteam.squares.model.exceptions.NoMovesDoneException;
 import it.unibo.squaresgameteam.squares.model.exceptions.UnexistentLineListException;
 import it.unibo.squaresgameteam.squares.model.interfaces.SquareGrid;
-import it.unibo.squaresgameteam.squares.model.interfaces.TriangleGrid;
 import it.unibo.squaresgameteam.squares.model.interfaces.BaseGrid;
 import it.unibo.squaresgameteam.squares.model.interfaces.Game;
 import it.unibo.squaresgameteam.squares.model.interfaces.Move;

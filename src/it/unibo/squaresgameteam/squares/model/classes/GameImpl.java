@@ -210,61 +210,22 @@ public class GameImpl implements Game {
     public Double getMatchDuration() {
         return playedTime.getTotalMatchDuration();
     }
-
-    private void callCorrectPointsCounter(final ListType listType, final Integer listIndex, final Integer position) throws UnexistentLineListException {
-        switch(listType) {
-        case HORIZONTAL:
-            if (grid instanceof TriangleGridImpl) {
-                ((TriangleGridPointsCounter) calculatePoints).horizontalPointScored(listIndex, position);
-            } else {
-                if (grid instanceof SquareGridImpl) {
-                    ((SquareGridPointsCounter) calculatePoints).horizontalPointScored(listIndex, position);
-                } else {
-                    throw new UnsupportedOperationException("the horizontal move is not supported by the selected game mode");
-                }
-            }
-            break;
-        case VERTICAL:
-        if (grid instanceof TriangleGridImpl) {
-            ((TriangleGridPointsCounter) calculatePoints).verticalPointScored(listIndex, position);
-        } else {
-            if (grid instanceof SquareGridImpl) {
-                ((SquareGridPointsCounter) calculatePoints).verticalPointScored(listIndex, position);
-            } else {
-                throw new UnsupportedOperationException("the vertical move is not supported by the selected game mode");
-            }
-        }
-            break;
-        case DIAGONAL:
-            if (grid instanceof TriangleGridImpl) {         
-                ((TriangleGridPointsCounter) calculatePoints).diagonalPointScored(listIndex, position);
-                break;
-            } else {
-                throw new UnsupportedOperationException("the diagonal move is not supported by the selected game mode");
-            }
-        default:
-            throw new IllegalArgumentException("the list selected does not exist");
-        }
-    }
     
     @Override
     public void setLine(final Move move) throws UnexistentLineListException {
         if (!this.isStarted()) {
             throw new IllegalStateException();
         }
-        final ListType listType = move.getListType();
-        final Integer listIndex = move.getListIndex();
-        final Integer position = move.getPosition();
-        switch (listType) {
+        switch (move.getListType()) {
         case HORIZONTAL:
-            ((SquareGridImpl) grid).setHorizontalLine(listIndex, position, this.turn);
+            ((SquareGridImpl) grid).setHorizontalLine(move.getListIndex(), move.getPosition(), this.turn);
             break;
         case VERTICAL:
-            ((SquareGridImpl) grid).setVerticalLine(listIndex, position, this.turn);
+            ((SquareGridImpl) grid).setVerticalLine(move.getListIndex(), move.getPosition(), this.turn);
             break;
         case DIAGONAL:
             if (grid instanceof TriangleGridImpl) {
-                ((TriangleGridImpl) grid).setDiagonalLine(listIndex, position, this.turn);          
+                ((TriangleGridImpl) grid).setDiagonalLine(move.getListIndex(), move.getPosition(), this.turn);          
             } else {
                 throw new UnsupportedOperationException("the diagonal move is not supported by the selected game mode");
             }
@@ -272,13 +233,12 @@ public class GameImpl implements Game {
         default:
             throw new IllegalArgumentException("the list selected does not exist");
         }
-        callCorrectPointsCounter(listType, listIndex, position);
-        addPoints(calculatePoints.getPoints());
+        final Move lastMove = new MoveImpl(move.getListType(), move.getListIndex(), move.getPosition());
+        addPoints(calculatePoints.getPoints(lastMove));
         if (isEnded()) {
             ((PlayedTimeImpl) playedTime).calculateMatchDuration(isEnded());
             createPlayers();
         }
-        final Move lastMove = new MoveImpl(listType, listIndex, position);
         lastMoveList.add(lastMove);
     }
 
@@ -309,37 +269,15 @@ public class GameImpl implements Game {
         }
         switch (getCopyOfLastMove().getListType()) {
         case HORIZONTAL:
-            if (grid instanceof TriangleGridImpl) {
-                ((TriangleGridPointsCounter) calculatePoints).horizontalPointScored(getCopyOfLastMove().getListIndex(),
-                        getCopyOfLastMove().getPosition());
-            } else {
-                if (grid instanceof SquareGridImpl) {
-                    ((SquareGridPointsCounter) calculatePoints).horizontalPointScored(getCopyOfLastMove().getListIndex(),
-                            getCopyOfLastMove().getPosition());
-                } else {
-                    throw new IllegalStateException();
-                }
-            }
             ((SquareGridImpl) grid).setHorizontalLine(getCopyOfLastMove().getListIndex(),
                     getCopyOfLastMove().getPosition(), GridOption.EMPTY);
             break;
         case VERTICAL:
-            if (grid instanceof TriangleGridImpl) {
-                ((TriangleGridPointsCounter) calculatePoints).verticalPointScored(getCopyOfLastMove().getListIndex(),
-                        getCopyOfLastMove().getPosition());
-            } else {
-                if (grid instanceof SquareGridImpl) {
-                    ((SquareGridPointsCounter) calculatePoints).verticalPointScored(getCopyOfLastMove().getListIndex(),
-                            getCopyOfLastMove().getPosition());
-                }
-            }
             ((SquareGridImpl) grid).setVerticalLine(getCopyOfLastMove().getListIndex(),
                     getCopyOfLastMove().getPosition(), GridOption.EMPTY);
             break;
         case DIAGONAL:
             if (grid instanceof TriangleGridImpl) {
-                ((TriangleGridPointsCounter) calculatePoints).diagonalPointScored(getCopyOfLastMove().getListIndex(),
-                        getCopyOfLastMove().getPosition());
                 ((TriangleGridImpl) grid).setDiagonalLine(getCopyOfLastMove().getListIndex(),
                     getCopyOfLastMove().getPosition(), GridOption.EMPTY);
             } else {
@@ -349,7 +287,7 @@ public class GameImpl implements Game {
         default:
             throw new IllegalArgumentException();
         }
-        addPoints(-calculatePoints.getPoints());
+        addPoints(-calculatePoints.getPoints(getCopyOfLastMove()));
         lastMoveList.remove(lastMoveList.size() - 1);
     }
 

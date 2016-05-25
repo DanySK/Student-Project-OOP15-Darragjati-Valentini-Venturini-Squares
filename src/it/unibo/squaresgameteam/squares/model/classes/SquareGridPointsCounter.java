@@ -2,6 +2,7 @@ package it.unibo.squaresgameteam.squares.model.classes;
 
 import it.unibo.squaresgameteam.squares.model.enumerations.GridOption;
 import it.unibo.squaresgameteam.squares.model.exceptions.UnexistentLineListException;
+import it.unibo.squaresgameteam.squares.model.interfaces.Move;
 import it.unibo.squaresgameteam.squares.model.interfaces.PointsCounterStrategy;
 import it.unibo.squaresgameteam.squares.model.interfaces.SquareGrid;
 
@@ -13,11 +14,13 @@ public class SquareGridPointsCounter implements PointsCounterStrategy {
 
     private final SquareGrid grid;
     private Integer pointsScored;
+
     /**
      * The consctructor takes in input the current playable grid.
      * 
      * @param grid
      *            the current grid
+     * @throws UnexistentLineListException 
      */
     // CHECKSTYLE:OFF:
     public SquareGridPointsCounter(final SquareGrid grid) {
@@ -26,10 +29,20 @@ public class SquareGridPointsCounter implements PointsCounterStrategy {
     }
 
     @Override
-    public Integer getPoints() {      
+    public Integer getPoints(final Move move) throws UnexistentLineListException {
+        switch (move.getListType()) {
+        case HORIZONTAL:
+            horizontalPointScored(move.getListIndex(), move.getPosition());
+            break;
+        case VERTICAL:
+            verticalPointScored(move.getListIndex(), move.getPosition());
+            break;
+        default:
+            throw new IllegalStateException();
+        }
         return this.pointsScored;
     }
-    
+
     /**
      * This method calculates the player points after an horizontal line is set.
      * 
@@ -42,7 +55,7 @@ public class SquareGridPointsCounter implements PointsCounterStrategy {
      * @throws UnexistentLineListException
      *             if the listIndex input is not correct
      */
-    protected void horizontalPointScored(final Integer listIndex, final Integer position)
+    private void horizontalPointScored(final Integer listIndex, final Integer position)
             throws UnexistentLineListException {
         Integer points = 0;
         if (listIndex > 0 && !grid.getHorizontalLinePlayer(listIndex - 1, position).equals(GridOption.EMPTY)
@@ -72,7 +85,7 @@ public class SquareGridPointsCounter implements PointsCounterStrategy {
      * @throws UnexistentLineListException
      *             if the listIndex input is not correct
      */
-    protected void verticalPointScored(final Integer listIndex, final Integer position)
+    private void verticalPointScored(final Integer listIndex, final Integer position)
             throws UnexistentLineListException {
         Integer points = 0;
         if (listIndex > 0 && !grid.getVerticalLinePlayer(listIndex - 1, position).equals(GridOption.EMPTY)
