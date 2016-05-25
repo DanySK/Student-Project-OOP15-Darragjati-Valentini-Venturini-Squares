@@ -125,23 +125,7 @@ public class SquareGridImpl implements SquareGrid {
                         : GridOption.PLAYER2;
     }
 
-    /**
-     * This method makes a player make a horizontal move.
-     * 
-     * @param listIndex
-     *            is the number of the horizontal list where the player wants to
-     *            set his line
-     * @param position
-     *            is the index of the chosen list where the player wants to set
-     *            the line
-     * @param playerTurn
-     *            which one of the two players is making the move
-     * @throws UnexistentLineListException
-     *             if the listIndex input is not correct
-     * @throws IllegalStateEception
-     *             if the move has been already made
-     */
-    protected void setHorizontalLine(final int listIndex, final int position, final GridOption playerTurn)
+    private void setHorizontalLine(final int listIndex, final int position, final GridOption playerTurn)
             throws UnexistentLineListException {
         checkCorrectHorizontalInput(listIndex, position);
         if (playerTurn.equals(GridOption.EMPTY)) {
@@ -178,23 +162,7 @@ public class SquareGridImpl implements SquareGrid {
                         : GridOption.PLAYER2;
     }
 
-    /**
-     * This method makes a player make a vertical move.
-     * 
-     * @param listIndex
-     *            is the number of the vertical list where the player wants to
-     *            set a line
-     * @param position
-     *            is the index of the chosen list where the player wants to set
-     *            a line
-     * @param playerTurn
-     *            which one of the two players is making the move
-     * @throws UnexistentLineListException
-     *             if the listIndex input is not correct
-     * @throws IllegalStateEception
-     *             if the move has been already made
-     */
-    protected void setVerticalLine(final int listIndex, final int position, final GridOption playerTurn)
+    private void setVerticalLine(final int listIndex, final int position, final GridOption playerTurn)
             throws UnexistentLineListException {
         checkCorrectVerticalInput(listIndex, position);
         if (playerTurn.equals(GridOption.EMPTY)) {

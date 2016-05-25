@@ -94,21 +94,7 @@ public class TriangleGridImpl extends SquareGridImpl implements TriangleGrid {
                         : GridOption.PLAYER2;
     }
 
-    /**
-     * @param listIndex
-     *            is the number of the diagonal list where the player wants to
-     *            set his line
-     * @param position
-     *            is the position of the chosen list where the player wants to
-     *            set the line
-     * @param playerTurn
-     *            which one of the two players is making the move
-     * @throws UnexistentLineListException
-     *             if the listIndex input is not correct
-     * @throws IllegalStateEception
-     *             if the move has been already made
-     */
-    protected void setDiagonalLine(final int listIndex, final int position, final GridOption playerTurn)
+    private void setDiagonalLine(final int listIndex, final int position, final GridOption playerTurn)
             throws UnexistentLineListException {
         checkCorrectDiagonalInput(listIndex, position);
         if (playerTurn.equals(GridOption.EMPTY)) {

@@ -27,7 +27,16 @@ public interface BaseGrid {
      * @return the maximum points that can be done in this game
      */
     Integer getMatchMaximumPoints();
-    
-    
+
+    /**
+     * This method makes a player make a move.
+     * 
+     * @param move
+     *            the players move
+     * @param currentPlayerTurn
+     *            wich one of the two players is making the move
+     * @throws UnexistentLineListException
+     *             if the listIndex of the move is not correct
+     */
     void setLine(Move move, GridOption currentPlayerTurn) throws UnexistentLineListException;
 }
