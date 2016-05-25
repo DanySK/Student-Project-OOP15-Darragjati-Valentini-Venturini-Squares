@@ -9,7 +9,6 @@ import it.unibo.squaresgameteam.squares.model.exceptions.MoveAlreadyDoneExceptio
 import it.unibo.squaresgameteam.squares.model.exceptions.MoveNotFoundException;
 import it.unibo.squaresgameteam.squares.model.exceptions.UnexistentLineListException;
 import it.unibo.squaresgameteam.squares.model.interfaces.Move;
-import it.unibo.squaresgameteam.squares.model.interfaces.Player;
 import it.unibo.squaresgameteam.squares.model.interfaces.SquareGrid;
 
 /**
