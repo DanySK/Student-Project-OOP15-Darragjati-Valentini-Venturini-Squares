@@ -74,6 +74,14 @@ public class TriangleGridImpl extends SquareGridImpl implements TriangleGrid {
         }
     }
 
+    private GridOption getDiagonalLinePlayer(final int listIndex, final int position)
+            throws UnexistentLineListException {
+        checkCorrectDiagonalInput(listIndex, position);
+        return diagonal.get(listIndex).get(position).equals(GridOption.EMPTY) ? GridOption.EMPTY
+                : diagonal.get(listIndex).get(position).equals(GridOption.PLAYER1) ? GridOption.PLAYER1
+                        : GridOption.PLAYER2;
+    }
+
     @Override
     public void setLine(final Move move, final GridOption currentPlayerTurn) throws UnexistentLineListException {
         if (move.getListType().equals(ListType.HORIZONTAL) || move.getListType().equals(ListType.VERTICAL)) {
@@ -97,15 +105,6 @@ public class TriangleGridImpl extends SquareGridImpl implements TriangleGrid {
         if (position < 0 || position > diagonal.get(listIndex).size()) {
             throw new IndexOutOfBoundsException();
         }
-    }
-
-    @Override
-    public GridOption getDiagonalLinePlayer(final int listIndex, final int position)
-            throws UnexistentLineListException {
-        checkCorrectDiagonalInput(listIndex, position);
-        return diagonal.get(listIndex).get(position).equals(GridOption.EMPTY) ? GridOption.EMPTY
-                : diagonal.get(listIndex).get(position).equals(GridOption.PLAYER1) ? GridOption.PLAYER1
-                        : GridOption.PLAYER2;
     }
 
     private void setDiagonalLine(final int listIndex, final int position, final GridOption playerTurn)

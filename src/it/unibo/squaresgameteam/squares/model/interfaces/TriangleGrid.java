@@ -1,8 +1,5 @@
 package it.unibo.squaresgameteam.squares.model.interfaces;
 
-import it.unibo.squaresgameteam.squares.model.enumerations.GridOption;
-import it.unibo.squaresgameteam.squares.model.exceptions.UnexistentLineListException;
-
 /**
  * This interface is used to extend the functionalities of the interface
  * SquareGrid. It adds a new way to score points, setting a line in a diagonal
@@ -25,7 +22,7 @@ public interface TriangleGrid extends SquareGrid {
      * @throws UnexistentLineListException
      *             if the rowsNumber or the coulumnsNumber aren't correct
      */
-    GridOption getDiagonalLinePlayer(final int listIndex, int position) throws UnexistentLineListException;
+   // GridOption getDiagonalLinePlayer(final int listIndex, int position) throws UnexistentLineListException;
 
     /**
      * @return the number of diagonal lists that makes the grid.

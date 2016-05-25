@@ -52,13 +52,15 @@ public class TriangleGridPointsCounter implements PointsCounterStrategy {
         if (listIndex > 0
                 && !grid.getWhoSetTheLine(new MoveImpl(ListType.VERTICAL, position, listIndex - 1))
                         .equals(GridOption.EMPTY)
-                && !grid.getDiagonalLinePlayer(listIndex - 1, position).equals(GridOption.EMPTY)) {
+                && !grid.getWhoSetTheLine(new MoveImpl(ListType.DIAGONAL, listIndex - 1, position))
+                        .equals(GridOption.EMPTY)) {
             points++;
         }
         if (listIndex < grid.getHorizontalListSize() - 1
                 && !grid.getWhoSetTheLine(new MoveImpl(ListType.VERTICAL, position + 1, listIndex))
                         .equals(GridOption.EMPTY)
-                && !grid.getDiagonalLinePlayer(listIndex, position).equals(GridOption.EMPTY)) {
+                && !grid.getWhoSetTheLine(new MoveImpl(ListType.DIAGONAL, listIndex, position))
+                        .equals(GridOption.EMPTY)) {
             points++;
         }
         this.pointsScored = points;
@@ -70,13 +72,15 @@ public class TriangleGridPointsCounter implements PointsCounterStrategy {
         if (listIndex > 0
                 && !grid.getWhoSetTheLine(new MoveImpl(ListType.HORIZONTAL, position, listIndex - 1))
                         .equals(GridOption.EMPTY)
-                && !grid.getDiagonalLinePlayer(position, listIndex - 1).equals(GridOption.EMPTY)) {
+                && !grid.getWhoSetTheLine(new MoveImpl(ListType.DIAGONAL, position, listIndex - 1))
+                        .equals(GridOption.EMPTY)) {
             points++;
         }
         if (listIndex < grid.getVerticalListSize() - 1
                 && !grid.getWhoSetTheLine(new MoveImpl(ListType.HORIZONTAL, position + 1, listIndex))
                         .equals(GridOption.EMPTY)
-                && !grid.getDiagonalLinePlayer(position, listIndex).equals(GridOption.EMPTY)) {
+                && !grid.getWhoSetTheLine(new MoveImpl(ListType.DIAGONAL, position, listIndex))
+                        .equals(GridOption.EMPTY)) {
             points++;
         }
         this.pointsScored = points;

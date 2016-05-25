@@ -51,7 +51,7 @@ public class TestTriangleGame {
         // verifies that every element in the list is initialized as EMPTY
         for (int i = 0; i < HORIZONTAL_SIZE + 1; i++) {
             for (int z = 0; z < HORIZONTAL_SIZE; z++) {
-                assertEquals(((SquareGridImpl) triangleGrid).getWhoSetTheLine(new MoveImpl(ListType.HORIZONTAL, i, z)),
+                assertEquals(triangleGrid.getWhoSetTheLine(new MoveImpl(ListType.HORIZONTAL, i, z)),
                         GridOption.EMPTY);
             }
         }
@@ -59,14 +59,14 @@ public class TestTriangleGame {
 
             for (int z = 0; z < VERTICAL_SIZE; z++) {
 
-                assertEquals(((SquareGridImpl) triangleGrid).getWhoSetTheLine(new MoveImpl(ListType.VERTICAL, i, z)),
+                assertEquals(triangleGrid.getWhoSetTheLine(new MoveImpl(ListType.VERTICAL, i, z)),
                         GridOption.EMPTY);
             }
         }
         for (int i = 0; i < HORIZONTAL_SIZE; i++) {
             move.setListIndex(i);
             for (int z = 0; z < VERTICAL_SIZE; z++) {
-                assertEquals(((TriangleGridImpl) triangleGrid).getDiagonalLinePlayer(i, z), GridOption.EMPTY);
+                assertEquals(triangleGrid.getWhoSetTheLine(new MoveImpl(ListType.DIAGONAL,  i, z)), GridOption.EMPTY);
             }
         }
         assertSame(VERTICAL_SIZE * HORIZONTAL_SIZE * 2, triangleGrid.getMatchMaximumPoints());
@@ -120,12 +120,11 @@ public class TestTriangleGame {
         gridOfSize.setLine(move);
         move = new MoveImpl(ListType.VERTICAL, 1, 1);
         gridOfSize.setLine(move);
-        move.setListType(ListType.VERTICAL);
-        move.setListIndex(2);
-        move.setPosition(1);
+        move = new MoveImpl(ListType.VERTICAL, 2, 1);
         gridOfSize.setLine(move);
         move = new MoveImpl(ListType.HORIZONTAL, 1, 1);
         gridOfSize.setLine(move);
+        System.out.println(gridOfSize.getPlayerPoints(GridOption.PLAYER1) + "   " + gridOfSize.getPlayerPoints(GridOption.PLAYER2));
         assertEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
     }
 

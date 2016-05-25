@@ -12,7 +12,7 @@ public final class PlayerImpl implements Player, Serializable {
 
     private static final long serialVersionUID = -9041141395276250548L;
     private final String playerName;
-    private transient Double winRate;
+    private Double winRate;
     private final Integer wonMatches;
     private final Integer totalMatches;
     private final Integer totalPointsScored;
