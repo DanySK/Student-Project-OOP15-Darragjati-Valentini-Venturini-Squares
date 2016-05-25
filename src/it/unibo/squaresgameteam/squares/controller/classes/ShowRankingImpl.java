@@ -9,15 +9,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-import java.io.PrintStream;
-import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 
 import it.unibo.squaresgameteam.squares.controller.interfaces.ShowRanking;
-import it.unibo.squaresgameteam.squares.model.classes.PlayerImpl;
+
 import it.unibo.squaresgameteam.squares.model.classes.RankingImpl;
 import it.unibo.squaresgameteam.squares.model.enumerations.RankingOption;
 import it.unibo.squaresgameteam.squares.model.exceptions.DuplicatedPlayerStatsException;
@@ -26,12 +23,10 @@ import it.unibo.squaresgameteam.squares.model.interfaces.Ranking;
 
 public class ShowRankingImpl implements ShowRanking {
 
-    
     private String rankingString;
     private File rankingFile;
     private Ranking rankingList;
     private List<Player> currentRanking;
-    
 
     public ShowRankingImpl() {
 
@@ -41,7 +36,8 @@ public class ShowRankingImpl implements ShowRanking {
     public String showRanking(RankingOption rankingOrder, boolean reverse)
             throws IOException, DuplicatedPlayerStatsException, ClassNotFoundException {
         createRanking();
-        this.currentRanking = this.rankingList.orderListBy(rankingOrder, reverse);
+        this.rankingList.orderListBy(rankingOrder, reverse);
+        this.currentRanking = rankingList.getPlayerList();
         writeRankingFile();
         readRanking();
         return this.rankingString;
@@ -180,7 +176,7 @@ public class ShowRankingImpl implements ShowRanking {
         try {
             oss = new ObjectOutputStream(new FileOutputStream(
                     System.getProperty("user.home") + System.getProperty("file.separator") + "Ranking.brm"));
-            
+
             oss.writeObject(this.currentRanking);
             oss.close();
         } catch (IOException e) {
