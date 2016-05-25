@@ -61,6 +61,20 @@ public class TriangleGridImpl extends SquareGridImpl implements TriangleGrid {
     }
 
     @Override
+    public GridOption getWhoSetTheLine(final Move move) throws UnexistentLineListException {
+        if (move.getListType().equals(ListType.HORIZONTAL) || move.getListType().equals(ListType.VERTICAL)) {
+            return super.getWhoSetTheLine(move);
+        } else {
+            switch (move.getListType()) {
+            case DIAGONAL:
+                return getDiagonalLinePlayer(move.getListIndex(), move.getPosition());
+            default:
+                throw new UnsupportedOperationException();
+            }
+        }
+    }
+
+    @Override
     public void setLine(final Move move, final GridOption currentPlayerTurn) throws UnexistentLineListException {
         if (move.getListType().equals(ListType.HORIZONTAL) || move.getListType().equals(ListType.VERTICAL)) {
             super.setLine(move, currentPlayerTurn);

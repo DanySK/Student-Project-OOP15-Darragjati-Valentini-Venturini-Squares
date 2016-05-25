@@ -28,6 +28,8 @@ public interface BaseGrid {
      */
     Integer getMatchMaximumPoints();
 
+    GridOption getWhoSetTheLine(Move move) throws UnexistentLineListException;
+    
     /**
      * This method makes a player make a move.
      * 

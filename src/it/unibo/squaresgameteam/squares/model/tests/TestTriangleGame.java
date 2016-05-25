@@ -30,7 +30,7 @@ public class TestTriangleGame {
     private static final Integer STANDARD_SIZE = 6;
     private static final Integer HORIZONTAL_SIZE = 5;
     private static final Integer VERTICAL_SIZE = 4;
-    private Move move;
+    private Move move = new MoveImpl(ListType.HORIZONTAL, 0, 0);
 
     /**
      * Tests the basic move option offered by a triangle game.
@@ -51,15 +51,20 @@ public class TestTriangleGame {
         // verifies that every element in the list is initialized as EMPTY
         for (int i = 0; i < HORIZONTAL_SIZE + 1; i++) {
             for (int z = 0; z < HORIZONTAL_SIZE; z++) {
-                assertEquals(((SquareGridImpl) triangleGrid).getHorizontalLinePlayer(i, z), GridOption.EMPTY);
+                assertEquals(((SquareGridImpl) triangleGrid).getWhoSetTheLine(new MoveImpl(ListType.HORIZONTAL, i, z)),
+                        GridOption.EMPTY);
             }
         }
         for (int i = 0; i < VERTICAL_SIZE + 1; i++) {
+
             for (int z = 0; z < VERTICAL_SIZE; z++) {
-                assertEquals(((SquareGridImpl) triangleGrid).getVerticalLinePlayer(i, z), GridOption.EMPTY);
+
+                assertEquals(((SquareGridImpl) triangleGrid).getWhoSetTheLine(new MoveImpl(ListType.VERTICAL, i, z)),
+                        GridOption.EMPTY);
             }
         }
         for (int i = 0; i < HORIZONTAL_SIZE; i++) {
+            move.setListIndex(i);
             for (int z = 0; z < VERTICAL_SIZE; z++) {
                 assertEquals(((TriangleGridImpl) triangleGrid).getDiagonalLinePlayer(i, z), GridOption.EMPTY);
             }

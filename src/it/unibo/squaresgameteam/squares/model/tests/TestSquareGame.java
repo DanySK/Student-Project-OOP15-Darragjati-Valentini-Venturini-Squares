@@ -53,13 +53,14 @@ public class TestSquareGame {
 
         // verifies that every element in the lists is initialized as EMPTY
         for (int i = 0; i < HORIZONTAL_SIZE + 1; i++) {
-            for (int z = 0; z < HORIZONTAL_SIZE; z++) {
-                assertEquals(((SquareGridImpl) squareGrid).getHorizontalLinePlayer(i, z), GridOption.EMPTY);
+            for (int z = 0; z < HORIZONTAL_SIZE; z++) {        
+                assertEquals(squareGrid.getWhoSetTheLine(new MoveImpl(ListType.HORIZONTAL, i, z)),
+                        GridOption.EMPTY);
             }
         }
         for (int i = 0; i < VERTICAL_SIZE + 1; i++) {
-            for (int z = 0; z < VERTICAL_SIZE; z++) {
-                assertEquals(((SquareGridImpl) squareGrid).getVerticalLinePlayer(i, z), GridOption.EMPTY);
+            for (int z = 0; z < VERTICAL_SIZE; z++) {    
+                assertEquals(squareGrid.getWhoSetTheLine(new MoveImpl(ListType.VERTICAL, i, z)), GridOption.EMPTY);
             }
         }
         assertSame(VERTICAL_SIZE * HORIZONTAL_SIZE, squareGrid.getMatchMaximumPoints());
@@ -93,11 +94,11 @@ public class TestSquareGame {
         assertEquals(gridOfSize.getCopyOfLastMove().getListType(), ListType.HORIZONTAL);
         assertEquals(gridOfSize.getCopyOfLastMove().getListIndex(), (Integer) 1);
         assertEquals(gridOfSize.getCopyOfLastMove().getPosition(), (Integer) 0);
-        //verifies that the player points are now the same
+        // verifies that the player points are now the same
         assertEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
         gridOfSize.undoLastMove();
         assertNotEquals(player, gridOfSize.getCurrentPlayerTurn());
-        
+
         // verifies that you can't modify the last move
         gridOfSize.getCopyOfLastMove().setListType(ListType.VERTICAL);
         gridOfSize.getCopyOfLastMove().setListIndex(3);
@@ -105,7 +106,7 @@ public class TestSquareGame {
         assertEquals(gridOfSize.getCopyOfLastMove().getListType(), ListType.HORIZONTAL);
         assertEquals(gridOfSize.getCopyOfLastMove().getListIndex(), (Integer) 0);
         assertEquals(gridOfSize.getCopyOfLastMove().getPosition(), (Integer) 0);
-              
+
         // check if the other method of points assignaments works correctly
         move = new MoveImpl(ListType.HORIZONTAL, 1, 1);
         gridOfSize.setLine(move);
@@ -133,12 +134,8 @@ public class TestSquareGame {
         // fills the grid with all the possible moves
         for (int i = 0; i < STANDARD_SIZE + 1; i++) {
             for (int z = 0; z < STANDARD_SIZE; z++) {
-                move.setListIndex(i);
-                move.setPosition(z);
-                move.setListType(ListType.HORIZONTAL);
-                gridOfSize2.setLine(move);
-                move.setListType(ListType.VERTICAL);
-                gridOfSize2.setLine(move);
+                gridOfSize2.setLine(new MoveImpl(ListType.HORIZONTAL, i, z));
+                gridOfSize2.setLine(new MoveImpl(ListType.VERTICAL, i, z));
             }
         }
         assertTrue(squareGrid2.getRemainingMoves().equals(0));

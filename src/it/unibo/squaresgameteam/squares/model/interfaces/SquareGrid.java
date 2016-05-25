@@ -26,7 +26,7 @@ public interface SquareGrid extends BaseGrid {
      * @throws UnexistentLineListException
      *             if the listIndex input is not correct
      */
-    GridOption getHorizontalLinePlayer(Integer listIndex, Integer position) throws UnexistentLineListException;
+ //   GridOption getHorizontalLinePlayer(Integer listIndex, Integer position) throws UnexistentLineListException;
 
     /**
      * This method is used to know which one of the two players has set the
@@ -43,7 +43,7 @@ public interface SquareGrid extends BaseGrid {
      * @throws UnexistentLineListException
      *             if the listIndex input is not correct
      */
-    GridOption getVerticalLinePlayer(Integer listIndex, Integer position) throws UnexistentLineListException;
+ //   GridOption getVerticalLinePlayer(Integer listIndex, Integer position) throws UnexistentLineListException;
 
     /**
      * @return the number of horizontal lists that makes the grid.

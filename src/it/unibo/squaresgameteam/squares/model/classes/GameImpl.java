@@ -210,21 +210,6 @@ public class GameImpl implements Game {
         return playedTime.getTotalMatchDuration();
     }
     
-    @Override
-    public void setLine(final Move move) throws UnexistentLineListException {
-        if (!this.isStarted()) {
-            throw new IllegalStateException();
-        }
-        grid.setLine(move, this.turn);
-        final Move lastMove = new MoveImpl(move.getListType(), move.getListIndex(), move.getPosition());
-        addPoints(calculatePoints.getPoints(lastMove));
-        if (isEnded()) {
-            ((PlayedTimeImpl) playedTime).calculateMatchDuration(isEnded());
-            createPlayers();
-        }
-        lastMoveList.add(lastMove);
-    }
-
     private void addPoints(final Integer points) {
         if (!isStarted()) {
             throw new IllegalStateException();
@@ -243,6 +228,21 @@ public class GameImpl implements Game {
                 throw new IllegalArgumentException();
             }
         }
+    }
+    
+    @Override
+    public void setLine(final Move move) throws UnexistentLineListException {
+        if (!this.isStarted()) {
+            throw new IllegalStateException();
+        }
+        grid.setLine(move, this.turn);
+        final Move lastMove = new MoveImpl(move.getListType(), move.getListIndex(), move.getPosition());
+        addPoints(calculatePoints.getPoints(lastMove));
+        if (isEnded()) {
+            ((PlayedTimeImpl) playedTime).calculateMatchDuration(isEnded());
+            createPlayers();
+        }
+        lastMoveList.add(lastMove);
     }
 
     @Override

@@ -9,6 +9,7 @@ import it.unibo.squaresgameteam.squares.model.exceptions.MoveAlreadyDoneExceptio
 import it.unibo.squaresgameteam.squares.model.exceptions.MoveNotFoundException;
 import it.unibo.squaresgameteam.squares.model.exceptions.UnexistentLineListException;
 import it.unibo.squaresgameteam.squares.model.interfaces.Move;
+import it.unibo.squaresgameteam.squares.model.interfaces.Player;
 import it.unibo.squaresgameteam.squares.model.interfaces.SquareGrid;
 
 /**
@@ -103,6 +104,36 @@ public class SquareGridImpl implements SquareGrid {
     }
 
     @Override
+    public GridOption getWhoSetTheLine(final Move move) throws UnexistentLineListException {
+        switch (move.getListType()) {
+        case HORIZONTAL:
+            return getHorizontalLinePlayer(move.getListIndex(), move.getPosition());
+        case VERTICAL:
+            return getVerticalLinePlayer(move.getListIndex(), move.getPosition());
+        default:
+            throw new UnsupportedOperationException();
+        }
+    }
+
+    //@Override
+    private GridOption getHorizontalLinePlayer(final Integer listIndex, final Integer position)
+            throws UnexistentLineListException {
+        checkCorrectHorizontalInput(listIndex, position);
+        return horizontal.get(listIndex).get(position).equals(GridOption.EMPTY) ? GridOption.EMPTY
+                : horizontal.get(listIndex).get(position).equals(GridOption.PLAYER1) ? GridOption.PLAYER1
+                        : GridOption.PLAYER2;
+    }
+
+   // @Override
+    private GridOption getVerticalLinePlayer(final Integer listIndex, final Integer position)
+            throws UnexistentLineListException {
+        checkCorrectVerticalInput(listIndex, position);
+        return vertical.get(listIndex).get(position).equals(GridOption.EMPTY) ? GridOption.EMPTY
+                : vertical.get(listIndex).get(position).equals(GridOption.PLAYER1) ? GridOption.PLAYER1
+                        : GridOption.PLAYER2;
+    }
+
+    @Override
     public void setLine(final Move move, final GridOption currentPlayerTurn) throws UnexistentLineListException {
         switch (move.getListType()) {
         case HORIZONTAL:
@@ -114,15 +145,6 @@ public class SquareGridImpl implements SquareGrid {
         default:
             throw new UnsupportedOperationException();
         }
-    }
-
-    @Override
-    public GridOption getHorizontalLinePlayer(final Integer listIndex, final Integer position)
-            throws UnexistentLineListException {
-        checkCorrectHorizontalInput(listIndex, position);
-        return horizontal.get(listIndex).get(position).equals(GridOption.EMPTY) ? GridOption.EMPTY
-                : horizontal.get(listIndex).get(position).equals(GridOption.PLAYER1) ? GridOption.PLAYER1
-                        : GridOption.PLAYER2;
     }
 
     private void setHorizontalLine(final int listIndex, final int position, final GridOption playerTurn)
@@ -151,15 +173,6 @@ public class SquareGridImpl implements SquareGrid {
         if (position < 0 || position > vertical.get(listIndex).size()) {
             throw new IndexOutOfBoundsException();
         }
-    }
-
-    @Override
-    public GridOption getVerticalLinePlayer(final Integer listIndex, final Integer position)
-            throws UnexistentLineListException {
-        checkCorrectVerticalInput(listIndex, position);
-        return vertical.get(listIndex).get(position).equals(GridOption.EMPTY) ? GridOption.EMPTY
-                : vertical.get(listIndex).get(position).equals(GridOption.PLAYER1) ? GridOption.PLAYER1
-                        : GridOption.PLAYER2;
     }
 
     private void setVerticalLine(final int listIndex, final int position, final GridOption playerTurn)
