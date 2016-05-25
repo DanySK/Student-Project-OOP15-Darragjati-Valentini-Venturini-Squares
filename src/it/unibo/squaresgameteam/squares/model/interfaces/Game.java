@@ -13,9 +13,6 @@ public interface Game {
 
     /**
      * Starts a new match.
-     * 
-     * @throws an
-     *             IllegalStateException if the match is already started
      */
     void startMatch();
 
@@ -26,15 +23,11 @@ public interface Game {
 
     /**
      * @return if there are no more moves left
-     * @throws an
-     *             IllegalStateException if the match is not started
      */
     boolean isEnded();
 
     /**
      * @return the player that should make the next move
-     * @throws an
-     *             IllegalStateException if the match is not started
      */
     GridOption getCurrentPlayerTurn();
 
@@ -44,8 +37,6 @@ public interface Game {
      * @param player
      *            is one of the players
      * @return his points
-     * @throws a
-     *             IllegalArgumentException if player does not exist
      */
     Integer getPlayerPoints(GridOption player);
 
@@ -53,8 +44,6 @@ public interface Game {
      * 
      * @return the winner of the match, if the game is even returns
      *         GridOption.Empty
-     * @throws an
-     *             IllegalStateException if the game is not ended
      */
     GridOption getWinner();
 
@@ -80,13 +69,9 @@ public interface Game {
      * @param move
      *            the move that the player wants to do
      * @throws UnexistentLineListException
-     *             if the listIndex input is not correct
-     * @throws an
-     *             UnsupportedOperationException if the list chosen is not
-     *             supported by the game mode
-     * @throws an
-     *             IllegalArgumentException if the inserted parameters are not
-     *             correct
+     *             if the move's listIndex is not correct
+     * @throws UnsupportedOperationException
+     *             if the list chosen is not supported by the game mode
      */
     void setLine(Move move) throws UnexistentLineListException;
 
@@ -96,10 +81,7 @@ public interface Game {
      * @throws NoMovesDoneException
      *             if no moves have been done yet
      * @throws UnexistentLineListException
-     *             if the listIndex input is not correct
-     * @throws an
-     *             IllegalArgumentException if the the listof the last move does
-     *             not exist
+     *             if the move's listIndex is not correct
      */
     void undoLastMove() throws NoMovesDoneException, UnexistentLineListException;
 

@@ -28,8 +28,18 @@ public interface BaseGrid {
      */
     Integer getMatchMaximumPoints();
 
+    /**
+     * This method is used to know wich player has set a move.
+     * 
+     * @param move
+     *            the move where you want to know who set it
+     * @return the player who has set the move, it is EMPTY if noone ha set the
+     *         move
+     * @throws UnexistentLineListException
+     *             if the move's listIndex is not correct
+     */
     GridOption getWhoSetTheLine(Move move) throws UnexistentLineListException;
-    
+
     /**
      * This method makes a player make a move.
      * 
