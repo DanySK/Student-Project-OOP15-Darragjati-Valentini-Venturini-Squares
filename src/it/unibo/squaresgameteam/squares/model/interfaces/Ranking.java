@@ -28,10 +28,15 @@ public interface Ranking {
      *            wich way the list should be ordered
      * @param reverseRanking
      *            true if the list should be ordered in the opposite way
-     * @return the reordered list
      * @throws an
      *             IllegalArgumentException if the ordering option does not
      *             exist
      */
-    List<Player> orderListBy(RankingOption option, boolean reverseRanking);
+    void orderListBy(RankingOption option, boolean reverseRanking);
+
+    /**
+     * 
+     * @return the unmodifiable list
+     */
+    List<Player> getPlayerList();
 }

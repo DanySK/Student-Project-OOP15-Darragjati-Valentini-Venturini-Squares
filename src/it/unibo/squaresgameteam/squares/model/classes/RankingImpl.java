@@ -1,7 +1,6 @@
 package it.unibo.squaresgameteam.squares.model.classes;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -66,7 +65,7 @@ public class RankingImpl implements Ranking, Serializable {
     }
 
     @Override
-    public List<Player> orderListBy(final RankingOption option, final boolean reverseRanking) {
+    public void orderListBy(final RankingOption option, final boolean reverseRanking) {
         switch (option) {
         case WINRATE:
             playerList.sort(new Comparator<Player>() {
@@ -146,7 +145,6 @@ public class RankingImpl implements Ranking, Serializable {
         if (reverseRanking) {
             Collections.reverse(playerList);
         }
-        return Collections.unmodifiableList(playerList);
     }
 
     private Integer compareWinrate(final Player player1, final Player player2) {
@@ -174,9 +172,8 @@ public class RankingImpl implements Ranking, Serializable {
         out.writeObject(playerList);
     }
 
-    @SuppressWarnings("unchecked")
-    private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
-        in.defaultReadObject();
-        this.playerList = (List<Player>) in.readObject();
+    @Override
+    public List<Player> getPlayerList() {
+        return Collections.unmodifiableList(this.playerList);
     }
 }
