@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.unibo.squaresgameteam.squares.model.enumerations.GridOption;
+import it.unibo.squaresgameteam.squares.model.enumerations.ListType;
 import it.unibo.squaresgameteam.squares.model.exceptions.UnsupportedSizeException;
 import it.unibo.squaresgameteam.squares.model.exceptions.MoveAlreadyDoneException;
 import it.unibo.squaresgameteam.squares.model.exceptions.MoveNotFoundException;
 import it.unibo.squaresgameteam.squares.model.exceptions.UnexistentLineListException;
+import it.unibo.squaresgameteam.squares.model.interfaces.Move;
 import it.unibo.squaresgameteam.squares.model.interfaces.TriangleGrid;
 
 /**
@@ -56,6 +58,21 @@ public class TriangleGridImpl extends SquareGridImpl implements TriangleGrid {
     @Override
     public Integer getMatchMaximumPoints() {
         return super.getMatchMaximumPoints() + (getHorizontalListSize() - 1) * (getVerticalListSize() - 1);
+    }
+
+    @Override
+    public void setLine(final Move move, final GridOption currentPlayerTurn) throws UnexistentLineListException {
+        if (move.getListType().equals(ListType.HORIZONTAL) || move.getListType().equals(ListType.VERTICAL)) {
+            super.setLine(move, currentPlayerTurn);
+        } else {
+            switch (move.getListType()) {
+            case DIAGONAL:
+                setDiagonalLine(move.getListIndex(), move.getPosition(), currentPlayerTurn);
+                break;
+            default:
+                throw new UnsupportedOperationException();
+            }
+        }
     }
 
     private void checkCorrectDiagonalInput(final Integer listIndex, final Integer position)

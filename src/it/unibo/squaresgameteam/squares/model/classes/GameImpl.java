@@ -215,23 +215,7 @@ public class GameImpl implements Game {
         if (!this.isStarted()) {
             throw new IllegalStateException();
         }
-        switch (move.getListType()) {
-        case HORIZONTAL:
-            ((SquareGridImpl) grid).setHorizontalLine(move.getListIndex(), move.getPosition(), this.turn);
-            break;
-        case VERTICAL:
-            ((SquareGridImpl) grid).setVerticalLine(move.getListIndex(), move.getPosition(), this.turn);
-            break;
-        case DIAGONAL:
-            if (grid instanceof TriangleGridImpl) {
-                ((TriangleGridImpl) grid).setDiagonalLine(move.getListIndex(), move.getPosition(), this.turn);          
-            } else {
-                throw new UnsupportedOperationException("the diagonal move is not supported by the selected game mode");
-            }
-            break;
-        default:
-            throw new IllegalArgumentException("the list selected does not exist");
-        }
+        grid.setLine(move, this.turn);
         final Move lastMove = new MoveImpl(move.getListType(), move.getListIndex(), move.getPosition());
         addPoints(calculatePoints.getPoints(lastMove));
         if (isEnded()) {
@@ -266,26 +250,7 @@ public class GameImpl implements Game {
         if (lastMoveList.isEmpty()) {
             throw new NoMovesDoneException();
         }
-        switch (getCopyOfLastMove().getListType()) {
-        case HORIZONTAL:
-            ((SquareGridImpl) grid).setHorizontalLine(getCopyOfLastMove().getListIndex(),
-                    getCopyOfLastMove().getPosition(), GridOption.EMPTY);
-            break;
-        case VERTICAL:
-            ((SquareGridImpl) grid).setVerticalLine(getCopyOfLastMove().getListIndex(),
-                    getCopyOfLastMove().getPosition(), GridOption.EMPTY);
-            break;
-        case DIAGONAL:
-            if (grid instanceof TriangleGridImpl) {
-                ((TriangleGridImpl) grid).setDiagonalLine(getCopyOfLastMove().getListIndex(),
-                    getCopyOfLastMove().getPosition(), GridOption.EMPTY);
-            } else {
-                throw new UnsupportedOperationException();
-            }
-            break;
-        default:
-            throw new IllegalArgumentException();
-        }
+        grid.setLine(getCopyOfLastMove(), GridOption.EMPTY);
         addPoints(-calculatePoints.getPoints(getCopyOfLastMove()));
         lastMoveList.remove(lastMoveList.size() - 1);
     }

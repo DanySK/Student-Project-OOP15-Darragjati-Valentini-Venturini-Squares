@@ -8,6 +8,7 @@ import it.unibo.squaresgameteam.squares.model.exceptions.UnsupportedSizeExceptio
 import it.unibo.squaresgameteam.squares.model.exceptions.MoveAlreadyDoneException;
 import it.unibo.squaresgameteam.squares.model.exceptions.MoveNotFoundException;
 import it.unibo.squaresgameteam.squares.model.exceptions.UnexistentLineListException;
+import it.unibo.squaresgameteam.squares.model.interfaces.Move;
 import it.unibo.squaresgameteam.squares.model.interfaces.SquareGrid;
 
 /**
@@ -98,6 +99,20 @@ public class SquareGridImpl implements SquareGrid {
         }
         if (position < 0 || position > horizontal.get(listIndex).size()) {
             throw new IndexOutOfBoundsException();
+        }
+    }
+
+    @Override
+    public void setLine(final Move move, final GridOption currentPlayerTurn) throws UnexistentLineListException {
+        switch (move.getListType()) {
+        case HORIZONTAL:
+            setHorizontalLine(move.getListIndex(), move.getPosition(), currentPlayerTurn);
+            break;
+        case VERTICAL:
+            setVerticalLine(move.getListIndex(), move.getPosition(), currentPlayerTurn);
+            break;
+        default:
+            throw new UnsupportedOperationException();
         }
     }
 
