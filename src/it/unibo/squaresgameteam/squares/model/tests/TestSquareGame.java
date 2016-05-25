@@ -53,14 +53,14 @@ public class TestSquareGame {
 
         // verifies that every element in the lists is initialized as EMPTY
         for (int i = 0; i < HORIZONTAL_SIZE + 1; i++) {
-            for (int z = 0; z < HORIZONTAL_SIZE; z++) {        
-                assertEquals(squareGrid.getWhoSetTheLine(new MoveImpl(ListType.HORIZONTAL, i, z)),
+            for (int p = 0; p < HORIZONTAL_SIZE; p++) {        
+                assertEquals(squareGrid.getWhoSetTheLine(new MoveImpl(ListType.HORIZONTAL, i, p)),
                         GridOption.EMPTY);
             }
         }
         for (int i = 0; i < VERTICAL_SIZE + 1; i++) {
-            for (int z = 0; z < VERTICAL_SIZE; z++) {    
-                assertEquals(squareGrid.getWhoSetTheLine(new MoveImpl(ListType.VERTICAL, i, z)), GridOption.EMPTY);
+            for (int p = 0; p < VERTICAL_SIZE; p++) {    
+                assertEquals(squareGrid.getWhoSetTheLine(new MoveImpl(ListType.VERTICAL, i, p)), GridOption.EMPTY);
             }
         }
         assertSame(VERTICAL_SIZE * HORIZONTAL_SIZE, squareGrid.getMatchMaximumPoints());
@@ -133,9 +133,9 @@ public class TestSquareGame {
         gridOfSize2.startMatch();
         // fills the grid with all the possible moves
         for (int i = 0; i < STANDARD_SIZE + 1; i++) {
-            for (int z = 0; z < STANDARD_SIZE; z++) {
-                gridOfSize2.setLine(new MoveImpl(ListType.HORIZONTAL, i, z));
-                gridOfSize2.setLine(new MoveImpl(ListType.VERTICAL, i, z));
+            for (int p = 0; p < STANDARD_SIZE; p++) {
+                gridOfSize2.setLine(new MoveImpl(ListType.HORIZONTAL, i, p));
+                gridOfSize2.setLine(new MoveImpl(ListType.VERTICAL, i, p));
             }
         }
         assertTrue(squareGrid2.getRemainingMoves().equals(0));

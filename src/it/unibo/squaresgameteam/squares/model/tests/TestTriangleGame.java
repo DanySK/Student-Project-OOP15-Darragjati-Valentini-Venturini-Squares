@@ -10,7 +10,6 @@ import org.junit.Test;
 
 import it.unibo.squaresgameteam.squares.model.classes.GameImpl;
 import it.unibo.squaresgameteam.squares.model.classes.MoveImpl;
-import it.unibo.squaresgameteam.squares.model.classes.SquareGridImpl;
 import it.unibo.squaresgameteam.squares.model.classes.TriangleGridImpl;
 import it.unibo.squaresgameteam.squares.model.enumerations.GridOption;
 import it.unibo.squaresgameteam.squares.model.enumerations.ListType;
@@ -50,23 +49,18 @@ public class TestTriangleGame {
 
         // verifies that every element in the list is initialized as EMPTY
         for (int i = 0; i < HORIZONTAL_SIZE + 1; i++) {
-            for (int z = 0; z < HORIZONTAL_SIZE; z++) {
-                assertEquals(triangleGrid.getWhoSetTheLine(new MoveImpl(ListType.HORIZONTAL, i, z)),
-                        GridOption.EMPTY);
+            for (int p = 0; p < HORIZONTAL_SIZE; p++) {
+                assertEquals(triangleGrid.getWhoSetTheLine(new MoveImpl(ListType.HORIZONTAL, i, p)), GridOption.EMPTY);
             }
         }
         for (int i = 0; i < VERTICAL_SIZE + 1; i++) {
-
-            for (int z = 0; z < VERTICAL_SIZE; z++) {
-
-                assertEquals(triangleGrid.getWhoSetTheLine(new MoveImpl(ListType.VERTICAL, i, z)),
-                        GridOption.EMPTY);
+            for (int p = 0; p < VERTICAL_SIZE; p++) {
+                assertEquals(triangleGrid.getWhoSetTheLine(new MoveImpl(ListType.VERTICAL, i, p)), GridOption.EMPTY);
             }
         }
         for (int i = 0; i < HORIZONTAL_SIZE; i++) {
-            move.setListIndex(i);
-            for (int z = 0; z < VERTICAL_SIZE; z++) {
-                assertEquals(triangleGrid.getWhoSetTheLine(new MoveImpl(ListType.DIAGONAL,  i, z)), GridOption.EMPTY);
+            for (int p = 0; p < VERTICAL_SIZE; p++) {
+                assertEquals(triangleGrid.getWhoSetTheLine(new MoveImpl(ListType.DIAGONAL, i, p)), GridOption.EMPTY);
             }
         }
         assertSame(VERTICAL_SIZE * HORIZONTAL_SIZE * 2, triangleGrid.getMatchMaximumPoints());
@@ -124,7 +118,6 @@ public class TestTriangleGame {
         gridOfSize.setLine(move);
         move = new MoveImpl(ListType.HORIZONTAL, 1, 1);
         gridOfSize.setLine(move);
-        System.out.println(gridOfSize.getPlayerPoints(GridOption.PLAYER1) + "   " + gridOfSize.getPlayerPoints(GridOption.PLAYER2));
         assertEquals(gridOfSize.getPlayerPoints(GridOption.PLAYER1), gridOfSize.getPlayerPoints(GridOption.PLAYER2));
     }
 
@@ -142,21 +135,15 @@ public class TestTriangleGame {
         gridOfSize2.startMatch();
         // fills the grid with all thepossible moves
         for (int i = 0; i < STANDARD_SIZE + 1; i++) {
-            for (int z = 0; z < STANDARD_SIZE; z++) {
-                move.setListIndex(i);
-                move.setPosition(z);
+            for (int p = 0; p < STANDARD_SIZE; p++) {
                 move.setListType(ListType.HORIZONTAL);
-                gridOfSize2.setLine(move);
-                move.setListType(ListType.VERTICAL);
-                gridOfSize2.setLine(move);
+                gridOfSize2.setLine(new MoveImpl(ListType.HORIZONTAL, i, p));
+                gridOfSize2.setLine(new MoveImpl(ListType.VERTICAL, i, p));
             }
         }
         for (int i = 0; i < STANDARD_SIZE; i++) {
-            for (int z = 0; z < STANDARD_SIZE; z++) {
-                move.setListType(ListType.DIAGONAL);
-                move.setListIndex(i);
-                move.setPosition(z);
-                gridOfSize2.setLine(move);
+            for (int p = 0; p < STANDARD_SIZE; p++) {
+                gridOfSize2.setLine(new MoveImpl(ListType.DIAGONAL, i, p));
             }
         }
         assertTrue(squareGrid2.getRemainingMoves().equals(0));
