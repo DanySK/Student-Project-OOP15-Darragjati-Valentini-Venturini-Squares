@@ -1,8 +1,10 @@
 package it.unibo.squaresgameteam.squares.controller.classes;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,7 +30,9 @@ public class ShowRankingImpl implements ShowRanking {
     private Ranking rankingList;
     private List<Player> currentRanking;
 
-    public ShowRankingImpl() {
+    public ShowRankingImpl() throws DuplicatedPlayerStatsException {
+        this.currentRanking = new ArrayList<>();
+        this.rankingList = new RankingImpl(currentRanking);
 
     }
 
@@ -36,148 +40,93 @@ public class ShowRankingImpl implements ShowRanking {
     public String showRanking(RankingOption rankingOrder, boolean reverse)
             throws IOException, DuplicatedPlayerStatsException, ClassNotFoundException {
         createRanking();
+
         this.rankingList.orderListBy(rankingOrder, reverse);
-        this.currentRanking = rankingList.getPlayerList();
-        writeRankingFile();
-        readRanking();
+        convertRanking();
+
         return this.rankingString;
+    }
+
+    private void convertRanking() {
+
+        this.currentRanking = rankingList.getPlayerList();
+        String s;
+        String line;
+        this.rankingString = "";
+        Double doubleNum;
+        int intNum;
+
+        for (Player element : this.currentRanking) {
+
+            line = element.getPlayerName();            
+            doubleNum = element.getWinRate();
+            s = Double.toString(doubleNum);
+            line = line + "\t" + s;
+            intNum = element.getWonMatches();
+            s = Integer.toString(intNum);
+            line = line + "\t" + s;
+            intNum = element.getTotalMatches();
+            s = Integer.toString(intNum);
+            line = line + "\t" + s;
+            intNum = element.getTotalPointsScored();
+            s = Integer.toString(intNum);
+            line = line + "\t" + s;
+            this.rankingString = this.rankingString + line + "\n";
+        }
+
     }
 
     @Override
     public void addPlayer(Player player) throws IOException, DuplicatedPlayerStatsException, ClassNotFoundException {
         createRanking();
         rankingList.addPlayerResults(player);
+        writeRankingFile();
 
     }
 
-    // private void createRanking() throws IOException,
-    // DuplicatedPlayerStatsException {
-    // checkRankingFile();
-    // this.currentRanking = new ArrayList<>();
-    //
-    // InputStream readFile = new
-    // FileInputStream(System.getProperty("user.home")+
-    // System.getProperty("file.separator") + "Ranking.txt");
-    //
-    // try (BufferedReader br = new BufferedReader(new
-    // InputStreamReader(readFile, "UTF8"))) {
-    // String s;
-    // String playerName;
-    // String strWonMatches;
-    // String srtTotalMatches;
-    // String strTotalPointsScored;
-    // while ((s = br.readLine()) != null) {
-    // StringTokenizer st = new StringTokenizer(s, "\t");
-    // playerName = st.nextToken();
-    // strWonMatches = st.nextToken();
-    // int wonMatches = Integer.parseInt(strWonMatches);
-    // srtTotalMatches = st.nextToken();
-    // int totalMatches = Integer.parseInt(srtTotalMatches);
-    // strTotalPointsScored = st.nextToken();
-    // int totalPointsScored = Integer.parseInt(strTotalPointsScored);
-    // Player player = new
-    // PlayerImpl.Builder().playerName(playerName).wonMatches(wonMatches)
-    // .totalMatches(totalMatches).totalPointsScored(totalPointsScored).build();
-    // currentRanking.add(player);
-    //
-    // }
-    // } catch (IOException ex) {
-    // throw new IOException();
-    // }
-    //
-    // this.rankingList = new RankingImpl(currentRanking);
-    //
-    // }
-
     private void createRanking() throws IOException, ClassNotFoundException, DuplicatedPlayerStatsException {
         checkRankingFile();
-        this.currentRanking = new ArrayList<>();
+
         ObjectInputStream ois;
         try {
-            ois = new ObjectInputStream(new FileInputStream(
-                    System.getProperty("user.home") + System.getProperty("file.separator") + "Ranking.brm"));
-            this.currentRanking = (List<Player>) ois.readObject();
+            ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(
+                    System.getProperty("user.home") + System.getProperty("file.separator") + "Ranking.obj")));
+            this.rankingList = (Ranking) ois.readObject();
+
+        } catch (FileNotFoundException e) {
+            throw new FileNotFoundException();
+
         } catch (IOException e) {
             throw new IOException();
         }
         ois.close();
-        this.rankingList = new RankingImpl(currentRanking);
-
-    }
-
-    private void readRanking() throws IOException {
-        checkRankingFile();
-        InputStream readFile = ShowRanking.class.getResourceAsStream(
-                System.getProperty("user.home") + System.getProperty("file.separator") + "Ranking.txt");
-
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(readFile, "UTF8"))) {
-            String s;
-            while ((s = br.readLine()) != null) {
-                this.rankingString = this.rankingString + s;
-
-            }
-        } catch (IOException ex) {
-            throw new IOException();
-        }
-        readFile.close();
 
     }
 
     private void checkRankingFile() throws IOException {
 
         this.rankingFile = new File(
-                System.getProperty("user.home") + System.getProperty("file.separator") + "Ranking.brm");
+                System.getProperty("user.home") + System.getProperty("file.separator") + "Ranking.obj");
         if (!this.rankingFile.exists()) {
             try {
                 this.rankingFile.createNewFile();
+
             } catch (IOException ex) {
                 throw new IOException();
             }
-
+            writeRankingFile();
         }
+
     }
 
-    // private void writeRankingFile() throws IOException {
-    // checkRankingFile();
-    //
-    // OutputStream writeFile = new FileOutputStream(
-    // System.getProperty("user.home") + System.getProperty("file.separator") +
-    // "Ranking.txt");
-    // String s;
-    // String line;
-    // Double doubleNum;
-    // int intNum;
-    // try (PrintStream write = new PrintStream(writeFile, true, "UTF8")) {
-    //
-    // for (Player element : this.currentRanking) {
-    //
-    // line = element.getPlayerName();
-    // doubleNum = element.getWinRate();
-    // s = Double.toString(doubleNum);
-    // line = line + "\t" + s;
-    // intNum = element.getWonMatches();
-    // s = Integer.toString(intNum);
-    // line = line + "\t" + s;
-    // intNum = element.getTotalMatches();
-    // s = Integer.toString(intNum);
-    // line = line + "\t" + s;
-    // intNum = element.getTotalPointsScored();
-    // s = Integer.toString(intNum);
-    // line = line + "\t" + s;
-    // write.println(line);
-    // }
-    // } catch (IOException e) {
-    // throw new IOException();
-    // }
-    //
-    // }
     private void writeRankingFile() throws IOException {
+
         ObjectOutputStream oss;
         try {
             oss = new ObjectOutputStream(new FileOutputStream(
-                    System.getProperty("user.home") + System.getProperty("file.separator") + "Ranking.brm"));
+                    System.getProperty("user.home") + System.getProperty("file.separator") + "Ranking.obj"));
 
-            oss.writeObject(this.currentRanking);
+            oss.writeObject(this.rankingList);
             oss.close();
         } catch (IOException e) {
             throw new IOException();

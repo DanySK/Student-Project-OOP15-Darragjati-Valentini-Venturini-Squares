@@ -9,6 +9,7 @@ import it.unibo.squaresgameteam.squares.controller.enumerations.TypeGame;
 import it.unibo.squaresgameteam.squares.controller.interfaces.Match;
 import it.unibo.squaresgameteam.squares.controller.interfaces.Menu;
 import it.unibo.squaresgameteam.squares.controller.interfaces.ShowRanking;
+import it.unibo.squaresgameteam.squares.model.exceptions.DuplicatedPlayerStatsException;
 
 public class MenuImpl implements Menu {
 
@@ -43,7 +44,7 @@ public class MenuImpl implements Menu {
 
     }
     
-    public ShowRanking createRankingClass(){     
+    public ShowRanking createRankingClass() throws DuplicatedPlayerStatsException{     
        return  new ShowRankingImpl();
     }
 
