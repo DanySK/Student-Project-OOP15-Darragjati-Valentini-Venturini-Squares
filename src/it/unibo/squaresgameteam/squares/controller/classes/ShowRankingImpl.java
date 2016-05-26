@@ -1,14 +1,13 @@
 package it.unibo.squaresgameteam.squares.controller.classes;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedReader;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
@@ -26,13 +25,15 @@ import it.unibo.squaresgameteam.squares.model.interfaces.Ranking;
 public class ShowRankingImpl implements ShowRanking {
 
     private String rankingString;
-    private File rankingFile;
+    private final File rankingFile;
     private Ranking rankingList;
     private List<Player> currentRanking;
 
     public ShowRankingImpl() throws DuplicatedPlayerStatsException {
         this.currentRanking = new ArrayList<>();
         this.rankingList = new RankingImpl(currentRanking);
+        this.rankingFile = new File(
+                System.getProperty("user.home") + System.getProperty("file.separator") + "Ranking.obj");
 
     }
 
@@ -40,10 +41,8 @@ public class ShowRankingImpl implements ShowRanking {
     public String showRanking(RankingOption rankingOrder, boolean reverse)
             throws IOException, DuplicatedPlayerStatsException, ClassNotFoundException {
         createRanking();
-
         this.rankingList.orderListBy(rankingOrder, reverse);
         convertRanking();
-
         return this.rankingString;
     }
 
@@ -56,22 +55,23 @@ public class ShowRankingImpl implements ShowRanking {
         Double doubleNum;
         int intNum;
 
-        for (Player element : this.currentRanking) {
+        for (final Player element : this.currentRanking) {
 
-            line = element.getPlayerName();            
+            line = element.getPlayerName();
             doubleNum = element.getWinRate();
             s = Double.toString(doubleNum);
-            line = line + "\t" + s;
+            line = line.concat("\t").concat(s);
             intNum = element.getWonMatches();
             s = Integer.toString(intNum);
-            line = line + "\t" + s;
+            line = line.concat("\t").concat(s);
             intNum = element.getTotalMatches();
             s = Integer.toString(intNum);
-            line = line + "\t" + s;
+            line = line.concat("\t").concat(s);
             intNum = element.getTotalPointsScored();
             s = Integer.toString(intNum);
-            line = line + "\t" + s;
-            this.rankingString = this.rankingString + line + "\n";
+            line = line.concat("\t").concat(s);
+
+            this.rankingString = this.rankingString.concat(line).concat("\n");
         }
 
     }
@@ -79,6 +79,7 @@ public class ShowRankingImpl implements ShowRanking {
     @Override
     public void addPlayer(Player player) throws IOException, DuplicatedPlayerStatsException, ClassNotFoundException {
         createRanking();
+        deleteRankingFile();
         rankingList.addPlayerResults(player);
         writeRankingFile();
 
@@ -105,8 +106,6 @@ public class ShowRankingImpl implements ShowRanking {
 
     private void checkRankingFile() throws IOException {
 
-        this.rankingFile = new File(
-                System.getProperty("user.home") + System.getProperty("file.separator") + "Ranking.obj");
         if (!this.rankingFile.exists()) {
             try {
                 this.rankingFile.createNewFile();
@@ -134,4 +133,14 @@ public class ShowRankingImpl implements ShowRanking {
 
     }
 
+    private void deleteRankingFile() {
+        if (this.rankingFile.exists()) {
+            try {
+                this.rankingFile.delete();
+            } catch (SecurityException e) {
+                throw new SecurityException();
+            }
+
+        }
+    }
 }
