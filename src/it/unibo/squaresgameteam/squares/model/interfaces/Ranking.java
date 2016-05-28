@@ -28,9 +28,6 @@ public interface Ranking {
      *            wich way the list should be ordered
      * @param reverseRanking
      *            true if the list should be ordered in the opposite way
-     * @throws an
-     *             IllegalArgumentException if the ordering option does not
-     *             exist
      */
     void orderListBy(RankingOption option, boolean reverseRanking);
 

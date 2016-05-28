@@ -8,23 +8,6 @@ package it.unibo.squaresgameteam.squares.model.interfaces;
 public interface TriangleGrid extends SquareGrid {
 
     /**
-     * This method is used to know which one of the two players has set the
-     * diagonal line.
-     * 
-     * @param listIndex
-     *            is the number of the diagonal list where the player wants to
-     *            get the line
-     * @param position
-     *            is the position of the chosen list where the player wants to
-     *            get the line
-     * @return which one of the two players has set the move, it is
-     *         GridOption.Empty if noone has set the line
-     * @throws UnexistentLineListException
-     *             if the rowsNumber or the coulumnsNumber aren't correct
-     */
-   // GridOption getDiagonalLinePlayer(final int listIndex, int position) throws UnexistentLineListException;
-
-    /**
      * @return the number of diagonal lists that makes the grid.
      */
     Integer getDiagonalListSize();

@@ -70,8 +70,6 @@ public interface Game {
      *            the move that the player wants to do
      * @throws UnexistentLineListException
      *             if the move's listIndex is not correct
-     * @throws UnsupportedOperationException
-     *             if the list chosen is not supported by the game mode
      */
     void setLine(Move move) throws UnexistentLineListException;
 

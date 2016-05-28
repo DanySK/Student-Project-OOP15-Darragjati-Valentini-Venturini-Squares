@@ -6,7 +6,7 @@ package it.unibo.squaresgameteam.squares.model.interfaces;
 public interface PlayedTime {
 
     /**
-     * @return the total play time after the last match.
+     * @return the total play time after the match is ended.
      * @throws an IllegalStateException if the method calculateMatchDuration wasn't called.
      */
     Double getTotalMatchDuration();
