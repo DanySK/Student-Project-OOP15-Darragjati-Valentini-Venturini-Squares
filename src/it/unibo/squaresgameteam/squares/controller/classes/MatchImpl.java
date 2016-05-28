@@ -42,6 +42,7 @@ public class MatchImpl implements Match {
     private PlayedTime time;
     private int playerScore;
     private GridOption winner;
+    private boolean endMatch;
     
 
     /**
@@ -61,6 +62,7 @@ public class MatchImpl implements Match {
         this.namePlayer1 = namePlayer1;
         this.namePlayer2 = namePlayer2;
         this.mode = mode;
+        this.endMatch = false;
     }
 
     @Override
@@ -111,7 +113,8 @@ public class MatchImpl implements Match {
         final Move addMove = new MoveImpl(direction, numLine, position);
 
         this.match.setLine(addMove);
-        if (this.match.isEnded()) {            
+        if (this.match.isEnded()) {
+            this.endMatch = true;
             this.numPlayer = this.match.getWinner();
             this.winner = numPlayer;
             addPlayerRank();
@@ -160,6 +163,10 @@ public class MatchImpl implements Match {
         }
         playerResult = this.match.getPlayerMatchResult(numPlayer);
         ranking.addPlayer(playerResult);
+    }
+    
+    public boolean getEndMatch(){
+        return this.endMatch;
     }
 
 }

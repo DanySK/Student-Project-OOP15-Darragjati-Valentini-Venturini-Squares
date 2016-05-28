@@ -12,7 +12,9 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-public class MusicImpl {
+import it.unibo.squaresgameteam.squares.controller.interfaces.Music;
+
+public class MusicImpl implements Music {
     
     private Clip clip;
     private AudioInputStream audioIn;

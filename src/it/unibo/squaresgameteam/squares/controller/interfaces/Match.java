@@ -60,4 +60,6 @@ public interface Match {
      */
     Double getMatchTime();
     
+    boolean getEndMatch();
+    
 }
