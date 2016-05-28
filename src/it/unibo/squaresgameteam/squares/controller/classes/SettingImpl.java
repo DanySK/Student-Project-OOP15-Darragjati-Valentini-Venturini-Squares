@@ -37,7 +37,7 @@ public class SettingImpl implements Setting {
 
     public void createAudio() throws IOException {
 
-        final File audio = new File(ClassLoader.class.getResource("/pol.au").getPath());
+        final File audio = new File(ClassLoader.class.getResource("/8_bit_adventure.au").getPath());
 
         final InputStream in = new FileInputStream(audio);
 
