@@ -192,10 +192,16 @@ public class SquareGridImpl implements BaseGrid {
         }
     }
 
+    /**
+     * @return the number of horizontal lists that form the grid
+     */
     protected Integer getHorizontalListSize() {
         return horizontal.size();
     }
 
+    /**
+     * @return the number of vertical lists that form the grid
+     */
     protected Integer getVerticalListSize() {
         return vertical.size();
     }

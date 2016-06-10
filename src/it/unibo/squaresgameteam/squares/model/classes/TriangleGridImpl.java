@@ -124,6 +124,9 @@ public class TriangleGridImpl extends SquareGridImpl {
         }
     }
 
+    /**
+     * @return the number of diagonal lists that form the grid
+     */
     protected Integer getDiagonalListSize() {
         return diagonal.size();
     }
