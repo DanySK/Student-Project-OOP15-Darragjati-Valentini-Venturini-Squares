@@ -10,13 +10,12 @@ import it.unibo.squaresgameteam.squares.model.exceptions.MoveAlreadyDoneExceptio
 import it.unibo.squaresgameteam.squares.model.exceptions.MoveNotFoundException;
 import it.unibo.squaresgameteam.squares.model.exceptions.UnexistentLineListException;
 import it.unibo.squaresgameteam.squares.model.interfaces.Move;
-import it.unibo.squaresgameteam.squares.model.interfaces.TriangleGrid;
 
 /**
  * This class modifies the base rules of the game adding a new way to set a move
  * to score a point.
  */
-public class TriangleGridImpl extends SquareGridImpl implements TriangleGrid {
+public class TriangleGridImpl extends SquareGridImpl {
 
     private final List<List<GridOption>> diagonal = new ArrayList<>();
 
@@ -125,8 +124,7 @@ public class TriangleGridImpl extends SquareGridImpl implements TriangleGrid {
         }
     }
 
-    @Override
-    public Integer getDiagonalListSize() {
+    protected Integer getDiagonalListSize() {
         return diagonal.size();
     }
 }

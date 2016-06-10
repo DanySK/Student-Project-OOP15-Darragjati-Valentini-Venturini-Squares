@@ -8,8 +8,8 @@ import it.unibo.squaresgameteam.squares.model.exceptions.UnsupportedSizeExceptio
 import it.unibo.squaresgameteam.squares.model.exceptions.MoveAlreadyDoneException;
 import it.unibo.squaresgameteam.squares.model.exceptions.MoveNotFoundException;
 import it.unibo.squaresgameteam.squares.model.exceptions.UnexistentLineListException;
+import it.unibo.squaresgameteam.squares.model.interfaces.BaseGrid;
 import it.unibo.squaresgameteam.squares.model.interfaces.Move;
-import it.unibo.squaresgameteam.squares.model.interfaces.SquareGrid;
 
 /**
  * This class implements the methods of the interface SquereGrid. It is used to
@@ -17,7 +17,7 @@ import it.unibo.squaresgameteam.squares.model.interfaces.SquareGrid;
  * the main informations about it like which one of the two players has set a
  * move or how much wide is the playeable field.
  */
-public class SquareGridImpl implements SquareGrid {
+public class SquareGridImpl implements BaseGrid {
 
     private final List<List<GridOption>> horizontal = new ArrayList<>();
     private final List<List<GridOption>> vertical = new ArrayList<>();
@@ -192,13 +192,11 @@ public class SquareGridImpl implements SquareGrid {
         }
     }
 
-    @Override
-    public Integer getHorizontalListSize() {
+    protected Integer getHorizontalListSize() {
         return horizontal.size();
     }
 
-    @Override
-    public Integer getVerticalListSize() {
+    protected Integer getVerticalListSize() {
         return vertical.size();
     }
 }

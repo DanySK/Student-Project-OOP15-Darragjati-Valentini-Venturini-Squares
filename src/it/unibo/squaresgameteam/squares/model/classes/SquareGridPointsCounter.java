@@ -5,7 +5,6 @@ import it.unibo.squaresgameteam.squares.model.enumerations.ListType;
 import it.unibo.squaresgameteam.squares.model.exceptions.UnexistentLineListException;
 import it.unibo.squaresgameteam.squares.model.interfaces.Move;
 import it.unibo.squaresgameteam.squares.model.interfaces.PointsCounterStrategy;
-import it.unibo.squaresgameteam.squares.model.interfaces.SquareGrid;
 
 /**
  * This class implements the interface PointsCounterStrategy. It is used to
@@ -13,7 +12,7 @@ import it.unibo.squaresgameteam.squares.model.interfaces.SquareGrid;
  */
 public class SquareGridPointsCounter implements PointsCounterStrategy {
 
-    private final SquareGrid grid;
+    private final SquareGridImpl grid;
     private Integer pointsScored;
 
     /**
@@ -24,7 +23,7 @@ public class SquareGridPointsCounter implements PointsCounterStrategy {
      * @throws UnexistentLineListException
      */
     // CHECKSTYLE:OFF:
-    public SquareGridPointsCounter(final SquareGrid grid) {
+    public SquareGridPointsCounter(final SquareGridImpl grid) {
         // CHECKSTYLE:ON:
         this.grid = grid;
     }

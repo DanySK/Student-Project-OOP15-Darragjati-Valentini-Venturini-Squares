@@ -16,10 +16,10 @@ import it.unibo.squaresgameteam.squares.model.exceptions.UnsupportedSizeExceptio
 import it.unibo.squaresgameteam.squares.model.exceptions.DuplicatedPlayerStatsException;
 import it.unibo.squaresgameteam.squares.model.exceptions.NoMovesDoneException;
 import it.unibo.squaresgameteam.squares.model.exceptions.UnexistentLineListException;
-import it.unibo.squaresgameteam.squares.model.interfaces.SquareGrid;
 import it.unibo.squaresgameteam.squares.model.interfaces.Move;
 import it.unibo.squaresgameteam.squares.model.interfaces.PlayedTime;
 import it.unibo.squaresgameteam.squares.model.interfaces.Player;
+import it.unibo.squaresgameteam.squares.model.interfaces.BaseGrid;
 import it.unibo.squaresgameteam.squares.model.interfaces.Game;
 
 /**
@@ -37,7 +37,7 @@ public class MatchImpl implements Match {
     private final TypeGame mode;
     private GridOption numPlayer;
     private String namePlayer;
-    private SquareGrid grid;
+    private BaseGrid grid;
     private Game match;
     private PlayedTime time;
     private int playerScore;

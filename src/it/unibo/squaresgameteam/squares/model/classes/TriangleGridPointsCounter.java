@@ -5,7 +5,6 @@ import it.unibo.squaresgameteam.squares.model.enumerations.ListType;
 import it.unibo.squaresgameteam.squares.model.exceptions.UnexistentLineListException;
 import it.unibo.squaresgameteam.squares.model.interfaces.Move;
 import it.unibo.squaresgameteam.squares.model.interfaces.PointsCounterStrategy;
-import it.unibo.squaresgameteam.squares.model.interfaces.TriangleGrid;
 
 /**
  * This class implements the interface PointsCounterStrategy. It is used to
@@ -13,7 +12,7 @@ import it.unibo.squaresgameteam.squares.model.interfaces.TriangleGrid;
  */
 public class TriangleGridPointsCounter implements PointsCounterStrategy {
 
-    private final TriangleGrid grid;
+    private final TriangleGridImpl grid;
     private Integer pointsScored;
 
     /**
@@ -23,7 +22,7 @@ public class TriangleGridPointsCounter implements PointsCounterStrategy {
      *            the current grid
      */
     // CHECKSTYLE:OFF:
-    public TriangleGridPointsCounter(final TriangleGrid grid) {
+    public TriangleGridPointsCounter(final TriangleGridImpl grid) {
         // CHECKSTYLE:ON:
         this.grid = grid;
     }

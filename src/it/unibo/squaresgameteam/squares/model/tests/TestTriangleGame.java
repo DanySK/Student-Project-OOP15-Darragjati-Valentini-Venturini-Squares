@@ -10,12 +10,12 @@ import org.junit.Test;
 
 import it.unibo.squaresgameteam.squares.model.classes.GameImpl;
 import it.unibo.squaresgameteam.squares.model.classes.MoveImpl;
+import it.unibo.squaresgameteam.squares.model.classes.SquareGridImpl;
 import it.unibo.squaresgameteam.squares.model.classes.TriangleGridImpl;
 import it.unibo.squaresgameteam.squares.model.enumerations.GridOption;
 import it.unibo.squaresgameteam.squares.model.enumerations.ListType;
 import it.unibo.squaresgameteam.squares.model.exceptions.UnsupportedSizeException;
 import it.unibo.squaresgameteam.squares.model.exceptions.UnexistentLineListException;
-import it.unibo.squaresgameteam.squares.model.interfaces.SquareGrid;
 import it.unibo.squaresgameteam.squares.model.interfaces.BaseGrid;
 import it.unibo.squaresgameteam.squares.model.interfaces.Game;
 import it.unibo.squaresgameteam.squares.model.interfaces.Move;
@@ -130,7 +130,7 @@ public class TestTriangleGame {
      *             if the listIndex input is not correctF
      */
     public void testCompleteMatch() throws UnsupportedSizeException, UnexistentLineListException {
-        final SquareGrid squareGrid2 = new TriangleGridImpl(STANDARD_SIZE, STANDARD_SIZE);
+        final BaseGrid squareGrid2 = new TriangleGridImpl(STANDARD_SIZE, STANDARD_SIZE);
         final Game gridOfSize2 = new GameImpl(squareGrid2, "Rei Ayanami", "Shinji Ikari");
         gridOfSize2.startMatch();
         // fills the grid with all thepossible moves

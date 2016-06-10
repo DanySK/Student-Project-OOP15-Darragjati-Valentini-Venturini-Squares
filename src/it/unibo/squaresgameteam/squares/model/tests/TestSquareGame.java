@@ -18,7 +18,6 @@ import it.unibo.squaresgameteam.squares.model.exceptions.UnsupportedSizeExceptio
 import it.unibo.squaresgameteam.squares.model.exceptions.MoveAlreadyDoneException;
 import it.unibo.squaresgameteam.squares.model.exceptions.NoMovesDoneException;
 import it.unibo.squaresgameteam.squares.model.exceptions.UnexistentLineListException;
-import it.unibo.squaresgameteam.squares.model.interfaces.SquareGrid;
 import it.unibo.squaresgameteam.squares.model.interfaces.BaseGrid;
 import it.unibo.squaresgameteam.squares.model.interfaces.Game;
 import it.unibo.squaresgameteam.squares.model.interfaces.Move;
@@ -128,7 +127,7 @@ public class TestSquareGame {
      *             if the listIndex input is not correctF
      */
     public void testCompleteMatch() throws UnsupportedSizeException, UnexistentLineListException {
-        final SquareGrid squareGrid2 = new SquareGridImpl(STANDARD_SIZE, STANDARD_SIZE);
+        final BaseGrid squareGrid2 = new SquareGridImpl(STANDARD_SIZE, STANDARD_SIZE);
         final Game gridOfSize2 = new GameImpl(squareGrid2, "Rei Ayanami", "Shinji Ikari");
         gridOfSize2.startMatch();
         // fills the grid with all the possible moves
@@ -157,7 +156,7 @@ public class TestSquareGame {
     @Test
     // CHECKSTYLE:OFF:
     public void testExceptions() throws UnsupportedSizeException, UnexistentLineListException {
-        SquareGrid exceptionGrid;
+        BaseGrid exceptionGrid;
         Game exceptionGame;
 
         try {
@@ -279,7 +278,7 @@ public class TestSquareGame {
             fail(ERROR);
         }
 
-        SquareGrid exceptionGrid2 = new SquareGridImpl(STANDARD_SIZE, STANDARD_SIZE);
+        SquareGridImpl exceptionGrid2 = new SquareGridImpl(STANDARD_SIZE, STANDARD_SIZE);
         Game exceptionGame2 = new GameImpl(exceptionGrid2, "Rei Ayanami", "Shinji Ikari");
         exceptionGame2.startMatch();
         for (int i = 0; i < STANDARD_SIZE + 1; i++) {
