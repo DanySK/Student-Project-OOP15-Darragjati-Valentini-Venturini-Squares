@@ -24,13 +24,13 @@ import it.unibo.squaresgameteam.squares.model.interfaces.Game;
 
 /**
  * 
- * @author Licia Valentini 
- * Classe creata per gestire la partita, dalla prima all'ultima mossa.
+ * @author Licia Valentini Classe creata per gestire la partita, dalla prima
+ *         all'ultima mossa.
  *
  */
 public class MatchImpl implements Match {
 
-    private final int columnsNumber;
+    private final int columsNumber;
     private final int rowsNumber;
     private final String namePlayer1;
     private final String namePlayer2;
@@ -43,21 +43,20 @@ public class MatchImpl implements Match {
     private int playerScore;
     private GridOption winner;
     private boolean endMatch;
-    
 
     /**
      * 
-     * @param columsNumber
-     * @param rowsNumber
-     * @param namePlayer1
-     * @param namePlayer2
-     * @param mode
+     * @param columsNumber number of colums
+     * @param rowsNumber   number of rows     
+     * @param namePlayer1 name first player
+     * @param namePlayer2 name second player
+     * @param mode game mode
      *            Costruttore della classe.
      */
     public MatchImpl(final int columsNumber, final int rowsNumber, final String namePlayer1, final String namePlayer2,
             final TypeGame mode) {
         controlNamePlayers(namePlayer1, namePlayer2);
-        this.columnsNumber = columsNumber;
+        this.columsNumber = columsNumber;
         this.rowsNumber = rowsNumber;
         this.namePlayer1 = namePlayer1;
         this.namePlayer2 = namePlayer2;
@@ -70,10 +69,10 @@ public class MatchImpl implements Match {
 
         switch (this.mode) {
         case SQUARE:
-            this.grid = new SquareGridImpl(this.rowsNumber, this.columnsNumber);
+            this.grid = new SquareGridImpl(this.rowsNumber, this.columsNumber);
             break;
         case TRIANGLE:
-            this.grid = new TriangleGridImpl(this.rowsNumber, this.columnsNumber);
+            this.grid = new TriangleGridImpl(this.rowsNumber, this.columsNumber);
             break;
         default:
             throw new IllegalStateException();
@@ -88,7 +87,7 @@ public class MatchImpl implements Match {
         match.startMatch();
         this.numPlayer = this.match.getCurrentPlayerTurn();
         convertNumToNamePlayer();
-        this.time = new PlayedTimeImpl();        
+        this.time = new PlayedTimeImpl();
         return this.namePlayer;
     }
 
@@ -164,9 +163,35 @@ public class MatchImpl implements Match {
         playerResult = this.match.getPlayerMatchResult(numPlayer);
         ranking.addPlayer(playerResult);
     }
-    
-    public boolean getEndMatch(){
+
+    @Override
+    public boolean getEndMatch() {
         return this.endMatch;
+    }
+
+    @Override
+    public String getNamePlayer1() {
+        return this.namePlayer1;
+    }
+
+    @Override
+    public String getNamePlayer2() {
+        return this.namePlayer2;
+    }
+
+    @Override
+    public int getColumsNumber() {
+        return this.columsNumber;
+    }
+    
+    @Override
+    public int getRowsNumber() {
+        return this.rowsNumber;
+    }
+    
+    @Override
+    public TypeGame getMode() {
+        return this.mode;
     }
 
 }

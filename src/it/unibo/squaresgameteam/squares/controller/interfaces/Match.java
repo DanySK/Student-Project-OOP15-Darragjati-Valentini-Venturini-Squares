@@ -2,6 +2,7 @@ package it.unibo.squaresgameteam.squares.controller.interfaces;
 
 import java.io.IOException;
 
+import it.unibo.squaresgameteam.squares.controller.enumerations.TypeGame;
 import it.unibo.squaresgameteam.squares.model.enumerations.ListType;
 import it.unibo.squaresgameteam.squares.model.exceptions.UnsupportedSizeException;
 import it.unibo.squaresgameteam.squares.model.exceptions.DuplicatedPlayerStatsException;
@@ -61,5 +62,21 @@ public interface Match {
     Double getMatchTime();
     
     boolean getEndMatch();
+    
+    String getNamePlayer1(); 
+        
+    
+
+    String getNamePlayer2();
+    
+
+    int getColumsNumber();
+        
+    
+ int getRowsNumber();
+        
+    
+    public TypeGame getMode();
+        
     
 }
