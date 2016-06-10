@@ -12,10 +12,10 @@ import it.unibo.squaresgameteam.squares.model.interfaces.BaseGrid;
 import it.unibo.squaresgameteam.squares.model.interfaces.Move;
 
 /**
- * This class implements the methods of the interface SquereGrid. It is used to
- * create the game's playable field. The class also provides the methods to get
- * the main informations about it like which one of the two players has set a
- * move or how much wide is the playeable field.
+ * This class implements the methods of the interface BaseGrid. It is used to
+ * create a playable field of the Square game mode. The class also provides the
+ * methods to get the main informations about it like which one of the two
+ * players has set a move or how much wide is the playeable field.
  */
 public class SquareGridImpl implements BaseGrid {
 
@@ -106,28 +106,24 @@ public class SquareGridImpl implements BaseGrid {
     public GridOption getWhoSetTheLine(final Move move) throws UnexistentLineListException {
         switch (move.getListType()) {
         case HORIZONTAL:
-            return getHorizontalLinePlayer(move.getListIndex(), move.getPosition());
+            return getWhoSetHorizontalLine(move.getListIndex(), move.getPosition());
         case VERTICAL:
-            return getVerticalLinePlayer(move.getListIndex(), move.getPosition());
+            return getWhoSetVerticalLine(move.getListIndex(), move.getPosition());
         default:
             throw new UnsupportedOperationException();
         }
     }
 
-    private GridOption getHorizontalLinePlayer(final Integer listIndex, final Integer position)
+    private GridOption getWhoSetHorizontalLine(final Integer listIndex, final Integer position)
             throws UnexistentLineListException {
         checkCorrectHorizontalInput(listIndex, position);
-        return horizontal.get(listIndex).get(position).equals(GridOption.EMPTY) ? GridOption.EMPTY
-                : horizontal.get(listIndex).get(position).equals(GridOption.PLAYER1) ? GridOption.PLAYER1
-                        : GridOption.PLAYER2;
+        return horizontal.get(listIndex).get(position);
     }
 
-    private GridOption getVerticalLinePlayer(final Integer listIndex, final Integer position)
+    private GridOption getWhoSetVerticalLine(final Integer listIndex, final Integer position)
             throws UnexistentLineListException {
         checkCorrectVerticalInput(listIndex, position);
-        return vertical.get(listIndex).get(position).equals(GridOption.EMPTY) ? GridOption.EMPTY
-                : vertical.get(listIndex).get(position).equals(GridOption.PLAYER1) ? GridOption.PLAYER1
-                        : GridOption.PLAYER2;
+        return vertical.get(listIndex).get(position);
     }
 
     @Override

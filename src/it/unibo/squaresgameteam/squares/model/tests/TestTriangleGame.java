@@ -10,7 +10,6 @@ import org.junit.Test;
 
 import it.unibo.squaresgameteam.squares.model.classes.GameImpl;
 import it.unibo.squaresgameteam.squares.model.classes.MoveImpl;
-import it.unibo.squaresgameteam.squares.model.classes.SquareGridImpl;
 import it.unibo.squaresgameteam.squares.model.classes.TriangleGridImpl;
 import it.unibo.squaresgameteam.squares.model.enumerations.GridOption;
 import it.unibo.squaresgameteam.squares.model.enumerations.ListType;

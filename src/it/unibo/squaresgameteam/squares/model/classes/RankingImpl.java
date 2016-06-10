@@ -50,12 +50,15 @@ public class RankingImpl implements Ranking, Serializable {
     }
 
     @Override
-    public void addPlayerResults(final Player player) {       
+    public void addPlayerResults(final Player player) {
         for (final Player p : playerList) {
             if (p.getPlayerName().equals(player.getPlayerName())) {
-                final Player updatedPlayer = new PlayerImpl.Builder().playerName(player.getPlayerName())
-                        .wonMatches(p.getWonMatches() + player.getWonMatches()).totalMatches(p.getTotalMatches() + player.getTotalMatches())
-                        .totalPointsScored(p.getTotalPointsScored() + player.getTotalPointsScored()).build();
+                final Player updatedPlayer = new PlayerImpl.Builder()
+                                                           .playerName(player.getPlayerName())
+                                                           .wonMatches(p.getWonMatches() + player.getWonMatches())
+                                                           .totalMatches(p.getTotalMatches() + player.getTotalMatches())
+                                                           .totalPointsScored(p.getTotalPointsScored() + player.getTotalPointsScored())
+                                                           .build();
                 playerList.remove(p);
                 playerList.add(updatedPlayer);
                 return;

@@ -12,8 +12,8 @@ import it.unibo.squaresgameteam.squares.model.exceptions.UnexistentLineListExcep
 import it.unibo.squaresgameteam.squares.model.interfaces.Move;
 
 /**
- * This class modifies the base rules of the game adding a new way to set a move
- * to score a point.
+ * This class modifies the base rules of the game adding the possibility to set
+ * a diagonal move to score a point.
  */
 public class TriangleGridImpl extends SquareGridImpl {
 
@@ -65,19 +65,17 @@ public class TriangleGridImpl extends SquareGridImpl {
             return super.getWhoSetTheLine(move);
         } else {
             if (move.getListType().equals(ListType.DIAGONAL)) {
-                return getDiagonalLinePlayer(move.getListIndex(), move.getPosition());
+                return getWhoSetDiagonalLine(move.getListIndex(), move.getPosition());
             } else {
                 throw new UnsupportedOperationException();
             }
         }
     }
 
-    private GridOption getDiagonalLinePlayer(final int listIndex, final int position)
+    private GridOption getWhoSetDiagonalLine(final int listIndex, final int position)
             throws UnexistentLineListException {
         checkCorrectDiagonalInput(listIndex, position);
-        return diagonal.get(listIndex).get(position).equals(GridOption.EMPTY) ? GridOption.EMPTY
-                : diagonal.get(listIndex).get(position).equals(GridOption.PLAYER1) ? GridOption.PLAYER1
-                        : GridOption.PLAYER2;
+        return diagonal.get(listIndex).get(position);
     }
 
     @Override

@@ -196,7 +196,6 @@ public class GameImpl implements Game {
                 return player2;
             default:
                 throw new IllegalArgumentException();
-
             }
         } else {
             throw new IllegalStateException();
