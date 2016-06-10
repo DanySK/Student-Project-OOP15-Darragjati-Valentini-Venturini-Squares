@@ -1,10 +1,25 @@
 package it.unibo.squaresgameteam.squares.view.classes;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.*;
-import javax.swing.*;
-import it.unibo.squaresgameteam.squares.view.interfaces.*;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSeparator;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
+import it.unibo.squaresgameteam.squares.controller.classes.MenuImpl;
+import it.unibo.squaresgameteam.squares.controller.classes.MatchImpl;
+import it.unibo.squaresgameteam.squares.controller.enumerations.TypeGame;
+
+import it.unibo.squaresgameteam.squares.view.interfaces.MatchSetup;
+import it.unibo.squaresgameteam.squares.view.interfaces.GUIElements;
 
 public class MatchSetupImpl implements MatchSetup, GUIElements {
 	
@@ -14,9 +29,12 @@ public class MatchSetupImpl implements MatchSetup, GUIElements {
 	private JTextField txtPlayer2;
 	private JTextField txtRows;
 	private JTextField txtColums;
+	private JComboBox<String> cmbGameMode;
+	private MenuImpl cont;
 	
 	public MatchSetupImpl(JFrame f)
 	{
+		cont = new MenuImpl();
 		initialize();
 		frame = f;
 	}
@@ -117,8 +135,10 @@ public class MatchSetupImpl implements MatchSetup, GUIElements {
 		lblGameMode.setHorizontalAlignment(SwingConstants.LEFT);
 		lblGameMode.setFont(new Font("Sitka Text", Font.PLAIN, 16));
 		
-		JComboBox<String> cmbGameMode = new JComboBox<String>();
+		cmbGameMode = new JComboBox<String>();
 		cmbGameMode.setBounds(230, 130, 130, 27);
+		cmbGameMode.addItem("SQUARE");
+		cmbGameMode.addItem("TRIANGLE");
 		pane.add(cmbGameMode);
 		cmbGameMode.setFont(new Font("Sitka Text", Font.PLAIN, 16));
 		
@@ -132,12 +152,7 @@ public class MatchSetupImpl implements MatchSetup, GUIElements {
 		btnStart.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				hideGUI();
-				frame.setVisible(false);
-				frame.dispose();
-				GameFrame gf = new GameFrame();
-				gf.setBackground(frmMatchSetup.getContentPane().getBackground());
-				gf.showGUI();
+				startMatch();
 			}
 		});
 		btnStart.setFont(new Font("Sitka Text", Font.PLAIN, 17));
@@ -157,7 +172,16 @@ public class MatchSetupImpl implements MatchSetup, GUIElements {
 	@Override
 	public void startMatch() {
 		// TODO Auto-generated method stub
-		
+		hideGUI();
+		frame.setVisible(false);
+		frame.dispose();
+		GameFrame gf;
+		if(cmbGameMode.getSelectedIndex()==0)
+			gf = new GameFrame((MatchImpl) cont.createMatch(Integer.parseInt(txtColums.getText()), Integer.parseInt(txtRows.getText()), txtPlayer1.getText(), txtPlayer2.getText(), TypeGame.SQUARE));
+		else
+			gf = new GameFrame((MatchImpl) cont.createMatch(Integer.parseInt(txtColums.getText()), Integer.parseInt(txtRows.getText()), txtPlayer1.getText(), txtPlayer2.getText(), TypeGame.TRIANGLE));
+		gf.setBackground(frmMatchSetup.getContentPane().getBackground());
+		gf.showGUI();
 	}
 
 	@Override

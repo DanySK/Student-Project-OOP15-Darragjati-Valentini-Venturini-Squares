@@ -6,20 +6,27 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
 
-import it.unibo.squaresgameteam.squares.view.interfaces.*;
+import it.unibo.squaresgameteam.squares.controller.classes.MenuImpl;
+
+import it.unibo.squaresgameteam.squares.view.interfaces.RulesMenu;
+import it.unibo.squaresgameteam.squares.view.interfaces.GUIElements;
 
 public class RulesMenuImpl implements RulesMenu, GUIElements {
 
 	private JFrame frmRulesMenu;
+	private JTextPane txtRules;
+	private MenuImpl cont;
 	
 	public RulesMenuImpl()
 	{
+		cont = new MenuImpl();
 		initialize();
 	}
 	
@@ -45,6 +52,7 @@ public class RulesMenuImpl implements RulesMenu, GUIElements {
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @throws IOException 
 	 */
 	private void initialize() {
 		frmRulesMenu = new JFrame();
@@ -67,6 +75,7 @@ public class RulesMenuImpl implements RulesMenu, GUIElements {
 
 		JTextPane txtRules = new JTextPane();
 		txtRules.setBounds(10, 11, 374, 308);
+		showRules();
 		frmRulesMenu.getContentPane().add(txtRules);
 		
 		JButton btnBack = new JButton("Back");
@@ -86,8 +95,12 @@ public class RulesMenuImpl implements RulesMenu, GUIElements {
 	
 	@Override
 	public void showRules() {
-		// TODO Auto-generated method stub
-		
+		try {
+			txtRules.setText(cont.showRules());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

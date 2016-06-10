@@ -15,7 +15,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import it.unibo.squaresgameteam.squares.view.interfaces.*;
+import it.unibo.squaresgameteam.squares.controller.classes.MatchImpl;
+
+import it.unibo.squaresgameteam.squares.view.interfaces.GUIElements;
 
 public class GameFrame implements GUIElements {
 	private ArrayList<ArrayList<JButton>> btns;
@@ -24,8 +26,11 @@ public class GameFrame implements GUIElements {
 	private int Rows=6, Colums=6;
 	private boolean player = true, change = true;
 	private Color player1=Color.CYAN, player2=Color.ORANGE;
+	private MatchImpl cont;
 
-	public GameFrame() {
+	public GameFrame(MatchImpl cont) {
+		this.cont = cont;
+		
 		initialize();
 	}
 	
@@ -69,12 +74,12 @@ public class GameFrame implements GUIElements {
 		});
 		frmGameFrame.setTitle("Squares");
 		frmGameFrame.setResizable(false);
-		frmGameFrame.setBounds(100, 100, 500, 400);
+		frmGameFrame.setBounds(100, 100, 600, 500);
 		frmGameFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frmGameFrame.getContentPane().setLayout(null);
 		
 		JPanel pane = new JPanel();
-		pane.setBounds(10, 11, 300, 300);
+		pane.setBounds(10, 10, 410, 410);
 		frmGameFrame.getContentPane().add(pane);
 		pane.setLayout(null);
 		
@@ -105,36 +110,36 @@ public class GameFrame implements GUIElements {
 		}
 		
 		
-		lblPlaying = new JLabel("Player1's turn");
+		lblPlaying = new JLabel("'s turn");
 		lblPlaying.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPlaying.setFont(new Font("Sitka Text", Font.BOLD, 14));
-		lblPlaying.setBounds(320, 11, 164, 30);
+		lblPlaying.setBounds(430, 10, 154, 30);
 		lblPlaying.setForeground(player1);
 		frmGameFrame.getContentPane().add(lblPlaying);
 		
 		JLabel lblPlayer1 = new JLabel("Player1");
 		lblPlayer1.setFont(new Font("Sitka Text", Font.PLAIN, 14));
-		lblPlayer1.setBounds(320, 90, 164, 30);
+		lblPlayer1.setBounds(430, 89, 154, 30);
 		frmGameFrame.getContentPane().add(lblPlayer1);
 		
 		JLabel lblScore1 = new JLabel("Score: ");
 		lblScore1.setFont(new Font("Sitka Text", Font.PLAIN, 14));
-		lblScore1.setBounds(320, 120, 164, 30);
+		lblScore1.setBounds(430, 119, 154, 30);
 		frmGameFrame.getContentPane().add(lblScore1);
 		
 		JLabel lblPlayer2 = new JLabel("Player2");
 		lblPlayer2.setFont(new Font("Sitka Text", Font.PLAIN, 14));
-		lblPlayer2.setBounds(320, 180, 164, 30);
+		lblPlayer2.setBounds(430, 179, 154, 30);
 		frmGameFrame.getContentPane().add(lblPlayer2);
 		
 		JLabel lblScore2 = new JLabel("Score: ");
 		lblScore2.setFont(new Font("Sitka Text", Font.PLAIN, 14));
-		lblScore2.setBounds(320, 210, 164, 30);
+		lblScore2.setBounds(430, 209, 154, 30);
 		frmGameFrame.getContentPane().add(lblScore2);
 		
 		JLabel lblPlayingTime = new JLabel("Playing time: " + btns.size());
 		lblPlayingTime.setFont(new Font("Sitka Text", Font.PLAIN, 14));
-		lblPlayingTime.setBounds(284, 330, 200, 30);
+		lblPlayingTime.setBounds(384, 430, 200, 30);
 		frmGameFrame.getContentPane().add(lblPlayingTime);
 		
 		JButton btnBack = new JButton("Back");
@@ -148,7 +153,7 @@ public class GameFrame implements GUIElements {
 			}
 		});
 		btnBack.setFont(new Font("Sitka Text", Font.PLAIN, 17));
-		btnBack.setBounds(10, 330, 130, 30);
+		btnBack.setBounds(10, 430, 130, 30);
 		frmGameFrame.getContentPane().add(btnBack);
 	}
 	
