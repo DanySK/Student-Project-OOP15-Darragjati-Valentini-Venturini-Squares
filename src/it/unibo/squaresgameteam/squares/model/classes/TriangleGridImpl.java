@@ -64,10 +64,9 @@ public class TriangleGridImpl extends SquareGridImpl {
         if (move.getListType().equals(ListType.HORIZONTAL) || move.getListType().equals(ListType.VERTICAL)) {
             return super.getWhoSetTheLine(move);
         } else {
-            switch (move.getListType()) {
-            case DIAGONAL:
+            if (move.getListType().equals(ListType.DIAGONAL)) {
                 return getDiagonalLinePlayer(move.getListIndex(), move.getPosition());
-            default:
+            } else {
                 throw new UnsupportedOperationException();
             }
         }
@@ -86,11 +85,9 @@ public class TriangleGridImpl extends SquareGridImpl {
         if (move.getListType().equals(ListType.HORIZONTAL) || move.getListType().equals(ListType.VERTICAL)) {
             super.setLine(move, currentPlayerTurn);
         } else {
-            switch (move.getListType()) {
-            case DIAGONAL:
+            if (move.getListType().equals(ListType.DIAGONAL)) {
                 setDiagonalLine(move.getListIndex(), move.getPosition(), currentPlayerTurn);
-                break;
-            default:
+            } else {
                 throw new UnsupportedOperationException();
             }
         }

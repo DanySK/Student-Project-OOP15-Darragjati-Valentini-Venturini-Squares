@@ -31,7 +31,7 @@ public class GameImpl implements Game {
     private GridOption turn = GridOption.EMPTY;
     private final List<Move> lastMoveList;
     private final PointsCounterStrategy calculatePoints;
-    private PlayedTime playedTime;
+    private final PlayedTime playedTime;
 
     /**
      * This constructor takes an object that implements BaseGrid.

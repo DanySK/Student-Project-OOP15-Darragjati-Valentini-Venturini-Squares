@@ -114,7 +114,6 @@ public class SquareGridImpl implements BaseGrid {
         }
     }
 
-    //@Override
     private GridOption getHorizontalLinePlayer(final Integer listIndex, final Integer position)
             throws UnexistentLineListException {
         checkCorrectHorizontalInput(listIndex, position);
@@ -123,7 +122,6 @@ public class SquareGridImpl implements BaseGrid {
                         : GridOption.PLAYER2;
     }
 
-   // @Override
     private GridOption getVerticalLinePlayer(final Integer listIndex, final Integer position)
             throws UnexistentLineListException {
         checkCorrectVerticalInput(listIndex, position);
@@ -200,7 +198,7 @@ public class SquareGridImpl implements BaseGrid {
     }
 
     /**
-     * @return the number of vertical lists that form the grid
+     * @return the number of horizontal lists that form the grid
      */
     protected Integer getVerticalListSize() {
         return vertical.size();

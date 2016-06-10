@@ -22,7 +22,7 @@ import it.unibo.squaresgameteam.squares.model.interfaces.Ranking;
 public class RankingImpl implements Ranking, Serializable {
 
     private static final long serialVersionUID = 5010913422706825614L;
-    private List<Player> playerList;
+    private final List<Player> playerList;
 
     /**
      * The consctructor is used to know the old players' matches results and
