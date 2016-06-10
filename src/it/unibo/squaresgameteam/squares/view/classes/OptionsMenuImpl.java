@@ -16,9 +16,11 @@ import javax.swing.SwingConstants;
 
 import it.unibo.squaresgameteam.squares.view.interfaces.*;
 
-public class OptionsMenuImpl implements OptionsMenu {
+public class OptionsMenuImpl implements OptionsMenu, GUIElements {
 
 	private JFrame frmOptionsMenu;
+	private Color col;
+	private boolean start=true;
 
 	/**
 	 * Create the application.
@@ -27,18 +29,21 @@ public class OptionsMenuImpl implements OptionsMenu {
 		initialize();
 	}
 	
+	@Override
 	public void showGUI()
 	{
 		frmOptionsMenu.setLocationRelativeTo(null);
 		frmOptionsMenu.setVisible(true);
 	}
 	
-	private void hideGUI()
+	@Override
+	public void hideGUI()
 	{
 		frmOptionsMenu.setVisible(false);
 		frmOptionsMenu.dispose();
 	}
 	
+	@Override
 	public void setBackground(Color c)
 	{
 		frmOptionsMenu.getContentPane().setBackground(c);
@@ -104,6 +109,8 @@ public class OptionsMenuImpl implements OptionsMenu {
 		btnBackground.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				if(start)
+					col = frmOptionsMenu.getContentPane().getBackground(); start=false;
 				setBackground(JColorChooser.showDialog(null, "Choose a color", Color.RED));
 			}
 		});
@@ -117,7 +124,7 @@ public class OptionsMenuImpl implements OptionsMenu {
 			public void mouseClicked(MouseEvent arg0) {
 				hideGUI();
 				StartMenuImpl sm = new StartMenuImpl();
-				sm.setBackground(frmOptionsMenu.getContentPane().getBackground());
+				sm.setBackground(col);
 				sm.showGUI();
 			}
 		});

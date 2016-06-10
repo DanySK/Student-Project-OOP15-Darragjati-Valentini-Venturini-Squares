@@ -9,7 +9,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.*;
 import it.unibo.squaresgameteam.squares.view.interfaces.*;
 
-public class StartMenuImpl implements StartMenu {
+public class StartMenuImpl implements StartMenu, GUIElements {
 	
 	private JFrame frmStartMenu;
 
@@ -22,18 +22,21 @@ public class StartMenuImpl implements StartMenu {
 		initialize();
 	}
 	
+	@Override
 	public void showGUI()
 	{
 		frmStartMenu.setLocationRelativeTo(null);
 		frmStartMenu.setVisible(true);
 	}
 	
-	private void hideGUI()
+	@Override
+	public void hideGUI()
 	{
 		frmStartMenu.setVisible(false);
 		frmStartMenu.dispose();
 	}
 	
+	@Override
 	public void setBackground(Color c)
 	{
 		frmStartMenu.getContentPane().setBackground(c);
@@ -67,7 +70,7 @@ public class StartMenuImpl implements StartMenu {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				hideGUI();
-				MatchSetupImpl ms = new MatchSetupImpl();
+				MatchSetupImpl ms = new MatchSetupImpl(frmStartMenu);
 				ms.setBackground(frmStartMenu.getContentPane().getBackground());
 				ms.showGUI();
 			}

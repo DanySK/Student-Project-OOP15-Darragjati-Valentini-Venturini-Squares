@@ -6,31 +6,36 @@ import java.awt.*;
 import javax.swing.*;
 import it.unibo.squaresgameteam.squares.view.interfaces.*;
 
-public class MatchSetupImpl implements MatchSetup{
+public class MatchSetupImpl implements MatchSetup, GUIElements {
 	
 	private JFrame frmMatchSetup;
+	private JFrame frame;
 	private JTextField txtPlayer1;
 	private JTextField txtPlayer2;
 	private JTextField txtRows;
 	private JTextField txtColums;
 	
-	public MatchSetupImpl()
+	public MatchSetupImpl(JFrame f)
 	{
 		initialize();
+		frame = f;
 	}
 	
+	@Override
 	public void showGUI()
 	{
 		frmMatchSetup.setLocationRelativeTo(null);
 		frmMatchSetup.setVisible(true);
 	}
 	
-	private void hideGUI()
+	@Override
+	public void hideGUI()
 	{
 		frmMatchSetup.setVisible(false);
 		frmMatchSetup.dispose();
 	}
 	
+	@Override
 	public void setBackground(Color c)
 	{
 		frmMatchSetup.getContentPane().setBackground(c);
@@ -38,6 +43,7 @@ public class MatchSetupImpl implements MatchSetup{
 	
 	private void initialize() {
 		frmMatchSetup = new JFrame();
+		frmMatchSetup.getContentPane().setBackground(Color.WHITE);
 		frmMatchSetup.setUndecorated(true);
 		frmMatchSetup.setTitle("Squares");
 		frmMatchSetup.setResizable(false);
@@ -45,100 +51,107 @@ public class MatchSetupImpl implements MatchSetup{
 		frmMatchSetup.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmMatchSetup.getContentPane().setLayout(null);
 		
+		JPanel pane = new JPanel();
+		pane.setBounds(5, 5, 390, 215);
+		frmMatchSetup.getContentPane().add(pane);
+		pane.setLayout(null);
+		
 		JLabel lblPlayer1 = new JLabel("PLAYER 1");
+		lblPlayer1.setBounds(30, 10, 200, 30);
+		pane.add(lblPlayer1);
 		lblPlayer1.setFont(new Font("Sitka Text", Font.PLAIN, 16));
 		lblPlayer1.setHorizontalAlignment(SwingConstants.LEFT);
-		lblPlayer1.setBounds(50, 11, 200, 30);
-		frmMatchSetup.getContentPane().add(lblPlayer1);
 		
 		txtPlayer1 = new JTextField();
+		txtPlayer1.setBounds(230, 10, 130, 25);
+		pane.add(txtPlayer1);
 		txtPlayer1.setFont(new Font("Sitka Text", Font.PLAIN, 15));
 		txtPlayer1.setHorizontalAlignment(SwingConstants.CENTER);
-		txtPlayer1.setBounds(221, 14, 130, 25);
-		frmMatchSetup.getContentPane().add(txtPlayer1);
 		txtPlayer1.setColumns(10);
 		
 		JLabel lblPlayer2 = new JLabel("PLAYER 2");
+		lblPlayer2.setBounds(30, 40, 200, 30);
+		pane.add(lblPlayer2);
 		lblPlayer2.setHorizontalAlignment(SwingConstants.LEFT);
 		lblPlayer2.setFont(new Font("Sitka Text", Font.PLAIN, 16));
-		lblPlayer2.setBounds(50, 39, 200, 30);
-		frmMatchSetup.getContentPane().add(lblPlayer2);
 		
 		txtPlayer2 = new JTextField();
+		txtPlayer2.setBounds(230, 40, 130, 25);
+		pane.add(txtPlayer2);
 		txtPlayer2.setHorizontalAlignment(SwingConstants.CENTER);
 		txtPlayer2.setFont(new Font("Sitka Text", Font.PLAIN, 15));
 		txtPlayer2.setColumns(10);
-		txtPlayer2.setBounds(221, 42, 130, 25);
-		frmMatchSetup.getContentPane().add(txtPlayer2);
 		
 		JLabel lblRows = new JLabel("ROWS");
+		lblRows.setBounds(30, 70, 200, 30);
+		pane.add(lblRows);
 		lblRows.setHorizontalAlignment(SwingConstants.LEFT);
 		lblRows.setFont(new Font("Sitka Text", Font.PLAIN, 16));
-		lblRows.setBounds(50, 65, 200, 30);
-		frmMatchSetup.getContentPane().add(lblRows);
 		
 		txtRows = new JTextField();
+		txtRows.setBounds(310, 70, 50, 25);
+		pane.add(txtRows);
 		txtRows.setText("6");
 		txtRows.setToolTipText("A number between 4 and 10");
 		txtRows.setHorizontalAlignment(SwingConstants.CENTER);
 		txtRows.setFont(new Font("Sitka Text", Font.PLAIN, 15));
 		txtRows.setColumns(10);
-		txtRows.setBounds(301, 68, 50, 25);
-		frmMatchSetup.getContentPane().add(txtRows);
 		
 		JLabel lblColums = new JLabel("COLUMS");
+		lblColums.setBounds(30, 100, 200, 30);
+		pane.add(lblColums);
 		lblColums.setHorizontalAlignment(SwingConstants.LEFT);
 		lblColums.setFont(new Font("Sitka Text", Font.PLAIN, 16));
-		lblColums.setBounds(50, 95, 200, 30);
-		frmMatchSetup.getContentPane().add(lblColums);
 		
 		txtColums = new JTextField();
+		txtColums.setBounds(310, 100, 50, 25);
+		pane.add(txtColums);
 		txtColums.setText("6");
 		txtColums.setHorizontalAlignment(SwingConstants.CENTER);
 		txtColums.setFont(new Font("Sitka Text", Font.PLAIN, 15));
 		txtColums.setColumns(10);
-		txtColums.setBounds(301, 98, 50, 25);
-		frmMatchSetup.getContentPane().add(txtColums);
 		
 		JLabel lblGameMode = new JLabel("GAME MODE");
+		lblGameMode.setBounds(30, 130, 200, 30);
+		pane.add(lblGameMode);
 		lblGameMode.setHorizontalAlignment(SwingConstants.LEFT);
 		lblGameMode.setFont(new Font("Sitka Text", Font.PLAIN, 16));
-		lblGameMode.setBounds(50, 125, 200, 30);
-		frmMatchSetup.getContentPane().add(lblGameMode);
 		
 		JComboBox<String> cmbGameMode = new JComboBox<String>();
+		cmbGameMode.setBounds(230, 130, 130, 27);
+		pane.add(cmbGameMode);
 		cmbGameMode.setFont(new Font("Sitka Text", Font.PLAIN, 16));
-		cmbGameMode.setBounds(221, 127, 130, 27);
-		frmMatchSetup.getContentPane().add(cmbGameMode);
 		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(0, 166, 400, 2);
-		frmMatchSetup.getContentPane().add(separator);
+		separator.setBounds(0, 165, 390, 2);
+		pane.add(separator);
 		
 		JButton btnStart = new JButton("Start");
+		btnStart.setBounds(10, 175, 130, 30);
+		pane.add(btnStart);
 		btnStart.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				hideGUI();
+				frame.setVisible(false);
+				frame.dispose();
+				GameFrame gf = new GameFrame();
+				gf.setBackground(frmMatchSetup.getContentPane().getBackground());
+				gf.showGUI();
 			}
 		});
 		btnStart.setFont(new Font("Sitka Text", Font.PLAIN, 17));
-		btnStart.setBounds(20, 179, 130, 30);
-		frmMatchSetup.getContentPane().add(btnStart);
 		
 		JButton btnCancel = new JButton("Cancel");
+		btnCancel.setBounds(250, 175, 130, 30);
+		pane.add(btnCancel);
 		btnCancel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				hideGUI();
-				StartMenuImpl sm = new StartMenuImpl();
-				sm.setBackground(frmMatchSetup.getContentPane().getBackground());
-				sm.showGUI();
 			}
 		});
 		btnCancel.setFont(new Font("Sitka Text", Font.PLAIN, 17));
-		btnCancel.setBounds(250, 179, 130, 30);
-		frmMatchSetup.getContentPane().add(btnCancel);
 	}
 	
 	@Override

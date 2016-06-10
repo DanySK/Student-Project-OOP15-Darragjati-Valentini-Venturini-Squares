@@ -14,27 +14,30 @@ import javax.swing.JTextPane;
 
 import it.unibo.squaresgameteam.squares.view.interfaces.*;
 
-public class RulesMenuImpl implements RulesMenu {
+public class RulesMenuImpl implements RulesMenu, GUIElements {
 
-private JFrame frmRulesMenu;
+	private JFrame frmRulesMenu;
 	
 	public RulesMenuImpl()
 	{
 		initialize();
 	}
 	
+	@Override
 	public void showGUI()
 	{
 		frmRulesMenu.setLocationRelativeTo(null);
 		frmRulesMenu.setVisible(true);
 	}
 	
-	private void hideGUI()
+	@Override
+	public void hideGUI()
 	{
 		frmRulesMenu.setVisible(false);
 		frmRulesMenu.dispose();
 	}
 	
+	@Override
 	public void setBackground(Color c)
 	{
 		frmRulesMenu.getContentPane().setBackground(c);

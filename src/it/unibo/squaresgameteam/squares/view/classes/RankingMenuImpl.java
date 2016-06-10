@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 
 import it.unibo.squaresgameteam.squares.view.interfaces.*;
 
-public class RankingMenuImpl implements RankingMenu {
+public class RankingMenuImpl implements RankingMenu, GUIElements {
 
 	private JFrame frmRankingMenu;
 
@@ -24,18 +24,21 @@ public class RankingMenuImpl implements RankingMenu {
 		initialize();
 	}
 	
+	@Override
 	public void showGUI()
 	{
 		frmRankingMenu.setLocationRelativeTo(null);
 		frmRankingMenu.setVisible(true);
 	}
 	
-	private void hideGUI()
+	@Override
+	public void hideGUI()
 	{
 		frmRankingMenu.setVisible(false);
 		frmRankingMenu.dispose();
 	}
 	
+	@Override
 	public void setBackground(Color c)
 	{
 		frmRankingMenu.getContentPane().setBackground(c);
