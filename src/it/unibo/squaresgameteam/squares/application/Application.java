@@ -26,11 +26,10 @@ public final class Application {
      */
     public static void main(final String[] args)
             throws IOException, ClassNotFoundException, DuplicatedPlayerStatsException {
-
-        StartMenuImpl start = new StartMenuImpl();
+        
+        final StartMenuImpl start = new StartMenuImpl();
+        final MusicImpl music = new MusicImpl();
         start.showGUI();
-        MusicImpl music = new MusicImpl();
-        music.startMusic();
-        music.stopMusic();
+        music.startMusic();       
     }
 }
