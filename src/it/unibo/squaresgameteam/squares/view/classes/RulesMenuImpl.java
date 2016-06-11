@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
 
 import it.unibo.squaresgameteam.squares.controller.classes.MenuImpl;
+import it.unibo.squaresgameteam.squares.controller.classes.MusicImpl;
 
 import it.unibo.squaresgameteam.squares.view.interfaces.RulesMenu;
 import it.unibo.squaresgameteam.squares.view.interfaces.GUIElements;
@@ -23,9 +24,11 @@ public class RulesMenuImpl implements RulesMenu, GUIElements {
 	private JFrame frmRulesMenu;
 	private JTextPane txtRules;
 	private MenuImpl cont;
+	private MusicImpl mi;
 	
-	public RulesMenuImpl()
+	public RulesMenuImpl(MusicImpl mi)
 	{
+		this.mi = mi;
 		cont = new MenuImpl();
 		initialize();
 	}
@@ -83,7 +86,7 @@ public class RulesMenuImpl implements RulesMenu, GUIElements {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				hideGUI();
-				StartMenuImpl sm = new StartMenuImpl();
+				StartMenuImpl sm = new StartMenuImpl(mi);
 				sm.setBackground(frmRulesMenu.getContentPane().getBackground());
 				sm.showGUI();
 			}

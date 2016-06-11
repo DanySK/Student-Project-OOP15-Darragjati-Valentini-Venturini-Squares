@@ -18,6 +18,7 @@ public class MusicImpl implements Music {
     
     private Clip clip;
     private AudioInputStream audioIn;
+    private boolean started;
 
     // Constructor
     public MusicImpl() {
@@ -48,12 +49,20 @@ public class MusicImpl implements Music {
         }
         // Loop the audio.
         this.clip.loop(Clip.LOOP_CONTINUOUSLY);
+        
+        started = true;
     }
 
     public void stopMusic() {
         // Stop the audio
         this.clip.stop();
 
+        started = false;
+    }
+    
+    public boolean isStarted()
+    {
+    	return started;
     }
 
     

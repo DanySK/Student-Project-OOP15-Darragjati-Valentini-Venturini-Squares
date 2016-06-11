@@ -7,18 +7,23 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.*;
-import it.unibo.squaresgameteam.squares.view.interfaces.*;
+
+import it.unibo.squaresgameteam.squares.controller.classes.MusicImpl;
+
+import it.unibo.squaresgameteam.squares.view.interfaces.StartMenu;
+import it.unibo.squaresgameteam.squares.view.interfaces.GUIElements;
 
 public class StartMenuImpl implements StartMenu, GUIElements {
 	
 	private JFrame frmStartMenu;
-
+	private MusicImpl mi;
 	
 
 	/**
 	 * Create the application.
 	 */
-	public StartMenuImpl() {
+	public StartMenuImpl(MusicImpl mi) {
+		this.mi = mi;
 		initialize();
 	}
 	
@@ -69,8 +74,7 @@ public class StartMenuImpl implements StartMenu, GUIElements {
 		btnNewGame.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				hideGUI();
-				MatchSetupImpl ms = new MatchSetupImpl(frmStartMenu);
+				MatchSetupImpl ms = new MatchSetupImpl(frmStartMenu, mi);
 				ms.setBackground(frmStartMenu.getContentPane().getBackground());
 				ms.showGUI();
 			}
@@ -84,7 +88,7 @@ public class StartMenuImpl implements StartMenu, GUIElements {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				hideGUI();
-				OptionsMenuImpl om = new OptionsMenuImpl();
+				OptionsMenuImpl om = new OptionsMenuImpl(mi);
 				om.setBackground(frmStartMenu.getContentPane().getBackground());
 				om.showGUI();
 			}
@@ -98,7 +102,7 @@ public class StartMenuImpl implements StartMenu, GUIElements {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				hideGUI();
-				RulesMenuImpl rm = new RulesMenuImpl();
+				RulesMenuImpl rm = new RulesMenuImpl(mi);
 				rm.setBackground(frmStartMenu.getContentPane().getBackground());
 				rm.showGUI();
 			}
@@ -112,7 +116,7 @@ public class StartMenuImpl implements StartMenu, GUIElements {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				hideGUI();
-				RankingMenuImpl rankm = new RankingMenuImpl();
+				RankingMenuImpl rankm = new RankingMenuImpl(mi);
 				rankm.setBackground(frmStartMenu.getContentPane().getBackground());
 				rankm.showGUI();
 			}

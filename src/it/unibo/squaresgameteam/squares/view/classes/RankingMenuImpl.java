@@ -11,16 +11,21 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import it.unibo.squaresgameteam.squares.view.interfaces.*;
+import it.unibo.squaresgameteam.squares.controller.classes.MusicImpl;
+
+import it.unibo.squaresgameteam.squares.view.interfaces.RankingMenu;
+import it.unibo.squaresgameteam.squares.view.interfaces.GUIElements;
 
 public class RankingMenuImpl implements RankingMenu, GUIElements {
 
 	private JFrame frmRankingMenu;
+	private MusicImpl mi;
 
 	/**
 	 * Create the application.
 	 */
-	public RankingMenuImpl() {
+	public RankingMenuImpl(MusicImpl mi) {
+		this.mi = mi;
 		initialize();
 	}
 	
@@ -71,7 +76,7 @@ public class RankingMenuImpl implements RankingMenu, GUIElements {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				hideGUI();
-				StartMenuImpl sm = new StartMenuImpl();
+				StartMenuImpl sm = new StartMenuImpl(mi);
 				sm.setBackground(frmRankingMenu.getContentPane().getBackground());
 				sm.showGUI();
 			}

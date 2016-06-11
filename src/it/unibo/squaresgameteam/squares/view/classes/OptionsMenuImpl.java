@@ -14,18 +14,24 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
-import it.unibo.squaresgameteam.squares.view.interfaces.*;
+import it.unibo.squaresgameteam.squares.controller.classes.MusicImpl;
+
+import it.unibo.squaresgameteam.squares.view.interfaces.GUIElements;
+import it.unibo.squaresgameteam.squares.view.interfaces.OptionsMenu;
 
 public class OptionsMenuImpl implements OptionsMenu, GUIElements {
 
 	private JFrame frmOptionsMenu;
 	private Color col;
 	private boolean start=true;
+	private JButton btnColor1, btnColor2, btnMusic;
+	private MusicImpl mi;
 
 	/**
 	 * Create the application.
 	 */
-	public OptionsMenuImpl() {
+	public OptionsMenuImpl(MusicImpl mi) {
+		this.mi = mi;
 		initialize();
 	}
 	
@@ -77,11 +83,11 @@ public class OptionsMenuImpl implements OptionsMenu, GUIElements {
 		lblColor1.setBounds(50, 70, 200, 30);
 		frmOptionsMenu.getContentPane().add(lblColor1);
 		
-		JButton btnColor1 = new JButton("");
+		btnColor1 = new JButton("");
 		btnColor1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				btnColor1.setBackground(JColorChooser.showDialog(null, "Choose a color", Color.RED));
+				setFirstPlayerColour();
 			}
 		});
 		btnColor1.setFont(new Font("Sitka Text", Font.PLAIN, 17));
@@ -91,31 +97,53 @@ public class OptionsMenuImpl implements OptionsMenu, GUIElements {
 		JLabel lblColor2 = new JLabel("PLAYER 2 COLOR");
 		lblColor2.setHorizontalAlignment(SwingConstants.LEFT);
 		lblColor2.setFont(new Font("Sitka Text", Font.PLAIN, 16));
-		lblColor2.setBounds(50, 111, 200, 30);
+		lblColor2.setBounds(50, 110, 200, 30);
 		frmOptionsMenu.getContentPane().add(lblColor2);
 
-		JButton btnColor2 = new JButton("");
+		btnColor2 = new JButton("");
 		btnColor2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				btnColor2.setBackground(JColorChooser.showDialog(null, "Choose a color", Color.RED));
+				setSecondPlayerColour();
 			}
 		});
 		btnColor2.setFont(new Font("Sitka Text", Font.PLAIN, 17));
-		btnColor2.setBounds(280, 111, 70, 30);
+		btnColor2.setBounds(280, 110, 70, 30);
 		frmOptionsMenu.getContentPane().add(btnColor2);
+		
+		JButton btnMusic;
+		if(mi.isStarted())
+			btnMusic = new JButton("Stop music");
+		else
+			btnMusic = new JButton("Start music");
+		btnMusic.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if(mi.isStarted())
+				{
+					mi.stopMusic();
+					btnMusic.setText("Start music");
+				}
+				else
+				{
+					mi.startMusic();
+					btnMusic.setText("Stop music");
+				}
+			}
+		});
+		btnMusic.setFont(new Font("Sitka Text", Font.PLAIN, 17));
+		btnMusic.setBounds(125, 225, 150, 30);
+		frmOptionsMenu.getContentPane().add(btnMusic);
 
 		JButton btnBackground = new JButton("Change application background...");
 		btnBackground.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				if(start)
-					col = frmOptionsMenu.getContentPane().getBackground(); start=false;
-				setBackground(JColorChooser.showDialog(null, "Choose a color", Color.RED));
+				setBackground();
 			}
 		});
 		btnBackground.setFont(new Font("Sitka Text", Font.PLAIN, 17));
-		btnBackground.setBounds(50, 267, 300, 30);
+		btnBackground.setBounds(50, 265, 300, 30);
 		frmOptionsMenu.getContentPane().add(btnBackground);
 		
 		JButton btnBack = new JButton("Back");
@@ -123,7 +151,7 @@ public class OptionsMenuImpl implements OptionsMenu, GUIElements {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				hideGUI();
-				StartMenuImpl sm = new StartMenuImpl();
+				StartMenuImpl sm = new StartMenuImpl(mi);
 				sm.setBackground(col);
 				sm.showGUI();
 			}
@@ -137,7 +165,7 @@ public class OptionsMenuImpl implements OptionsMenu, GUIElements {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				hideGUI();
-				StartMenuImpl sm = new StartMenuImpl();
+				StartMenuImpl sm = new StartMenuImpl(mi);
 				sm.setBackground(frmOptionsMenu.getContentPane().getBackground());
 				sm.showGUI();
 			}
@@ -161,20 +189,22 @@ public class OptionsMenuImpl implements OptionsMenu, GUIElements {
 
 	@Override
 	public void setFirstPlayerColour() {
-		// TODO Auto-generated method stub
-		
+		btnColor1.setBackground(JColorChooser.showDialog(null, "Choose a color", Color.RED));
 	}
 
 	@Override
 	public void setSecondPlayerColour() {
-		// TODO Auto-generated method stub
-		
+		btnColor2.setBackground(JColorChooser.showDialog(null, "Choose a color", Color.RED));
 	}
 
 	@Override
 	public void setBackground() {
-		// TODO Auto-generated method stub
-		
+		if(start)
+		{
+			col = frmOptionsMenu.getContentPane().getBackground();
+			start=false;
+		}
+		setBackground(JColorChooser.showDialog(null, "Choose a color", Color.RED));
 	}
 
 }

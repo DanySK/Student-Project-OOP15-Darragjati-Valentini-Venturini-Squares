@@ -9,13 +9,17 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 
 import it.unibo.squaresgameteam.squares.controller.classes.MenuImpl;
 import it.unibo.squaresgameteam.squares.controller.classes.MatchImpl;
+import it.unibo.squaresgameteam.squares.controller.classes.MusicImpl;
 import it.unibo.squaresgameteam.squares.controller.enumerations.TypeGame;
 
 import it.unibo.squaresgameteam.squares.view.interfaces.MatchSetup;
@@ -27,13 +31,15 @@ public class MatchSetupImpl implements MatchSetup, GUIElements {
 	private JFrame frame;
 	private JTextField txtPlayer1;
 	private JTextField txtPlayer2;
-	private JTextField txtRows;
-	private JTextField txtColums;
+	private JSpinner spnRows;
+	private JSpinner spnColums;
 	private JComboBox<String> cmbGameMode;
 	private MenuImpl cont;
+	private MusicImpl mi;
 	
-	public MatchSetupImpl(JFrame f)
+	public MatchSetupImpl(JFrame f, MusicImpl mi)
 	{
+		this.mi = mi;
 		cont = new MenuImpl();
 		initialize();
 		frame = f;
@@ -68,6 +74,7 @@ public class MatchSetupImpl implements MatchSetup, GUIElements {
 		frmMatchSetup.setBounds(100, 100, 400, 225);
 		frmMatchSetup.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmMatchSetup.getContentPane().setLayout(null);
+		setBackground(Color.WHITE);
 		
 		JPanel pane = new JPanel();
 		pane.setBounds(5, 5, 390, 215);
@@ -82,10 +89,10 @@ public class MatchSetupImpl implements MatchSetup, GUIElements {
 		
 		txtPlayer1 = new JTextField();
 		txtPlayer1.setBounds(230, 10, 130, 25);
-		pane.add(txtPlayer1);
 		txtPlayer1.setFont(new Font("Sitka Text", Font.PLAIN, 15));
 		txtPlayer1.setHorizontalAlignment(SwingConstants.CENTER);
 		txtPlayer1.setColumns(10);
+		pane.add(txtPlayer1);
 		
 		JLabel lblPlayer2 = new JLabel("PLAYER 2");
 		lblPlayer2.setBounds(30, 40, 200, 30);
@@ -95,10 +102,10 @@ public class MatchSetupImpl implements MatchSetup, GUIElements {
 		
 		txtPlayer2 = new JTextField();
 		txtPlayer2.setBounds(230, 40, 130, 25);
-		pane.add(txtPlayer2);
 		txtPlayer2.setHorizontalAlignment(SwingConstants.CENTER);
 		txtPlayer2.setFont(new Font("Sitka Text", Font.PLAIN, 15));
 		txtPlayer2.setColumns(10);
+		pane.add(txtPlayer2);
 		
 		JLabel lblRows = new JLabel("ROWS");
 		lblRows.setBounds(30, 70, 200, 30);
@@ -106,14 +113,13 @@ public class MatchSetupImpl implements MatchSetup, GUIElements {
 		lblRows.setHorizontalAlignment(SwingConstants.LEFT);
 		lblRows.setFont(new Font("Sitka Text", Font.PLAIN, 16));
 		
-		txtRows = new JTextField();
-		txtRows.setBounds(310, 70, 50, 25);
-		pane.add(txtRows);
-		txtRows.setText("6");
-		txtRows.setToolTipText("A number between 4 and 10");
-		txtRows.setHorizontalAlignment(SwingConstants.CENTER);
-		txtRows.setFont(new Font("Sitka Text", Font.PLAIN, 15));
-		txtRows.setColumns(10);
+		spnRows = new JSpinner();
+		spnRows.setModel(new SpinnerNumberModel(6, 4, 10, 1));
+		spnRows.setBounds(310, 70, 50, 25);
+		spnRows.setValue(6);
+		spnRows.setToolTipText("A number between 4 and 10");
+		spnRows.setFont(new Font("Sitka Text", Font.PLAIN, 15));
+		pane.add(spnRows);
 		
 		JLabel lblColums = new JLabel("COLUMS");
 		lblColums.setBounds(30, 100, 200, 30);
@@ -121,13 +127,12 @@ public class MatchSetupImpl implements MatchSetup, GUIElements {
 		lblColums.setHorizontalAlignment(SwingConstants.LEFT);
 		lblColums.setFont(new Font("Sitka Text", Font.PLAIN, 16));
 		
-		txtColums = new JTextField();
-		txtColums.setBounds(310, 100, 50, 25);
-		pane.add(txtColums);
-		txtColums.setText("6");
-		txtColums.setHorizontalAlignment(SwingConstants.CENTER);
-		txtColums.setFont(new Font("Sitka Text", Font.PLAIN, 15));
-		txtColums.setColumns(10);
+		spnColums = new JSpinner();
+		spnColums.setModel(new SpinnerNumberModel(6, 4, 10, 1));
+		spnColums.setToolTipText("A number between 4 and 10");
+		spnColums.setFont(new Font("Sitka Text", Font.PLAIN, 15));
+		spnColums.setBounds(310, 100, 50, 25);
+		pane.add(spnColums);
 		
 		JLabel lblGameMode = new JLabel("GAME MODE");
 		lblGameMode.setBounds(30, 130, 200, 30);
@@ -172,16 +177,25 @@ public class MatchSetupImpl implements MatchSetup, GUIElements {
 	@Override
 	public void startMatch() {
 		// TODO Auto-generated method stub
-		hideGUI();
-		frame.setVisible(false);
-		frame.dispose();
-		GameFrame gf;
-		if(cmbGameMode.getSelectedIndex()==0)
-			gf = new GameFrame((MatchImpl) cont.createMatch(Integer.parseInt(txtColums.getText()), Integer.parseInt(txtRows.getText()), txtPlayer1.getText(), txtPlayer2.getText(), TypeGame.SQUARE));
+		if(txtPlayer1.getText().equals("") ||
+				txtPlayer1.getText().equals(txtPlayer2.getText())||
+				txtPlayer2.getText().equals(""))
+		{
+			JOptionPane.showMessageDialog(null, "You should write the players namess correctly.", "InfoBox", JOptionPane.INFORMATION_MESSAGE);
+		}
 		else
-			gf = new GameFrame((MatchImpl) cont.createMatch(Integer.parseInt(txtColums.getText()), Integer.parseInt(txtRows.getText()), txtPlayer1.getText(), txtPlayer2.getText(), TypeGame.TRIANGLE));
-		gf.setBackground(frmMatchSetup.getContentPane().getBackground());
-		gf.showGUI();
+		{
+			hideGUI();
+			frame.setVisible(false);
+			frame.dispose();
+			GameFrame gf;
+			if(cmbGameMode.getSelectedIndex()==0)
+				gf = new GameFrame((MatchImpl) cont.createMatch((Integer)spnColums.getValue(), (Integer)spnRows.getValue(), txtPlayer1.getText(), txtPlayer2.getText(), TypeGame.SQUARE), mi);
+			else
+				gf = new GameFrame((MatchImpl) cont.createMatch((Integer)spnColums.getValue(), (Integer)spnRows.getValue(), txtPlayer1.getText(), txtPlayer2.getText(), TypeGame.TRIANGLE), mi);
+			gf.setBackground(frmMatchSetup.getContentPane().getBackground());
+			gf.showGUI();
+		}
 	}
 
 	@Override

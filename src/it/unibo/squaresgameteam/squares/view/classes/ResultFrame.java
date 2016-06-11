@@ -12,14 +12,18 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 
-import it.unibo.squaresgameteam.squares.view.interfaces.*;
+import it.unibo.squaresgameteam.squares.controller.classes.MusicImpl;
+
+import it.unibo.squaresgameteam.squares.view.interfaces.GUIElements;
 
 public class ResultFrame implements GUIElements {
 		
 		private JFrame frmMatchSetup;
+		private MusicImpl mi;
 		
-		public ResultFrame()
+		public ResultFrame(MusicImpl mi)
 		{
+			this.mi = mi;
 			initialize();
 		}
 		
@@ -87,7 +91,7 @@ public class ResultFrame implements GUIElements {
 				@Override
 				public void mouseClicked(MouseEvent arg0) {
 					hideGUI();
-					StartMenuImpl sm = new StartMenuImpl();
+					StartMenuImpl sm = new StartMenuImpl(mi);
 					sm.setBackground(frmMatchSetup.getContentPane().getBackground());
 					sm.showGUI();
 				}
