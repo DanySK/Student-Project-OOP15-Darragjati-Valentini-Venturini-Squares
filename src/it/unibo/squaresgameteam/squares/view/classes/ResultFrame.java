@@ -12,18 +12,22 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 
+import it.unibo.squaresgameteam.squares.controller.classes.MatchImpl;
 import it.unibo.squaresgameteam.squares.controller.classes.MusicImpl;
 
 import it.unibo.squaresgameteam.squares.view.interfaces.GUIElements;
 
 public class ResultFrame implements GUIElements {
 		
-		private JFrame frmMatchSetup;
+		private JFrame frmMatchSetup, f;
 		private Settings s;
+		private MatchImpl cont;
 		
-		public ResultFrame(JFrame f, Settings s)
+		public ResultFrame(JFrame f, Settings s, MatchImpl cont)
 		{
+			this.f = f;
 			this.s = s;
+			this.cont = cont;
 			initialize();
 		}
 		
@@ -68,17 +72,23 @@ public class ResultFrame implements GUIElements {
 			lblWinner.setFont(new Font("Sitka Text", Font.PLAIN, 16));
 			lblWinner.setHorizontalAlignment(SwingConstants.CENTER);
 			
-			JLabel lblPlayer = new JLabel("PLAYER");
+			JLabel lblPlayer = new JLabel(cont.getCurrentPlayerTurn());
 			lblPlayer.setBounds(95, 40, 200, 30);
 			pane.add(lblPlayer);
 			lblPlayer.setHorizontalAlignment(SwingConstants.CENTER);
 			lblPlayer.setFont(new Font("Sitka Text", Font.PLAIN, 16));
 			
-			JLabel lblScore = new JLabel("Score:");
-			lblScore.setBounds(75, 90, 240, 30);
+			JLabel lblScore = new JLabel("Score: " + cont.getCurrentPlayerScore());
+			lblScore.setBounds(75, 70, 240, 30);
 			pane.add(lblScore);
-			lblScore.setHorizontalAlignment(SwingConstants.LEFT);
+			lblScore.setHorizontalAlignment(SwingConstants.CENTER);
 			lblScore.setFont(new Font("Sitka Text", Font.PLAIN, 16));
+			
+			JLabel lblTime = new JLabel("Played time: " + cont.getMatchTime() + "s");
+			lblTime.setHorizontalAlignment(SwingConstants.CENTER);
+			lblTime.setFont(new Font("Sitka Text", Font.PLAIN, 16));
+			lblTime.setBounds(75, 131, 240, 30);
+			pane.add(lblTime);
 			
 			JSeparator separator = new JSeparator();
 			separator.setBounds(0, 165, 390, 2);
@@ -90,6 +100,8 @@ public class ResultFrame implements GUIElements {
 			btnMenu.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent arg0) {
+					f.setVisible(false);
+					f.dispose();
 					hideGUI();
 					StartMenuImpl sm = new StartMenuImpl(s);
 					sm.setBackground(frmMatchSetup.getContentPane().getBackground());

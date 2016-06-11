@@ -194,7 +194,7 @@ public class MatchSetupImpl implements MatchSetup, GUIElements {
 			hideGUI();
 			frame.setVisible(false);
 			frame.dispose();
-			GameFrame gf = new GameFrame((MatchImpl) cont.createMatch((Integer)spnColums.getValue(), (Integer)spnRows.getValue(), txtPlayer1.getText(), txtPlayer2.getText(), setBoardType()), s);gf = new GameFrame((MatchImpl) cont.createMatch((Integer)spnColums.getValue(), (Integer)spnRows.getValue(), txtPlayer1.getText(), txtPlayer2.getText(), TypeGame.TRIANGLE), s);
+			GameFrame gf = new GameFrame((MatchImpl) cont.createMatch((Integer)spnColums.getValue(), (Integer)spnRows.getValue(), txtPlayer1.getText(), txtPlayer2.getText(), setBoardType()), s);
 			gf.setBackground(frmMatchSetup.getContentPane().getBackground());
 			gf.showGUI();
 		}
