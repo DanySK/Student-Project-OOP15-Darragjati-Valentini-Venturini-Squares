@@ -33,12 +33,12 @@ public class MenuImpl implements Menu {
     public String showRules() throws IOException {
 
         final String txtDirectory = ClassLoader.class.getResource("/Rules.txt").getPath();
-        // final FileReader in = new FileReader(txtDirectory);
+        
 
         try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(txtDirectory), "UTF8"))) {
             String s;
             while ((s = br.readLine()) != null) {
-                System.out.println(s);
+              
                 this.rules = this.rules + s;
 
             }

@@ -33,13 +33,13 @@ public interface Match {
      * @param direction Verticale, orizzontale o diagonale (se la griglia � triangolare).
      * @param numLine Numero linea in cui � posta la mossa.
      * @param position Posizione nella linea della mossa.
-     * @return Nome del giocatore che deve fare la prossima mossa
+     * 
      * @throws UnexistentLineListException Eccezione in caso di lista inesistente
      * @throws DuplicatedPlayerStatsException 
      * @throws IOException 
      * @throws ClassNotFoundException 
      */
-    String addLine(ListType direction, int numLine, int position) throws UnexistentLineListException, IOException, DuplicatedPlayerStatsException, ClassNotFoundException;
+    void addLine(ListType direction, int numLine, int position) throws UnexistentLineListException, IOException, DuplicatedPlayerStatsException, ClassNotFoundException;
     
     
     
@@ -49,12 +49,12 @@ public interface Match {
      * @throws NoMovesDoneException 
      * @throws UnexistentLineListException 
      */
-    Move undo() throws NoMovesDoneException, UnexistentLineListException;
+    void undo() throws NoMovesDoneException, UnexistentLineListException;
     /**
      * 
      * @return ritorna il punteggio del giocatore corrente.
      */
-    int getPlayerScore();
+    int getCurrentPlayerScore();
     /**
      * 
      * @return il tempo totale di gioco a fine partita.
@@ -77,6 +77,8 @@ public interface Match {
         
     
     public TypeGame getMode();
+
+    Move getLastMove() ;
         
     
 }

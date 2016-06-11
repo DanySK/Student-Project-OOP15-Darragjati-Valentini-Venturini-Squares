@@ -24,8 +24,7 @@ import it.unibo.squaresgameteam.squares.model.interfaces.Game;
 
 /**
  * 
- * @author Licia Valentini 
- * This class manages the match.
+ * @author Licia Valentini This class manages the match.
  *
  */
 public class MatchImpl implements Match {
@@ -55,8 +54,7 @@ public class MatchImpl implements Match {
      * @param namePlayer2
      *            name second player
      * @param mode
-     *            game mode. 
-     * Constructor of the class.
+     *            game mode. Constructor of the class.
      */
     public MatchImpl(final int columsNumber, final int rowsNumber, final String namePlayer1, final String namePlayer2,
             final TypeGame mode) {
@@ -111,7 +109,7 @@ public class MatchImpl implements Match {
     }
 
     @Override
-    public String addLine(final ListType direction, final int numLine, final int position)
+    public void addLine(final ListType direction, final int numLine, final int position)
             throws UnexistentLineListException, IOException, DuplicatedPlayerStatsException, ClassNotFoundException {
 
         final Move addMove = new MoveImpl(direction, numLine, position);
@@ -129,20 +127,29 @@ public class MatchImpl implements Match {
             this.numPlayer = this.match.getCurrentPlayerTurn();
         }
 
+    }
+
+    @Override
+    public int getCurrentPlayerScore() {
+        return this.playerScore;
+    }
+
+    public String getCurrentPlayerTurn() {
         convertNumToNamePlayer();
         return this.namePlayer;
     }
 
     @Override
-    public int getPlayerScore() {
-        return this.playerScore;
-    }
+    public Move getLastMove() {
 
-    @Override
-    public Move undo() throws NoMovesDoneException, UnexistentLineListException {
-        this.match.undoLastMove();
         return this.match.getCopyOfLastMove();
 
+    }
+
+    public void undo() throws NoMovesDoneException, UnexistentLineListException {
+        this.match.undoLastMove();
+        this.numPlayer = match.getCurrentPlayerTurn();
+        this.playerScore = match.getPlayerPoints(numPlayer);
     }
 
     @Override
@@ -188,12 +195,12 @@ public class MatchImpl implements Match {
     public int getColumsNumber() {
         return this.columsNumber;
     }
-    
+
     @Override
     public int getRowsNumber() {
         return this.rowsNumber;
     }
-    
+
     @Override
     public TypeGame getMode() {
         return this.mode;
