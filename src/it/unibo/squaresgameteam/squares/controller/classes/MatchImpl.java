@@ -19,6 +19,7 @@ import it.unibo.squaresgameteam.squares.model.exceptions.UnexistentLineListExcep
 import it.unibo.squaresgameteam.squares.model.interfaces.Move;
 import it.unibo.squaresgameteam.squares.model.interfaces.PlayedTime;
 import it.unibo.squaresgameteam.squares.model.interfaces.Player;
+import sun.font.CreatedFontTracker;
 import it.unibo.squaresgameteam.squares.model.interfaces.BaseGrid;
 import it.unibo.squaresgameteam.squares.model.interfaces.Game;
 
@@ -206,5 +207,48 @@ public class MatchImpl implements Match {
     public TypeGame getMode() {
         return this.mode;
     }
+    
+public static void main() throws UnsupportedSizeException, ClassNotFoundException, UnexistentLineListException, IOException, DuplicatedPlayerStatsException{
+    String s;
+    int score;
+    Match partita = new MatchImpl(4, 4, "ciao", "ciao2", TypeGame.SQUARE);
+    partita.createGrid();
+    partita.createNewMatch();
+    score = partita.getCurrentPlayerScore();
+    s = partita.getCurrentPlayerTurn();
+    System.out.println(score + s);
+    partita.addLine(ListType.HORIZONTAL, 0, 0);
+    s = partita.getCurrentPlayerTurn();
+    score = partita.getCurrentPlayerScore();
+    System.out.println(score + s);
+    partita.addLine(ListType.VERTICAL, 3, 3);
+    score = partita.getCurrentPlayerScore();
+    s = partita.getCurrentPlayerTurn();
+    System.out.println(score + s);
+    partita.addLine(ListType.VERTICAL, 0, 0);
+    score = partita.getCurrentPlayerScore();
+    s = partita.getCurrentPlayerTurn();
+    System.out.println(score + s);
+    partita.addLine(ListType.HORIZONTAL, 3, 3);
+    score = partita.getCurrentPlayerScore();
+    s = partita.getCurrentPlayerTurn();
+    System.out.println(score + s);
+    partita.addLine(ListType.VERTICAL, 1, 0);
+    score = partita.getCurrentPlayerScore();
+    s = partita.getCurrentPlayerTurn();
+    System.out.println(score + s);
+    partita.addLine(ListType.VERTICAL, 0, 3);
+    score = partita.getCurrentPlayerScore();
+    s = partita.getCurrentPlayerTurn();
+    System.out.println(score + s);
+    partita.addLine(ListType.HORIZONTAL, 1, 0);
+    score = partita.getCurrentPlayerScore();
+    s = partita.getCurrentPlayerTurn();
+    System.out.println(score + s);
+    
+}
 
 }
+
+
+

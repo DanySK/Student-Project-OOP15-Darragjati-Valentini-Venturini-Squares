@@ -33,6 +33,7 @@ public interface Match {
 
     /**
      * This method allows to enter a move.
+     * If the match is ended sets the winner's name and adds the result to the ranking. 
      * 
      * @param direction
      *            Vertical, horizontal or diagonal.
