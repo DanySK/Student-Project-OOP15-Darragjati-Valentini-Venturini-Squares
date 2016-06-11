@@ -39,7 +39,7 @@ public class MenuImpl implements Menu {
             String s;
             while ((s = br.readLine()) != null) {
               
-                this.rules = this.rules + s;
+                this.rules = this.rules + s + "\n";
 
             }
         } catch (IOException ex) {

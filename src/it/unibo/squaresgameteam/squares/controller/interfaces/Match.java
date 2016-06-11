@@ -10,31 +10,31 @@ import it.unibo.squaresgameteam.squares.model.exceptions.NoMovesDoneException;
 import it.unibo.squaresgameteam.squares.model.exceptions.UnexistentLineListException;
 import it.unibo.squaresgameteam.squares.model.interfaces.Move;
 /**
- * Interfaccia della classe MatchImpl.
+ * Interface of class MatchImpl.
  * @author Licia Valentini
  *
  */
 public interface Match {
 
     /**
-     * Metodo che crea la griglia di gioco, a seconda della tipologia di gioco scelta.
+     * This method creates a new grid.
      * @throws UnsupportedSizeException 
      */
     void createGrid() throws UnsupportedSizeException;
     
     /**
-     * Metodo che genera una nuova partita e fa partire il tempo di gioco.
-     * @return Nome del giocatore che deve fare la prima mossa
+     * This method creates a new match and starts the match time.
+     * 
      */
-    String createNewMatch();
+    void createNewMatch();
     
     /**
-     * Metodo che permette di aggiungere una mossa e controlla se la partita � finita.
-     * @param direction Verticale, orizzontale o diagonale (se la griglia � triangolare).
-     * @param numLine Numero linea in cui � posta la mossa.
-     * @param position Posizione nella linea della mossa.
+     * This method allows to enter a move. 
+     * @param direction Vertical, horizontal or diagonal.
+     * @param numLine line number.
+     * @param position position.
      * 
-     * @throws UnexistentLineListException Eccezione in caso di lista inesistente
+     * @throws UnexistentLineListException 
      * @throws DuplicatedPlayerStatsException 
      * @throws IOException 
      * @throws ClassNotFoundException 
@@ -44,28 +44,40 @@ public interface Match {
     
     
     /**
-     * Metodo che fa l'undo dell'ultima mossa.
-     * @return l'oggetto contenente la posizione dell'ultima mossa.
+     * This method makes the undo of the last move.     
      * @throws NoMovesDoneException 
      * @throws UnexistentLineListException 
      */
     void undo() throws NoMovesDoneException, UnexistentLineListException;
     /**
      * 
-     * @return ritorna il punteggio del giocatore corrente.
+     * @return the score of the current player
      */
     int getCurrentPlayerScore();
     /**
      * 
-     * @return il tempo totale di gioco a fine partita.
+     * @return the total time at the end of the match.
      */
     Double getMatchTime();
     
+    /**
+     * 
+     * @return if the match is ended
+     */
+    
     boolean getEndMatch();
+    
+    /**
+     * 
+     * @return player 1 name
+     */
     
     String getNamePlayer1(); 
         
-    
+    /**
+     * 
+     * @return player 2 name
+     */
 
     String getNamePlayer2();
     

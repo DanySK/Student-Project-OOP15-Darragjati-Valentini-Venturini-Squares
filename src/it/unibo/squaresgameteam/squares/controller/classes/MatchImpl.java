@@ -85,13 +85,13 @@ public class MatchImpl implements Match {
     }
 
     @Override
-    public String createNewMatch() {
+    public void createNewMatch() {
         this.match = new GameImpl(this.grid, namePlayer1, namePlayer2);
         match.startMatch();
         this.numPlayer = this.match.getCurrentPlayerTurn();
         convertNumToNamePlayer();
         this.time = new PlayedTimeImpl();
-        return this.namePlayer;
+      
     }
 
     private void convertNumToNamePlayer() {
