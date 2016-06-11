@@ -19,11 +19,11 @@ import it.unibo.squaresgameteam.squares.view.interfaces.GUIElements;
 public class ResultFrame implements GUIElements {
 		
 		private JFrame frmMatchSetup;
-		private MusicImpl mi;
+		private Settings s;
 		
-		public ResultFrame(MusicImpl mi)
+		public ResultFrame(JFrame f, Settings s)
 		{
-			this.mi = mi;
+			this.s = s;
 			initialize();
 		}
 		
@@ -91,11 +91,17 @@ public class ResultFrame implements GUIElements {
 				@Override
 				public void mouseClicked(MouseEvent arg0) {
 					hideGUI();
-					StartMenuImpl sm = new StartMenuImpl(mi);
+					StartMenuImpl sm = new StartMenuImpl(s);
 					sm.setBackground(frmMatchSetup.getContentPane().getBackground());
 					sm.showGUI();
 				}
 			});
 			btnMenu.setFont(new Font("Sitka Text", Font.PLAIN, 17));
+
+			JButton btnColor = new JButton("");
+			btnColor.setBounds(0, 0, 400, 225);
+			frmMatchSetup.getContentPane().add(btnColor);
+			btnColor.setEnabled(false);
+			btnColor.setBackground(Color.WHITE);
 		}
 }

@@ -11,10 +11,10 @@ import java.io.IOException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import it.unibo.squaresgameteam.squares.controller.classes.MenuImpl;
-import it.unibo.squaresgameteam.squares.controller.classes.MusicImpl;
 
 import it.unibo.squaresgameteam.squares.view.interfaces.RulesMenu;
 import it.unibo.squaresgameteam.squares.view.interfaces.GUIElements;
@@ -75,12 +75,18 @@ public class RulesMenuImpl implements RulesMenu, GUIElements {
 		frmRulesMenu.setBounds(100, 100, 400, 400);
 		frmRulesMenu.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frmRulesMenu.getContentPane().setLayout(null);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 10, 374, 308);
+		frmRulesMenu.getContentPane().add(scrollPane);
 
 		txtRules = new JTextArea();
 		txtRules.setEditable(false);
 		txtRules.setBounds(10, 11, 374, 308);
+		txtRules.setWrapStyleWord(true);
+		txtRules.setLineWrap(true);
 		showRules();
-		frmRulesMenu.getContentPane().add(txtRules);
+		scrollPane.setViewportView(txtRules);
 		
 		JButton btnBack = new JButton("Back");
 		btnBack.addMouseListener(new MouseAdapter() {

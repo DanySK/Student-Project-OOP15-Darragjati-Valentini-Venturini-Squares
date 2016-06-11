@@ -172,6 +172,12 @@ public class MatchSetupImpl implements MatchSetup, GUIElements {
 			}
 		});
 		btnCancel.setFont(new Font("Sitka Text", Font.PLAIN, 17));
+
+		JButton btnColor = new JButton("");
+		btnColor.setEnabled(false);
+		btnColor.setBackground(Color.WHITE);
+		btnColor.setBounds(0, 0, 400, 225);
+		frmMatchSetup.getContentPane().add(btnColor);
 	}
 	
 	@Override

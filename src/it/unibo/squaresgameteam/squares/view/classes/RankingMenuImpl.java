@@ -6,25 +6,38 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
-import it.unibo.squaresgameteam.squares.controller.classes.MusicImpl;
+import it.unibo.squaresgameteam.squares.controller.classes.ShowRankingImpl;
 
+import it.unibo.squaresgameteam.squares.model.enumerations.RankingOption;
+import it.unibo.squaresgameteam.squares.model.exceptions.DuplicatedPlayerStatsException;
 import it.unibo.squaresgameteam.squares.view.interfaces.RankingMenu;
 import it.unibo.squaresgameteam.squares.view.interfaces.GUIElements;
 
 public class RankingMenuImpl implements RankingMenu, GUIElements {
 
 	private JFrame frmRankingMenu;
+	private JTextArea txtRules;
+	private ShowRankingImpl cont;
 	private Settings s;
 
 	/**
 	 * Create the application.
 	 */
 	public RankingMenuImpl(Settings s) {
+		try {
+			cont = new ShowRankingImpl();
+		} catch (DuplicatedPlayerStatsException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.s = s;
 		initialize();
 	}
@@ -70,6 +83,17 @@ public class RankingMenuImpl implements RankingMenu, GUIElements {
 		frmRankingMenu.setBounds(100, 100, 400, 400);
 		frmRankingMenu.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frmRankingMenu.getContentPane().setLayout(null);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 10, 374, 308);
+		frmRankingMenu.getContentPane().add(scrollPane);
+
+		txtRules = new JTextArea();
+		txtRules.setEditable(false);
+		txtRules.setBounds(10, 11, 374, 308);
+		txtRules.setWrapStyleWord(true);
+		txtRules.setLineWrap(true);
+		scrollPane.setViewportView(txtRules);
 		
 		JButton btnBack = new JButton("Back");
 		btnBack.addMouseListener(new MouseAdapter() {

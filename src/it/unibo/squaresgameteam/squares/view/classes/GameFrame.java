@@ -6,6 +6,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -15,8 +16,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import it.unibo.squaresgameteam.squares.controller.classes.MusicImpl;
+import it.unibo.squaresgameteam.squares.model.exceptions.DuplicatedPlayerStatsException;
+import it.unibo.squaresgameteam.squares.model.exceptions.UnexistentLineListException;
 import it.unibo.squaresgameteam.squares.model.exceptions.UnsupportedSizeException;
+import it.unibo.squaresgameteam.squares.model.enumerations.ListType;
 import it.unibo.squaresgameteam.squares.controller.classes.MatchImpl;
 
 import it.unibo.squaresgameteam.squares.view.interfaces.GUIElements;
@@ -24,14 +27,15 @@ import it.unibo.squaresgameteam.squares.view.interfaces.GUIElements;
 public class GameFrame implements GUIElements {
 	private ArrayList<ArrayList<JButton>> btns;
 	private JFrame frmGameFrame;
-	private JLabel lblPlaying;
+	private JLabel lblPlaying, lblScore1, lblScore2;
 	private int rows, colums;
-	private boolean player = true, change = true;
 	private String name1, name2;
 	private Color player1, player2;
+	private MatchImpl cont;
 	private Settings s;
 
 	public GameFrame(MatchImpl cont, Settings s) {
+		this.cont = cont;
 		rows = cont.getRowsNumber();
 		colums = cont.getColumsNumber();
 		name1 = cont.getNamePlayer1();
@@ -42,7 +46,6 @@ public class GameFrame implements GUIElements {
 		try {
 			cont.createGrid();
 		} catch (UnsupportedSizeException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		cont.createNewMatch();
@@ -125,12 +128,19 @@ public class GameFrame implements GUIElements {
 				}
 		}
 		
-		
-		lblPlaying = new JLabel(name1+"'s turn");
+		if(cont.getCurrentPlayerTurn().equals(name1))
+		{
+			lblPlaying = new JLabel(name1+"'s turn");
+			lblPlaying.setForeground(player1);
+		}
+		else
+		{
+			lblPlaying = new JLabel(name2+"'s turn");
+			lblPlaying.setForeground(player2);
+		}
 		lblPlaying.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPlaying.setFont(new Font("Sitka Text", Font.BOLD, 14));
 		lblPlaying.setBounds(colums*40+30, 10, 150, 30);
-		lblPlaying.setForeground(player1);
 		frmGameFrame.getContentPane().add(lblPlaying);
 		
 		JLabel lblPlayer1 = new JLabel(name1);
@@ -138,7 +148,7 @@ public class GameFrame implements GUIElements {
 		lblPlayer1.setBounds(colums*40+30, 50, 150, 30);
 		frmGameFrame.getContentPane().add(lblPlayer1);
 		
-		JLabel lblScore1 = new JLabel("Score: ");
+		lblScore1 = new JLabel("Score: ");
 		lblScore1.setFont(new Font("Sitka Text", Font.PLAIN, 14));
 		lblScore1.setBounds(colums*40+30, 80, 150, 30);
 		frmGameFrame.getContentPane().add(lblScore1);
@@ -148,7 +158,7 @@ public class GameFrame implements GUIElements {
 		lblPlayer2.setBounds(colums*40+30, 120, 150, 30);
 		frmGameFrame.getContentPane().add(lblPlayer2);
 		
-		JLabel lblScore2 = new JLabel("Score: ");
+		lblScore2 = new JLabel("Score: ");
 		lblScore2.setFont(new Font("Sitka Text", Font.PLAIN, 14));
 		lblScore2.setBounds(colums*40+30, 150, 150, 30);
 		frmGameFrame.getContentPane().add(lblScore2);
@@ -201,6 +211,12 @@ public class GameFrame implements GUIElements {
 			public void mouseClicked(MouseEvent arg0) {
 				if(btnLine1.isEnabled())
 				{
+					try {
+						cont.addLine(ListType.HORIZONTAL, y/40, x/40);
+					} catch (ClassNotFoundException | UnexistentLineListException | IOException
+							| DuplicatedPlayerStatsException e) {
+						e.printStackTrace();
+					}
 					if(y!=0)
 					{
 						if(!btns.get(x/40+(y/40-1)*colums).get(0).isEnabled() &&
@@ -210,8 +226,6 @@ public class GameFrame implements GUIElements {
 						{
 							btns.get(x/40+(y/40-1)*colums).get(2).setVisible(true);
 							btns.get(x/40+(y/40-1)*colums).get(2).setBackground(lblPlaying.getForeground());
-							
-							change = false;
 						}
 					}
 					if(!btns.get(x/40+y/40*colums).get(0).isEnabled() &&
@@ -221,29 +235,23 @@ public class GameFrame implements GUIElements {
 					{
 						btns.get(x/40+y/40*colums).get(2).setVisible(true);
 						btns.get(x/40+y/40*colums).get(2).setBackground(lblPlaying.getForeground());
-						
-						change = false;
 					}
 					
 					btnLine1.setBackground(lblPlaying.getForeground());
 					btnLine1.setEnabled(false);
 					
-					if(change==true)
+					if(cont.getCurrentPlayerTurn().equals(name1))
 					{
-						if(player==true)
-						{
-							lblPlaying.setForeground(player2);
-							lblPlaying.setText(name2+"'s turn");
-						}
-						else
-						{
-							lblPlaying.setForeground(player1);
-							lblPlaying.setText(name1+"'s turn");
-						}
-						player=!player;
+						lblPlaying.setText(name1+"'s turn");
+						lblPlaying.setForeground(player1);
+						lblScore1.setText("Score: " + cont.getCurrentPlayerScore());
 					}
 					else
-						change = true;
+					{
+						lblPlaying.setText(name2+"'s turn");
+						lblPlaying.setForeground(player2);
+						lblScore2.setText("Score: " + cont.getCurrentPlayerScore());
+					}
 				}
 			}
 		});
@@ -259,7 +267,13 @@ public class GameFrame implements GUIElements {
 			public void mouseClicked(MouseEvent arg0) {
 				if(btnLine2.isEnabled())
 				{
-				if(y!=0)
+					try {
+						cont.addLine(ListType.VERTICAL, x/40, y/40);
+					} catch (ClassNotFoundException | UnexistentLineListException | IOException
+							| DuplicatedPlayerStatsException e) {
+						e.printStackTrace();
+					}
+					if(y!=0)
 					{
 						if(!btns.get((x/40-1)+y/40*colums).get(0).isEnabled() &&
 								!btns.get((x/40-1)+y/40*colums).get(1).isEnabled() &&
@@ -268,8 +282,6 @@ public class GameFrame implements GUIElements {
 						{
 							btns.get((x/40-1)+y/40*colums).get(2).setVisible(true);
 							btns.get((x/40-1)+y/40*colums).get(2).setBackground(lblPlaying.getForeground());
-							
-							change = false;
 						}
 					}
 					if(!btns.get(x/40+y/40*colums).get(0).isEnabled() &&
@@ -279,34 +291,28 @@ public class GameFrame implements GUIElements {
 					{
 						btns.get(x/40+y/40*colums).get(2).setVisible(true);
 						btns.get(x/40+y/40*colums).get(2).setBackground(lblPlaying.getForeground());
-						
-						change = false;
 					}
 					
 					btnLine2.setBackground(lblPlaying.getForeground());
 					btnLine2.setEnabled(false);
 					
-					if(change==true)
+					if(cont.getCurrentPlayerTurn().equals(name1))
 					{
-						if(player==true)
-						{
-							lblPlaying.setForeground(player2);
-							lblPlaying.setText(name2+"'s turn");
-						}
-						else
-						{
-							lblPlaying.setForeground(player1);
-							lblPlaying.setText(name1+"'s turn");
-						}
-						player=!player;
+						lblPlaying.setText(name1+"'s turn");
+						lblPlaying.setForeground(player1);
+						lblScore1.setText("Score: " + cont.getCurrentPlayerScore());
 					}
 					else
-						change = true;
+					{
+						lblPlaying.setText(name2+"'s turn");
+						lblPlaying.setForeground(player2);
+						lblScore2.setText("Score: " + cont.getCurrentPlayerScore());
+					}
 				}
 			}
 		});
 		if(x!=0)
-			btns.get((x/40-1)+y/40*colums).add(btnLine1);
+			btns.get((x/40-1)+y/40*colums).add(btnLine2);
 		btns.get(x/40+y/40*colums).add(btnLine2);
 		pane.add(btnLine2);
 		
@@ -333,6 +339,12 @@ public class GameFrame implements GUIElements {
 			public void mouseClicked(MouseEvent arg0) {
 				if(btnLine.isEnabled())
 				{
+					try {
+						cont.addLine(ListType.VERTICAL, x/40, y/40);
+					} catch (ClassNotFoundException | UnexistentLineListException | IOException
+							| DuplicatedPlayerStatsException e) {
+						e.printStackTrace();
+					}
 					if(!btns.get((x/40-1)+y/40*colums).get(0).isEnabled() &&
 							!btns.get((x/40-1)+y/40*colums).get(1).isEnabled() &&
 							!btns.get((x/40-1)+y/40*colums).get(3).isEnabled() &&
@@ -340,29 +352,23 @@ public class GameFrame implements GUIElements {
 					{
 						btns.get((x/40-1)+y/40*colums).get(2).setVisible(true);
 						btns.get((x/40-1)+y/40*colums).get(2).setBackground(lblPlaying.getForeground());
-						
-						change = false;
 					}
 					
 					btnLine.setBackground(lblPlaying.getForeground());
 					btnLine.setEnabled(false);
 					
-					if(change==true)
+					if(cont.getCurrentPlayerTurn().equals(name1))
 					{
-						if(player==true)
-						{
-							lblPlaying.setForeground(player2);
-							lblPlaying.setText(name2+"'s turn");
-						}
-						else
-						{
-							lblPlaying.setForeground(player1);
-							lblPlaying.setText(name1+"'s turn");
-						}
-						player=!player;
+						lblPlaying.setText(name1+"'s turn");
+						lblPlaying.setForeground(player1);
+						lblScore1.setText("Score: " + cont.getCurrentPlayerScore());
 					}
 					else
-						change = true;
+					{
+						lblPlaying.setText(name2+"'s turn");
+						lblPlaying.setForeground(player2);
+						lblScore2.setText("Score: " + cont.getCurrentPlayerScore());
+					}
 				}
 			}
 		});
@@ -385,6 +391,12 @@ public class GameFrame implements GUIElements {
 			public void mouseClicked(MouseEvent arg0) {
 				if(btnLine.isEnabled())
 				{
+					try {
+						cont.addLine(ListType.HORIZONTAL, y/40, x/40);
+					} catch (ClassNotFoundException | UnexistentLineListException | IOException
+							| DuplicatedPlayerStatsException e) {
+						e.printStackTrace();
+					}
 					if(!btns.get(x/40+(y/40-1)*colums).get(0).isEnabled() &&
 							!btns.get(x/40+(y/40-1)*colums).get(1).isEnabled() &&
 							!btns.get(x/40+(y/40-1)*colums).get(3).isEnabled() &&
@@ -392,29 +404,29 @@ public class GameFrame implements GUIElements {
 					{
 						btns.get(x/40+(y/40-1)*colums).get(2).setVisible(true);
 						btns.get(x/40+(y/40-1)*colums).get(2).setBackground(lblPlaying.getForeground());
-						
-						change = false;
 					}
 					
 					btnLine.setBackground(lblPlaying.getForeground());
 					btnLine.setEnabled(false);
 					
-					if(change==true)
+					if(cont.getCurrentPlayerTurn().equals(name1))
 					{
-						if(player==true)
-						{
-							lblPlaying.setForeground(player2);
-							lblPlaying.setText(name2+"'s turn");
-						}
-						else
-						{
-							lblPlaying.setForeground(player1);
-							lblPlaying.setText(name1+"'s turn");
-						}
-						player=!player;
+						lblPlaying.setText(name1+"'s turn");
+						lblPlaying.setForeground(player1);
+						lblScore2.setText("Score: " + cont.getCurrentPlayerScore());
 					}
 					else
-						change = true;
+					{
+						lblPlaying.setText(name2+"'s turn");
+						lblPlaying.setForeground(player2);
+						lblScore1.setText("Score: " + cont.getCurrentPlayerScore());
+					}
+					
+					if(cont.isEnded())
+					{
+						ResultFrame rf = new ResultFrame(frmGameFrame, s);
+						rf.showGUI();
+					}
 				}
 			}
 		});
