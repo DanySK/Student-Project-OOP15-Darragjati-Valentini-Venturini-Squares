@@ -133,7 +133,8 @@ public class MatchImpl implements Match {
     public int getCurrentPlayerScore() {
         return this.playerScore;
     }
-
+    
+    @Override
     public String getCurrentPlayerTurn() {
         convertNumToNamePlayer();
         return this.namePlayer;
@@ -177,7 +178,7 @@ public class MatchImpl implements Match {
     }
 
     @Override
-    public boolean getEndMatch() {
+    public boolean isEnded() {
         return this.endMatch;
     }
 

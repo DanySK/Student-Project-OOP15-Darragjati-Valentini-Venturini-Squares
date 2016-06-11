@@ -5,27 +5,41 @@ import java.io.IOException;
 import it.unibo.squaresgameteam.squares.model.enumerations.RankingOption;
 import it.unibo.squaresgameteam.squares.model.exceptions.DuplicatedPlayerStatsException;
 import it.unibo.squaresgameteam.squares.model.interfaces.Player;
+
 /**
  * 
  * @author Licia Valentini
  * 
- * Interfaccia della classe dedicata alla gestione della classifica.
+ *         Interface of class ShowRankingImpl.
  *
  */
 public interface ShowRanking {
-     /**
-     * Metodo per la visualizzazione della lista, i parametri servono per modificare il criterio d'ordine.
+    /**
+     * This method show the ranking.
+     * 
      * @param rankingOrder
+     *            sort order
      * @param reverse
-     * @return classifica sotto forma di stringa.
-     * @throws IOException 
-     * @throws DuplicatedPlayerStatsException 
-     * @throws ClassNotFoundException 
+     *            if you want the reverse
+     * @return a string with the ranking.
+     * @throws IOException
+     *             .
+     * @throws DuplicatedPlayerStatsException
+     *             .
+     * @throws ClassNotFoundException
+     *             .
      */
-    String showRanking(RankingOption rankingOrder, boolean reverse) throws IOException, DuplicatedPlayerStatsException, ClassNotFoundException;
+    String showRanking(RankingOption rankingOrder, boolean reverse)
+            throws IOException, DuplicatedPlayerStatsException, ClassNotFoundException;
     
+    /**
+     * this method add the player's result at the end of the game.
+     * @param player object with player's info
+     * @throws IOException .
+     * @throws DuplicatedPlayerStatsException .
+     * @throws ClassNotFoundException .
+     */
+
     void addPlayer(Player player) throws IOException, DuplicatedPlayerStatsException, ClassNotFoundException;
-   
-    
 
 }

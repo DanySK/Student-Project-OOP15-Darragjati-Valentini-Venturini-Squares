@@ -37,6 +37,7 @@ public class ShowRankingImpl implements ShowRanking {
     private final File rankingFile;
     private Ranking rankingList;
     private List<Player> currentRanking;
+    private final static int DIGITS = 2;
     
     /**
      * 
@@ -69,11 +70,13 @@ public class ShowRankingImpl implements ShowRanking {
         this.rankingString = "";
         Double doubleNum;
         int intNum;
+        double temp = Math.pow(10, DIGITS);
 
         for (final Player element : this.currentRanking) {
 
             line = element.getPlayerName();
             doubleNum = element.getWinRate();
+            doubleNum = Math.round(doubleNum * temp) / temp;
             s = Double.toString(doubleNum);
             line = line.concat("\t").concat(s);
             intNum = element.getWonMatches();
