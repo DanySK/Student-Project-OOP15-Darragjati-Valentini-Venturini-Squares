@@ -42,6 +42,7 @@ public class GameFrame implements GUIElements {
 		name1 = cont.getNamePlayer1();
 		name2 = cont.getNamePlayer2();
 		this.s = s;
+		previous = "";
 		player1 = s.getPlayer1Color();
 		player2 = s.getPlayer2Color();
 		try {
@@ -227,9 +228,9 @@ public class GameFrame implements GUIElements {
 						lblPlaying.setText(name1+"'s turn");
 						lblPlaying.setForeground(player1);
 						if(previous.equals(cont.getCurrentPlayerTurn()))
-							lblScore2.setText("Score: " + cont.getCurrentPlayerScore());
-						else
 							lblScore1.setText("Score: " + cont.getCurrentPlayerScore());
+						else
+							lblScore2.setText("Score: " + cont.getCurrentPlayerScore());
 					}
 					else
 					{
@@ -278,9 +279,9 @@ public class GameFrame implements GUIElements {
 						lblPlaying.setText(name1+"'s turn");
 						lblPlaying.setForeground(player1);
 						if(previous.equals(cont.getCurrentPlayerTurn()))
-							lblScore2.setText("Score: " + cont.getCurrentPlayerScore());
-						else
 							lblScore1.setText("Score: " + cont.getCurrentPlayerScore());
+						else
+							lblScore2.setText("Score: " + cont.getCurrentPlayerScore());
 					}
 					else
 					{
@@ -330,9 +331,9 @@ public class GameFrame implements GUIElements {
 							lblPlaying.setText(name1+"'s turn");
 							lblPlaying.setForeground(player1);
 							if(previous.equals(cont.getCurrentPlayerTurn()))
-								lblScore2.setText("Score: " + cont.getCurrentPlayerScore());
-							else
 								lblScore1.setText("Score: " + cont.getCurrentPlayerScore());
+							else
+								lblScore2.setText("Score: " + cont.getCurrentPlayerScore());
 						}
 						else
 						{
@@ -392,9 +393,9 @@ public class GameFrame implements GUIElements {
 						lblPlaying.setText(name1+"'s turn");
 						lblPlaying.setForeground(player1);
 						if(previous.equals(cont.getCurrentPlayerTurn()))
-							lblScore2.setText("Score: " + cont.getCurrentPlayerScore());
-						else
 							lblScore1.setText("Score: " + cont.getCurrentPlayerScore());
+						else
+							lblScore2.setText("Score: " + cont.getCurrentPlayerScore());
 					}
 					else
 					{
@@ -450,9 +451,9 @@ public class GameFrame implements GUIElements {
 						lblPlaying.setText(name1+"'s turn");
 						lblPlaying.setForeground(player1);
 						if(previous.equals(cont.getCurrentPlayerTurn()))
-							lblScore2.setText("Score: " + cont.getCurrentPlayerScore());
-						else
 							lblScore1.setText("Score: " + cont.getCurrentPlayerScore());
+						else
+							lblScore2.setText("Score: " + cont.getCurrentPlayerScore());
 					}
 					else
 					{
