@@ -24,11 +24,11 @@ public class RulesMenuImpl implements RulesMenu, GUIElements {
 	private JFrame frmRulesMenu;
 	private JTextArea txtRules;
 	private MenuImpl cont;
-	private MusicImpl mi;
+	private Settings s;
 	
-	public RulesMenuImpl(MusicImpl mi)
+	public RulesMenuImpl(Settings s)
 	{
-		this.mi = mi;
+		this.s = s;
 		cont = new MenuImpl();
 		initialize();
 	}
@@ -63,7 +63,7 @@ public class RulesMenuImpl implements RulesMenu, GUIElements {
 			@Override
 			public void windowClosing(WindowEvent arg0) {
 				String ObjButtons[] = {"Yes","No"};
-		        int PromptResult = JOptionPane.showOptionDialog(null,"Are you sure you want to exit?","Online Examination System",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
+		        int PromptResult = JOptionPane.showOptionDialog(null,"Are you sure you want to exit?","Squares",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
 		        if(PromptResult==JOptionPane.YES_OPTION)
 		        {
 		            System.exit(0);
@@ -87,7 +87,7 @@ public class RulesMenuImpl implements RulesMenu, GUIElements {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				hideGUI();
-				StartMenuImpl sm = new StartMenuImpl(mi);
+				StartMenuImpl sm = new StartMenuImpl(s);
 				sm.setBackground(frmRulesMenu.getContentPane().getBackground());
 				sm.showGUI();
 			}

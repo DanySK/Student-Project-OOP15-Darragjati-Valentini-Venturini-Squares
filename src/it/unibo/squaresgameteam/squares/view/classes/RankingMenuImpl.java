@@ -19,13 +19,13 @@ import it.unibo.squaresgameteam.squares.view.interfaces.GUIElements;
 public class RankingMenuImpl implements RankingMenu, GUIElements {
 
 	private JFrame frmRankingMenu;
-	private MusicImpl mi;
+	private Settings s;
 
 	/**
 	 * Create the application.
 	 */
-	public RankingMenuImpl(MusicImpl mi) {
-		this.mi = mi;
+	public RankingMenuImpl(Settings s) {
+		this.s = s;
 		initialize();
 	}
 	
@@ -58,7 +58,7 @@ public class RankingMenuImpl implements RankingMenu, GUIElements {
 			@Override
 			public void windowClosing(WindowEvent arg0) {
 				String ObjButtons[] = {"Yes","No"};
-		        int PromptResult = JOptionPane.showOptionDialog(null,"Are you sure you want to exit?","Online Examination System",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
+		        int PromptResult = JOptionPane.showOptionDialog(null,"Are you sure you want to exit?","Squares",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
 		        if(PromptResult==JOptionPane.YES_OPTION)
 		        {
 		            System.exit(0);
@@ -76,7 +76,7 @@ public class RankingMenuImpl implements RankingMenu, GUIElements {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				hideGUI();
-				StartMenuImpl sm = new StartMenuImpl(mi);
+				StartMenuImpl sm = new StartMenuImpl(s);
 				sm.setBackground(frmRankingMenu.getContentPane().getBackground());
 				sm.showGUI();
 			}

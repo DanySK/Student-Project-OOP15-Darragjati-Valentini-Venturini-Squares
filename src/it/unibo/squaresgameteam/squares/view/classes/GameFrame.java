@@ -28,15 +28,17 @@ public class GameFrame implements GUIElements {
 	private int rows, colums;
 	private boolean player = true, change = true;
 	private String name1, name2;
-	private Color player1=Color.CYAN, player2=Color.ORANGE;
-	private MusicImpl mi;
+	private Color player1, player2;
+	private Settings s;
 
-	public GameFrame(MatchImpl cont, MusicImpl mi) {
+	public GameFrame(MatchImpl cont, Settings s) {
 		rows = cont.getRowsNumber();
 		colums = cont.getColumsNumber();
 		name1 = cont.getNamePlayer1();
 		name2 = cont.getNamePlayer2();
-		this.mi = mi;
+		this.s = s;
+		player1 = s.getPlayer1Color();
+		player2 = s.getPlayer2Color();
 		try {
 			cont.createGrid();
 		} catch (UnsupportedSizeException e) {
@@ -160,7 +162,7 @@ public class GameFrame implements GUIElements {
 		        if(PromptResult==JOptionPane.YES_OPTION)
 		        {
 					hideGUI();
-					StartMenuImpl sm = new StartMenuImpl(mi);
+					StartMenuImpl sm = new StartMenuImpl(s);
 					sm.setBackground(frmGameFrame.getContentPane().getBackground());
 					sm.showGUI();
 		        }

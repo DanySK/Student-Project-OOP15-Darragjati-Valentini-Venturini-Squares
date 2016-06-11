@@ -25,13 +25,13 @@ public class StartMenuImpl implements StartMenu, GUIElements {
 	 */
 	public StartMenuImpl(MusicImpl mi) {
 		frmStartMenu = new JFrame();
-		this.mi = mi;
 		s = new Settings(mi, frmStartMenu.getBackground(), Color.RED, Color.BLUE);
 		initialize();
 	}
 	
 	public StartMenuImpl(Settings s)
 	{
+		frmStartMenu = new JFrame();
 		this.s = s;
 		initialize();
 	}
@@ -65,7 +65,7 @@ public class StartMenuImpl implements StartMenu, GUIElements {
 			@Override
 			public void windowClosing(WindowEvent arg0) {
 				String ObjButtons[] = {"Yes","No"};
-		        int PromptResult = JOptionPane.showOptionDialog(null,"Are you sure you want to exit?","Exiting Squares",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
+		        int PromptResult = JOptionPane.showOptionDialog(null,"Are you sure you want to exit?","Squares",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
 		        if(PromptResult==JOptionPane.YES_OPTION)
 		        {
 		            System.exit(0);
@@ -125,7 +125,7 @@ public class StartMenuImpl implements StartMenu, GUIElements {
 
 	@Override
 	public void startNewGame() {
-		MatchSetupImpl ms = new MatchSetupImpl(frmStartMenu, mi);
+		MatchSetupImpl ms = new MatchSetupImpl(frmStartMenu, s);
 		ms.setBackground(frmStartMenu.getContentPane().getBackground());
 		ms.showGUI();
 	}
@@ -133,7 +133,7 @@ public class StartMenuImpl implements StartMenu, GUIElements {
 	@Override
 	public void showRules() {
 		hideGUI();
-		RulesMenuImpl rm = new RulesMenuImpl(mi);
+		RulesMenuImpl rm = new RulesMenuImpl(s);
 		rm.setBackground(frmStartMenu.getContentPane().getBackground());
 		rm.showGUI();
 	}
@@ -141,7 +141,7 @@ public class StartMenuImpl implements StartMenu, GUIElements {
 	@Override
 	public void showRanking() {
 		hideGUI();
-		RankingMenuImpl rankm = new RankingMenuImpl(mi);
+		RankingMenuImpl rankm = new RankingMenuImpl(s);
 		rankm.setBackground(frmStartMenu.getContentPane().getBackground());
 		rankm.showGUI();
 	}
@@ -149,7 +149,7 @@ public class StartMenuImpl implements StartMenu, GUIElements {
 	@Override
 	public void showSettings() {
 		hideGUI();
-		OptionsMenuImpl om = new OptionsMenuImpl(mi);
+		OptionsMenuImpl om = new OptionsMenuImpl(s);
 		om.setBackground(frmStartMenu.getContentPane().getBackground());
 		om.showGUI();
 	}

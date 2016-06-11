@@ -35,11 +35,11 @@ public class MatchSetupImpl implements MatchSetup, GUIElements {
 	private JSpinner spnColums;
 	private JComboBox<String> cmbGameMode;
 	private MenuImpl cont;
-	private MusicImpl mi;
+	private Settings s;
 	
-	public MatchSetupImpl(JFrame f, MusicImpl mi)
+	public MatchSetupImpl(JFrame f, Settings s)
 	{
-		this.mi = mi;
+		this.s = s;
 		cont = new MenuImpl();
 		initialize();
 		frame = f;
@@ -188,7 +188,7 @@ public class MatchSetupImpl implements MatchSetup, GUIElements {
 			hideGUI();
 			frame.setVisible(false);
 			frame.dispose();
-			GameFrame gf = new GameFrame((MatchImpl) cont.createMatch((Integer)spnColums.getValue(), (Integer)spnRows.getValue(), txtPlayer1.getText(), txtPlayer2.getText(), setBoardType()), mi);gf = new GameFrame((MatchImpl) cont.createMatch((Integer)spnColums.getValue(), (Integer)spnRows.getValue(), txtPlayer1.getText(), txtPlayer2.getText(), TypeGame.TRIANGLE), mi);
+			GameFrame gf = new GameFrame((MatchImpl) cont.createMatch((Integer)spnColums.getValue(), (Integer)spnRows.getValue(), txtPlayer1.getText(), txtPlayer2.getText(), setBoardType()), s);gf = new GameFrame((MatchImpl) cont.createMatch((Integer)spnColums.getValue(), (Integer)spnRows.getValue(), txtPlayer1.getText(), txtPlayer2.getText(), TypeGame.TRIANGLE), s);
 			gf.setBackground(frmMatchSetup.getContentPane().getBackground());
 			gf.showGUI();
 		}

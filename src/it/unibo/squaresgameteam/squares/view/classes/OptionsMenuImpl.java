@@ -25,13 +25,13 @@ public class OptionsMenuImpl implements OptionsMenu, GUIElements {
 	private Color col;
 	private boolean start=true;
 	private JButton btnColor1, btnColor2, btnMusic;
-	private MusicImpl mi;
+	private Settings s;
 
 	/**
 	 * Create the application.
 	 */
-	public OptionsMenuImpl(MusicImpl mi) {
-		this.mi = mi;
+	public OptionsMenuImpl(Settings s) {
+		this.s = s;
 		initialize();
 	}
 	
@@ -92,6 +92,7 @@ public class OptionsMenuImpl implements OptionsMenu, GUIElements {
 		});
 		btnColor1.setFont(new Font("Sitka Text", Font.PLAIN, 17));
 		btnColor1.setBounds(280, 70, 70, 30);
+		btnColor1.setBackground(s.getPlayer1Color());
 		frmOptionsMenu.getContentPane().add(btnColor1);
 		
 		JLabel lblColor2 = new JLabel("PLAYER 2 COLOR");
@@ -109,10 +110,10 @@ public class OptionsMenuImpl implements OptionsMenu, GUIElements {
 		});
 		btnColor2.setFont(new Font("Sitka Text", Font.PLAIN, 17));
 		btnColor2.setBounds(280, 110, 70, 30);
+		btnColor2.setBackground(s.getPlayer2Color());
 		frmOptionsMenu.getContentPane().add(btnColor2);
 		
-		JButton btnMusic;
-		if(mi.isStarted())
+		if(s.getMusic().isStarted())
 			btnMusic = new JButton("Stop music");
 		else
 			btnMusic = new JButton("Start music");
@@ -142,7 +143,7 @@ public class OptionsMenuImpl implements OptionsMenu, GUIElements {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				hideGUI();
-				StartMenuImpl sm = new StartMenuImpl(mi);
+				StartMenuImpl sm = new StartMenuImpl(s);
 				sm.setBackground(col);
 				sm.showGUI();
 			}
@@ -156,7 +157,8 @@ public class OptionsMenuImpl implements OptionsMenu, GUIElements {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				hideGUI();
-				StartMenuImpl sm = new StartMenuImpl(mi);
+				s = new Settings(s.getMusic(),frmOptionsMenu.getContentPane().getBackground(),btnColor1.getBackground(),btnColor2.getBackground());
+				StartMenuImpl sm = new StartMenuImpl(s);
 				sm.setBackground(frmOptionsMenu.getContentPane().getBackground());
 				sm.showGUI();
 			}
@@ -168,14 +170,14 @@ public class OptionsMenuImpl implements OptionsMenu, GUIElements {
 	
 	@Override
 	public void setMusic() {
-		if(mi.isStarted())
+		if(s.getMusic().isStarted())
 		{
-			mi.stopMusic();
+			s.getMusic().stopMusic();
 			btnMusic.setText("Start music");
 		}
 		else
 		{
-			mi.startMusic();
+			s.getMusic().startMusic();
 			btnMusic.setText("Stop music");
 		}
 	}
