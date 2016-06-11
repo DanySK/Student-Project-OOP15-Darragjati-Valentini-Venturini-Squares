@@ -10,12 +10,7 @@ public interface OptionsMenu {
     /**
      * sets the application's volume higher.
      */
-    void setVolumeHigher();
-
-    /**
-     * sets the application's volume lower.
-     */
-    void setVolumeLower();
+    void setMusic();
 
     /**
      * sets the first player's colour.

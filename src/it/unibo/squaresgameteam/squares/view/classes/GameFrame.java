@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import it.unibo.squaresgameteam.squares.controller.classes.MusicImpl;
+import it.unibo.squaresgameteam.squares.model.exceptions.UnsupportedSizeException;
 import it.unibo.squaresgameteam.squares.controller.classes.MatchImpl;
 
 import it.unibo.squaresgameteam.squares.view.interfaces.GUIElements;
@@ -36,6 +37,12 @@ public class GameFrame implements GUIElements {
 		name1 = cont.getNamePlayer1();
 		name2 = cont.getNamePlayer2();
 		this.mi = mi;
+		try {
+			cont.createGrid();
+		} catch (UnsupportedSizeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		cont.createNewMatch();
 		
 		initialize();
@@ -190,49 +197,52 @@ public class GameFrame implements GUIElements {
 		btnLine1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				if(y!=0)
+				if(btnLine1.isEnabled())
 				{
-					if(!btns.get(x/40+(y/40-1)*colums).get(0).isEnabled() &&
-							!btns.get(x/40+(y/40-1)*colums).get(1).isEnabled() &&
-							!btns.get(x/40+(y/40-1)*colums).get(3).isEnabled() &&
-							!btns.get(x/40+(y/40-1)*colums).get(4).isEnabled())
+					if(y!=0)
 					{
-						btns.get(x/40+(y/40-1)*colums).get(2).setVisible(true);
-						btns.get(x/40+(y/40-1)*colums).get(2).setBackground(lblPlaying.getForeground());
+						if(!btns.get(x/40+(y/40-1)*colums).get(0).isEnabled() &&
+								!btns.get(x/40+(y/40-1)*colums).get(1).isEnabled() &&
+								!btns.get(x/40+(y/40-1)*colums).get(3).isEnabled() &&
+								!btns.get(x/40+(y/40-1)*colums).get(4).isEnabled())
+						{
+							btns.get(x/40+(y/40-1)*colums).get(2).setVisible(true);
+							btns.get(x/40+(y/40-1)*colums).get(2).setBackground(lblPlaying.getForeground());
+							
+							change = false;
+						}
+					}
+					if(!btns.get(x/40+y/40*colums).get(0).isEnabled() &&
+							!btns.get(x/40+y/40*colums).get(1).isEnabled() &&
+							!btns.get(x/40+y/40*colums).get(3).isEnabled() &&
+							!btns.get(x/40+y/40*colums).get(4).isEnabled())
+					{
+						btns.get(x/40+y/40*colums).get(2).setVisible(true);
+						btns.get(x/40+y/40*colums).get(2).setBackground(lblPlaying.getForeground());
 						
 						change = false;
 					}
-				}
-				if(!btns.get(x/40+y/40*colums).get(0).isEnabled() &&
-						!btns.get(x/40+y/40*colums).get(1).isEnabled() &&
-						!btns.get(x/40+y/40*colums).get(3).isEnabled() &&
-						!btns.get(x/40+y/40*colums).get(4).isEnabled())
-				{
-					btns.get(x/40+y/40*colums).get(2).setVisible(true);
-					btns.get(x/40+y/40*colums).get(2).setBackground(lblPlaying.getForeground());
 					
-					change = false;
-				}
-				
-				btnLine1.setBackground(lblPlaying.getForeground());
-				btnLine1.setEnabled(false);
-				
-				if(change==true)
-				{
-					if(player==true)
+					btnLine1.setBackground(lblPlaying.getForeground());
+					btnLine1.setEnabled(false);
+					
+					if(change==true)
 					{
-						lblPlaying.setForeground(player2);
-						lblPlaying.setText(name2+"'s turn");
+						if(player==true)
+						{
+							lblPlaying.setForeground(player2);
+							lblPlaying.setText(name2+"'s turn");
+						}
+						else
+						{
+							lblPlaying.setForeground(player1);
+							lblPlaying.setText(name1+"'s turn");
+						}
+						player=!player;
 					}
 					else
-					{
-						lblPlaying.setForeground(player1);
-						lblPlaying.setText(name1+"'s turn");
-					}
-					player=!player;
+						change = true;
 				}
-				else
-					change = true;
 			}
 		});
 		if(y!=0)
@@ -245,49 +255,52 @@ public class GameFrame implements GUIElements {
 		btnLine2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				if(y!=0)
+				if(btnLine2.isEnabled())
 				{
-					if(!btns.get((x/40-1)+y/40*colums).get(0).isEnabled() &&
-							!btns.get((x/40-1)+y/40*colums).get(1).isEnabled() &&
-							!btns.get((x/40-1)+y/40*colums).get(3).isEnabled() &&
-							!btns.get((x/40-1)+y/40*colums).get(4).isEnabled())
+				if(y!=0)
 					{
-						btns.get((x/40-1)+y/40*colums).get(2).setVisible(true);
-						btns.get((x/40-1)+y/40*colums).get(2).setBackground(lblPlaying.getForeground());
+						if(!btns.get((x/40-1)+y/40*colums).get(0).isEnabled() &&
+								!btns.get((x/40-1)+y/40*colums).get(1).isEnabled() &&
+								!btns.get((x/40-1)+y/40*colums).get(3).isEnabled() &&
+								!btns.get((x/40-1)+y/40*colums).get(4).isEnabled())
+						{
+							btns.get((x/40-1)+y/40*colums).get(2).setVisible(true);
+							btns.get((x/40-1)+y/40*colums).get(2).setBackground(lblPlaying.getForeground());
+							
+							change = false;
+						}
+					}
+					if(!btns.get(x/40+y/40*colums).get(0).isEnabled() &&
+							!btns.get(x/40+y/40*colums).get(1).isEnabled() &&
+							!btns.get(x/40+y/40*colums).get(3).isEnabled() &&
+							!btns.get(x/40+y/40*colums).get(4).isEnabled())
+					{
+						btns.get(x/40+y/40*colums).get(2).setVisible(true);
+						btns.get(x/40+y/40*colums).get(2).setBackground(lblPlaying.getForeground());
 						
 						change = false;
 					}
-				}
-				if(!btns.get(x/40+y/40*colums).get(0).isEnabled() &&
-						!btns.get(x/40+y/40*colums).get(1).isEnabled() &&
-						!btns.get(x/40+y/40*colums).get(3).isEnabled() &&
-						!btns.get(x/40+y/40*colums).get(4).isEnabled())
-				{
-					btns.get(x/40+y/40*colums).get(2).setVisible(true);
-					btns.get(x/40+y/40*colums).get(2).setBackground(lblPlaying.getForeground());
 					
-					change = false;
-				}
-				
-				btnLine2.setBackground(lblPlaying.getForeground());
-				btnLine2.setEnabled(false);
-				
-				if(change==true)
-				{
-					if(player==true)
+					btnLine2.setBackground(lblPlaying.getForeground());
+					btnLine2.setEnabled(false);
+					
+					if(change==true)
 					{
-						lblPlaying.setForeground(player2);
-						lblPlaying.setText(name2+"'s turn");
+						if(player==true)
+						{
+							lblPlaying.setForeground(player2);
+							lblPlaying.setText(name2+"'s turn");
+						}
+						else
+						{
+							lblPlaying.setForeground(player1);
+							lblPlaying.setText(name1+"'s turn");
+						}
+						player=!player;
 					}
 					else
-					{
-						lblPlaying.setForeground(player1);
-						lblPlaying.setText(name1+"'s turn");
-					}
-					player=!player;
+						change = true;
 				}
-				else
-					change = true;
 			}
 		});
 		if(x!=0)
@@ -316,36 +329,39 @@ public class GameFrame implements GUIElements {
 		btnLine.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				if(!btns.get((x/40-1)+y/40*colums).get(0).isEnabled() &&
-						!btns.get((x/40-1)+y/40*colums).get(1).isEnabled() &&
-						!btns.get((x/40-1)+y/40*colums).get(3).isEnabled() &&
-						!btns.get((x/40-1)+y/40*colums).get(4).isEnabled())
+				if(btnLine.isEnabled())
 				{
-					btns.get((x/40-1)+y/40*colums).get(2).setVisible(true);
-					btns.get((x/40-1)+y/40*colums).get(2).setBackground(lblPlaying.getForeground());
-					
-					change = false;
-				}
-				
-				btnLine.setBackground(lblPlaying.getForeground());
-				btnLine.setEnabled(false);
-				
-				if(change==true)
-				{
-					if(player==true)
+					if(!btns.get((x/40-1)+y/40*colums).get(0).isEnabled() &&
+							!btns.get((x/40-1)+y/40*colums).get(1).isEnabled() &&
+							!btns.get((x/40-1)+y/40*colums).get(3).isEnabled() &&
+							!btns.get((x/40-1)+y/40*colums).get(4).isEnabled())
 					{
-						lblPlaying.setForeground(player2);
-						lblPlaying.setText(name2+"'s turn");
+						btns.get((x/40-1)+y/40*colums).get(2).setVisible(true);
+						btns.get((x/40-1)+y/40*colums).get(2).setBackground(lblPlaying.getForeground());
+						
+						change = false;
+					}
+					
+					btnLine.setBackground(lblPlaying.getForeground());
+					btnLine.setEnabled(false);
+					
+					if(change==true)
+					{
+						if(player==true)
+						{
+							lblPlaying.setForeground(player2);
+							lblPlaying.setText(name2+"'s turn");
+						}
+						else
+						{
+							lblPlaying.setForeground(player1);
+							lblPlaying.setText(name1+"'s turn");
+						}
+						player=!player;
 					}
 					else
-					{
-						lblPlaying.setForeground(player1);
-						lblPlaying.setText(name1+"'s turn");
-					}
-					player=!player;
+						change = true;
 				}
-				else
-					change = true;
 			}
 		});
 		btns.get((x/40-1)+y/40*colums).add(btnLine);
@@ -365,36 +381,39 @@ public class GameFrame implements GUIElements {
 		btnLine.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				if(!btns.get(x/40+(y/40-1)*colums).get(0).isEnabled() &&
-						!btns.get(x/40+(y/40-1)*colums).get(1).isEnabled() &&
-						!btns.get(x/40+(y/40-1)*colums).get(3).isEnabled() &&
-						!btns.get(x/40+(y/40-1)*colums).get(4).isEnabled())
+				if(btnLine.isEnabled())
 				{
-					btns.get(x/40+(y/40-1)*colums).get(2).setVisible(true);
-					btns.get(x/40+(y/40-1)*colums).get(2).setBackground(lblPlaying.getForeground());
-					
-					change = false;
-				}
-				
-				btnLine.setBackground(lblPlaying.getForeground());
-				btnLine.setEnabled(false);
-				
-				if(change==true)
-				{
-					if(player==true)
+					if(!btns.get(x/40+(y/40-1)*colums).get(0).isEnabled() &&
+							!btns.get(x/40+(y/40-1)*colums).get(1).isEnabled() &&
+							!btns.get(x/40+(y/40-1)*colums).get(3).isEnabled() &&
+							!btns.get(x/40+(y/40-1)*colums).get(4).isEnabled())
 					{
-						lblPlaying.setForeground(player2);
-						lblPlaying.setText(name2+"'s turn");
+						btns.get(x/40+(y/40-1)*colums).get(2).setVisible(true);
+						btns.get(x/40+(y/40-1)*colums).get(2).setBackground(lblPlaying.getForeground());
+						
+						change = false;
+					}
+					
+					btnLine.setBackground(lblPlaying.getForeground());
+					btnLine.setEnabled(false);
+					
+					if(change==true)
+					{
+						if(player==true)
+						{
+							lblPlaying.setForeground(player2);
+							lblPlaying.setText(name2+"'s turn");
+						}
+						else
+						{
+							lblPlaying.setForeground(player1);
+							lblPlaying.setText(name1+"'s turn");
+						}
+						player=!player;
 					}
 					else
-					{
-						lblPlaying.setForeground(player1);
-						lblPlaying.setText(name1+"'s turn");
-					}
-					player=!player;
+						change = true;
 				}
-				else
-					change = true;
 			}
 		});
 		btns.get(x/40+(y/40-1)*colums).add(btnLine);

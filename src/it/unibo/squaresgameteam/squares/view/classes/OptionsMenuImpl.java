@@ -119,16 +119,7 @@ public class OptionsMenuImpl implements OptionsMenu, GUIElements {
 		btnMusic.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				if(mi.isStarted())
-				{
-					mi.stopMusic();
-					btnMusic.setText("Start music");
-				}
-				else
-				{
-					mi.startMusic();
-					btnMusic.setText("Stop music");
-				}
+				setMusic();
 			}
 		});
 		btnMusic.setFont(new Font("Sitka Text", Font.PLAIN, 17));
@@ -176,15 +167,17 @@ public class OptionsMenuImpl implements OptionsMenu, GUIElements {
 	}
 	
 	@Override
-	public void setVolumeHigher() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setVolumeLower() {
-		// TODO Auto-generated method stub
-		
+	public void setMusic() {
+		if(mi.isStarted())
+		{
+			mi.stopMusic();
+			btnMusic.setText("Start music");
+		}
+		else
+		{
+			mi.startMusic();
+			btnMusic.setText("Stop music");
+		}
 	}
 
 	@Override

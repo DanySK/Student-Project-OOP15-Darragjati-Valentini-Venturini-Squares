@@ -17,13 +17,22 @@ public class StartMenuImpl implements StartMenu, GUIElements {
 	
 	private JFrame frmStartMenu;
 	private MusicImpl mi;
+	private Settings s;
 	
 
 	/**
 	 * Create the application.
 	 */
 	public StartMenuImpl(MusicImpl mi) {
+		frmStartMenu = new JFrame();
 		this.mi = mi;
+		s = new Settings(mi, frmStartMenu.getBackground(), Color.RED, Color.BLUE);
+		initialize();
+	}
+	
+	public StartMenuImpl(Settings s)
+	{
+		this.s = s;
 		initialize();
 	}
 	
@@ -52,7 +61,6 @@ public class StartMenuImpl implements StartMenu, GUIElements {
 	 */
 	private void initialize()
 	{
-		frmStartMenu = new JFrame();
 		frmStartMenu.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent arg0) {
@@ -74,9 +82,7 @@ public class StartMenuImpl implements StartMenu, GUIElements {
 		btnNewGame.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				MatchSetupImpl ms = new MatchSetupImpl(frmStartMenu, mi);
-				ms.setBackground(frmStartMenu.getContentPane().getBackground());
-				ms.showGUI();
+				startNewGame();
 			}
 		});
 		btnNewGame.setFont(new Font("Sitka Text", Font.PLAIN, 17));
@@ -87,10 +93,7 @@ public class StartMenuImpl implements StartMenu, GUIElements {
 		btnSettings.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				hideGUI();
-				OptionsMenuImpl om = new OptionsMenuImpl(mi);
-				om.setBackground(frmStartMenu.getContentPane().getBackground());
-				om.showGUI();
+				showSettings();
 			}
 		});
 		btnSettings.setFont(new Font("Sitka Text", Font.PLAIN, 17));
@@ -101,10 +104,7 @@ public class StartMenuImpl implements StartMenu, GUIElements {
 		btnRules.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				hideGUI();
-				RulesMenuImpl rm = new RulesMenuImpl(mi);
-				rm.setBackground(frmStartMenu.getContentPane().getBackground());
-				rm.showGUI();
+				showRules();
 			}
 		});
 		btnRules.setFont(new Font("Sitka Text", Font.PLAIN, 17));
@@ -115,51 +115,43 @@ public class StartMenuImpl implements StartMenu, GUIElements {
 		btnStats.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				hideGUI();
-				RankingMenuImpl rankm = new RankingMenuImpl(mi);
-				rankm.setBackground(frmStartMenu.getContentPane().getBackground());
-				rankm.showGUI();
+				showRanking();
 			}
 		});
 		btnStats.setFont(new Font("Sitka Text", Font.PLAIN, 17));
 		btnStats.setBounds(135, 235, 130, 30);
 		frmStartMenu.getContentPane().add(btnStats);
 	}
-	
-	@Override
-	public void showStartMenu() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void startNewGame() {
-		// TODO Auto-generated method stub
-		
+		MatchSetupImpl ms = new MatchSetupImpl(frmStartMenu, mi);
+		ms.setBackground(frmStartMenu.getContentPane().getBackground());
+		ms.showGUI();
 	}
 
 	@Override
 	public void showRules() {
-		// TODO Auto-generated method stub
-		
+		hideGUI();
+		RulesMenuImpl rm = new RulesMenuImpl(mi);
+		rm.setBackground(frmStartMenu.getContentPane().getBackground());
+		rm.showGUI();
 	}
 
 	@Override
 	public void showRanking() {
-		// TODO Auto-generated method stub
-		
+		hideGUI();
+		RankingMenuImpl rankm = new RankingMenuImpl(mi);
+		rankm.setBackground(frmStartMenu.getContentPane().getBackground());
+		rankm.showGUI();
 	}
 
 	@Override
 	public void showSettings() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void quit() {
-		// TODO Auto-generated method stub
-		
+		hideGUI();
+		OptionsMenuImpl om = new OptionsMenuImpl(mi);
+		om.setBackground(frmStartMenu.getContentPane().getBackground());
+		om.showGUI();
 	}
 
 }

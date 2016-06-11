@@ -8,11 +8,6 @@ package it.unibo.squaresgameteam.squares.view.interfaces;
 public interface StartMenu {
 
     /**
-     * this method shows or not the starting menu.
-     */
-    void showStartMenu();
-
-    /**
      * this method starts a new match.
      */
     void startNewGame();
@@ -31,9 +26,4 @@ public interface StartMenu {
      * this method shows the options.
      */
     void showSettings();
-
-    /**
-     * this method quits the application.
-     */
-    void quit();
 }

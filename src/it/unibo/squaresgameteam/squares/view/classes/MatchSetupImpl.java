@@ -188,26 +188,18 @@ public class MatchSetupImpl implements MatchSetup, GUIElements {
 			hideGUI();
 			frame.setVisible(false);
 			frame.dispose();
-			GameFrame gf;
-			if(cmbGameMode.getSelectedIndex()==0)
-				gf = new GameFrame((MatchImpl) cont.createMatch((Integer)spnColums.getValue(), (Integer)spnRows.getValue(), txtPlayer1.getText(), txtPlayer2.getText(), TypeGame.SQUARE), mi);
-			else
-				gf = new GameFrame((MatchImpl) cont.createMatch((Integer)spnColums.getValue(), (Integer)spnRows.getValue(), txtPlayer1.getText(), txtPlayer2.getText(), TypeGame.TRIANGLE), mi);
+			GameFrame gf = new GameFrame((MatchImpl) cont.createMatch((Integer)spnColums.getValue(), (Integer)spnRows.getValue(), txtPlayer1.getText(), txtPlayer2.getText(), setBoardType()), mi);gf = new GameFrame((MatchImpl) cont.createMatch((Integer)spnColums.getValue(), (Integer)spnRows.getValue(), txtPlayer1.getText(), txtPlayer2.getText(), TypeGame.TRIANGLE), mi);
 			gf.setBackground(frmMatchSetup.getContentPane().getBackground());
 			gf.showGUI();
 		}
 	}
 
 	@Override
-	public void borderless() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setBoardType() {
-		// TODO Auto-generated method stub
-		
+	public TypeGame setBoardType() {
+		if(cmbGameMode.getSelectedIndex()==0)
+			return TypeGame.SQUARE;
+		else
+			return TypeGame.TRIANGLE;
 	}
 
 }
