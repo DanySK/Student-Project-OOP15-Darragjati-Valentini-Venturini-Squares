@@ -36,9 +36,7 @@ public class MusicImpl implements Music {
         } catch (LineUnavailableException e) {
             e.printStackTrace();
         }
-    }
-
-    public void startMusic() {
+        
         try {
             // Open the audio.
             this.clip.open(this.audioIn);
@@ -47,6 +45,11 @@ public class MusicImpl implements Music {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        // Loop the audio.
+    }
+
+    public void startMusic() {
+        
         // Loop the audio.
         this.clip.loop(Clip.LOOP_CONTINUOUSLY);
         
