@@ -3,12 +3,12 @@ package it.unibo.squaresgameteam.squares.controller.enumerations;
  * 
  * @author Licia Valentini
  * 
- * Enumerazione che permette di scegliere la modalit� di gioco.
+ * This enum allows you to choose the game mode.
  *
  */
 public enum TypeGame {
     /**
-     * Modalit� quadrati o triangoli.
+     * Square and triangle mode.
      */
     SQUARE, TRIANGLE;
 

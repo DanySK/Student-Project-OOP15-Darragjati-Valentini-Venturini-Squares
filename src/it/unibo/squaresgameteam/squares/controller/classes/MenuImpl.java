@@ -11,23 +11,29 @@ import it.unibo.squaresgameteam.squares.controller.interfaces.Menu;
 import it.unibo.squaresgameteam.squares.controller.interfaces.ShowRanking;
 import it.unibo.squaresgameteam.squares.model.exceptions.DuplicatedPlayerStatsException;
 
+/**
+ * 
+ * @author Licia Valentini
+ * 
+ *         This class manages the start Menu.
+ *
+ */
 public class MenuImpl implements Menu {
 
     private String rules;
 
-    public MenuImpl() {
-        
+    @Override
+    public Match createMatch(final int columsNumber, final int rowsNumber, final String namePlayer1,
+            final String namePlayer2, final TypeGame mode) {
+        return new MatchImpl(columsNumber, rowsNumber, namePlayer1, namePlayer2, mode);
+
     }
 
-    public Match createMatch(int columsNumber, int rowsNumber, String namePlayer1, String namePlayer2, TypeGame mode){
-        return  new MatchImpl(columsNumber, rowsNumber, namePlayer1, namePlayer2, mode);
-        
-    }
+    @Override
     public String showRules() throws IOException {
 
         final String txtDirectory = ClassLoader.class.getResource("/Rules.txt").getPath();
-        //final FileReader in = new FileReader(txtDirectory);
-        
+        // final FileReader in = new FileReader(txtDirectory);
 
         try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(txtDirectory), "UTF8"))) {
             String s;
@@ -39,15 +45,17 @@ public class MenuImpl implements Menu {
         } catch (IOException ex) {
             throw new IOException();
         }
-        
+
         return this.rules;
 
     }
-    
-    public ShowRanking createRankingClass() throws DuplicatedPlayerStatsException{     
-       return  new ShowRankingImpl();
+
+    @Override
+    public ShowRanking createRankingClass() throws DuplicatedPlayerStatsException {
+        return new ShowRankingImpl();
     }
 
+    @Override
     public void exitApp() {
         System.exit(0);
     }

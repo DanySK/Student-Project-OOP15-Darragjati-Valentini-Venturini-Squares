@@ -1,7 +1,5 @@
 package it.unibo.squaresgameteam.squares.controller.classes;
 
-
-
 import java.io.IOException;
 
 import java.net.URL;
@@ -14,13 +12,21 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 import it.unibo.squaresgameteam.squares.controller.interfaces.Music;
 
+/**
+ * 
+ * @author Licia Valentini This class manages the music in game.
+ *
+ */
+
 public class MusicImpl implements Music {
-    
+
     private Clip clip;
     private AudioInputStream audioIn;
     private boolean started;
 
-    // Constructor
+    /**
+     * Constructor of the class.
+     */
     public MusicImpl() {
         try {
             // Open an audio input stream.
@@ -36,7 +42,7 @@ public class MusicImpl implements Music {
         } catch (LineUnavailableException e) {
             e.printStackTrace();
         }
-        
+
         try {
             // Open the audio.
             this.clip.open(this.audioIn);
@@ -48,28 +54,26 @@ public class MusicImpl implements Music {
         // Loop the audio.
     }
 
+    @Override
     public void startMusic() {
-        
+
         // Loop the audio.
         this.clip.loop(Clip.LOOP_CONTINUOUSLY);
-        
-        started = true;
+
+        this.started = true;
     }
 
+    @Override
     public void stopMusic() {
         // Stop the audio
         this.clip.stop();
 
-        started = false;
-    }
-    
-    public boolean isStarted()
-    {
-    	return started;
+        this.started = false;
     }
 
-    
+    @Override
+    public boolean isStarted() {
+        return started;
+    }
+
 }
-
-
-

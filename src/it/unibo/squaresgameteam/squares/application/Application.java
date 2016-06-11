@@ -1,6 +1,5 @@
 package it.unibo.squaresgameteam.squares.application;
 
-import it.unibo.squaresgameteam.squares.controller.interfaces.Menu;
 import it.unibo.squaresgameteam.squares.controller.classes.MusicImpl;
 import it.unibo.squaresgameteam.squares.view.classes.StartMenuImpl;
 
@@ -13,17 +12,15 @@ public final class Application {
     }
 
     /**
-     * Main of the application.
      * 
      * @param args
-     * @throws IOException
-     * @throws ClassNotFoundException
-     * @throws DuplicatedPlayerStatsException
+     *            necessary arguments
+     *
      */
     public static void main(final String[] args) {
-    	MusicImpl music = new MusicImpl();
-    	music.startMusic();
-    	StartMenuImpl sm = new StartMenuImpl(music);
+        final MusicImpl music = new MusicImpl();
+        music.startMusic();
+        final StartMenuImpl sm = new StartMenuImpl(music);
         sm.showGUI();
     }
 }

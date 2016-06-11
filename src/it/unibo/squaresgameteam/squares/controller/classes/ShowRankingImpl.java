@@ -2,6 +2,7 @@ package it.unibo.squaresgameteam.squares.controller.classes;
 
 import java.io.BufferedInputStream;
 
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -22,12 +23,26 @@ import it.unibo.squaresgameteam.squares.model.exceptions.DuplicatedPlayerStatsEx
 import it.unibo.squaresgameteam.squares.model.interfaces.Player;
 import it.unibo.squaresgameteam.squares.model.interfaces.Ranking;
 
+/**
+ * 
+ * @author Licia Valentini
+ * 
+ * This class manages the ranking
+ *
+ */
+
 public class ShowRankingImpl implements ShowRanking {
 
     private String rankingString;
     private final File rankingFile;
     private Ranking rankingList;
     private List<Player> currentRanking;
+    
+    /**
+     * 
+     * @throws DuplicatedPlayerStatsException
+     * Constructor of the class.
+     */
 
     public ShowRankingImpl() throws DuplicatedPlayerStatsException {
         this.currentRanking = new ArrayList<>();
@@ -38,7 +53,7 @@ public class ShowRankingImpl implements ShowRanking {
     }
 
     @Override
-    public String showRanking(RankingOption rankingOrder, boolean reverse)
+    public String showRanking(final RankingOption rankingOrder, final boolean reverse)
             throws IOException, DuplicatedPlayerStatsException, ClassNotFoundException {
         createRanking();
         this.rankingList.orderListBy(rankingOrder, reverse);
@@ -77,7 +92,7 @@ public class ShowRankingImpl implements ShowRanking {
     }
 
     @Override
-    public void addPlayer(Player player) throws IOException, DuplicatedPlayerStatsException, ClassNotFoundException {
+    public void addPlayer(final Player player) throws IOException, DuplicatedPlayerStatsException, ClassNotFoundException {
         createRanking();
         deleteRankingFile();
         rankingList.addPlayerResults(player);

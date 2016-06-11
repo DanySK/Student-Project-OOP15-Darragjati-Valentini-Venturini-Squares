@@ -24,8 +24,8 @@ import it.unibo.squaresgameteam.squares.model.interfaces.Game;
 
 /**
  * 
- * @author Licia Valentini Classe creata per gestire la partita, dalla prima
- *         all'ultima mossa.
+ * @author Licia Valentini 
+ * This class manages the match.
  *
  */
 public class MatchImpl implements Match {
@@ -46,12 +46,17 @@ public class MatchImpl implements Match {
 
     /**
      * 
-     * @param columsNumber number of colums
-     * @param rowsNumber   number of rows     
-     * @param namePlayer1 name first player
-     * @param namePlayer2 name second player
-     * @param mode game mode
-     *            Costruttore della classe.
+     * @param columsNumber
+     *            number of columns
+     * @param rowsNumber
+     *            number of rows
+     * @param namePlayer1
+     *            name first player
+     * @param namePlayer2
+     *            name second player
+     * @param mode
+     *            game mode. 
+     * Constructor of the class.
      */
     public MatchImpl(final int columsNumber, final int rowsNumber, final String namePlayer1, final String namePlayer2,
             final TypeGame mode) {
