@@ -58,9 +58,9 @@ public class SquareGridPointsCounter implements PointsCounterStrategy {
         if (listIndex < grid.getHorizontalListSize() - 1
                 && !grid.getWhoSetTheLine(new MoveImpl(ListType.HORIZONTAL, listIndex + 1, position))
                         .equals(GridOption.EMPTY)
-                && !grid.getWhoSetTheLine(new MoveImpl(ListType.VERTICAL, position, listIndex - 1))
+                && !grid.getWhoSetTheLine(new MoveImpl(ListType.VERTICAL, position, listIndex))
                         .equals(GridOption.EMPTY)
-                && !grid.getWhoSetTheLine(new MoveImpl(ListType.VERTICAL, position + 1, listIndex - 1))
+                && !grid.getWhoSetTheLine(new MoveImpl(ListType.VERTICAL, position + 1, listIndex))
                         .equals(GridOption.EMPTY)) {
             points++;
         }
@@ -82,9 +82,9 @@ public class SquareGridPointsCounter implements PointsCounterStrategy {
         if (listIndex < grid.getVerticalListSize() - 1
                 && !grid.getWhoSetTheLine(new MoveImpl(ListType.VERTICAL, listIndex + 1, position))
                         .equals(GridOption.EMPTY)
-                && !grid.getWhoSetTheLine(new MoveImpl(ListType.HORIZONTAL, position, listIndex - 1))
+                && !grid.getWhoSetTheLine(new MoveImpl(ListType.HORIZONTAL, position, listIndex))
                         .equals(GridOption.EMPTY)
-                && !grid.getWhoSetTheLine(new MoveImpl(ListType.HORIZONTAL, position + 1, listIndex - 1))
+                && !grid.getWhoSetTheLine(new MoveImpl(ListType.HORIZONTAL, position + 1, listIndex))
                         .equals(GridOption.EMPTY)) {
             points++;
         }
