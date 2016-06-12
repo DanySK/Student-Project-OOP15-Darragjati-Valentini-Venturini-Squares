@@ -37,8 +37,7 @@ public class MatchImpl implements Match {
     private GridOption numPlayer;
     private String namePlayer;
     private BaseGrid grid;
-    private Game match;
-    private PlayedTime time;
+    private Game match;    
     private int playerScore;
     private GridOption winner;
     private boolean endMatch;
@@ -90,7 +89,7 @@ public class MatchImpl implements Match {
         match.startMatch();
         this.numPlayer = this.match.getCurrentPlayerTurn();
         convertNumToNamePlayer();
-        this.time = new PlayedTimeImpl();
+        
       
     }
 
@@ -156,7 +155,7 @@ public class MatchImpl implements Match {
 
     @Override
     public Double getMatchTime() {
-        return this.time.getTotalMatchDuration();
+        return this.match.getMatchDuration();
     }
 
     private void controlNamePlayers(final String namePlayer1, final String namePlayer2) {
@@ -168,14 +167,14 @@ public class MatchImpl implements Match {
     private void addPlayerRank() throws IOException, DuplicatedPlayerStatsException, ClassNotFoundException {
         final ShowRanking ranking = new ShowRankingImpl();
         Player playerResult = this.match.getPlayerMatchResult(numPlayer);
-        ranking.addPlayer(playerResult);
+        ((ShowRankingImpl) ranking).addPlayer(playerResult);
         if (this.numPlayer.equals(GridOption.PLAYER1)) {
             this.numPlayer = GridOption.PLAYER2;
         } else {
             this.numPlayer = GridOption.PLAYER1;
         }
         playerResult = this.match.getPlayerMatchResult(numPlayer);
-        ranking.addPlayer(playerResult);
+        ((ShowRankingImpl) ranking).addPlayer(playerResult);
     }
 
     @Override

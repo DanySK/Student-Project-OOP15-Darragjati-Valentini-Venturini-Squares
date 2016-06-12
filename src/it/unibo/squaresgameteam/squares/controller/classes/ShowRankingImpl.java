@@ -94,8 +94,8 @@ public class ShowRankingImpl implements ShowRanking {
 
     }
 
-    @Override
-    public void addPlayer(final Player player) throws IOException, DuplicatedPlayerStatsException, ClassNotFoundException {
+   
+    protected void addPlayer(final Player player) throws IOException, DuplicatedPlayerStatsException, ClassNotFoundException {
         createRanking();
         deleteRankingFile();
         rankingList.addPlayerResults(player);

@@ -30,16 +30,7 @@ public interface ShowRanking {
      *             .
      */
     String showRanking(RankingOption rankingOrder, boolean reverse)
-            throws IOException, DuplicatedPlayerStatsException, ClassNotFoundException;
+            throws IOException, DuplicatedPlayerStatsException, ClassNotFoundException;    
     
-    /**
-     * this method add the player's result at the end of the game.
-     * @param player object with player's info
-     * @throws IOException .
-     * @throws DuplicatedPlayerStatsException .
-     * @throws ClassNotFoundException .
-     */
-
-    void addPlayer(Player player) throws IOException, DuplicatedPlayerStatsException, ClassNotFoundException;
 
 }
