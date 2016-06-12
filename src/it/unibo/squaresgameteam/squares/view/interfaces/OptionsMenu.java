@@ -1,16 +1,21 @@
 package it.unibo.squaresgameteam.squares.view.interfaces;
 
 /**
- * This interface is used to custom the application's interface. The user can
+ * This interface is used to customize the application's interface. The user can
  * lower or increase the application's volume and choose the colours of the
  * background and the players.
  */
 public interface OptionsMenu {
 
     /**
-     * sets the application's volume higher.
+     * sets on/off the application's music.
      */
     void setMusic();
+    
+    /**
+     * resets the application's ranking.
+     */
+    void resetRanking();
 
     /**
      * sets the first player's colour.

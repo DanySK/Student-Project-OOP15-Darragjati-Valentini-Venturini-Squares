@@ -164,7 +164,7 @@ public class GameFrame implements GUIElements {
 		lblPlayer1.setBounds(colums*40+30, 50, 150, 30);
 		frmGameFrame.getContentPane().add(lblPlayer1);
 		
-		lblScore1 = new JLabel("Score: ");
+		lblScore1 = new JLabel("Score: 0");
 		lblScore1.setFont(new Font("Sitka Text", Font.PLAIN, 14));
 		lblScore1.setBounds(colums*40+30, 80, 150, 30);
 		frmGameFrame.getContentPane().add(lblScore1);
@@ -174,7 +174,7 @@ public class GameFrame implements GUIElements {
 		lblPlayer2.setBounds(colums*40+30, 120, 150, 30);
 		frmGameFrame.getContentPane().add(lblPlayer2);
 		
-		lblScore2 = new JLabel("Score: ");
+		lblScore2 = new JLabel("Score: 0");
 		lblScore2.setFont(new Font("Sitka Text", Font.PLAIN, 14));
 		lblScore2.setBounds(colums*40+30, 150, 150, 30);
 		frmGameFrame.getContentPane().add(lblScore2);

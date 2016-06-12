@@ -15,7 +15,8 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
 import it.unibo.squaresgameteam.squares.controller.classes.MusicImpl;
-
+import it.unibo.squaresgameteam.squares.controller.classes.ShowRankingImpl;
+import it.unibo.squaresgameteam.squares.model.exceptions.DuplicatedPlayerStatsException;
 import it.unibo.squaresgameteam.squares.view.interfaces.GUIElements;
 import it.unibo.squaresgameteam.squares.view.interfaces.OptionsMenu;
 
@@ -64,7 +65,7 @@ public class OptionsMenuImpl implements OptionsMenu, GUIElements {
 			@Override
 			public void windowClosing(WindowEvent arg0) {
 				String ObjButtons[] = {"Yes","No"};
-		        int PromptResult = JOptionPane.showOptionDialog(null,"Are you sure you want to exit?","Online Examination System",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
+		        int PromptResult = JOptionPane.showOptionDialog(null,"Are you sure you want to exit?","Squares",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
 		        if(PromptResult==JOptionPane.YES_OPTION)
 		        {
 		            System.exit(0);
@@ -124,8 +125,24 @@ public class OptionsMenuImpl implements OptionsMenu, GUIElements {
 			}
 		});
 		btnMusic.setFont(new Font("Sitka Text", Font.PLAIN, 17));
-		btnMusic.setBounds(125, 225, 150, 30);
+		btnMusic.setBounds(125, 185, 150, 30);
 		frmOptionsMenu.getContentPane().add(btnMusic);
+		
+		JButton btnResetRanking = new JButton("Reset ranking");
+		btnResetRanking.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				String ObjButtons[] = {"Yes","No"};
+		        int PromptResult = JOptionPane.showOptionDialog(null,"Are you sure you want to reset the ranking?","Ranking reset",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
+		        if(PromptResult==JOptionPane.YES_OPTION)
+		        {
+		            resetRanking();
+		        }
+			}
+		});
+		btnResetRanking.setFont(new Font("Sitka Text", Font.PLAIN, 17));
+		btnResetRanking.setBounds(100, 225, 200, 30);
+		frmOptionsMenu.getContentPane().add(btnResetRanking);
 
 		JButton btnBackground = new JButton("Change application background...");
 		btnBackground.addMouseListener(new MouseAdapter() {
@@ -179,6 +196,17 @@ public class OptionsMenuImpl implements OptionsMenu, GUIElements {
 		{
 			s.getMusic().startMusic();
 			btnMusic.setText("Stop music");
+		}
+	}
+	
+	@Override
+	public void resetRanking() {
+		try {
+			ShowRankingImpl sri = new ShowRankingImpl();
+			sri.deleteRankingFile();
+		} catch (DuplicatedPlayerStatsException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
