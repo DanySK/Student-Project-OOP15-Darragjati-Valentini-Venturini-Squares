@@ -128,6 +128,7 @@ public class TestTriangleGame {
      * @throws UnexistentLineListException
      *             if the listIndex input is not correctF
      */
+    @Test
     public void testCompleteMatch() throws UnsupportedSizeException, UnexistentLineListException {
         final BaseGrid squareGrid2 = new TriangleGridImpl(STANDARD_SIZE, STANDARD_SIZE);
         final Game gridOfSize2 = new GameImpl(squareGrid2, "Rei Ayanami", "Shinji Ikari");

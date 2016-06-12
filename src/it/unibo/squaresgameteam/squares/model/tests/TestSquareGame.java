@@ -126,6 +126,7 @@ public class TestSquareGame {
      * @throws UnexistentLineListException
      *             if the listIndex input is not correctF
      */
+    @Test
     public void testCompleteMatch() throws UnsupportedSizeException, UnexistentLineListException {
         final BaseGrid squareGrid2 = new SquareGridImpl(STANDARD_SIZE, STANDARD_SIZE);
         final Game gridOfSize2 = new GameImpl(squareGrid2, "Rei Ayanami", "Shinji Ikari");
@@ -154,7 +155,6 @@ public class TestSquareGame {
      * @throws UnexistentLineListException
      */
     @Test
-    // CHECKSTYLE:OFF:
     public void testExceptions() throws UnsupportedSizeException, UnexistentLineListException {
         BaseGrid exceptionGrid;
         Game exceptionGame;

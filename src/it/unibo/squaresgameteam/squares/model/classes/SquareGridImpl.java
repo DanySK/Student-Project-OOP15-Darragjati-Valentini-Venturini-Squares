@@ -92,94 +92,60 @@ public class SquareGridImpl implements BaseGrid {
         return (getHorizontalListSize() - 1) * (getVerticalListSize() - 1);
     }
 
-    private void checkCorrectHorizontalInput(final Integer listIndex, final Integer position)
-            throws UnexistentLineListException {
-        if (listIndex < 0 || listIndex > horizontal.size()) {
-            throw new UnexistentLineListException();
-        }
-        if (position < 0 || position > horizontal.get(listIndex).size()) {
-            throw new IndexOutOfBoundsException();
-        }
-    }
-
     @Override
     public GridOption getWhoSetTheLine(final Move move) throws UnexistentLineListException {
+        List<List<GridOption>> list;     
         switch (move.getListType()) {
         case HORIZONTAL:
-            return getWhoSetHorizontalLine(move.getListIndex(), move.getPosition());
-        case VERTICAL:
-            return getWhoSetVerticalLine(move.getListIndex(), move.getPosition());
-        default:
-            throw new UnsupportedOperationException();
-        }
-    }
-
-    private GridOption getWhoSetHorizontalLine(final Integer listIndex, final Integer position)
-            throws UnexistentLineListException {
-        checkCorrectHorizontalInput(listIndex, position);
-        return horizontal.get(listIndex).get(position);
-    }
-
-    private GridOption getWhoSetVerticalLine(final Integer listIndex, final Integer position)
-            throws UnexistentLineListException {
-        checkCorrectVerticalInput(listIndex, position);
-        return vertical.get(listIndex).get(position);
-    }
-
-    @Override
-    public void setLine(final Move move, final GridOption currentPlayerTurn) throws UnexistentLineListException {
-        switch (move.getListType()) {
-        case HORIZONTAL:
-            setHorizontalLine(move.getListIndex(), move.getPosition(), currentPlayerTurn);
+            list = horizontal;          
             break;
         case VERTICAL:
-            setVerticalLine(move.getListIndex(), move.getPosition(), currentPlayerTurn);
+            list = vertical;
             break;
         default:
             throw new UnsupportedOperationException();
         }
+        final Integer listIndex = move.getListIndex();
+        final Integer position = move.getPosition();
+        checkCorrectHorizontalInput(list, listIndex, position);
+        return list.get(listIndex).get(position);
     }
 
-    private void setHorizontalLine(final int listIndex, final int position, final GridOption playerTurn)
+    private void checkCorrectHorizontalInput(final List<List<GridOption>> list, final Integer listIndex, final Integer position)
             throws UnexistentLineListException {
-        checkCorrectHorizontalInput(listIndex, position);
-        if (playerTurn.equals(GridOption.EMPTY)) {
-            if (horizontal.get(listIndex).get(position).equals(GridOption.EMPTY)) {
-                throw new MoveNotFoundException("You can't undo a move that wasn't made");
-            } else {
-                horizontal.get(listIndex).set(position, playerTurn);
-            }
-        } else {
-            if (horizontal.get(listIndex).get(position).equals(GridOption.EMPTY)) {
-                horizontal.get(listIndex).set(position, playerTurn);
-            } else {
-                throw new MoveAlreadyDoneException("You can't make a move that has been already made");
-            }
-        }
-    }
-
-    private void checkCorrectVerticalInput(final Integer listIndex, final Integer position)
-            throws UnexistentLineListException {
-        if (listIndex < 0 || listIndex > vertical.size()) {
+        if (listIndex < 0 || listIndex > list.size()) {
             throw new UnexistentLineListException();
         }
-        if (position < 0 || position > vertical.get(listIndex).size()) {
+        if (position < 0 || position > list.get(listIndex).size()) {
             throw new IndexOutOfBoundsException();
         }
     }
-
-    private void setVerticalLine(final int listIndex, final int position, final GridOption playerTurn)
-            throws UnexistentLineListException {
-        checkCorrectVerticalInput(listIndex, position);
-        if (playerTurn.equals(GridOption.EMPTY)) {
-            if (vertical.get(listIndex).get(position).equals(GridOption.EMPTY)) {
+    
+    @Override
+    public void setLine(final Move move, final GridOption currentPlayerTurn) throws UnexistentLineListException {
+        List<List<GridOption>> list;
+        switch (move.getListType()) {
+        case HORIZONTAL:
+            list = horizontal;
+            break;
+        case VERTICAL:
+            list = vertical;
+            break;
+        default:
+            throw new UnsupportedOperationException();
+        }     
+        final Integer listIndex = move.getListIndex();
+        final Integer position = move.getPosition();
+        checkCorrectHorizontalInput(list, listIndex, position);
+        if (currentPlayerTurn.equals(GridOption.EMPTY)) {
+            if (list.get(listIndex).get(position).equals(GridOption.EMPTY)) {
                 throw new MoveNotFoundException("You can't undo a move that wasn't made");
             } else {
-                vertical.get(listIndex).set(position, playerTurn);
+                list.get(listIndex).set(position, currentPlayerTurn);
             }
         } else {
-            if (vertical.get(listIndex).get(position).equals(GridOption.EMPTY)) {
-                vertical.get(listIndex).set(position, playerTurn);
+            if (list.get(listIndex).get(position).equals(GridOption.EMPTY)) {
+                list.get(listIndex).set(position, currentPlayerTurn);
             } else {
                 throw new MoveAlreadyDoneException("You can't make a move that has been already made");
             }
