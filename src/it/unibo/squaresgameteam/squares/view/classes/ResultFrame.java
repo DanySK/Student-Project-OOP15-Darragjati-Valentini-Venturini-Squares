@@ -88,7 +88,11 @@ public class ResultFrame implements GUIElements {
 			lblPlayer.setHorizontalAlignment(SwingConstants.CENTER);
 			lblPlayer.setFont(new Font("Sitka Text", Font.PLAIN, 16));
 			
-			JLabel lblScore = new JLabel("Score: " + cont.getCurrentPlayerScore());
+			JLabel lblScore;
+			if(cont.getPlayer1Score()>cont.getPlayer2Score())
+				lblScore = new JLabel("Score: " + cont.getPlayer1Score());
+			else
+				lblScore = new JLabel("Score: " + cont.getPlayer2Score());
 			lblScore.setBounds(75, 70, 240, 30);
 			pane.add(lblScore);
 			lblScore.setHorizontalAlignment(SwingConstants.CENTER);

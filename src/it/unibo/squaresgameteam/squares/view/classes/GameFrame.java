@@ -223,20 +223,15 @@ public class GameFrame implements GUIElements {
 					{
 						lblPlaying.setText(name1+"'s turn");
 						lblPlaying.setForeground(player1);
-						if(previous.equals(cont.getCurrentPlayerTurn()))
-							lblScore2.setText("Score: " + cont.getCurrentPlayerScore());
-						else
-							lblScore1.setText("Score: " + cont.getCurrentPlayerScore());
 					}
 					else
 					{
 						lblPlaying.setText(name2+"'s turn");
 						lblPlaying.setForeground(player2);
-						if(previous.equals(cont.getCurrentPlayerTurn()))
-							lblScore1.setText("Score: " + cont.getCurrentPlayerScore());
-						else
-							lblScore2.setText("Score: " + cont.getCurrentPlayerScore());
 					}
+					
+					lblScore1.setText("Score: " + cont.getPlayer1Score());
+					lblScore2.setText("Score: " + cont.getPlayer2Score());
 				}
 				else
 					JOptionPane.showMessageDialog(null, "No moves to undo.", "InfoBox", JOptionPane.INFORMATION_MESSAGE);
@@ -284,20 +279,15 @@ public class GameFrame implements GUIElements {
 						{
 							lblPlaying.setText(name1+"'s turn");
 							lblPlaying.setForeground(player1);
-							if(previous.equals(cont.getCurrentPlayerTurn()))
-								lblScore1.setText("Score: " + cont.getCurrentPlayerScore());
-							else
-								lblScore2.setText("Score: " + cont.getCurrentPlayerScore());
 						}
 						else
 						{
 							lblPlaying.setText(name2+"'s turn");
 							lblPlaying.setForeground(player2);
-							if(previous.equals(cont.getCurrentPlayerTurn()))
-								lblScore2.setText("Score: " + cont.getCurrentPlayerScore());
-							else
-								lblScore1.setText("Score: " + cont.getCurrentPlayerScore());
 						}
+						
+						lblScore1.setText("Score: " + cont.getPlayer1Score());
+						lblScore2.setText("Score: " + cont.getPlayer2Score());
 					}
 					
 					previous = cont.getCurrentPlayerTurn();
@@ -336,20 +326,15 @@ public class GameFrame implements GUIElements {
 						{
 							lblPlaying.setText(name1+"'s turn");
 							lblPlaying.setForeground(player1);
-							if(previous.equals(cont.getCurrentPlayerTurn()))
-								lblScore1.setText("Score: " + cont.getCurrentPlayerScore());
-							else
-								lblScore2.setText("Score: " + cont.getCurrentPlayerScore());
 						}
 						else
 						{
 							lblPlaying.setText(name2+"'s turn");
 							lblPlaying.setForeground(player2);
-							if(previous.equals(cont.getCurrentPlayerTurn()))
-								lblScore2.setText("Score: " + cont.getCurrentPlayerScore());
-							else
-								lblScore1.setText("Score: " + cont.getCurrentPlayerScore());
 						}
+						
+						lblScore1.setText("Score: " + cont.getPlayer1Score());
+						lblScore2.setText("Score: " + cont.getPlayer2Score());
 					}
 					
 					previous = cont.getCurrentPlayerTurn();
@@ -388,20 +373,15 @@ public class GameFrame implements GUIElements {
 							{
 								lblPlaying.setText(name1+"'s turn");
 								lblPlaying.setForeground(player1);
-								if(previous.equals(cont.getCurrentPlayerTurn()))
-									lblScore1.setText("Score: " + cont.getCurrentPlayerScore());
-								else
-									lblScore2.setText("Score: " + cont.getCurrentPlayerScore());
 							}
 							else
 							{
 								lblPlaying.setText(name2+"'s turn");
 								lblPlaying.setForeground(player2);
-								if(previous.equals(cont.getCurrentPlayerTurn()))
-									lblScore2.setText("Score: " + cont.getCurrentPlayerScore());
-								else
-									lblScore1.setText("Score: " + cont.getCurrentPlayerScore());
 							}
+							
+							lblScore1.setText("Score: " + cont.getPlayer1Score());
+							lblScore2.setText("Score: " + cont.getPlayer2Score());
 						}
 						
 						previous = cont.getCurrentPlayerTurn();
@@ -452,20 +432,15 @@ public class GameFrame implements GUIElements {
 						{
 							lblPlaying.setText(name1+"'s turn");
 							lblPlaying.setForeground(player1);
-							if(previous.equals(cont.getCurrentPlayerTurn()))
-								lblScore1.setText("Score: " + cont.getCurrentPlayerScore());
-							else
-								lblScore2.setText("Score: " + cont.getCurrentPlayerScore());
 						}
 						else
 						{
 							lblPlaying.setText(name2+"'s turn");
 							lblPlaying.setForeground(player2);
-							if(previous.equals(cont.getCurrentPlayerTurn()))
-								lblScore2.setText("Score: " + cont.getCurrentPlayerScore());
-							else
-								lblScore1.setText("Score: " + cont.getCurrentPlayerScore());
 						}
+						
+						lblScore1.setText("Score: " + cont.getPlayer1Score());
+						lblScore2.setText("Score: " + cont.getPlayer2Score());
 					}
 					
 					previous = cont.getCurrentPlayerTurn();
@@ -512,20 +487,15 @@ public class GameFrame implements GUIElements {
 						{
 							lblPlaying.setText(name1+"'s turn");
 							lblPlaying.setForeground(player1);
-							if(previous.equals(cont.getCurrentPlayerTurn()))
-								lblScore1.setText("Score: " + cont.getCurrentPlayerScore());
-							else
-								lblScore2.setText("Score: " + cont.getCurrentPlayerScore());
 						}
 						else
 						{
 							lblPlaying.setText(name2+"'s turn");
 							lblPlaying.setForeground(player2);
-							if(previous.equals(cont.getCurrentPlayerTurn()))
-								lblScore2.setText("Score: " + cont.getCurrentPlayerScore());
-							else
-								lblScore1.setText("Score: " + cont.getCurrentPlayerScore());
 						}
+						
+						lblScore1.setText("Score: " + cont.getPlayer1Score());
+						lblScore2.setText("Score: " + cont.getPlayer2Score());
 					}
 					
 					previous = cont.getCurrentPlayerTurn();
