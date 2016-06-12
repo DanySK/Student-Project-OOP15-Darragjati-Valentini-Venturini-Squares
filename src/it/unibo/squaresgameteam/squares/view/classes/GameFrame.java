@@ -367,7 +367,7 @@ public class GameFrame implements GUIElements {
 					{
 						btns.add(btnBox);
 						try {
-							cont.addLine(ListType.DIAGONAL, x/40, y/40);
+							cont.addLine(ListType.DIAGONAL, y/40, x/40);
 						} catch (ClassNotFoundException | UnexistentLineListException | IOException
 								| DuplicatedPlayerStatsException e) {
 							e.printStackTrace();
