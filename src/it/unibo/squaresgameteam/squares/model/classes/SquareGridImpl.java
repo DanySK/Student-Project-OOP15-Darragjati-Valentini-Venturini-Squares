@@ -40,10 +40,10 @@ public class SquareGridImpl implements BaseGrid {
             throw new UnsupportedSizeException();
         }
         for (int i = 0; i < rowsNumber + 1; i++) {
-            horizontal.add(createEmptyList(rowsNumber));
+            horizontal.add(createEmptyList(columnsNumber));
         }
         for (int i = 0; i < columnsNumber + 1; i++) {
-            vertical.add(createEmptyList(columnsNumber));
+            vertical.add(createEmptyList(rowsNumber));
         }
     }
 

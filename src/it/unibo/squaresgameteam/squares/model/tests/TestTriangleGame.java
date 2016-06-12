@@ -48,12 +48,12 @@ public class TestTriangleGame {
 
         // verifies that every element in the list is initialized as EMPTY
         for (int i = 0; i < HORIZONTAL_SIZE + 1; i++) {
-            for (int p = 0; p < HORIZONTAL_SIZE; p++) {
+            for (int p = 0; p < VERTICAL_SIZE; p++) {
                 assertEquals(triangleGrid.getWhoSetTheLine(new MoveImpl(ListType.HORIZONTAL, i, p)), GridOption.EMPTY);
             }
         }
         for (int i = 0; i < VERTICAL_SIZE + 1; i++) {
-            for (int p = 0; p < VERTICAL_SIZE; p++) {
+            for (int p = 0; p < HORIZONTAL_SIZE; p++) {
                 assertEquals(triangleGrid.getWhoSetTheLine(new MoveImpl(ListType.VERTICAL, i, p)), GridOption.EMPTY);
             }
         }

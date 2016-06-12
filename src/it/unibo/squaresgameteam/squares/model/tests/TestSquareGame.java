@@ -52,13 +52,13 @@ public class TestSquareGame {
 
         // verifies that every element in the lists is initialized as EMPTY
         for (int i = 0; i < HORIZONTAL_SIZE + 1; i++) {
-            for (int p = 0; p < HORIZONTAL_SIZE; p++) {        
+            for (int p = 0; p < VERTICAL_SIZE; p++) {        
                 assertEquals(squareGrid.getWhoSetTheLine(new MoveImpl(ListType.HORIZONTAL, i, p)),
                         GridOption.EMPTY);
             }
         }
         for (int i = 0; i < VERTICAL_SIZE + 1; i++) {
-            for (int p = 0; p < VERTICAL_SIZE; p++) {    
+            for (int p = 0; p < HORIZONTAL_SIZE; p++) {    
                 assertEquals(squareGrid.getWhoSetTheLine(new MoveImpl(ListType.VERTICAL, i, p)), GridOption.EMPTY);
             }
         }
@@ -135,16 +135,18 @@ public class TestSquareGame {
         for (int i = 0; i < STANDARD_SIZE + 1; i++) {
             for (int p = 0; p < STANDARD_SIZE; p++) {
                 gridOfSize2.setLine(new MoveImpl(ListType.HORIZONTAL, i, p));
-                gridOfSize2.setLine(new MoveImpl(ListType.VERTICAL, i, p));
+                gridOfSize2.setLine(new MoveImpl(ListType.VERTICAL, i, p));                
             }
         }
         assertTrue(squareGrid2.getRemainingMoves().equals(0));
         assertNotEquals(gridOfSize2.getPlayerPoints(GridOption.PLAYER1),
                 gridOfSize2.getPlayerPoints(GridOption.PLAYER2));
+        assertEquals(gridOfSize2.getPlayerPoints(GridOption.PLAYER1) + gridOfSize2.getPlayerPoints(GridOption.PLAYER2), 36);
         assertTrue(gridOfSize2.isEnded());
         assertNotEquals(GridOption.EMPTY, gridOfSize2.getWinner());
         assertNotEquals(gridOfSize2.getPlayerMatchResult(GridOption.PLAYER1),
                 gridOfSize2.getPlayerMatchResult(GridOption.PLAYER2));
+        System.out.println(gridOfSize2.getMatchDuration());
         assertNotEquals(gridOfSize2.getMatchDuration(), -1.0);
     }
 
