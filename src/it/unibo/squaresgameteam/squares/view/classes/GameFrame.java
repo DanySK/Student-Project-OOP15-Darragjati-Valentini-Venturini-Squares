@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import it.unibo.squaresgameteam.squares.model.exceptions.DuplicatedPlayerStatsException;
+import it.unibo.squaresgameteam.squares.model.exceptions.NoMovesDoneException;
 import it.unibo.squaresgameteam.squares.model.exceptions.UnexistentLineListException;
 import it.unibo.squaresgameteam.squares.model.exceptions.UnsupportedSizeException;
 import it.unibo.squaresgameteam.squares.model.enumerations.ListType;
@@ -32,7 +33,7 @@ import it.unibo.squaresgameteam.squares.view.interfaces.GUIElements;
  *
  */
 public class GameFrame implements GUIElements {
-	private ArrayList<ArrayList<JButton>> btns;
+	private ArrayList<JButton> btns;
 	private JFrame frmGameFrame;
 	private JLabel lblPlaying, lblScore1, lblScore2;
 	private int rows, colums;
@@ -49,6 +50,7 @@ public class GameFrame implements GUIElements {
      *            settings manager
      */
 	public GameFrame(MatchImpl cont, Settings s) {
+		btns = new ArrayList<JButton>();
 		this.cont = cont;
 		rows = cont.getRowsNumber();
 		colums = cont.getColumsNumber();
@@ -92,8 +94,6 @@ public class GameFrame implements GUIElements {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		btns = new ArrayList<ArrayList<JButton>>();
-		
 		frmGameFrame = new JFrame();
 		frmGameFrame.addWindowListener(new WindowAdapter() {
 			@Override
@@ -201,7 +201,39 @@ public class GameFrame implements GUIElements {
 		btnUndo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				
+				if(btns.size()!=0)
+				{
+					btns.get(btns.size()-1).setEnabled(true);
+					btns.get(btns.size()-1).setBackground(null);
+					btns.remove(btns.size()-1);
+					try {
+						cont.undo();
+					} catch (NoMovesDoneException | UnexistentLineListException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					if(cont.getCurrentPlayerTurn().equals(name1))
+					{
+						lblPlaying.setText(name1+"'s turn");
+						lblPlaying.setForeground(player1);
+						if(previous.equals(cont.getCurrentPlayerTurn()))
+							lblScore1.setText("Score: " + cont.getCurrentPlayerScore());
+						else
+							lblScore2.setText("Score: " + cont.getCurrentPlayerScore());
+					}
+					else
+					{
+						lblPlaying.setText(name2+"'s turn");
+						lblPlaying.setForeground(player2);
+						if(previous.equals(cont.getCurrentPlayerTurn()))
+							lblScore2.setText("Score: " + cont.getCurrentPlayerScore());
+						else
+							lblScore1.setText("Score: " + cont.getCurrentPlayerScore());
+					}
+				}
+				else
+					JOptionPane.showMessageDialog(null, "You should write the players namess correctly.", "InfoBox", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 		btnUndo.setFont(new Font("Sitka Text", Font.PLAIN, 17));
@@ -211,8 +243,6 @@ public class GameFrame implements GUIElements {
 	
 	private void addBasicSquare(JPanel pane, int x, int y)
 	{
-		btns.add(new ArrayList<JButton>());
-		
 		JButton btnPoint = new JButton("");
 		btnPoint.setBounds(x,y,10,10);
 		btnPoint.setEnabled(false);
@@ -226,6 +256,7 @@ public class GameFrame implements GUIElements {
 			public void mouseClicked(MouseEvent arg0) {
 				if(btnLine1.isEnabled())
 				{
+					btns.add(btnLine1);
 					try {
 						cont.addLine(ListType.HORIZONTAL, y/40, x/40);
 					} catch (ClassNotFoundException | UnexistentLineListException | IOException
@@ -267,9 +298,6 @@ public class GameFrame implements GUIElements {
 				}
 			}
 		});
-		if(y!=0)
-			btns.get(x/40+(y/40-1)*colums).add(btnLine1);
-		btns.get(x/40+y/40*colums).add(btnLine1);
 		pane.add(btnLine1);
 		
 		JButton btnLine2 = new JButton("");
@@ -279,6 +307,7 @@ public class GameFrame implements GUIElements {
 			public void mouseClicked(MouseEvent arg0) {
 				if(btnLine2.isEnabled())
 				{
+					btns.add(btnLine2);
 					try {
 						cont.addLine(ListType.VERTICAL, x/40, y/40);
 					} catch (ClassNotFoundException | UnexistentLineListException | IOException
@@ -321,9 +350,6 @@ public class GameFrame implements GUIElements {
 				}
 			}
 		});
-		if(x!=0)
-			btns.get((x/40-1)+y/40*colums).add(btnLine2);
-		btns.get(x/40+y/40*colums).add(btnLine2);
 		pane.add(btnLine2);
 		
 		JButton btnBox = new JButton("");
@@ -333,6 +359,7 @@ public class GameFrame implements GUIElements {
 				public void mouseClicked(MouseEvent arg0) {
 					if(!btnBox.getText().equals("\u2572"))
 					{
+						btns.add(btnBox);
 						try {
 							cont.addLine(ListType.DIAGONAL, x/40, y/40);
 						} catch (ClassNotFoundException | UnexistentLineListException | IOException
@@ -379,7 +406,6 @@ public class GameFrame implements GUIElements {
 			btnBox.setVisible(false);
 		btnBox.setFont(new Font("Lucida Sans Unicode", Font.BOLD, 28));
 		btnBox.setBounds(x+10,y+10,30,30);
-		btns.get(x/40+y/40*colums).add(btnBox);
 		pane.add(btnBox);
 	}
 	
@@ -398,6 +424,7 @@ public class GameFrame implements GUIElements {
 			public void mouseClicked(MouseEvent arg0) {
 				if(btnLine.isEnabled())
 				{
+					btns.add(btnLine);
 					try {
 						cont.addLine(ListType.VERTICAL, x/40, y/40);
 					} catch (ClassNotFoundException | UnexistentLineListException | IOException
@@ -439,7 +466,6 @@ public class GameFrame implements GUIElements {
 				}
 			}
 		});
-		btns.get((x/40-1)+y/40*colums).add(btnLine);
 		pane.add(btnLine);
 	}
 	
@@ -458,6 +484,7 @@ public class GameFrame implements GUIElements {
 			public void mouseClicked(MouseEvent arg0) {
 				if(btnLine.isEnabled())
 				{
+					btns.add(btnLine);
 					try {
 						cont.addLine(ListType.HORIZONTAL, y/40, x/40);
 					} catch (ClassNotFoundException | UnexistentLineListException | IOException
@@ -499,7 +526,6 @@ public class GameFrame implements GUIElements {
 				}
 			}
 		});
-		btns.get(x/40+(y/40-1)*colums).add(btnLine);
 		pane.add(btnLine);
 	}
 }
