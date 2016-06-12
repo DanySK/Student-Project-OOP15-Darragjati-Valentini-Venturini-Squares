@@ -13,7 +13,6 @@ import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 
 import it.unibo.squaresgameteam.squares.controller.classes.MatchImpl;
-import it.unibo.squaresgameteam.squares.controller.classes.MusicImpl;
 
 import it.unibo.squaresgameteam.squares.view.interfaces.GUIElements;
 
@@ -53,7 +52,6 @@ public class ResultFrame implements GUIElements {
 		
 		private void initialize() {
 			frmMatchSetup = new JFrame();
-			frmMatchSetup.getContentPane().setBackground(Color.WHITE);
 			frmMatchSetup.setUndecorated(true);
 			frmMatchSetup.setTitle("Squares");
 			frmMatchSetup.setResizable(false);

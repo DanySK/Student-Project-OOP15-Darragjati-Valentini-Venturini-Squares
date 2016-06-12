@@ -292,6 +292,7 @@ public class GameFrame implements GUIElements {
 					if(cont.isEnded())
 					{
 						ResultFrame rf = new ResultFrame(frmGameFrame, s, cont);
+						rf.setBackground(frmGameFrame.getContentPane().getBackground());
 						rf.showGUI();
 					}
 					else

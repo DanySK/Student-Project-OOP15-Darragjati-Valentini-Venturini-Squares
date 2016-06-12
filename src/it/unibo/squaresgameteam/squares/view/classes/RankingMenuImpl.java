@@ -16,8 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
+import javax.swing.SwingConstants;
 
 import it.unibo.squaresgameteam.squares.controller.classes.ShowRankingImpl;
 
@@ -89,8 +88,38 @@ public class RankingMenuImpl implements RankingMenu, GUIElements {
 		frmRankingMenu.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frmRankingMenu.getContentPane().setLayout(null);
 		
+		JLabel lblName = new JLabel("Name");
+		lblName.setFont(new Font("Sitka Text", Font.PLAIN, 11));
+		lblName.setHorizontalAlignment(SwingConstants.CENTER);
+		lblName.setBounds(10, 10, 75, 14);
+		frmRankingMenu.getContentPane().add(lblName);
+		
+		JLabel lblWinrate = new JLabel("Winrate");
+		lblWinrate.setFont(new Font("Sitka Text", Font.PLAIN, 11));
+		lblWinrate.setHorizontalAlignment(SwingConstants.CENTER);
+		lblWinrate.setBounds(85, 10, 75, 14);
+		frmRankingMenu.getContentPane().add(lblWinrate);
+		
+		JLabel lblTotalWins = new JLabel("Total wins");
+		lblTotalWins.setFont(new Font("Sitka Text", Font.PLAIN, 11));
+		lblTotalWins.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTotalWins.setBounds(160, 10, 75, 14);
+		frmRankingMenu.getContentPane().add(lblTotalWins);
+		
+		JLabel lblTotalMatches = new JLabel("Total matches");
+		lblTotalMatches.setFont(new Font("Sitka Text", Font.PLAIN, 11));
+		lblTotalMatches.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTotalMatches.setBounds(235, 10, 75, 14);
+		frmRankingMenu.getContentPane().add(lblTotalMatches);
+		
+		JLabel lblPointsScored = new JLabel("Points scored");
+		lblPointsScored.setFont(new Font("Sitka Text", Font.PLAIN, 11));
+		lblPointsScored.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPointsScored.setBounds(310, 10, 75, 14);
+		frmRankingMenu.getContentPane().add(lblPointsScored);
+		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 10, 374, 270);
+		scrollPane.setBounds(10, 30, 375, 250);
 		frmRankingMenu.getContentPane().add(scrollPane);
 
 		txtRules = new JTextArea();
@@ -120,7 +149,7 @@ public class RankingMenuImpl implements RankingMenu, GUIElements {
 		rdbtnTotalMatches.setBounds(169, 299, 105, 23);
 		frmRankingMenu.getContentPane().add(rdbtnTotalMatches);
 		
-		JRadioButton rdbtnSquaresCatched = new JRadioButton("Squares catched");
+		JRadioButton rdbtnSquaresCatched = new JRadioButton("Points scored");
 		rdbtnSquaresCatched.setFont(new Font("Sitka Text", Font.PLAIN, 12));
 		rdbtnSquaresCatched.setBounds(276, 299, 115, 23);
 		frmRankingMenu.getContentPane().add(rdbtnSquaresCatched);
@@ -151,23 +180,19 @@ public class RankingMenuImpl implements RankingMenu, GUIElements {
 			public void mouseClicked(MouseEvent arg0) {
 				if(rdbtnWinrate.isSelected())
 				{
-					txtRules.setText("1");
 					orderByWinrate();
 				}
 				else if(rdbtnTotalWins.isSelected())
 				{
-					txtRules.setText("2");
 					orderByTotalWins();
 				}
 				else if(rdbtnTotalMatches.isSelected())
 				{
-					txtRules.setText("3");
 					orderByTotalMatches();
 				}
 				else
 				{
-					txtRules.setText("4");
-					orderByTotalSquaresCatched();
+					orderByTotalPointsScored();
 				}
 			}
 		});
@@ -179,7 +204,7 @@ public class RankingMenuImpl implements RankingMenu, GUIElements {
 	@Override
 	public void orderByWinrate() {
 		try {
-			txtRules.setText(cont.showRanking(RankingOption.WINRATE, true));
+			txtRules.setText(cont.showRanking(RankingOption.WINRATE, false));
 		} catch (ClassNotFoundException | IOException | DuplicatedPlayerStatsException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -189,7 +214,7 @@ public class RankingMenuImpl implements RankingMenu, GUIElements {
 	@Override
 	public void orderByTotalWins() {
 		try {
-			txtRules.setText(cont.showRanking(RankingOption.TOTAL_WINS, true));
+			txtRules.setText(cont.showRanking(RankingOption.TOTAL_WINS, false));
 		} catch (ClassNotFoundException | IOException | DuplicatedPlayerStatsException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -199,7 +224,7 @@ public class RankingMenuImpl implements RankingMenu, GUIElements {
 	@Override
 	public void orderByTotalMatches() {
 		try {
-			txtRules.setText(cont.showRanking(RankingOption.TOTAL_MATCHES, true));
+			txtRules.setText(cont.showRanking(RankingOption.TOTAL_MATCHES, false));
 		} catch (ClassNotFoundException | IOException | DuplicatedPlayerStatsException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -207,9 +232,9 @@ public class RankingMenuImpl implements RankingMenu, GUIElements {
 	}
 
 	@Override
-	public void orderByTotalSquaresCatched() {
+	public void orderByTotalPointsScored() {
 		try {
-			txtRules.setText(cont.showRanking(RankingOption.TOTAL_POINTS_SCORED, true));
+			txtRules.setText(cont.showRanking(RankingOption.TOTAL_POINTS_SCORED, false));
 		} catch (ClassNotFoundException | IOException | DuplicatedPlayerStatsException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

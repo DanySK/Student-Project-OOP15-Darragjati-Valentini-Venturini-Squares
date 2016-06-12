@@ -26,5 +26,5 @@ public interface RankingMenu {
     /**
      * orders the ranking by total conquered points.
      */
-    void orderByTotalSquaresCatched();
+    void orderByTotalPointsScored();
 }
