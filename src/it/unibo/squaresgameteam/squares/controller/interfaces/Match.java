@@ -21,7 +21,8 @@ public interface Match {
     /**
      * This method creates a new grid.
      * 
-     * @throws UnsupportedSizeException .
+     * @throws UnsupportedSizeException
+     *             .
      */
     void createGrid() throws UnsupportedSizeException;
 
@@ -32,8 +33,8 @@ public interface Match {
     void createNewMatch();
 
     /**
-     * This method allows to enter a move.
-     * If the match is ended sets the winner's name and adds the result to the ranking. 
+     * This method allows to enter a move. If the match is ended sets the
+     * winner's name and adds the result to the ranking.
      * 
      * @param direction
      *            Vertical, horizontal or diagonal.
@@ -42,10 +43,14 @@ public interface Match {
      * @param position
      *            position.
      * 
-     * @throws UnexistentLineListException .
-     * @throws DuplicatedPlayerStatsException .
-     * @throws IOException .
-     * @throws ClassNotFoundException .
+     * @throws UnexistentLineListException
+     *             .
+     * @throws DuplicatedPlayerStatsException
+     *             .
+     * @throws IOException
+     *             .
+     * @throws ClassNotFoundException
+     *             .
      */
     void addLine(ListType direction, int numLine, int position)
             throws UnexistentLineListException, IOException, DuplicatedPlayerStatsException, ClassNotFoundException;
@@ -58,7 +63,7 @@ public interface Match {
      * @throws UnexistentLineListException
      *             .
      */
-    void undo() throws NoMovesDoneException, UnexistentLineListException;   
+    void undo() throws NoMovesDoneException, UnexistentLineListException;
 
     /**
      * 
@@ -113,14 +118,14 @@ public interface Match {
      */
 
     Move getLastMove();
-    
+
     /**
      * 
      * @return the player who has to do the next move
      */
 
     String getCurrentPlayerTurn();
-    
+
     /**
      * 
      * @return true if the match's result is par.
@@ -128,7 +133,16 @@ public interface Match {
 
     boolean isPar();
 
+    /**
+     * 
+     * @return first player's score
+     */
     int getPlayer1Score();
+
+    /**
+     * 
+     * @return second player's score
+     */
 
     int getPlayer2Score();
 

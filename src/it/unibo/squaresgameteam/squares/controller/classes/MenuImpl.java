@@ -37,6 +37,7 @@ public class MenuImpl implements Menu {
 
         try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(txtDirectory), "UTF8"))) {
             String s;
+            this.rules = "";
             while ((s = br.readLine()) != null) {
               
                 this.rules = this.rules + s + "\n";

@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import it.unibo.squaresgameteam.squares.model.enumerations.RankingOption;
 import it.unibo.squaresgameteam.squares.model.exceptions.DuplicatedPlayerStatsException;
-import it.unibo.squaresgameteam.squares.model.interfaces.Player;
+
 
 /**
  * 
