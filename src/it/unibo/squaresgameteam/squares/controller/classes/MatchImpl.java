@@ -54,6 +54,8 @@ public class MatchImpl implements Match {
      *            game mode. 
      *            Constructor of the class.
      */
+    
+    //CHECKSTYLE:OFF:
     public MatchImpl(final int columsNumber, final int rowsNumber, final String namePlayer1, final String namePlayer2,
             final TypeGame mode) {
         controlNamePlayers(namePlayer1, namePlayer2);
@@ -65,6 +67,7 @@ public class MatchImpl implements Match {
         this.endMatch = false;
         this.par = false;
     }
+    //CHECKSTYLE:ON:
 
     @Override
     public void createGrid() throws UnsupportedSizeException {
@@ -160,12 +163,14 @@ public class MatchImpl implements Match {
     public Double getMatchTime() {
         return this.match.getMatchDuration();
     }
-
+    
+    //CHECKSTYLE:OFF:
     private void controlNamePlayers(final String namePlayer1, final String namePlayer2) {
         if (namePlayer1.equals(namePlayer2)) {
             throw new IllegalArgumentException();
         }
     }
+    //CHECKSTYLE:ON:
 
     private void addPlayerRank() throws IOException, DuplicatedPlayerStatsException, ClassNotFoundException {
         final ShowRanking ranking = new ShowRankingImpl();
