@@ -3,6 +3,7 @@ package it.unibo.squaresgameteam.squares.controller.classes;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import it.unibo.squaresgameteam.squares.controller.enumerations.TypeGame;
@@ -32,10 +33,10 @@ public class MenuImpl implements Menu {
     @Override
     public String showRules() throws IOException {
 
-        final String txtDirectory = ClassLoader.class.getResource("/Rules.txt").getPath();
+        final InputStream txtDirectory = ClassLoader.class.getResourceAsStream("/Rules.txt");
         
 
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(txtDirectory), "UTF8"))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(txtDirectory, "UTF8"))) {
             String s;
             this.rules = "";
             while ((s = br.readLine()) != null) {
