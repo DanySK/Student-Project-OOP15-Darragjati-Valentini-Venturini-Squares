@@ -30,7 +30,13 @@ public interface ShowRanking {
      *             .
      */
     String showRanking(RankingOption rankingOrder, boolean reverse)
-            throws IOException, DuplicatedPlayerStatsException, ClassNotFoundException;    
+            throws IOException, DuplicatedPlayerStatsException, ClassNotFoundException;
+    
+    /**
+     * This method resets the ranking.
+     */
+
+    void deleteRankingFile();    
     
 
 }

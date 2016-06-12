@@ -2,7 +2,6 @@ package it.unibo.squaresgameteam.squares.controller.classes;
 
 import java.io.BufferedInputStream;
 
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -27,7 +26,7 @@ import it.unibo.squaresgameteam.squares.model.interfaces.Ranking;
  * 
  * @author Licia Valentini
  * 
- * This class manages the ranking
+ *         This class manages the ranking
  *
  */
 
@@ -37,12 +36,12 @@ public class ShowRankingImpl implements ShowRanking {
     private final File rankingFile;
     private Ranking rankingList;
     private List<Player> currentRanking;
-    private final static int DIGITS = 2;
-    
+    private static final int DIGITS = 2;
+
     /**
      * 
      * @throws DuplicatedPlayerStatsException
-     * Constructor of the class.
+     *             Constructor of the class.
      */
 
     public ShowRankingImpl() throws DuplicatedPlayerStatsException {
@@ -70,7 +69,7 @@ public class ShowRankingImpl implements ShowRanking {
         this.rankingString = "";
         Double doubleNum;
         int intNum;
-        double temp = Math.pow(10, DIGITS);
+        final double temp = Math.pow(10, DIGITS);
 
         for (final Player element : this.currentRanking) {
 
@@ -94,8 +93,19 @@ public class ShowRankingImpl implements ShowRanking {
 
     }
 
-   
-    protected void addPlayer(final Player player) throws IOException, DuplicatedPlayerStatsException, ClassNotFoundException {
+    /**
+     * 
+     * @param player
+     *            object with player's info
+     * @throws IOException
+     *             .
+     * @throws DuplicatedPlayerStatsException
+     *             .
+     * @throws ClassNotFoundException
+     *             .
+     */
+    protected void addPlayer(final Player player)
+            throws IOException, DuplicatedPlayerStatsException, ClassNotFoundException {
         createRanking();
         deleteRankingFile();
         rankingList.addPlayerResults(player);
@@ -151,14 +161,13 @@ public class ShowRankingImpl implements ShowRanking {
 
     }
 
-    private void deleteRankingFile() {
-        if (this.rankingFile.exists()) {
-            try {
-                this.rankingFile.delete();
-            } catch (SecurityException e) {
-                throw new SecurityException();
-            }
-
+    @Override
+    public void deleteRankingFile() {
+        try {
+            this.rankingFile.delete();
+        } catch (SecurityException e) {
+            throw new SecurityException();
         }
+
     }
 }
