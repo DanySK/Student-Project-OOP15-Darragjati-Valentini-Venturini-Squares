@@ -59,23 +59,28 @@ public class TriangleGridImpl extends SquareGridImpl {
         return super.getMatchMaximumPoints() + (getHorizontalListSize() - 1) * (getVerticalListSize() - 1);
     }
 
+    private void checkCorrectInput(final Integer listIndex, final Integer position)
+            throws UnexistentLineListException {
+        if (listIndex < 0 || listIndex > diagonal.size()) {
+            throw new UnexistentLineListException();
+        }
+        if (position < 0 || position > diagonal.get(listIndex).size()) {
+            throw new IndexOutOfBoundsException();
+        }
+    }
+    
     @Override
     public GridOption getWhoSetTheLine(final Move move) throws UnexistentLineListException {
         if (move.getListType().equals(ListType.HORIZONTAL) || move.getListType().equals(ListType.VERTICAL)) {
             return super.getWhoSetTheLine(move);
         } else {
             if (move.getListType().equals(ListType.DIAGONAL)) {
-                return getWhoSetDiagonalLine(move.getListIndex(), move.getPosition());
+                checkCorrectInput(move.getListIndex(), move.getPosition());
+                return diagonal.get(move.getListIndex()).get(move.getPosition());
             } else {
                 throw new UnsupportedOperationException();
             }
         }
-    }
-
-    private GridOption getWhoSetDiagonalLine(final int listIndex, final int position)
-            throws UnexistentLineListException {
-        checkCorrectDiagonalInput(listIndex, position);
-        return diagonal.get(listIndex).get(position);
     }
 
     @Override
@@ -91,19 +96,9 @@ public class TriangleGridImpl extends SquareGridImpl {
         }
     }
 
-    private void checkCorrectDiagonalInput(final Integer listIndex, final Integer position)
-            throws UnexistentLineListException {
-        if (listIndex < 0 || listIndex > diagonal.size()) {
-            throw new UnexistentLineListException();
-        }
-        if (position < 0 || position > diagonal.get(listIndex).size()) {
-            throw new IndexOutOfBoundsException();
-        }
-    }
-
     private void setDiagonalLine(final int listIndex, final int position, final GridOption playerTurn)
             throws UnexistentLineListException {
-        checkCorrectDiagonalInput(listIndex, position);
+        checkCorrectInput(listIndex, position);
         if (playerTurn.equals(GridOption.EMPTY)) {
             if (diagonal.get(listIndex).get(position).equals(GridOption.EMPTY)) {
                 throw new MoveNotFoundException("You can't undo a move that wasn't made");

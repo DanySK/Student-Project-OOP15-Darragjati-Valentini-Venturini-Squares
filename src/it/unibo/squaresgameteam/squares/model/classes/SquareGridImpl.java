@@ -92,26 +92,7 @@ public class SquareGridImpl implements BaseGrid {
         return (getHorizontalListSize() - 1) * (getVerticalListSize() - 1);
     }
 
-    @Override
-    public GridOption getWhoSetTheLine(final Move move) throws UnexistentLineListException {
-        List<List<GridOption>> list;     
-        switch (move.getListType()) {
-        case HORIZONTAL:
-            list = horizontal;          
-            break;
-        case VERTICAL:
-            list = vertical;
-            break;
-        default:
-            throw new UnsupportedOperationException();
-        }
-        final Integer listIndex = move.getListIndex();
-        final Integer position = move.getPosition();
-        checkCorrectHorizontalInput(list, listIndex, position);
-        return list.get(listIndex).get(position);
-    }
-
-    private void checkCorrectHorizontalInput(final List<List<GridOption>> list, final Integer listIndex, final Integer position)
+    private void checkCorrectInput(final List<List<GridOption>> list, final Integer listIndex, final Integer position)
             throws UnexistentLineListException {
         if (listIndex < 0 || listIndex > list.size()) {
             throw new UnexistentLineListException();
@@ -120,7 +101,24 @@ public class SquareGridImpl implements BaseGrid {
             throw new IndexOutOfBoundsException();
         }
     }
-    
+
+    @Override
+    public GridOption getWhoSetTheLine(final Move move) throws UnexistentLineListException {
+        List<List<GridOption>> list;
+        switch (move.getListType()) {
+        case HORIZONTAL:
+            list = horizontal;
+            break;
+        case VERTICAL:
+            list = vertical;
+            break;
+        default:
+            throw new UnsupportedOperationException();
+        }
+        checkCorrectInput(list, move.getListIndex(), move.getPosition());
+        return list.get(move.getListIndex()).get(move.getPosition());
+    }
+
     @Override
     public void setLine(final Move move, final GridOption currentPlayerTurn) throws UnexistentLineListException {
         List<List<GridOption>> list;
@@ -133,10 +131,10 @@ public class SquareGridImpl implements BaseGrid {
             break;
         default:
             throw new UnsupportedOperationException();
-        }     
+        }
         final Integer listIndex = move.getListIndex();
         final Integer position = move.getPosition();
-        checkCorrectHorizontalInput(list, listIndex, position);
+        checkCorrectInput(list, listIndex, position);
         if (currentPlayerTurn.equals(GridOption.EMPTY)) {
             if (list.get(listIndex).get(position).equals(GridOption.EMPTY)) {
                 throw new MoveNotFoundException("You can't undo a move that wasn't made");
