@@ -8,7 +8,6 @@ import it.unibo.squaresgameteam.squares.controller.interfaces.ShowRanking;
 import it.unibo.squaresgameteam.squares.model.classes.SquareGridImpl;
 import it.unibo.squaresgameteam.squares.model.classes.GameImpl;
 import it.unibo.squaresgameteam.squares.model.classes.MoveImpl;
-import it.unibo.squaresgameteam.squares.model.classes.PlayedTimeImpl;
 import it.unibo.squaresgameteam.squares.model.classes.TriangleGridImpl;
 import it.unibo.squaresgameteam.squares.model.enumerations.GridOption;
 import it.unibo.squaresgameteam.squares.model.enumerations.ListType;
@@ -17,7 +16,6 @@ import it.unibo.squaresgameteam.squares.model.exceptions.DuplicatedPlayerStatsEx
 import it.unibo.squaresgameteam.squares.model.exceptions.NoMovesDoneException;
 import it.unibo.squaresgameteam.squares.model.exceptions.UnexistentLineListException;
 import it.unibo.squaresgameteam.squares.model.interfaces.Move;
-import it.unibo.squaresgameteam.squares.model.interfaces.PlayedTime;
 import it.unibo.squaresgameteam.squares.model.interfaces.Player;
 import it.unibo.squaresgameteam.squares.model.interfaces.BaseGrid;
 import it.unibo.squaresgameteam.squares.model.interfaces.Game;
@@ -38,7 +36,6 @@ public class MatchImpl implements Match {
     private String namePlayer;
     private BaseGrid grid;
     private Game match;    
-    private int playerScore;
     private GridOption winner;
     private boolean endMatch;
     private boolean par;
@@ -54,7 +51,8 @@ public class MatchImpl implements Match {
      * @param namePlayer2
      *            name second player
      * @param mode
-     *            game mode. Constructor of the class.
+     *            game mode. 
+     *            Constructor of the class.
      */
     public MatchImpl(final int columsNumber, final int rowsNumber, final String namePlayer1, final String namePlayer2,
             final TypeGame mode) {
@@ -90,9 +88,7 @@ public class MatchImpl implements Match {
         this.match = new GameImpl(this.grid, namePlayer1, namePlayer2);
         match.startMatch();
         this.numPlayer = this.match.getCurrentPlayerTurn();
-        convertNumToNamePlayer();
-        
-      
+
     }
 
     private void convertNumToNamePlayer() {
@@ -120,27 +116,29 @@ public class MatchImpl implements Match {
             this.endMatch = true;
             this.numPlayer = this.match.getWinner();
             if (this.numPlayer.equals(GridOption.EMPTY)) {
-                this.par = true;
-                this.playerScore = this.match.getPlayerPoints(GridOption.PLAYER1);
+                this.par = true;                
             } else {
-            this.winner = numPlayer;
-            addPlayerRank();
-            this.numPlayer = this.winner;
-            this.playerScore = this.match.getPlayerPoints(numPlayer);
+                this.winner = numPlayer;
+                addPlayerRank();
+                this.numPlayer = this.winner;                
             }
 
         } else {
-            this.playerScore = this.match.getPlayerPoints(this.numPlayer);
-            this.numPlayer = this.match.getCurrentPlayerTurn();
+            this.numPlayer = this.match.getCurrentPlayerTurn();            
         }
 
     }
 
     @Override
-    public int getCurrentPlayerScore() {
-        return this.playerScore;
+    public int getPlayer1Score() {        
+        return this.match.getPlayerPoints(GridOption.PLAYER1);
     }
     
+    @Override
+    public int getPlayer2Score() {
+        return this.match.getPlayerPoints(GridOption.PLAYER2);        
+    }
+
     @Override
     public String getCurrentPlayerTurn() {
         convertNumToNamePlayer();
@@ -149,15 +147,13 @@ public class MatchImpl implements Match {
 
     @Override
     public Move getLastMove() {
-
         return this.match.getCopyOfLastMove();
-
     }
+
     @Override
     public void undo() throws NoMovesDoneException, UnexistentLineListException {
         this.match.undoLastMove();
-        this.numPlayer = match.getCurrentPlayerTurn();
-        this.playerScore = match.getPlayerPoints(numPlayer);
+        this.numPlayer = match.getCurrentPlayerTurn();       
     }
 
     @Override
@@ -213,14 +209,10 @@ public class MatchImpl implements Match {
     public TypeGame getMode() {
         return this.mode;
     }
-    
+
     @Override
-    public boolean isPar(){
+    public boolean isPar() {
         return this.par;
     }
-    
 
 }
-
-
-

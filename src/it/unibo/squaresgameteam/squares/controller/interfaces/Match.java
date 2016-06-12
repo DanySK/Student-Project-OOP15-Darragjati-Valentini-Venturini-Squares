@@ -58,13 +58,7 @@ public interface Match {
      * @throws UnexistentLineListException
      *             .
      */
-    void undo() throws NoMovesDoneException, UnexistentLineListException;
-
-    /**
-     * 
-     * @return the score of the current player
-     */
-    int getCurrentPlayerScore();
+    void undo() throws NoMovesDoneException, UnexistentLineListException;   
 
     /**
      * 
@@ -133,5 +127,9 @@ public interface Match {
      */
 
     boolean isPar();
+
+    int getPlayer1Score();
+
+    int getPlayer2Score();
 
 }
