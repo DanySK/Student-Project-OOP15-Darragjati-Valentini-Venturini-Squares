@@ -233,7 +233,7 @@ public class GameFrame implements GUIElements {
 					}
 				}
 				else
-					JOptionPane.showMessageDialog(null, "You should write the players namess correctly.", "InfoBox", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "No moves to undo.", "InfoBox", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 		btnUndo.setFont(new Font("Sitka Text", Font.PLAIN, 17));
