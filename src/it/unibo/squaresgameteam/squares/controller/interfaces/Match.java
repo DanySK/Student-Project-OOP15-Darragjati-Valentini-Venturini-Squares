@@ -74,7 +74,7 @@ public interface Match {
 
     /**
      * 
-     * @return if the match is ended
+     * @return true if the match is ended
      */
 
     boolean isEnded();
@@ -126,5 +126,12 @@ public interface Match {
      */
 
     String getCurrentPlayerTurn();
+    
+    /**
+     * 
+     * @return true if the match's result is par.
+     */
+
+    boolean isPar();
 
 }

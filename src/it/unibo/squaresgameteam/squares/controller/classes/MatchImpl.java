@@ -41,6 +41,7 @@ public class MatchImpl implements Match {
     private int playerScore;
     private GridOption winner;
     private boolean endMatch;
+    private boolean par;
 
     /**
      * 
@@ -64,6 +65,7 @@ public class MatchImpl implements Match {
         this.namePlayer2 = namePlayer2;
         this.mode = mode;
         this.endMatch = false;
+        this.par = false;
     }
 
     @Override
@@ -117,10 +119,15 @@ public class MatchImpl implements Match {
         if (this.match.isEnded()) {
             this.endMatch = true;
             this.numPlayer = this.match.getWinner();
+            if (this.numPlayer.equals(GridOption.EMPTY)) {
+                this.par = true;
+                this.playerScore = this.match.getPlayerPoints(GridOption.PLAYER1);
+            } else {
             this.winner = numPlayer;
             addPlayerRank();
             this.numPlayer = this.winner;
             this.playerScore = this.match.getPlayerPoints(numPlayer);
+            }
 
         } else {
             this.playerScore = this.match.getPlayerPoints(this.numPlayer);
@@ -205,6 +212,11 @@ public class MatchImpl implements Match {
     @Override
     public TypeGame getMode() {
         return this.mode;
+    }
+    
+    @Override
+    public boolean isPar(){
+        return this.par;
     }
     
 
