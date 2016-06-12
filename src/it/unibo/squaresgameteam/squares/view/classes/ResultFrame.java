@@ -64,13 +64,25 @@ public class ResultFrame implements GUIElements {
 			frmMatchSetup.getContentPane().add(pane);
 			pane.setLayout(null);
 			
-			JLabel lblWinner = new JLabel("Winner");
+			JLabel lblWinner;
+			JLabel lblPlayer;
+			
+			if(cont.isPar())
+			{
+				lblWinner = new JLabel("NO WINNER");
+				lblPlayer = new JLabel("It's a draw!");
+			}
+			else
+			{
+				lblWinner = new JLabel("Winner");
+				lblPlayer = new JLabel(cont.getCurrentPlayerTurn());
+			}
+			
 			lblWinner.setBounds(95, 10, 200, 30);
 			pane.add(lblWinner);
 			lblWinner.setFont(new Font("Sitka Text", Font.PLAIN, 16));
 			lblWinner.setHorizontalAlignment(SwingConstants.CENTER);
 			
-			JLabel lblPlayer = new JLabel(cont.getCurrentPlayerTurn());
 			lblPlayer.setBounds(95, 40, 200, 30);
 			pane.add(lblPlayer);
 			lblPlayer.setHorizontalAlignment(SwingConstants.CENTER);

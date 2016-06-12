@@ -119,12 +119,11 @@ public class RankingMenuImpl implements RankingMenu, GUIElements {
 		frmRankingMenu.getContentPane().add(lblPointsScored);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 30, 375, 250);
+		scrollPane.setBounds(5, 30, 385, 250);
 		frmRankingMenu.getContentPane().add(scrollPane);
 
 		txtRules = new JTextArea();
 		txtRules.setEditable(false);
-		txtRules.setBounds(10, 11, 374, 308);
 		txtRules.setWrapStyleWord(true);
 		txtRules.setLineWrap(true);
 		scrollPane.setViewportView(txtRules);

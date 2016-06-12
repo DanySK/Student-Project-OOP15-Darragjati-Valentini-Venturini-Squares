@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 
 import it.unibo.squaresgameteam.squares.model.exceptions.DuplicatedPlayerStatsException;
 import it.unibo.squaresgameteam.squares.model.exceptions.NoMovesDoneException;
@@ -203,6 +204,11 @@ public class GameFrame implements GUIElements {
 			public void mouseClicked(MouseEvent arg0) {
 				if(btns.size()!=0)
 				{
+					if(cont.getMode()==TypeGame.TRIANGLE)
+					{
+						btns.get(btns.size()-1).setText("");
+						btns.get(btns.size()-1).setBorder(btnUndo.getBorder());
+					}
 					btns.get(btns.size()-1).setEnabled(true);
 					btns.get(btns.size()-1).setBackground(null);
 					btns.remove(btns.size()-1);
@@ -218,18 +224,18 @@ public class GameFrame implements GUIElements {
 						lblPlaying.setText(name1+"'s turn");
 						lblPlaying.setForeground(player1);
 						if(previous.equals(cont.getCurrentPlayerTurn()))
-							lblScore1.setText("Score: " + cont.getCurrentPlayerScore());
-						else
 							lblScore2.setText("Score: " + cont.getCurrentPlayerScore());
+						else
+							lblScore1.setText("Score: " + cont.getCurrentPlayerScore());
 					}
 					else
 					{
 						lblPlaying.setText(name2+"'s turn");
 						lblPlaying.setForeground(player2);
 						if(previous.equals(cont.getCurrentPlayerTurn()))
-							lblScore2.setText("Score: " + cont.getCurrentPlayerScore());
-						else
 							lblScore1.setText("Score: " + cont.getCurrentPlayerScore());
+						else
+							lblScore2.setText("Score: " + cont.getCurrentPlayerScore());
 					}
 				}
 				else
