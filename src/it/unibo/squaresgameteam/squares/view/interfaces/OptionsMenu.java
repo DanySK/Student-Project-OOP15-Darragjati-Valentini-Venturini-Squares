@@ -2,7 +2,7 @@ package it.unibo.squaresgameteam.squares.view.interfaces;
 
 /**
  * This interface is used to customize the application's interface. The user can
- * lower or increase the application's volume and choose the colours of the
+ * lower or increase the application's volume and choose the colors of the
  * background and the players.
  */
 public interface OptionsMenu {
@@ -18,14 +18,14 @@ public interface OptionsMenu {
   void resetRanking();
 
   /**
-   * sets the first player's colour.
+   * sets the first player's color.
    */
-  void setFirstPlayerColour();
+  void setFirstPlayerColor();
 
   /**
-   * sets the second player's colour.
+   * sets the second player's color.
    */
-  void setSecondPlayerColour();
+  void setSecondPlayerColor();
 
   /**
    * sets the application's background.

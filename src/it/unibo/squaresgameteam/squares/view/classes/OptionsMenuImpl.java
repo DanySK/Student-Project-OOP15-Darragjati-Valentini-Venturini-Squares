@@ -80,7 +80,7 @@ public class OptionsMenuImpl implements OptionsMenu, GuiElements {
     btnColor1.addMouseListener(new MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent arg0) {
-        setFirstPlayerColour();
+        setFirstPlayerColor();
       }
     });
     btnColor1.setFont(new Font("Sitka Text", Font.PLAIN, 17));
@@ -98,7 +98,7 @@ public class OptionsMenuImpl implements OptionsMenu, GuiElements {
     btnColor2.addMouseListener(new MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent arg0) {
-        setSecondPlayerColour();
+        setSecondPlayerColor();
       }
     });
     btnColor2.setFont(new Font("Sitka Text", Font.PLAIN, 17));
@@ -231,12 +231,12 @@ public class OptionsMenuImpl implements OptionsMenu, GuiElements {
   }
 
   @Override
-  public void setFirstPlayerColour() {
+  public void setFirstPlayerColor() {
     btnColor1.setBackground(JColorChooser.showDialog(null, "Choose a color", Color.RED));
   }
 
   @Override
-  public void setSecondPlayerColour() {
+  public void setSecondPlayerColor() {
     btnColor2.setBackground(JColorChooser.showDialog(null, "Choose a color", Color.RED));
   }
 }

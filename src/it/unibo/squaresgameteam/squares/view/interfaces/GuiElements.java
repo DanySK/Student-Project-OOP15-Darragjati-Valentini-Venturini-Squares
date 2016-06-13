@@ -20,6 +20,9 @@ public interface GuiElements {
 
   /**
    * This method sets the frame background.
+   * 
+   * @param color
+   *        color of the background
    */
   void setBackground(Color color);
 }

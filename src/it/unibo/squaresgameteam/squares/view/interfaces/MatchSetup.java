@@ -14,6 +14,8 @@ public interface MatchSetup {
 
   /**
    * This method sets the game mode.
+   * 
+   * @return the specified game mode
    */
   TypeGame setBoardType();
 }
