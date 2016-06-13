@@ -7,28 +7,28 @@ package it.unibo.squaresgameteam.squares.view.interfaces;
  */
 public interface OptionsMenu {
 
-    /**
-     * sets on/off the application's music.
-     */
-    void setMusic();
-    
-    /**
-     * resets the application's ranking.
-     */
-    void resetRanking();
+  /**
+   * sets on/off the application's music.
+   */
+  void setMusic();
 
-    /**
-     * sets the first player's colour.
-     */
-    void setFirstPlayerColour();
+  /**
+   * resets the application's ranking.
+   */
+  void resetRanking();
 
-    /**
-     * sets the second player's colour.
-     */
-    void setSecondPlayerColour();
+  /**
+   * sets the first player's colour.
+   */
+  void setFirstPlayerColour();
 
-    /**
-     * sets the application's background.
-     */
-    void setBackground();
+  /**
+   * sets the second player's colour.
+   */
+  void setSecondPlayerColour();
+
+  /**
+   * sets the application's background.
+   */
+  void setBackground();
 }

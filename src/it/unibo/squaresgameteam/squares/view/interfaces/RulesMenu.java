@@ -5,8 +5,8 @@ package it.unibo.squaresgameteam.squares.view.interfaces;
  */
 public interface RulesMenu {
 
-    /**
-     * Shows the rules of the game.
-     */
-    void showRules();
+  /**
+   * Shows the rules of the game.
+   */
+  void showRules();
 }

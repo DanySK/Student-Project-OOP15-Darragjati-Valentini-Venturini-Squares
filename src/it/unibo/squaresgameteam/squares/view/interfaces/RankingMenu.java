@@ -6,23 +6,23 @@ package it.unibo.squaresgameteam.squares.view.interfaces;
  */
 public interface RankingMenu {
 
-    /**
-     * Orders the ranking by win rate.
-     */
-    void orderByWinrate();
+  /**
+   * Orders the ranking by win rate.
+   */
+  void orderByWinrate();
 
-    /**
-     * Orders the ranking by total wins.
-     */
-    void orderByTotalWins();
+  /**
+   * Orders the ranking by total wins.
+   */
+  void orderByTotalWins();
 
-    /**
-     * Orders the ranking by total matches.
-     */
-    void orderByTotalMatches();
+  /**
+   * Orders the ranking by total matches.
+   */
+  void orderByTotalMatches();
 
-    /**
-     * Orders the ranking by total conquered points.
-     */
-    void orderByTotalPointsScored();
+  /**
+   * Orders the ranking by total conquered points.
+   */
+  void orderByTotalPointsScored();
 }
