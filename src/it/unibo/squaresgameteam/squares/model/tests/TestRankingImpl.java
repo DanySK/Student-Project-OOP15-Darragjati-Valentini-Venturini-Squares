@@ -23,9 +23,8 @@ public class TestRankingImpl {
     private static final String PLAYER3 = "Paperino";
     private static final String PLAYER4 = "Topolino";
     private static final String PLAYER5 = "Paperone";
-
+    // CHECKSTYLE:OFF:
     private List<Player> createPlayers() {
-        // CHECKSTYLE:OFF:
         final PlayerImpl player1 = new PlayerImpl.Builder()
                                                  .playerName(PLAYER1)
                                                  .wonMatches(1)
@@ -49,7 +48,6 @@ public class TestRankingImpl {
                                                  .totalPointsScored(223)
                                                  .build();
         assertEquals(player3.getWinRate(), player2.getWinRate(), 0);
-        // CHECKSTYLE:ON:
         final List<Player> playerList = new ArrayList<>();
         playerList.add(player1);
         playerList.add(player2);

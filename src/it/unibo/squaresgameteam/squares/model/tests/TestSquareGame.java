@@ -41,6 +41,7 @@ public class TestSquareGame {
      * @throws UnexistentLineListException
      *             if the listIndex input is not correct
      */
+    // CHECKSTYLE:OFF:
     @Test
     public void testBasicMoveOperation() throws UnsupportedSizeException, UnexistentLineListException {
 
@@ -146,7 +147,6 @@ public class TestSquareGame {
         assertNotEquals(GridOption.EMPTY, gridOfSize2.getWinner());
         assertNotEquals(gridOfSize2.getPlayerMatchResult(GridOption.PLAYER1),
                 gridOfSize2.getPlayerMatchResult(GridOption.PLAYER2));
-        System.out.println(gridOfSize2.getMatchDuration());
         assertNotEquals(gridOfSize2.getMatchDuration(), -1.0);
     }
 
@@ -214,9 +214,7 @@ public class TestSquareGame {
         try {
             move.setListType(ListType.HORIZONTAL);
             move.setListIndex(0);
-            // CHECKSTYLE:OFF:
             move.setPosition(7);
-            // CHECKSTYLE:ON:
             exceptionGame.setLine(move);
             fail("The grid isn't big enough");
         } catch (IndexOutOfBoundsException e) {
