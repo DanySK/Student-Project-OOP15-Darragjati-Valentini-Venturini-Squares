@@ -17,7 +17,7 @@ public final class Application {
      *            necessary arguments
      * 
      */
-    static void main(final String[] args) {
+    public static void main(final String[] args) {
         final MusicImpl music = new MusicImpl();
         music.startMusic();
         final StartMenuImpl sm = new StartMenuImpl(music);
