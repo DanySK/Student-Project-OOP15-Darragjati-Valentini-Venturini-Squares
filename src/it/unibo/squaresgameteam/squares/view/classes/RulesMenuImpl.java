@@ -19,6 +19,11 @@ import it.unibo.squaresgameteam.squares.controller.classes.MenuImpl;
 import it.unibo.squaresgameteam.squares.view.interfaces.RulesMenu;
 import it.unibo.squaresgameteam.squares.view.interfaces.GUIElements;
 
+/**
+ * 
+ * @author Karl Darragjati This class displays the game rules.
+ *
+ */
 public class RulesMenuImpl implements RulesMenu, GUIElements {
 
 	private JFrame frmRulesMenu;
@@ -26,6 +31,12 @@ public class RulesMenuImpl implements RulesMenu, GUIElements {
 	private MenuImpl cont;
 	private Settings s;
 	
+	/**
+	 * This constructor initializes the frame and his components.
+     * 
+     * @param s
+     *            settings manager
+     */
 	public RulesMenuImpl(Settings s)
 	{
 		this.s = s;

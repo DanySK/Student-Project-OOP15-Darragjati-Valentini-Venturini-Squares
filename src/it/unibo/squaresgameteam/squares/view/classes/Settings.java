@@ -4,10 +4,27 @@ import java.awt.Color;
 
 import it.unibo.squaresgameteam.squares.controller.classes.MusicImpl;
 
+/**
+ * 
+ * @author Karl Darragjati This class contains the application settings.
+ *
+ */
 public class Settings {
 	private MusicImpl mi;
 	private Color background, player1, player2;
 	
+	/**
+	 * This constructor initializes the settings.
+     * 
+     * @param mi
+     *            music manager
+     * @param background
+     *            background color
+     * @param player1
+     *            player1 color
+     * @param player2
+     *            player2 color
+     */
 	Settings(MusicImpl mi, Color background, Color player1, Color player2)
 	{
 		this.mi = mi;

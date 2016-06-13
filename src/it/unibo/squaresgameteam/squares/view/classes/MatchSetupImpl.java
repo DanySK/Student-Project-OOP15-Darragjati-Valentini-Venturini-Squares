@@ -19,12 +19,16 @@ import javax.swing.SwingConstants;
 
 import it.unibo.squaresgameteam.squares.controller.classes.MenuImpl;
 import it.unibo.squaresgameteam.squares.controller.classes.MatchImpl;
-import it.unibo.squaresgameteam.squares.controller.classes.MusicImpl;
 import it.unibo.squaresgameteam.squares.controller.enumerations.TypeGame;
 
 import it.unibo.squaresgameteam.squares.view.interfaces.MatchSetup;
 import it.unibo.squaresgameteam.squares.view.interfaces.GUIElements;
 
+/**
+ * 
+ * @author Karl Darragjati This class displays and manages the match options.
+ *
+ */
 public class MatchSetupImpl implements MatchSetup, GUIElements {
 	
 	private JFrame frmMatchSetup;
@@ -37,6 +41,14 @@ public class MatchSetupImpl implements MatchSetup, GUIElements {
 	private MenuImpl cont;
 	private Settings s;
 	
+	/**
+	 * This constructor initializes the frame and his components.
+     * 
+     * @param f
+     *            the frame that called this constructor
+     * @param s
+     *            settings manager
+     */
 	public MatchSetupImpl(JFrame f, Settings s)
 	{
 		this.s = s;
@@ -64,7 +76,10 @@ public class MatchSetupImpl implements MatchSetup, GUIElements {
 	{
 		frmMatchSetup.getContentPane().setBackground(c);
 	}
-	
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
 	private void initialize() {
 		frmMatchSetup = new JFrame();
 		frmMatchSetup.getContentPane().setBackground(Color.WHITE);
@@ -182,7 +197,6 @@ public class MatchSetupImpl implements MatchSetup, GUIElements {
 	
 	@Override
 	public void startMatch() {
-		// TODO Auto-generated method stub
 		if(txtPlayer1.getText().equals("") ||
 				txtPlayer1.getText().equals(txtPlayer2.getText())||
 				txtPlayer2.getText().equals(""))

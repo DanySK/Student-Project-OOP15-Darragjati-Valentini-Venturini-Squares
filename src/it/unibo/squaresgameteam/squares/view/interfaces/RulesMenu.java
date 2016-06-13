@@ -2,12 +2,11 @@ package it.unibo.squaresgameteam.squares.view.interfaces;
 
 /**
  * This interface is used to show the game's rules.
- *
  */
 public interface RulesMenu {
 
     /**
-     * show the rules of the game.
+     * Shows the rules of the game.
      */
     void showRules();
 }

@@ -13,6 +13,11 @@ import it.unibo.squaresgameteam.squares.controller.classes.MusicImpl;
 import it.unibo.squaresgameteam.squares.view.interfaces.StartMenu;
 import it.unibo.squaresgameteam.squares.view.interfaces.GUIElements;
 
+/**
+ * 
+ * @author Karl Darragjati This class displays the application main menu.
+ *
+ */
 public class StartMenuImpl implements StartMenu, GUIElements {
 	
 	private JFrame frmStartMenu;
@@ -21,14 +26,23 @@ public class StartMenuImpl implements StartMenu, GUIElements {
 	
 
 	/**
-	 * Create the application.
-	 */
+	 * This constructor initializes the frame and his components.
+     * 
+     * @param mi
+     *            music manager
+     */
 	public StartMenuImpl(MusicImpl mi) {
 		frmStartMenu = new JFrame();
 		s = new Settings(mi, frmStartMenu.getBackground(), Color.RED, Color.BLUE);
 		initialize();
 	}
 	
+	/**
+	 * This constructor initializes the frame and his components.
+     * 
+     * @param s
+     *            settings manager
+     */
 	public StartMenuImpl(Settings s)
 	{
 		frmStartMenu = new JFrame();

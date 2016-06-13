@@ -14,12 +14,17 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
-import it.unibo.squaresgameteam.squares.controller.classes.MusicImpl;
 import it.unibo.squaresgameteam.squares.controller.classes.ShowRankingImpl;
 import it.unibo.squaresgameteam.squares.model.exceptions.DuplicatedPlayerStatsException;
+
 import it.unibo.squaresgameteam.squares.view.interfaces.GUIElements;
 import it.unibo.squaresgameteam.squares.view.interfaces.OptionsMenu;
 
+/**
+ * 
+ * @author Karl Darragjati This class displays and manages the application options.
+ *
+ */
 public class OptionsMenuImpl implements OptionsMenu, GUIElements {
 
 	private JFrame frmOptionsMenu;
@@ -29,8 +34,11 @@ public class OptionsMenuImpl implements OptionsMenu, GUIElements {
 	private Settings s;
 
 	/**
-	 * Create the application.
-	 */
+	 * This constructor initializes the frame and his components.
+     * 
+     * @param s
+     *            settings manager
+     */
 	public OptionsMenuImpl(Settings s) {
 		this.s = s;
 		initialize();
@@ -205,7 +213,6 @@ public class OptionsMenuImpl implements OptionsMenu, GUIElements {
 			ShowRankingImpl sri = new ShowRankingImpl();
 			sri.deleteRankingFile();
 		} catch (DuplicatedPlayerStatsException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

@@ -25,21 +25,29 @@ import it.unibo.squaresgameteam.squares.model.exceptions.DuplicatedPlayerStatsEx
 import it.unibo.squaresgameteam.squares.view.interfaces.RankingMenu;
 import it.unibo.squaresgameteam.squares.view.interfaces.GUIElements;
 
+/**
+ * 
+ * @author Karl Darragjati This class displays and orders the game ranking.
+ *
+ */
 public class RankingMenuImpl implements RankingMenu, GUIElements {
 
 	private JFrame frmRankingMenu;
 	private JTextArea txtRules;
 	private ShowRankingImpl cont;
 	private Settings s;
+	private JRadioButton rdtbnAscending, rdbtnDescending;
 
 	/**
-	 * Create the application.
-	 */
+	 * This constructor initializes the frame and his components.
+     * 
+     * @param s
+     *            settings manager
+     */
 	public RankingMenuImpl(Settings s) {
 		try {
 			cont = new ShowRankingImpl();
 		} catch (DuplicatedPlayerStatsException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		this.s = s;
@@ -152,12 +160,27 @@ public class RankingMenuImpl implements RankingMenu, GUIElements {
 		rdbtnSquaresCatched.setFont(new Font("Sitka Text", Font.PLAIN, 12));
 		rdbtnSquaresCatched.setBounds(276, 299, 115, 23);
 		frmRankingMenu.getContentPane().add(rdbtnSquaresCatched);
+		
+		rdtbnAscending = new JRadioButton("Ascending");
+		rdtbnAscending.setFont(new Font("Sitka Text", Font.PLAIN, 12));
+		rdtbnAscending.setBounds(70, 280, 85, 23);
+		frmRankingMenu.getContentPane().add(rdtbnAscending);
+		
+		rdbtnDescending = new JRadioButton("Descending");
+		rdbtnDescending.setSelected(true);
+		rdbtnDescending.setFont(new Font("Sitka Text", Font.PLAIN, 12));
+		rdbtnDescending.setBounds(152, 280, 90, 23);
+		frmRankingMenu.getContentPane().add(rdbtnDescending);
 
-		ButtonGroup bg = new ButtonGroup();
-		bg.add(rdbtnWinrate);
-		bg.add(rdbtnTotalWins);
-		bg.add(rdbtnTotalMatches);
-		bg.add(rdbtnSquaresCatched);
+		ButtonGroup bg1 = new ButtonGroup();
+		bg1.add(rdbtnWinrate);
+		bg1.add(rdbtnTotalWins);
+		bg1.add(rdbtnTotalMatches);
+		bg1.add(rdbtnSquaresCatched);
+		
+		ButtonGroup bg2 = new ButtonGroup();
+		bg2.add(rdtbnAscending);
+		bg2.add(rdbtnDescending);
 		
 		JButton btnBack = new JButton("Back");
 		btnBack.addMouseListener(new MouseAdapter() {
@@ -203,9 +226,11 @@ public class RankingMenuImpl implements RankingMenu, GUIElements {
 	@Override
 	public void orderByWinrate() {
 		try {
-			txtRules.setText(cont.showRanking(RankingOption.WINRATE, false));
+			if(rdtbnAscending.isSelected())
+				txtRules.setText(cont.showRanking(RankingOption.WINRATE, true));
+			else
+				txtRules.setText(cont.showRanking(RankingOption.WINRATE, false));
 		} catch (ClassNotFoundException | IOException | DuplicatedPlayerStatsException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -213,9 +238,11 @@ public class RankingMenuImpl implements RankingMenu, GUIElements {
 	@Override
 	public void orderByTotalWins() {
 		try {
-			txtRules.setText(cont.showRanking(RankingOption.TOTAL_WINS, false));
+			if(rdtbnAscending.isSelected())
+				txtRules.setText(cont.showRanking(RankingOption.TOTAL_WINS, true));
+			else
+				txtRules.setText(cont.showRanking(RankingOption.TOTAL_WINS, false));
 		} catch (ClassNotFoundException | IOException | DuplicatedPlayerStatsException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -223,9 +250,11 @@ public class RankingMenuImpl implements RankingMenu, GUIElements {
 	@Override
 	public void orderByTotalMatches() {
 		try {
-			txtRules.setText(cont.showRanking(RankingOption.TOTAL_MATCHES, false));
+			if(rdtbnAscending.isSelected())
+				txtRules.setText(cont.showRanking(RankingOption.TOTAL_MATCHES, true));
+			else
+				txtRules.setText(cont.showRanking(RankingOption.TOTAL_MATCHES, false));
 		} catch (ClassNotFoundException | IOException | DuplicatedPlayerStatsException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -233,9 +262,11 @@ public class RankingMenuImpl implements RankingMenu, GUIElements {
 	@Override
 	public void orderByTotalPointsScored() {
 		try {
-			txtRules.setText(cont.showRanking(RankingOption.TOTAL_POINTS_SCORED, false));
+			if(rdtbnAscending.isSelected())
+				txtRules.setText(cont.showRanking(RankingOption.TOTAL_POINTS_SCORED, true));
+			else
+				txtRules.setText(cont.showRanking(RankingOption.TOTAL_POINTS_SCORED, false));
 		} catch (ClassNotFoundException | IOException | DuplicatedPlayerStatsException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

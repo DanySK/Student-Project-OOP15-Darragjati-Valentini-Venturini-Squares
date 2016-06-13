@@ -16,12 +16,27 @@ import it.unibo.squaresgameteam.squares.controller.classes.MatchImpl;
 
 import it.unibo.squaresgameteam.squares.view.interfaces.GUIElements;
 
+/**
+ * 
+ * @author Karl Darragjati This class displays the result of the match.
+ *
+ */
 public class ResultFrame implements GUIElements {
 		
 		private JFrame frmMatchSetup, f;
 		private Settings s;
 		private MatchImpl cont;
 		
+		/**
+		 * This constructor initializes the frame and his components.
+	     * 
+	     * @param f
+	     *            the frame that called this constructor
+	     * @param s
+	     *            settings manager
+	     * @param cont
+	     *            match manager
+	     */
 		public ResultFrame(JFrame f, Settings s, MatchImpl cont)
 		{
 			this.f = f;

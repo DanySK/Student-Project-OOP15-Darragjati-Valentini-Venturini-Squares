@@ -8,22 +8,22 @@ package it.unibo.squaresgameteam.squares.view.interfaces;
 public interface StartMenu {
 
     /**
-     * this method starts a new match.
+     * This method starts a new match.
      */
     void startNewGame();
 
     /**
-     * this method shows the rules of the game.
+     * This method shows the rules of the game.
      */
     void showRules();
 
     /**
-     * this method shows the ranking of the players.
+     * This method shows the ranking of the players.
      */
     void showRanking();
 
     /**
-     * this method shows the options.
+     * This method shows the options.
      */
     void showSettings();
 }

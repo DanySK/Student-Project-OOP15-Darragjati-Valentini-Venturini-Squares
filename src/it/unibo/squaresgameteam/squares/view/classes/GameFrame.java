@@ -16,7 +16,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.border.Border;
 
 import it.unibo.squaresgameteam.squares.model.exceptions.DuplicatedPlayerStatsException;
 import it.unibo.squaresgameteam.squares.model.exceptions.NoMovesDoneException;
@@ -30,7 +29,7 @@ import it.unibo.squaresgameteam.squares.view.interfaces.GUIElements;
 
 /**
  * 
- * @author Karl Darragjati This class displays and manage the match.
+ * @author Karl Darragjati This class displays and manages the match.
  *
  */
 public class GameFrame implements GUIElements {
@@ -45,6 +44,7 @@ public class GameFrame implements GUIElements {
 	private Settings s;
 
 	/**
+	 * This constructor initializes the frame and his components.
      * 
      * @param cont
      *            match manager
