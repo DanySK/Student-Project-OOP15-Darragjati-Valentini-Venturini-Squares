@@ -1,7 +1,6 @@
 package it.unibo.squaresgameteam.squares.view.classes;
 
-import it.unibo.squaresgameteam.squares.controller.classes.MusicImpl;
-
+import it.unibo.squaresgameteam.squares.controller.interfaces.Music;
 import it.unibo.squaresgameteam.squares.view.interfaces.GuiElements;
 import it.unibo.squaresgameteam.squares.view.interfaces.StartMenu;
 
@@ -32,7 +31,7 @@ public class StartMenuImpl implements StartMenu, GuiElements {
    * @param mi
    *          music manager
    */
-  public StartMenuImpl(MusicImpl mi) {
+  public StartMenuImpl(Music mi) {
     frmStartMenu = new JFrame();
     sett = new Settings(mi, frmStartMenu.getBackground(), Color.RED, Color.BLUE);
     initialize();

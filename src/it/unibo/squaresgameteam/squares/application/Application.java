@@ -1,7 +1,9 @@
 package it.unibo.squaresgameteam.squares.application;
 
 import it.unibo.squaresgameteam.squares.view.classes.StartMenuImpl;
+import it.unibo.squaresgameteam.squares.view.interfaces.StartMenu;
 import it.unibo.squaresgameteam.squares.controller.classes.MusicImpl;
+import it.unibo.squaresgameteam.squares.controller.interfaces.Music;
 
 /**
  * This class is used to start the application.
@@ -18,9 +20,9 @@ public final class Application {
      * 
      */
     public static void main(final String[] args) {
-        final MusicImpl music = new MusicImpl();
+        final Music music = new MusicImpl();
         music.startMusic();
-        final StartMenuImpl sm = new StartMenuImpl(music);
-        sm.showGui();
+        final StartMenu sm = new StartMenuImpl((MusicImpl) music);
+        ((StartMenuImpl) sm).showGui();
     }
 }

@@ -1,6 +1,6 @@
 package it.unibo.squaresgameteam.squares.view.classes;
 
-import it.unibo.squaresgameteam.squares.controller.classes.MusicImpl;
+import it.unibo.squaresgameteam.squares.controller.interfaces.Music;
 
 import java.awt.Color;
 
@@ -10,7 +10,7 @@ import java.awt.Color;
  *
  */
 public class Settings {
-  private MusicImpl mi;
+  private Music mi;
   private Color background;
   private Color player1;
   private Color player2;
@@ -27,14 +27,14 @@ public class Settings {
    * @param player2
    *          player2 color
    */
-  Settings(MusicImpl mi, Color background, Color player1, Color player2) {
+  Settings(Music mi, Color background, Color player1, Color player2) {
     this.mi = mi;
     this.background = background;
     this.player1 = player1;
     this.player2 = player2;
   }
 
-  public MusicImpl getMusic() {
+  public Music getMusic() {
     return mi;
   }
 
