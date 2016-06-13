@@ -21,6 +21,6 @@ public final class Application {
         final MusicImpl music = new MusicImpl();
         music.startMusic();
         final StartMenuImpl sm = new StartMenuImpl(music);
-        sm.showGUI();
+        sm.showGui();
     }
 }
