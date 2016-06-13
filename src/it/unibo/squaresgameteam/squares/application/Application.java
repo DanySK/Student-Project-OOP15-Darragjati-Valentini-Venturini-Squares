@@ -1,16 +1,16 @@
 package it.unibo.squaresgameteam.squares.application;
 
-import it.unibo.squaresgameteam.squares.controller.classes.MusicImpl;
 import it.unibo.squaresgameteam.squares.view.classes.StartMenuImpl;
+import it.unibo.squaresgameteam.squares.controller.classes.MusicImpl;
 
 /**
  * This class is used to start the application.
  */
 public final class Application {
 
-    private Application() {
+    private Application() {        
     }
-
+    
     /**
      * 
      * @param args
@@ -22,6 +22,5 @@ public final class Application {
         music.startMusic();
         final StartMenuImpl sm = new StartMenuImpl(music);
         sm.showGUI();
-
     }
 }
